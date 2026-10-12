@@ -1,0 +1,162 @@
+WEBVTT
+
+00:00:00.705 --> 00:00:03.323
+A vision network has millions of weights.
+
+00:00:03.343 --> 00:00:05.822
+To learn, every weight needs one number:
+
+00:00:05.842 --> 00:00:08.855
+if it moves a little, how much does the loss
+change?
+
+00:00:08.945 --> 00:00:14.088
+You could nudge each weight and rerun the
+whole network: millions of forward passes.
+
+00:00:14.108 --> 00:00:17.770
+Backpropagation gets every answer from one
+backward sweep.
+
+00:00:18.400 --> 00:00:19.818
+Shrink it to one path.
+
+00:00:19.838 --> 00:00:21.268
+Input x is two.
+
+00:00:21.287 --> 00:00:22.930
+Times w one, a half.
+
+00:00:22.950 --> 00:00:24.242
+Plus b one, zero.
+
+00:00:24.262 --> 00:00:25.242
+A ReLu.
+
+00:00:25.262 --> 00:00:27.492
+Times w two, which is one.
+
+00:00:27.512 --> 00:00:30.875
+Then a loss: half the squared miss from the
+target, three.
+
+00:00:31.040 --> 00:00:32.082
+Run it forward.
+
+00:00:32.102 --> 00:00:33.845
+Two times a half is one.
+
+00:00:33.865 --> 00:00:37.995
+The ReLu passes positives, so h is one, and
+the guess is one.
+
+00:00:38.015 --> 00:00:42.140
+It misses three by two, so the loss, half of
+two squared, is two.
+
+00:00:42.430 --> 00:00:43.622
+Now go backward.
+
+00:00:43.643 --> 00:00:47.585
+Each node knows only its own local derivative,
+the orange chip.
+
+00:00:47.605 --> 00:00:51.405
+At the loss, that's the guess minus the
+target: minus two.
+
+00:00:51.485 --> 00:00:54.165
+Carry it left, multiplying by each chip.
+
+00:00:54.185 --> 00:00:56.865
+Into w two, times h: minus two.
+
+00:00:56.885 --> 00:00:59.540
+Into h, times w two: minus two.
+
+00:00:59.560 --> 00:01:02.515
+The ReLu is open, so times one: minus two.
+
+00:01:02.535 --> 00:01:05.210
+Into b one, times one: minus two.
+
+00:01:05.400 --> 00:01:06.730
+One step is left.
+
+00:01:06.750 --> 00:01:09.592
+The chip on w one is x, which is two.
+
+00:01:09.612 --> 00:01:11.768
+So what is the gradient for w one?
+
+00:01:11.788 --> 00:01:13.450
+Pause and decide.
+
+00:01:16.240 --> 00:01:18.870
+Minus two times two: minus four.
+
+00:01:18.890 --> 00:01:22.170
+Check it the slow way: raise w one by a
+hundredth,
+
+00:01:22.190 --> 00:01:24.870
+and the loss falls by about four hundredths.
+
+00:01:24.890 --> 00:01:29.840
+Backprop got every gradient in one sweep, for
+about the cost of a forward pass.
+
+00:01:30.295 --> 00:01:31.925
+Real networks branch.
+
+00:01:31.945 --> 00:01:35.875
+Say h also feeds a box predictor, which sends
+back plus one.
+
+00:01:35.895 --> 00:01:40.570
+Where wires meet, gradients add: minus two
+plus one is minus one.
+
+00:01:40.955 --> 00:01:42.260
+Now a surprise.
+
+00:01:42.280 --> 00:01:44.173
+Set b one to minus two.
+
+00:01:44.193 --> 00:01:47.223
+Then z is minus one, and the ReLu shuts.
+
+00:01:47.242 --> 00:01:49.235
+The loss grows to four point five,
+
+00:01:49.255 --> 00:01:53.773
+yet every weight gets a zero gradient: the
+shut gate blocks both directions.
+
+00:01:53.792 --> 00:01:56.080
+A dead ReLu learns nothing.
+
+00:01:56.615 --> 00:02:01.595
+Reset b one to zero, and take one gradient
+step of size zero point one.
+
+00:02:01.615 --> 00:02:06.158
+Run forward again: the loss falls from two to
+zero point one eight.
+
+00:02:06.178 --> 00:02:11.265
+A CNN is this same graph with bigger nodes,
+and autograd builds it for you.
+
+00:02:11.695 --> 00:02:12.988
+Remember three things.
+
+00:02:13.008 --> 00:02:15.138
+Every node has a local derivative.
+
+00:02:15.158 --> 00:02:17.175
+Along a path, multiply them.
+
+00:02:17.195 --> 00:02:18.945
+Where paths meet, add.
+

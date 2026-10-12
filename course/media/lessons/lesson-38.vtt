@@ -1,0 +1,47 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.842
+A two-layer network can be differentiated by tracing the same small operations used in the forward
+
+00:00:06.842 --> 00:00:13.484
+pass. Save values such as the preactivation, hidden activation and prediction. Their local derivatives then connect
+
+00:00:13.484 --> 00:00:16.390
+the scalar loss back to each parameter.
+
+00:00:16.900 --> 00:00:23.093
+Save the preactivation as well as the activation. Its sign determines which local derivative will be
+
+00:00:23.093 --> 00:00:23.480
+used.
+
+00:00:24.000 --> 00:00:29.740
+The output layer multiplies the hidden activation by two. The target is held fixed at three.
+
+00:00:30.267 --> 00:00:35.619
+Can this example have a large loss but zero gradient through its first layer? Pause here
+
+00:00:35.619 --> 00:00:37.627
+and make a prediction before continuing.
+
+00:00:38.733 --> 00:00:46.622
+Each factor comes from one edge: loss, output weight, activation and input multiplication. Omitting a factor
+
+00:00:46.622 --> 00:00:54.510
+changes the gradient. For our starting inputs, Hidden activation: 1. Prediction: 2. Loss: 0.5. Weight gradient:
+
+00:00:54.510 --> 00:00:55.003
+-4.
+
+00:00:55.533 --> 00:01:02.579
+For negative preactivation, this example passes zero gradient through ReLU even when loss is large. At
+
+00:01:02.579 --> 00:01:08.303
+exactly zero we use the implementation convention of zero, not an ordinary derivative.
+
+00:01:08.833 --> 00:01:14.331
+A gradient is a sensitivity of a stated loss to a stated parameter. Trace its path
+
+00:01:14.331 --> 00:01:17.423
+and account for every branch before applying an update.
+

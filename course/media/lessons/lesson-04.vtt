@@ -1,0 +1,50 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.468
+A binary classifier begins with a score: a real number expressing which side of its decision
+
+00:00:06.468 --> 00:00:12.737
+boundary an input lies on. Sigmoid converts that score into a class-1 probability. The score and
+
+00:00:12.737 --> 00:00:17.830
+probability are different quantities, so they have different allowed ranges and different meanings.
+
+00:00:18.333 --> 00:00:23.228
+A score can be negative or greater than one. It is not yet a probability, so
+
+00:00:23.228 --> 00:00:26.593
+taking the logarithm of the score would be the wrong operation.
+
+00:00:27.100 --> 00:00:33.340
+The exponential is positive, so the denominator exceeds one. This keeps the output strictly between zero
+
+00:00:33.340 --> 00:00:35.680
+and one for any finite score.
+
+00:00:36.200 --> 00:00:41.861
+Keep the score fixed and change the observed class. Which quantities will change? Pause here and
+
+00:00:41.861 --> 00:00:43.630
+make a prediction before continuing.
+
+00:00:44.733 --> 00:00:54.755
+The model has two complementary probabilities. The loss uses the one assigned to the class that
+
+00:00:54.755 --> 00:01:04.777
+actually occurred. For our starting inputs, Class 1 probability: 0.75026. True-class probability: 0.75026. Negative log loss:
+
+00:01:04.777 --> 00:01:05.403
+0.28734.
+
+00:01:05.933 --> 00:01:13.392
+Taking the negative logarithm produces a nonnegative penalty. A small true-class probability creates a large penalty;
+
+00:01:13.392 --> 00:01:15.723
+increasing it reduces the loss.
+
+00:01:16.233 --> 00:01:23.049
+Trace z → sigmoid(z) → probability of the observed class → negative logarithm. Do not take
+
+00:01:23.049 --> 00:01:26.883
+the logarithm of the score or forget the target.
+

@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.158
+A function value tells you where the curve is. A derivative tells you how its output
+
+00:00:06.158 --> 00:00:12.116
+changes for a small input displacement. Begin with a finite difference between nearby points, then consider
+
+00:00:12.116 --> 00:00:14.350
+what happens as their separation shrinks.
+
+00:00:14.867 --> 00:00:19.651
+The function value is a height. A derivative is instead a rate of change of height
+
+00:00:19.651 --> 00:00:21.147
+with respect to the input.
+
+00:00:21.667 --> 00:00:26.373
+This is a secant slope over a short interval, not yet the derivative at a single
+
+00:00:26.373 --> 00:00:26.667
+point.
+
+00:00:27.167 --> 00:00:33.346
+Will a small finite-difference slope exactly equal the derivative on a curved function? Pause here and
+
+00:00:33.346 --> 00:00:35.277
+make a prediction before continuing.
+
+00:00:36.400 --> 00:00:44.813
+The derivative removes the interval-dependent extra term. Negative slope means the output decreases as the input
+
+00:00:44.813 --> 00:00:52.700
+increases locally. For our starting inputs, Function value: 4. Derivative: 4. Secant at h=0.1: 4.1.
+
+00:00:53.200 --> 00:00:59.491
+This linear model approximates nearby changes. For this quadratic, the missing term is h squared, so
+
+00:00:59.491 --> 00:01:01.850
+it becomes less accurate farther away.
+
+00:01:02.367 --> 00:01:07.767
+Keep function value, derivative and finite-difference estimate as three separate quantities.
+

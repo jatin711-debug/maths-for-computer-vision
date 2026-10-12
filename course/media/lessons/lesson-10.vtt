@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.573
+A model cannot produce every possible observation vector. A constant model, for example, can only produce
+
+00:00:06.573 --> 00:00:12.947
+outputs whose entries are all equal. Fitting chooses the point in this small output space closest
+
+00:00:12.947 --> 00:00:14.540
+to the observed targets.
+
+00:00:15.067 --> 00:00:21.314
+The model predicts the same value for every observation. Its representable outputs lie on the line
+
+00:00:21.314 --> 00:00:23.267
+spanned by the all-ones vector.
+
+00:00:23.767 --> 00:00:29.697
+Differentiating the sum of squared residuals and setting the derivative to zero gives the sample mean.
+
+00:00:30.200 --> 00:00:35.731
+If one target increases by three, how much will the fitted constant move? Pause here and
+
+00:00:35.731 --> 00:00:37.460
+make a prediction before continuing.
+
+00:00:38.567 --> 00:00:46.520
+These are prediction-minus-observation residuals. Individual residuals can be nonzero at the best fit. For our starting
+
+00:00:46.520 --> 00:00:50.497
+inputs, Fitted constant: 2. Squared residual sum: 2.
+
+00:00:51.000 --> 00:00:57.257
+The residual is orthogonal to the only model direction. It cannot be reduced further by shifting
+
+00:00:57.257 --> 00:00:58.430
+every prediction together.
+
+00:00:58.933 --> 00:01:03.821
+Inspect the residual pattern as well as the fitted parameters. A best fit can still be
+
+00:01:03.821 --> 00:01:05.653
+a poor model of the data.
+

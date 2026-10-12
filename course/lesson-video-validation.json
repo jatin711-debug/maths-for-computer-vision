@@ -1,0 +1,445 @@
+{
+  "validatedAt": "2026-10-11T15:27:18.748836+00:00",
+  "lessons": 48,
+  "additionalExports": 45,
+  "originalExports": 3,
+  "chapters": 336,
+  "captionCues": 648,
+  "bytes": 150243951,
+  "durationSeconds": 3463.0666666666666,
+  "videos": [
+    {
+      "lesson": 1,
+      "key": "pixels",
+      "sha256": "500030f3ab8ed71accb6246303aa52f75efdcc140488f0069c8e9cbfc1f19e94",
+      "duration": 40.53333333333333,
+      "chapters": 7,
+      "captionCues": 7,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 2,
+      "key": "lesson-02",
+      "sha256": "1950f9fb7b0a56e0973d32616c4b2c1ae84fb1178caf7c28ce26a8fadf306fbe",
+      "duration": 60.06666666666667,
+      "chapters": 7,
+      "captionCues": 12,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 3,
+      "key": "lesson-03",
+      "sha256": "cdf68e4e883ed5068c01de5bb94ae0cb33c2c70e1045f8ca67b2798ef79d6cb0",
+      "duration": 62.4,
+      "chapters": 7,
+      "captionCues": 12,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 4,
+      "key": "lesson-04",
+      "sha256": "3f483e5a72f5d3676320ba695e517f1535e22c6e01986c272590fd3de7a905bb",
+      "duration": 87.33333333333333,
+      "chapters": 7,
+      "captionCues": 16,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 5,
+      "key": "lesson-05",
+      "sha256": "8f4c352737836599d5565406e180dbad9349d6e4ed01531cda83f44045a0ca9c",
+      "duration": 74.3,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 6,
+      "key": "projection",
+      "sha256": "19e7fc96f2a86690bf159d0dfb7c63fdde9f666f8b5db7a9748b82497a593285",
+      "duration": 49.86666666666667,
+      "chapters": 7,
+      "captionCues": 7,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 7,
+      "key": "lesson-07",
+      "sha256": "5f9c2137090b2e63b3b182dbf6b84ebf8d11053b93368a208170f322e737f34d",
+      "duration": 65.43333333333334,
+      "chapters": 7,
+      "captionCues": 13,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 8,
+      "key": "lesson-08",
+      "sha256": "52322b65d28aba12df99893cdc8ea8320eeb47f37815b5a1795badc04266c3ed",
+      "duration": 69.83333333333333,
+      "chapters": 7,
+      "captionCues": 15,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 9,
+      "key": "lesson-09",
+      "sha256": "918f818e858d32c7cfd95ed08b851e93d12e0c3330c93e5744bf9333c5055f0a",
+      "duration": 70.23333333333333,
+      "chapters": 7,
+      "captionCues": 13,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 10,
+      "key": "lesson-10",
+      "sha256": "49b116c2e8916e5f2ea105eea2729f38a0c36ed561e2ea6e03881d5f5a0c13a0",
+      "duration": 66.13333333333334,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 11,
+      "key": "lesson-11",
+      "sha256": "b6022f0a27e6cf8c78e168bd3bac448193f54a028bdab24816491eff8c5d0508",
+      "duration": 73.63333333333334,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 12,
+      "key": "lesson-12",
+      "sha256": "9891e0fd75c3e583efca393e8dceb93075cc7b4eb7989f3a4c483762a1a420ec",
+      "duration": 70.83333333333333,
+      "chapters": 7,
+      "captionCues": 15,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 13,
+      "key": "lesson-13",
+      "sha256": "365b655fe88d326fe1deb4fb52ce3c2bb285f556035714dd9f5b81e676041ae4",
+      "duration": 71.2,
+      "chapters": 7,
+      "captionCues": 13,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 14,
+      "key": "lesson-14",
+      "sha256": "4120deef1a9532bbc0785316b5e1a75a4d272f5342c4330d33c16630227322c7",
+      "duration": 76.06666666666666,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 15,
+      "key": "lesson-15",
+      "sha256": "1f1380ac71cb30ac0472502adf52e827612fb3ff252c1a5fd8bd768b324da46c",
+      "duration": 71.73333333333333,
+      "chapters": 7,
+      "captionCues": 12,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 16,
+      "key": "lesson-16",
+      "sha256": "f786f2614dd99c7bbe71c0af82eba8068a4ddb2b7b3f3e356e7442bca84077eb",
+      "duration": 72.16666666666667,
+      "chapters": 7,
+      "captionCues": 13,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 17,
+      "key": "lesson-17",
+      "sha256": "fa8044423937dcc08cf010b75931f9be2d195edeb4db1d6fa98db2f7c2e8c2c5",
+      "duration": 68.23333333333333,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 18,
+      "key": "lesson-18",
+      "sha256": "9e463a526fbeac4bea3995e3c84d626efea66e0768e0c00e942b274607494a4e",
+      "duration": 67.9,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 19,
+      "key": "lesson-19",
+      "sha256": "36a6ea519271ec596cf2e96281a93a7976cd8e430648e51507be830177bb1dde",
+      "duration": 68.3,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 20,
+      "key": "lesson-20",
+      "sha256": "2fba0538b9a8cf957263c6df398cfd4584762ad1f416f5817564e9ae8558c483",
+      "duration": 68.53333333333333,
+      "chapters": 7,
+      "captionCues": 12,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 21,
+      "key": "lesson-21",
+      "sha256": "dd5fc96cf0c968b0722d5872f262416a53e10c6393920d1607076fc49aac69d5",
+      "duration": 73.7,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 22,
+      "key": "lesson-22",
+      "sha256": "89b98983d83975345bfe7c6b4b0ffef5eff550f4c0f43f03e5616657c9d29793",
+      "duration": 80.4,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 23,
+      "key": "lesson-23",
+      "sha256": "c925b466ba484abe7ea2be22fd003e557e7eb59e73457fbe606332e8dc6a6c58",
+      "duration": 71.53333333333333,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 24,
+      "key": "lesson-24",
+      "sha256": "c936f377f66ab6b110a9a08c5a4cf1f0ed66855de988a3f527c70042a473e79b",
+      "duration": 79.83333333333333,
+      "chapters": 7,
+      "captionCues": 15,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 25,
+      "key": "lesson-25",
+      "sha256": "71d1ff8492abfc1648e37c48a662cb02de2ac08a6ea132100baff508635e52c3",
+      "duration": 75.83333333333333,
+      "chapters": 7,
+      "captionCues": 13,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 26,
+      "key": "lesson-26",
+      "sha256": "4e1f8dec9c9c27f6643ea1960ef2db69f37f5ecd99531b219ef565545e7980c3",
+      "duration": 80.26666666666667,
+      "chapters": 7,
+      "captionCues": 16,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 27,
+      "key": "lesson-27",
+      "sha256": "1803ea48d51f049dd401932399f4ce29a823c73be4e4ad85a1f190d2a08691c8",
+      "duration": 77.3,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 28,
+      "key": "lesson-28",
+      "sha256": "9ff7a6a34b7681559a762e21b5fd02d7b5fa8be66896cee4e49b64a758b674d1",
+      "duration": 76.8,
+      "chapters": 7,
+      "captionCues": 13,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 29,
+      "key": "descent",
+      "sha256": "17268e8a60099862ba7e7b2051aec91733bdfe43c8b25ca50041471c29dab1e1",
+      "duration": 50.7,
+      "chapters": 7,
+      "captionCues": 7,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 30,
+      "key": "lesson-30",
+      "sha256": "62c81bdc3397f1bd357df55c8e197ca6ff160370a0da2c33b10372375fccd72c",
+      "duration": 69.96666666666667,
+      "chapters": 7,
+      "captionCues": 13,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 31,
+      "key": "lesson-31",
+      "sha256": "74d6dd6ba832b2808d64c82ca510f02eaaaa3c9f47969ab5e1f223c84f55b8a6",
+      "duration": 69.56666666666666,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 32,
+      "key": "lesson-32",
+      "sha256": "86dd17a9c7150c39aa866e0a1f0d1faae5da6c14080c351ce94b938cf2bbe385",
+      "duration": 79.9,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 33,
+      "key": "lesson-33",
+      "sha256": "961ffed443caf1a00ac609daa27fd56fdecfc8f83dce0d2c183724b773da7066",
+      "duration": 75.03333333333333,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 34,
+      "key": "lesson-34",
+      "sha256": "f71840f200695e3cb9a18d532ecefafbbb2cc17577ec5a07e2f8c549cb41bdc7",
+      "duration": 67.73333333333333,
+      "chapters": 7,
+      "captionCues": 12,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 35,
+      "key": "lesson-35",
+      "sha256": "882e887b14ae11292da96e737961b2d76a0132436ccdca20ba54feb7a276b76a",
+      "duration": 72.96666666666667,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 36,
+      "key": "lesson-36",
+      "sha256": "d38db43dd182ed7dbf24f8fc56391c7fe2fb205caa413a2f2d4dd07131d4034c",
+      "duration": 79.06666666666666,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 37,
+      "key": "lesson-37",
+      "sha256": "a363f54ca78562dcc7eb4921e852826c35fee62de0cdc95b8e02a5ca73069393",
+      "duration": 71.06666666666666,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 38,
+      "key": "lesson-38",
+      "sha256": "97eb064746b7284da3a8296284b30495ac9c31870597c67e9fc17929ddba4b50",
+      "duration": 77.9,
+      "chapters": 7,
+      "captionCues": 15,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 39,
+      "key": "lesson-39",
+      "sha256": "6b1fd6b86bb2de6b2631ee960ff1288f397c6f8f6f3fe71aae64e7858b791053",
+      "duration": 74.93333333333334,
+      "chapters": 7,
+      "captionCues": 13,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 40,
+      "key": "lesson-40",
+      "sha256": "47b07d30d7f494f21a11a73f39bf9e38645d95312e7469d452b5a16a39fd3901",
+      "duration": 83.23333333333333,
+      "chapters": 7,
+      "captionCues": 16,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 41,
+      "key": "lesson-41",
+      "sha256": "65d8d5dcae558c6758634f348982bf2f1e749ff081be256fd284d7cd45f9f7e0",
+      "duration": 76.46666666666667,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 42,
+      "key": "lesson-42",
+      "sha256": "3b29fae469f1e1bf77a9bfc2a95ae34d998debee6c913c740b4fc203c6f0a9c1",
+      "duration": 72.43333333333334,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 43,
+      "key": "lesson-43",
+      "sha256": "1da91455558d1b0912f93f429067a4c2c913df6675d41b02fc12eb5ab48466e5",
+      "duration": 78.26666666666667,
+      "chapters": 7,
+      "captionCues": 13,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 44,
+      "key": "lesson-44",
+      "sha256": "eff987fa072615313309a455d4d1fe0feee996143af160429240e9f4b54ba829",
+      "duration": 77.56666666666666,
+      "chapters": 7,
+      "captionCues": 14,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 45,
+      "key": "lesson-45",
+      "sha256": "fa6bd9c12de9973be9fa410db55199cc55a85059790989976d1cd228164e2804",
+      "duration": 78.3,
+      "chapters": 7,
+      "captionCues": 16,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 46,
+      "key": "lesson-46",
+      "sha256": "de54ac3384d0c7bc75c00bf9ea294703eccfa79f3f4ab8a311b6b499fc7c8d13",
+      "duration": 73.3,
+      "chapters": 7,
+      "captionCues": 15,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 47,
+      "key": "lesson-47",
+      "sha256": "4a69e5a84817e1d9979292edd65bc9dc771a08fb4fbb6412352a7f824ae77c25",
+      "duration": 76.63333333333334,
+      "chapters": 7,
+      "captionCues": 15,
+      "fullDecodePassed": true
+    },
+    {
+      "lesson": 48,
+      "key": "lesson-48",
+      "sha256": "88114e57ef3a79e2ac5d80b997241d9f7a8bc00fa6dddaea92831e1af9655679",
+      "duration": 87.63333333333334,
+      "chapters": 7,
+      "captionCues": 16,
+      "fullDecodePassed": true
+    }
+  ],
+  "issues": []
+}

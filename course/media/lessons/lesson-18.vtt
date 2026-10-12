@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.666
+With several inputs, a change can point in many directions. Each partial derivative varies one coordinate
+
+00:00:06.666 --> 00:00:13.132
+while holding the others fixed. The gradient collects those partials into a vector with the same
+
+00:00:13.132 --> 00:00:13.940
+input-coordinate structure.
+
+00:00:14.467 --> 00:00:20.900
+Two input coordinates allow different rates of change. A partial derivative varies one coordinate while holding
+
+00:00:20.900 --> 00:00:22.107
+the other fixed.
+
+00:00:22.633 --> 00:00:29.033
+The gradient is a vector in input-coordinate space. Its components have the units of output per
+
+00:00:29.033 --> 00:00:29.833
+corresponding input.
+
+00:00:30.333 --> 00:00:36.284
+Can a direction decrease the function even when one coordinate partial is positive? Pause here and
+
+00:00:36.284 --> 00:00:38.143
+make a prediction before continuing.
+
+00:00:39.267 --> 00:00:46.615
+A unit direction specifies orientation without also scaling the length of the proposed move. For our
+
+00:00:46.615 --> 00:00:51.667
+starting inputs, x partial: 2. y partial: 4. Directional derivative: 4.4.
+
+00:00:52.167 --> 00:00:59.517
+The dot product combines the coordinate sensitivities. Positive means ascent along this direction; negative means descent.
+
+00:01:00.033 --> 00:01:05.671
+A gradient must be evaluated at a specific point. It gives local sensitivity, not the total
+
+00:01:05.671 --> 00:01:07.433
+change after a large move.
+

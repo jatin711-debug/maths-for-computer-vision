@@ -1,0 +1,23 @@
+{
+  "id": 62,
+  "module": 16,
+  "title": "Triangulation, rectification and stereo depth",
+  "file": "lessons/62-triangulation-rectification-and-stereo-depth.md",
+  "reading": "CV 11.2.4, 12.1 (12.1.1-12.1.2), 12.3-12.4 and 12.6-12.7; Guo Part IV, Chapter 2, Section 4.",
+  "goal": "Triangulate points from two calibrated views, rectify a stereo pair, compute disparity from a cost volume, and propagate disparity error to depth.",
+  "exercises": [
+    "Take P₁ = [I | 0] and P₂ = [I | (−0.5, 0, 0)ᵀ] with the normalised match (0.1, −0.2) ↔ (0, −0.2). Write the four DLT rows and find the point.",
+    "A stereo rig has f = 700 px and B = 0.12 m. Find the depth for disparities of 42 px and 6 px, and the depth error at both for σ_d = 0.25 px.",
+    "The SAD costs at d = 17, 18 and 19 are 52, 20 and 28. Find the sub-pixel disparity and compare the depths it and the whole-pixel winner give with fB = 84.",
+    "With the two rows of the SAD example, centre the 3-pixel window at x = 4 instead and compute the costs for d = 0 to 3. What would the costs be if both rows were constant at 20, and what does that say about matching on a white cup?"
+  ],
+  "solutions": [
+    "The rows of P₁ are p₁ = (1, 0, 0, 0), p₂ = (0, 1, 0, 0), p₃ = (0, 0, 1, 0); P₂ has p₁ = (1, 0, 0, −0.5) and the same p₂, p₃. View 1: x p₃ᵀ − p₁ᵀ = (−1, 0, 0.1, 0) and y p₃ᵀ − p₂ᵀ = (0, −1, −0.2, 0). View 2 with x = 0: (−1, 0, 0, 0.5); with y = −0.2: (0, −1, −0.2, 0). The first and third rows give X = 0.1Z and X = 0.5W; the second gives Y = −0.2Z. With W = 1: X = 0.5, Z = 5, Y = −1, so the point is (0.5, −1, 5). Check: the disparity is 0.1 − 0 = 0.1 = B/Z = 0.5/5.",
+    "fB = 700 · 0.12 = 84. For d = 42: Z = 84/42 = 2 m and σ_Z ≈ Z²σ_d/(fB) = 4 · 0.25/84 ≈ 0.0119 m, about 1.2 cm. For d = 6: Z = 84/6 = 14 m and σ_Z ≈ 196 · 0.25/84 ≈ 0.583 m. The second point is 7 times farther and its error is 49 times larger, because σ_Z grows with Z².",
+    "With C₋ = 52, C₀ = 20 and C₊ = 28: C₊ − 2C₀ + C₋ = 28 − 40 + 52 = 40, so d* = 18 − (28 − 52)/(2 · 40) = 18 + 24/80 = 18.3. The minimum leans towards d = 19, whose cost is lower than that of d = 17. The depths are 84/18.3 ≈ 4.590 m and 84/18 ≈ 4.667 m: rounding to the whole pixel would cost about 7.7 cm here.",
+    "The left window at x = 4 is (90, 40, 20). Against the right row at x − d: d = 0 gives (20, 20, 20) and a cost of 70 + 20 + 0 = 90; d = 1 gives (40, 20, 20) and 50 + 20 + 0 = 70; d = 2 gives (90, 40, 20) and 0; d = 3 gives (50, 90, 40) and 40 + 50 + 20 = 110. The winner is d̂ = 2, as at x = 3. If both rows were constant at 20, every cost would be 0: the cost curve is flat and any disparity fits equally well. A white cup or a smooth saucer behaves the same way, so matching there needs a larger window, a smoothness prior or a learned matcher, and its estimates should be flagged as unreliable."
+  ],
+  "checkpoint": "Triangulate a point by stacking two rows per view, derive Z = fB/d for a rectified pair, propagate a disparity error to σ_Z ≈ Z²σ_d/(fB), and explain how the window size trades noise against blurred depth edges.",
+  "lab": "stereo",
+  "minutes": 90
+}

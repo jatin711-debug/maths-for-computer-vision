@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.000 --> 00:06.000
+An imperfect parameter. w₀=0 · L=(w−3)².
+The best parameter is w=3. Initial loss is 9.
+
+2
+00:06.000 --> 00:12.000
+Find the local slope. g₀=2(w₀−3)=−6.
+Use learning rate α=0.2. Move opposite to the gradient.
+
+3
+00:12.000 --> 00:18.000
+Apply the first step. w₁=0−0.2(−6)=1.2.
+New loss: (1.2−3)²=3.24. The same rule computes each step.
+
+4
+00:18.000 --> 00:24.000
+Watch the error shrink. w₂=1.92 · w₃=2.352.
+Each error is multiplied by 0.6. A larger rate can overshoot.

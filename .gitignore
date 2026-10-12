@@ -1,0 +1,21 @@
+# Publish the course only; everything else in this workspace (video tooling, build caches, scratch files) stays local.
+/*
+!/.gitignore
+!/.github/
+!/README.md
+!/LICENSE
+!/LICENSE-CONTENT.md
+!/Makefile
+!/Open Course.cmd
+!/Open-Course.ps1
+!/course/
+!/docs/
+
+# The cited books are not redistributed (see course/resources/README.md).
+/course/resources/*.pdf
+/course/resources/copy-manifest.json
+
+# Local caches
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

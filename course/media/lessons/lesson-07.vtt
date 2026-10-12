@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.483
+Read a matrix row as a recipe for one output coordinate. Each row takes a weighted
+
+00:00:06.483 --> 00:00:12.766
+sum of all input components, and the collection of rows produces the output vector. Matrix multiplication
+
+00:00:12.766 --> 00:00:16.300
+is therefore a map, not multiplication of matching entries.
+
+00:00:16.833 --> 00:00:21.906
+The inner dimensions match. The result has two rows and one column; it is an output
+
+00:00:21.906 --> 00:00:22.223
+vector.
+
+00:00:22.733 --> 00:00:29.253
+A row describes one output coordinate. Every entry in that row weights a corresponding input coordinate.
+
+00:00:29.767 --> 00:00:36.261
+What information disappears when the horizontal scale becomes zero? Pause here and make a prediction before
+
+00:00:36.261 --> 00:00:36.667
+continuing.
+
+00:00:37.767 --> 00:00:44.412
+The second row keeps the vertical coordinate. This example stretches horizontally and adds a shear. For
+
+00:00:44.412 --> 00:00:49.397
+our starting inputs, Output x: 7. Output y: 3. Area scale: 2.
+
+00:00:49.900 --> 00:00:56.009
+The determinant describes signed area scaling for this square map. At zero, one input direction collapses
+
+00:00:56.009 --> 00:00:58.300
+and the map is not invertible.
+
+00:00:58.800 --> 00:01:04.960
+A layer’s numerical entries, input convention and output dimensions together define its behaviour.
+

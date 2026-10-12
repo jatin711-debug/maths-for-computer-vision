@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.124
+A layer sums many weighted inputs. If each weight keeps the same variance as the number
+
+00:00:06.124 --> 00:00:12.047
+of inputs grows, the preactivation spread can grow with the fan-in. Initialization rules choose a scale
+
+00:00:12.047 --> 00:00:16.120
+to keep activations and gradients useful at the start of training.
+
+00:00:16.633 --> 00:00:24.573
+Assume independent zero-mean weights and independent unit-second-moment inputs, with no bias contribution to this calculation.
+
+00:00:25.100 --> 00:00:31.029
+As the number of summed inputs grows, each weight’s variance shrinks to avoid uncontrolled growth of
+
+00:00:31.029 --> 00:00:31.770
+activation scale.
+
+00:00:32.300 --> 00:00:38.389
+Should weight standard deviation increase or decrease as fan-in grows? Pause here and make a prediction
+
+00:00:38.389 --> 00:00:39.150
+before continuing.
+
+00:00:40.267 --> 00:00:49.287
+Cross terms vanish under the stated independence and zero-mean assumptions. This is an initial-scale argument, not
+
+00:00:49.287 --> 00:00:58.307
+a guarantee throughout training. For our starting inputs, Fan-in: 32. Weight variance: 0.0625. Weight SD: 0.25.
+
+00:00:58.833 --> 00:01:06.072
+For a symmetric preactivation distribution, ReLU removes half the squared contribution. This is a second moment,
+
+00:01:06.072 --> 00:01:10.143
+not variance: ReLU outputs generally have a positive mean.
+
+00:01:10.667 --> 00:01:18.453
+Check nonfinite values, saturation and vanishing or exploding gradient norms before attributing all training failures to
+
+00:01:18.453 --> 00:01:19.427
+model capacity.
+

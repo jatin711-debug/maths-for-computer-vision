@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.339
+An image is sampled spatial data. High-frequency structure can produce the same stored samples as a
+
+00:00:07.339 --> 00:00:14.479
+different lower-frequency pattern, so it becomes impossible to recover the original signal uniquely from those samples
+
+00:00:14.479 --> 00:00:16.710
+alone. This ambiguity is aliasing.
+
+00:00:17.233 --> 00:00:23.053
+The frequency is cycles per unit time or distance. The sampling rate uses the matching units.
+
+00:00:23.567 --> 00:00:29.781
+Sampling keeps a sequence of values and discards what happened between them. Different continuous signals can
+
+00:00:29.781 --> 00:00:30.947
+share this sequence.
+
+00:00:31.467 --> 00:00:37.671
+Will frequencies four and eight give different sampled cosine values? Pause here and make a prediction
+
+00:00:37.671 --> 00:00:38.447
+before continuing.
+
+00:00:39.567 --> 00:00:47.210
+For this cosine, frequencies mirrored around half the sampling rate have identical samples. This apparent frequency
+
+00:00:47.210 --> 00:00:54.854
+cannot identify the original one uniquely. For our starting inputs, Original frequency: 4. Apparent frequency: 4.
+
+00:00:54.854 --> 00:00:56.287
+Nyquist limit: 6.
+
+00:00:56.800 --> 00:01:04.909
+Before reducing sampling density, suppress frequencies above the new limit. Interpolation alone cannot recover structure already
+
+00:01:04.909 --> 00:01:06.430
+aliased by sampling.
+
+00:01:06.933 --> 00:01:14.553
+Resizing is a signal-processing operation. A sharper-looking resized image need not preserve the original information.
+

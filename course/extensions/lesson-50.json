@@ -1,0 +1,23 @@
+{
+  "id": 50,
+  "module": 13,
+  "title": "Homographies, warping and resampling",
+  "file": "lessons/50-homographies-warping-and-resampling.md",
+  "reading": "CV 3.6.1, 8.1.1 and 3.5.1; CS205A 11.2 for multivariable interpolation; Guo Part II, Chapter 1, Section 2.",
+  "goal": "Estimate a homography from four correspondences and warp an image by inverse mapping with bilinear interpolation.",
+  "exercises": [
+    "Map the point (2,1) with H = [[1,0,1],[0,1,0],[0.5,0,1]] and divide by the last coordinate.",
+    "Write the two rows of A contributed by the correspondence (1,2)↔(3,5), and explain why four correspondences are needed.",
+    "Interpolate bilinearly at α = 0.25, β = 0.75 between I00 = 10 (top-left), I10 = 30 (top-right), I01 = 50 (bottom-left) and I11 = 90 (bottom-right). What does nearest neighbour give?",
+    "A warp enlarges a region by 2 in each direction. With forward mapping to the nearest output pixel, at least what fraction of output pixels receives no value? Why does inverse mapping avoid this?"
+  ],
+  "solutions": [
+    "H(2,1,1)ᵀ = (2+0+1, 0+1+0, 0.5·2+0+1) = (3, 1, 2). Dividing by the last coordinate gives the point (1.5, 0.5). Without the division you would wrongly read (3, 1).",
+    "With h = (h11,…,h33), the u-row is (x, y, 1, 0, 0, 0, −ux, −uy, −u) = (1, 2, 1, 0, 0, 0, −3, −6, −3) and the v-row is (0, 0, 0, x, y, 1, −vx, −vy, −v) = (0, 0, 0, 1, 2, 1, −5, −10, −5). H has 9 entries but only 8 degrees of freedom, because any nonzero multiple gives the same map; each correspondence gives 2 equations, so 4 correspondences (no three collinear) give the 8 that are needed.",
+    "Top row: 0.75·10 + 0.25·30 = 15. Bottom row: 0.75·50 + 0.25·90 = 60. Vertically: 0.25·15 + 0.75·60 = 48.75. The weights 0.1875, 0.0625, 0.5625 and 0.1875 sum to 1. Nearest neighbour: α < 0.5 picks the left column and β > 0.5 the bottom row, so it returns I01 = 50.",
+    "Each source pixel covers about 2 × 2 = 4 output pixels, but forward mapping writes it into only one, so at most a quarter of the output is filled and at least 75% of the output pixels are holes. Inverse mapping loops over the output pixels, maps each centre back with H⁻¹ and interpolates the source there, so every output pixel gets exactly one value."
+  ],
+  "checkpoint": "Derive the two linear equations that one correspondence gives, explain why a homography has eight degrees of freedom, and explain why a rectified image is computed by inverse mapping with bilinear sampling, with a blur first wherever the warp shrinks.",
+  "lab": "homography",
+  "minutes": 90
+}

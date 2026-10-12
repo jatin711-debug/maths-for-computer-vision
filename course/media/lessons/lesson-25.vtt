@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.606
+Probability asks how likely possible data is under a specified parameter. Likelihood uses the same numerical
+
+00:00:07.606 --> 00:00:15.013
+expression but treats observed data as fixed while comparing candidate parameters. It does not become a
+
+00:00:15.013 --> 00:00:17.790
+normalized probability distribution over those candidates.
+
+00:00:18.300 --> 00:00:24.896
+Likelihood varies the parameter while holding the actual data fixed. It is not a probability distribution
+
+00:00:24.896 --> 00:00:25.720
+over parameters.
+
+00:00:26.233 --> 00:00:32.433
+The product assumes conditionally independent Bernoulli observations with one shared success probability.
+
+00:00:32.933 --> 00:00:38.158
+Why would a prediction of near certainty be bad when both outcomes have been observed? Pause
+
+00:00:38.158 --> 00:00:40.443
+here and make a prediction before continuing.
+
+00:00:41.567 --> 00:00:52.487
+The logarithm preserves the location of a maximum. Negating it turns likelihood maximization into loss minimization.
+
+00:00:52.487 --> 00:01:00.677
+For our starting inputs, Likelihood: 0.0625. Total NLL: 2.7726. Mean NLL: 0.69315.
+
+00:01:01.200 --> 00:01:07.928
+The observed success fraction minimizes this loss. Moving toward certainty at either endpoint is punished because
+
+00:01:07.928 --> 00:01:09.610
+both outcome types occurred.
+
+00:01:10.133 --> 00:01:15.383
+State conditional-independence assumptions and whether your reported loss is a sum or mean.
+

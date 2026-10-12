@@ -1,0 +1,23 @@
+{
+  "id": 64,
+  "module": 16,
+  "title": "Volume rendering and neural radiance fields",
+  "file": "lessons/64-volume-rendering-and-neural-radiance-fields.md",
+  "reading": "CV 14.6, 3.1.3, 13.5 (13.5.1) and 14.3; CS205A 12.2; MML 6.7.1.",
+  "goal": "Render a pixel by integrating density and colour along its camera ray, discretise the integral into alpha compositing, and explain with Fourier-feature positional encoding why NeRF can represent fine detail.",
+  "exercises": [
+    "Three samples along a ray have σδ = (0.2, 1.0, 2.0). Compute α, T and w for each, and the transmittance left for the background. Check that everything adds up to 1.",
+    "Their grey colours are 0.2, 0.9 and 0.5 at depths 2, 3 and 4, and the background is white (1). Render the pixel and find the expected depth of the opaque part.",
+    "Compute γ(p) for p = 0.1 with L = 3. Which pair of features changes fastest as p moves, and why does that help an MLP represent an edge?",
+    "A NeRF renders held-out images with an MSE of 0.004. What is its PSNR, and how many decibels would halving the RMS error add? Explain why a sample with Tᵢ = 0.01 behind a wall barely changes during training."
+  ],
+  "solutions": [
+    "α₁ = 1 − e^(−0.2) = 0.1813, α₂ = 1 − e^(−1) = 0.6321, α₃ = 1 − e^(−2) = 0.8647. Transmittance before each sample: T₁ = 1, T₂ = 1 − 0.1813 = 0.8187, T₃ = 0.8187 · 0.3679 = 0.3012. Weights wᵢ = Tᵢαᵢ: 0.1813, 0.5175 and 0.2604. The background gets T₄ = 0.3012 · 0.1353 = 0.0408. Total 0.1813 + 0.5175 + 0.2604 + 0.0408 = 1.0000: every bit of the pixel comes from one sample or the background.",
+    "Ĉ = 0.1813 · 0.2 + 0.5175 · 0.9 + 0.2604 · 0.5 + 0.0408 · 1 = 0.0363 + 0.4658 + 0.1302 + 0.0408 ≈ 0.673. The samples' weights sum to 0.9592, so the expected depth of the opaque part is (0.1813 · 2 + 0.5175 · 3 + 0.2604 · 4)/0.9592 = 2.957/0.9592 ≈ 3.08: mostly the middle sample, pulled slightly towards the far one.",
+    "γ(0.1) = (sin 0.1π, cos 0.1π, sin 0.2π, cos 0.2π, sin 0.4π, cos 0.4π) = (0.309, 0.951, 0.588, 0.809, 0.951, 0.309). The last pair, with frequency 2²π = 4π, changes fastest: its derivative can be 4π ≈ 12.6 per unit of p, four times that of the first pair. A small step in p therefore moves the encoded point a long way, so a smooth, low-frequency function of γ(p), which is what an MLP learns first, can still jump sharply across an edge in p.",
+    "PSNR = −10 log₁₀ 0.004 ≈ 23.98 dB. Halving the RMS error divides the MSE by 4, adding 10 log₁₀ 4 ≈ 6.02 dB, to about 30 dB. The rendered colour depends on that sample only through its weight wᵢ = Tᵢαᵢ ≤ 0.01, so ∂Ĉ/∂cᵢ ≤ 0.01, and the gradients for its density are scaled by Tᵢ as well. A sample hidden behind a wall changes almost nothing in the image, so the loss hardly pushes it: occluded space is learned slowly, if at all."
+  ],
+  "checkpoint": "Derive T(s) = exp(−∫σ) from the absorption over a short step, turn the rendering integral into the weights wᵢ = Tᵢαᵢ, composite a few samples by hand, and explain how Fourier features overcome spectral bias and what goes wrong when L is too large.",
+  "lab": "volume",
+  "minutes": 90
+}

@@ -1,0 +1,23 @@
+{
+  "id": 59,
+  "module": 15,
+  "title": "Optical flow and direct image alignment",
+  "file": "lessons/59-optical-flow-and-direct-image-alignment.md",
+  "reading": "CV 9.1, 9.1.1, 9.1.3, 9.3 and 7.1.5.",
+  "goal": "Derive brightness constancy, solve Lucas–Kanade as 2×2 least squares, see the aperture problem as a rank-deficient structure tensor, and recover large motions coarse-to-fine.",
+  "exercises": [
+    "Three pixels have (I_x, I_y, I_t) = (2, 0, −2), (0, 1, 1) and (1, 1, 0). Build M and the right-hand side, solve for (u, v) and check each equation.",
+    "Every pixel in a window has gradient (3, 4) and I_t = −10. Why can Lucas–Kanade not solve for the flow? Give the normal flow vector and two different flows that satisfy the constraint.",
+    "A camera pans so that content moves 8 pixels between frames, and Lucas–Kanade is reliable only below about 1 pixel. How many pyramid levels are needed, what is the motion at each level, and how many for a 13-pixel motion?",
+    "Apply one Horn–Schunck update at a pixel with (I_x, I_y, I_t) = (1, 0, −2) and neighbour average ū = v̄ = 0 for α = 1 and α = 3. Repeat for α = 1 when ū = 1.5. What does α control?"
+  ],
+  "solutions": [
+    "M = [[ΣI_x², ΣI_xI_y], [ΣI_xI_y, ΣI_y²]] = [[4 + 0 + 1, 0 + 0 + 1], [1, 0 + 1 + 1]] = [[5, 1], [1, 2]]. Right-hand side −(ΣI_xI_t, ΣI_yI_t) = −((2)(−2) + 0 + (1)(0), 0 + (1)(1) + (1)(0)) = (4, −1). det M = 10 − 1 = 9, so (u, v) = (1/9)[[2, −1], [−1, 5]](4, −1) = (1/9)(8 + 1, −4 − 5) = (1, −1). Check I_xu + I_yv + I_t: 2·1 + 0 − 2 = 0, 0 + 1·(−1) + 1 = 0 and 1·1 + 1·(−1) + 0 = 0, so all three hold exactly.",
+    "Every row of the least-squares system is (3, 4), so M = n·[[9, 12], [12, 16]] has determinant 0: its eigenvalues are 25n and 0, and the system has a line of solutions. Each pixel says only 3u + 4v = 10. The normal flow is the solution along the gradient: length −I_t/|∇I| = 10/5 = 2 pixels in direction (0.6, 0.8), i.e. (1.2, 1.6). Adding any multiple of the edge direction (−0.8, 0.6) also fits, for example (2, 1): 6 + 4 = 10, and (−2, 4): −6 + 16 = 10. This is the aperture problem: motion along the edge is invisible in the window.",
+    "Halving the image halves the motion: 8 px at level 0, 4 px at level 1, 2 px at level 2 and 1 px at level 3. Three levels above the original (a 4-level pyramid) bring it down to 1 pixel, where the linearisation works; the flow found there is doubled at each finer level and refined. For 13 px: 13, 6.5, 3.25, 1.625, 0.8125, so level 4 is the first below 1 pixel and four halvings are needed.",
+    "The data residual is I_xū + I_yv̄ + I_t = 0 + 0 − 2 = −2. With α = 1: u = 0 − 1·(−2)/(1 + 1) = 1 and v = 0 − 0 = 0. With α = 3: u = 2/(9 + 1) = 0.2. With ū = 1.5 and α = 1 the residual is 1.5 − 2 = −0.5, so u = 1.5 + 0.5/2 = 1.75. The single pixel alone asks for u = 2 (its constraint u − 2 = 0); α² weighs agreement with the neighbours against that data term, so a large α gives smooth flow that spreads from textured into flat regions, and a small α trusts each pixel's own constraint."
+  ],
+  "checkpoint": "Derive I_xu + I_yv + I_t ≈ 0 from brightness constancy, solve the 2×2 Lucas–Kanade system for a small window, explain the aperture problem through the eigenvalues of M, and explain why a pyramid lets the same linearisation recover large motions.",
+  "lab": "opticalflow",
+  "minutes": 90
+}

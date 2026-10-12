@@ -1,0 +1,111 @@
+{
+  "banks": [
+    "practice-bank-m01-03.js",
+    "practice-bank-m04-06.js",
+    "practice-bank-m07-09.js",
+    "practice-bank-m10-12.js"
+  ],
+  "seedsPerGenerator": 300,
+  "lessons": 68,
+  "generators": 312,
+  "instances": 93600,
+  "texSegments": 125803,
+  "issues": [],
+  "warnings": [
+    {
+      "where": "Lesson 39 batchnorm answer 2",
+      "message": "Typing 0 is accepted for [0.00128] (seed 282); consider an explicit tol"
+    },
+    {
+      "where": "Lesson 39 stable-bce answer 0",
+      "message": "Typing 0 is accepted for [0.00742] (seed 14); consider an explicit tol"
+    },
+    {
+      "where": "Lesson 47 ece answer 1",
+      "message": "Typing 0 is accepted for [0.00538] (seed 227); consider an explicit tol"
+    },
+    {
+      "where": "Lesson 65 cross-attention-row answer 1",
+      "message": "Typing 0 is accepted for [-0.00428] (seed 264); consider an explicit tol"
+    },
+    {
+      "where": "Lesson 66 responsibility answer 0",
+      "message": "Typing 0 is accepted for [0.000138] (seed 6); consider an explicit tol"
+    },
+    {
+      "where": "Lesson 67 forward-noise answer 1",
+      "message": "Typing 0 is accepted for [-0.00488] (seed 90); consider an explicit tol"
+    }
+  ],
+  "thinLessons": [],
+  "perLesson": {
+    "1": 4,
+    "2": 4,
+    "3": 4,
+    "4": 4,
+    "5": 4,
+    "6": 4,
+    "7": 4,
+    "8": 4,
+    "9": 4,
+    "10": 4,
+    "11": 4,
+    "12": 4,
+    "13": 4,
+    "14": 4,
+    "15": 4,
+    "16": 4,
+    "17": 4,
+    "18": 4,
+    "19": 4,
+    "20": 4,
+    "21": 4,
+    "22": 4,
+    "23": 4,
+    "24": 4,
+    "25": 5,
+    "26": 4,
+    "27": 4,
+    "28": 5,
+    "29": 4,
+    "30": 4,
+    "31": 4,
+    "32": 5,
+    "33": 4,
+    "34": 4,
+    "35": 4,
+    "36": 5,
+    "37": 5,
+    "38": 5,
+    "39": 5,
+    "40": 5,
+    "41": 5,
+    "42": 5,
+    "43": 5,
+    "44": 5,
+    "45": 5,
+    "46": 5,
+    "47": 5,
+    "48": 5,
+    "49": 4,
+    "50": 4,
+    "51": 4,
+    "52": 4,
+    "53": 4,
+    "54": 4,
+    "55": 4,
+    "56": 4,
+    "57": 6,
+    "58": 6,
+    "59": 5,
+    "60": 6,
+    "61": 6,
+    "62": 6,
+    "63": 6,
+    "64": 7,
+    "65": 6,
+    "66": 6,
+    "67": 6,
+    "68": 6
+  }
+}

@@ -1,0 +1,47 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.104
+A model can perform differently across lighting, object size, source or population groups. The aggregate combines
+
+00:00:07.104 --> 00:00:14.008
+these results using the evaluation mixture, so a shift toward difficult cases can lower the headline
+
+00:00:14.008 --> 00:00:17.460
+score even if subgroup behaviour itself stays unchanged.
+
+00:00:17.967 --> 00:00:24.190
+These conditional accuracies are held fixed in this toy example. The model already performs much worse
+
+00:00:24.190 --> 00:00:25.357
+on dark images.
+
+00:00:25.867 --> 00:00:32.561
+A different use environment can contain a different share of difficult conditions, even with identical behaviour
+
+00:00:32.561 --> 00:00:33.817
+inside each subgroup.
+
+00:00:34.333 --> 00:00:40.956
+Can aggregate accuracy fall even when neither subgroup accuracy changes? Pause here and make a prediction
+
+00:00:40.956 --> 00:00:41.783
+before continuing.
+
+00:00:42.900 --> 00:00:51.509
+Aggregate accuracy is a weighted average here. A headline score can change simply because the subgroup
+
+00:00:51.509 --> 00:00:59.580
+mixture changed. For our starting inputs, Bright accuracy: 0.9. Dark accuracy: 0.5. Aggregate accuracy: 0.82.
+
+00:01:00.100 --> 00:01:06.797
+Compare conditional results as well as the aggregate. If subgroup performance changes too, mixture shift alone
+
+00:01:06.797 --> 00:01:08.890
+cannot explain the new result.
+
+00:01:09.400 --> 00:01:15.772
+A limitation report should describe which conditions failed, how many examples support it and what remains
+
+00:01:15.772 --> 00:01:16.170
+uncertain.
+

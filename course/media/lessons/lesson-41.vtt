@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.823
+A classifier’s output is a class decision derived from scores. Training-time transformations can encourage useful robustness
+
+00:00:06.823 --> 00:00:13.447
+by presenting varied inputs with the same target, but the shared label is an assumption about
+
+00:00:13.447 --> 00:00:18.000
+the task rather than a property of the image operation alone.
+
+00:00:18.500 --> 00:00:24.770
+This toy brightness augmentation modifies stored values while keeping the same shape and pixel positions.
+
+00:00:25.300 --> 00:00:31.683
+A larger scale can remove distinctions through clipping. The object’s outline is preserved here, but visibility
+
+00:00:31.683 --> 00:00:32.880
+can still change.
+
+00:00:33.400 --> 00:00:39.458
+When clipping removes distinctions, is the same target still clearly supported by the image? Pause here
+
+00:00:39.458 --> 00:00:41.730
+and make a prediction before continuing.
+
+00:00:42.833 --> 00:00:49.590
+Brightness changes may preserve an object identity label in a chosen range. They need not preserve
+
+00:00:49.590 --> 00:00:56.347
+labels for exposure quality or tasks whose target depends on intensity. For our starting inputs, Scale:
+
+00:00:56.347 --> 00:00:59.303
+1. Original mean: 80. Augmented mean: 80.
+
+00:00:59.833 --> 00:01:07.825
+Augmentation encourages a particular robustness, but improvement must be measured. A mathematically valid transformation can be
+
+00:01:07.825 --> 00:01:09.823
+inappropriate for the task.
+
+00:01:10.333 --> 00:01:15.993
+Inductive biases and augmentations should match the invariances your target genuinely has.
+

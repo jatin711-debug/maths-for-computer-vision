@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.695
+A score threshold selects which predictions count as positive. Precision asks what fraction of that selected
+
+00:00:06.695 --> 00:00:13.189
+set is correct. Recall asks what fraction of the actual positive targets has been recovered. Their
+
+00:00:13.189 --> 00:00:18.060
+denominators describe different groups, which is why neither can replace the other.
+
+00:00:18.567 --> 00:00:24.967
+The convention includes equality. Raising the threshold changes the positive set; it does not retrain the
+
+00:00:24.967 --> 00:00:25.367
+model.
+
+00:00:25.867 --> 00:00:30.217
+There are four actual positives and two actual negatives in this tiny example.
+
+00:00:30.733 --> 00:00:37.204
+Will precision remain defined if the threshold selects no examples? Pause here and make a prediction
+
+00:00:37.204 --> 00:00:38.013
+before continuing.
+
+00:00:39.133 --> 00:00:49.030
+Precision conditions on a positive prediction. If there are no positive predictions, state the chosen empty-denominator
+
+00:00:49.030 --> 00:00:56.453
+reporting convention. For our starting inputs, Threshold: 0.5. Precision: 0.75. Recall: 0.75.
+
+00:00:56.967 --> 00:01:05.301
+Recall conditions on an actual positive. Sweeping thresholds creates multiple precision-recall points; detection AP additionally needs
+
+00:01:05.301 --> 00:01:08.427
+matching and an explicit integration convention.
+
+00:01:08.933 --> 00:01:15.477
+Choose thresholds using the intended costs or a validation protocol, then report how positives are matched
+
+00:01:15.477 --> 00:01:17.113
+and metrics are aggregated.
+

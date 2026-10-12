@@ -1,0 +1,160 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.555
+A factory camera inspects every part.
+
+00:00:03.575 --> 00:00:06.805
+Its detector catches ninety percent of real
+defects,
+
+00:00:06.825 --> 00:00:10.918
+and raises a false alarm on only five percent
+of good parts.
+
+00:00:10.938 --> 00:00:12.142
+Then it beeps.
+
+00:00:12.162 --> 00:00:15.350
+How likely is it that this part is really
+defective?
+
+00:00:15.700 --> 00:00:17.568
+Let's count instead of guessing.
+
+00:00:17.588 --> 00:00:19.455
+Picture a thousand parts.
+
+00:00:19.475 --> 00:00:21.918
+Defects are rare, just two percent:
+
+00:00:21.938 --> 00:00:25.250
+twenty orange dots, among nine hundred eighty
+good ones.
+
+00:00:25.475 --> 00:00:27.055
+Now run the detector.
+
+00:00:27.075 --> 00:00:30.605
+It flags eighteen of the twenty defects, and
+misses two.
+
+00:00:30.625 --> 00:00:35.525
+But it also beeps on five percent of the good
+parts: forty nine false alarms.
+
+00:00:35.935 --> 00:00:37.040
+So a part beeps.
+
+00:00:37.060 --> 00:00:38.928
+What is the chance it's really defective?
+
+00:00:38.948 --> 00:00:40.585
+Pause and decide.
+
+00:00:43.350 --> 00:00:47.393
+Keep only the parts that beeped, and gather
+them: sixty seven alerts.
+
+00:00:47.413 --> 00:00:49.168
+How many are real defects?
+
+00:00:49.188 --> 00:00:50.493
+Just eighteen.
+
+00:00:50.513 --> 00:00:54.000
+Eighteen out of sixty seven is about twenty
+seven percent.
+
+00:00:54.360 --> 00:00:57.540
+If you guessed ninety, you answered a
+different question.
+
+00:00:57.560 --> 00:01:00.965
+Ninety percent is the chance of a beep, given
+a defect.
+
+00:01:00.985 --> 00:01:03.827
+We wanted the chance of a defect, given a
+beep.
+
+00:01:03.848 --> 00:01:08.260
+Good parts are so common that their false
+alarms swamp the real ones.
+
+00:01:08.780 --> 00:01:12.248
+Bayes' theorem is the same count, in
+probabilities.
+
+00:01:12.268 --> 00:01:16.485
+The chance of a defect given a beep equals the
+chance of a beep given a defect,
+
+00:01:16.505 --> 00:01:19.673
+times the base rate, over the chance of any
+beep.
+
+00:01:19.693 --> 00:01:22.185
+That's point nine times point zero two,
+
+00:01:22.205 --> 00:01:26.780
+over sixty seven in a thousand: eighteen over
+sixty seven again.
+
+00:01:27.245 --> 00:01:30.925
+Now make defects ten times as common: twenty
+percent.
+
+00:01:30.945 --> 00:01:32.875
+The detector hasn't changed.
+
+00:01:32.895 --> 00:01:37.012
+But now one hundred eighty true alerts face
+only forty false ones,
+
+00:01:37.032 --> 00:01:41.170
+so a beep means a real defect about eighty two
+percent of the time.
+
+00:01:41.695 --> 00:01:44.425
+Back at two percent, these numbers have names.
+
+00:01:44.445 --> 00:01:47.388
+Recall: of the real defects, how many beeped?
+
+00:01:47.408 --> 00:01:48.700
+Eighteen of twenty.
+
+00:01:48.720 --> 00:01:51.413
+Precision: of the beeps, how many were real?
+
+00:01:51.432 --> 00:01:53.245
+Eighteen of sixty seven.
+
+00:01:53.430 --> 00:01:55.672
+Rare classes look just like this.
+
+00:01:55.692 --> 00:01:59.810
+In this photo, the camera fills twenty of a
+thousand patches.
+
+00:01:59.830 --> 00:02:02.385
+And a model's confidence only means what it
+says
+
+00:02:02.405 --> 00:02:05.605
+when it's calibrated at the base rate where
+it's deployed.
+
+00:02:06.200 --> 00:02:07.842
+So remember three things.
+
+00:02:07.862 --> 00:02:09.367
+Start from the base rate.
+
+00:02:09.387 --> 00:02:11.480
+Count the true and false alerts.
+
+00:02:11.500 --> 00:02:15.175
+And the posterior is true alerts divided by
+all alerts.
+

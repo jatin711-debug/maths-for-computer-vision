@@ -1,0 +1,50 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.600
+Automatic differentiation follows operation dependencies and applies local chain-rule rules. It computes derivatives of the implemented
+
+00:00:07.600 --> 00:00:15.000
+function, which may differ from the function you intended because of a wrong reduction, axis, detached
+
+00:00:15.000 --> 00:00:16.850
+value or graph construction.
+
+00:00:17.367 --> 00:00:24.548
+Use float64 for this small numerical check. Smoothness near the test point avoids ambiguity from activation
+
+00:00:24.548 --> 00:00:24.997
+kinks.
+
+00:00:25.500 --> 00:00:32.916
+A numerical comparison is useful only when the objective, reduction and tested parameter match the analytic
+
+00:00:32.916 --> 00:00:33.380
+calculation.
+
+00:00:33.900 --> 00:00:40.247
+Will making the step arbitrarily tiny always make a numerical derivative more accurate? Pause here and
+
+00:00:40.247 --> 00:00:42.230
+make a prediction before continuing.
+
+00:00:43.333 --> 00:00:51.104
+Evaluate both displaced inputs while keeping all other inputs fixed. A central difference has smaller truncation
+
+00:00:51.104 --> 00:00:58.874
+error than a one-sided difference for this smooth example. For our starting inputs, Step size h:
+
+00:00:58.874 --> 00:01:02.273
+0.01. Analytic gradient: 12. Numerical gradient: 12.
+
+00:01:02.800 --> 00:01:09.342
+For this cubic the truncation error is exactly h squared. At extremely tiny h, subtraction and
+
+00:01:09.342 --> 00:01:13.430
+floating-point rounding can dominate, so smaller is not always better.
+
+00:01:13.933 --> 00:01:20.997
+Numerical agreement tests a local computation. It does not establish that the overall model, data protocol
+
+00:01:20.997 --> 00:01:22.763
+or objective is appropriate.
+

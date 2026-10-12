@@ -1,0 +1,50 @@
+.lesson-python{min-width:0;margin-top:20px;padding:28px 32px;border:1px solid var(--line);border-radius:16px;background:var(--surface);scroll-margin-top:90px}
+.lesson-python>.eyebrow{font-size:10px}
+.lesson-python h2{font-size:24px;line-height:1.35;letter-spacing:-.5px;margin:0 0 12px}
+.python-jump{display:inline-flex;align-items:center;min-height:44px;margin-top:4px;padding:8px 0;border:0;background:none;color:var(--green);font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.python-jump:focus-visible,.lesson-python h2:focus-visible{outline:3px solid var(--orange);outline-offset:4px;border-radius:3px}
+.python-intro{font-size:15px;line-height:1.8;color:var(--muted);margin:0 0 20px;max-width:90ch}
+.python-panel,.python-source,.python-guide{min-width:0}
+.python-code-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.python-code-head>span{font-size:11px;font-family:var(--mono);color:var(--green);background:#edf3e8;padding:7px 10px;border-radius:6px}
+.python-actions{display:flex;flex-wrap:wrap;gap:8px}
+.python-actions .btn{min-height:44px;font-size:12px;padding:10px 13px}
+.python-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(240px,1fr);gap:24px;align-items:start}
+.python-source pre{max-width:100%;overflow:auto;overscroll-behavior-x:contain;margin:0;border:1px solid #2f473c;border-radius:10px;background:#172a22;color:#eef4ee;padding:19px 20px;tab-size:4;line-height:1.8;font-size:12px;font-family:var(--mono)}
+.python-source pre:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.python-source code{font:inherit;white-space:pre;background:none;padding:0;color:inherit}
+.python-editbar,.python-runbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;margin:0 0 10px}
+.python-editbar .btn{font-size:11px;min-height:44px;padding:8px 10px}
+.python-follow{font-size:11px;line-height:1.6;color:var(--muted)}
+.python-editor{display:block;width:100%;max-width:100%;min-width:0;resize:vertical;min-height:230px;border:1px solid #2f473c;border-radius:10px;background:#172a22;color:#eef4ee;padding:19px 20px;line-height:1.8;font-size:12px;font-family:var(--mono);tab-size:4;overflow:auto;overscroll-behavior-x:contain}
+.python-editor:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.lesson-python [hidden]{display:none!important}
+.python-runbar{margin:14px 0 0}
+.python-runbar .btn{min-height:44px;font-size:12px;padding:10px 13px}
+.python-run-status{flex:1 1 190px;font-size:12px;line-height:1.7;color:var(--muted)}
+.python-output{margin-top:17px;border:1px solid #d9e3d0;border-radius:10px;overflow:hidden;background:#edf3e8}
+.python-output-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;padding:11px 14px}
+.python-output-head h4{margin:0;font-size:12px}.python-output-head span{color:var(--muted);font-size:10px}
+.python-source .python-console{border:0;border-top:1px solid #d9e3d0;border-radius:0;background:#f5f8f1;color:#233f30;white-space:pre-wrap;overflow-wrap:anywhere;padding:14px;max-height:320px;font-size:12px;line-height:1.8}
+.python-console:empty::before{content:'No text output yet.';color:var(--muted)}
+.py-comment{color:#a8bda9}.py-keyword{color:#c3aaf4}.py-string{color:#cae8aa}.py-number{color:#f7c88d}.py-function{color:#9ad8e5}
+.python-status{font-size:12px;line-height:1.7;color:var(--green);margin:10px 0 0}
+.python-status:empty{display:none}
+.python-guide h4{font-size:13px;margin:0 0 10px;line-height:1.7}
+.python-guide h4>span{font-size:11px;font-weight:400;color:var(--muted)}
+.python-results{margin:0 0 20px;padding:12px 15px;background:#edf3e8;border:1px solid #d9e3d0;border-radius:9px}
+.python-results>div{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:5px 15px;padding:6px 0}
+.python-results dt{font-size:12px;line-height:1.6;flex:1 1 140px}
+.python-results dd{font-family:var(--mono);font-size:13px;line-height:1.6;font-weight:600;color:var(--green);margin:0;overflow-wrap:anywhere}
+.python-guide ul{padding-left:18px;margin:0;font-size:13px;line-height:1.85;color:#36483d}
+.python-guide li+li{margin-top:9px}
+.python-try{border-left:3px solid var(--orange);background:#fff3e9;padding:12px 15px;margin:17px 0 0;font-size:13px;line-height:1.85}
+.python-setup{margin-top:18px;padding-top:15px;border-top:1px solid var(--line);font-size:13px;line-height:1.8}
+.python-setup summary,.python-alternate>summary{cursor:pointer;color:var(--green);font-weight:600;min-height:44px;align-content:center}
+.python-setup p{margin:8px 0;overflow-wrap:anywhere}
+.python-setup code{font-size:12px;background:#edf3e8;padding:2px 5px;border-radius:4px;white-space:normal;overflow-wrap:anywhere}
+.python-alternate{border-top:1px solid var(--line);padding-top:14px;margin-top:16px}
+.python-alternate>.python-panel{margin-top:14px}
+@media(max-width:1200px){.python-grid{grid-template-columns:1fr;gap:20px}.lesson-python{padding:24px}}
+@media(max-width:600px){.lesson-python{padding:20px 17px}.lesson-python h2{font-size:21px}.python-intro{font-size:14px}.python-code-head{display:block}.python-code-head>span{display:inline-block;margin-bottom:12px}.python-source pre,.python-editor{padding:15px;font-size:12px}.python-actions .btn{flex:1 1 110px}.python-results{padding:10px 13px}.python-run-status{flex-basis:100%}}
+@media print{.python-actions,.python-status,.python-setup,.python-editbar,.python-runbar,.python-editor{display:none}.python-grid{display:block}.python-source pre{white-space:pre-wrap;overflow:visible;background:white;color:black;border-color:#ccc}.python-source>pre[hidden]{display:block!important}.python-source code{white-space:pre-wrap;overflow-wrap:anywhere}.python-source code span{color:inherit}.lesson-python{break-inside:auto}.python-guide{margin-top:15px}}

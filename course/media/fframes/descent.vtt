@@ -1,0 +1,40 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.433
+This curve shows loss as the weight changes. Start at zero,
+with loss nine. The minimum is at three.
+
+2
+00:00:06.433 --> 00:00:13.967
+The gradient is twice the difference between the weight and
+three. At zero it is minus six. The curve slopes down to the
+right.
+
+3
+00:00:13.967 --> 00:00:21.833
+We subtract the gradient times a learning rate. With a
+negative gradient, should the weight move left or right? Pause
+here.
+
+4
+00:00:21.833 --> 00:00:29.767
+Use learning rate zero point two. Subtracting a negative moves
+right to one point two. Loss falls to three point two four.
+
+5
+00:00:29.767 --> 00:00:35.900
+Recompute the slope at the new weight: minus three point six.
+The next weight is one point nine two.
+
+6
+00:00:35.900 --> 00:00:42.200
+A third update reaches two point three five two. The steps
+shrink as the weight approaches the minimum.
+
+7
+00:00:42.200 --> 00:00:50.700
+Step size matters. A learning rate of one point two jumps past
+the minimum and increases the loss to seventeen point six
+four.
+

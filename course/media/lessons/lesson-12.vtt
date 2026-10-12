@@ -1,0 +1,47 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.045
+Fitting only the training observations can encourage complicated or unstable parameter choices. A regularizer adds a
+
+00:00:07.045 --> 00:00:13.890
+cost for a chosen property, such as large weight magnitude. It changes the optimization objective rather
+
+00:00:13.890 --> 00:00:17.740
+than merely changing the way a solver computes it.
+
+00:00:18.267 --> 00:00:24.987
+The first term rewards matching the observation. The second charges for weight magnitude; its coefficient states
+
+00:00:24.987 --> 00:00:25.827
+the tradeoff.
+
+00:00:26.333 --> 00:00:31.915
+The penalty contributes to the derivative too. Minimizing only the data term would give a different
+
+00:00:31.915 --> 00:00:32.263
+answer.
+
+00:00:32.767 --> 00:00:38.729
+Will the training error necessarily decrease when the penalty gets stronger? Pause here and make a
+
+00:00:38.729 --> 00:00:39.847
+prediction before continuing.
+
+00:00:40.967 --> 00:00:47.910
+Collecting the terms in w gives this solution. The positive curvature makes it the unique global
+
+00:00:47.910 --> 00:00:54.853
+minimizer in this example. For our starting inputs, Unpenalized fit: 2. Regularized fit: 1. Data error:
+
+00:00:54.853 --> 00:00:55.287
+1.
+
+00:00:55.800 --> 00:01:02.283
+A larger penalty can increase training error while reducing weight size. Validation, rather than training fit
+
+00:01:02.283 --> 00:01:05.120
+alone, decides whether this preference is useful.
+
+00:01:05.633 --> 00:01:10.383
+Better training fit and better performance on unseen data are separate outcomes.
+

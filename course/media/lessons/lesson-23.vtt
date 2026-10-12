@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.253
+Variance measures spread around a mean using squared deviations. Covariance measures whether two centred quantities tend
+
+00:00:07.253 --> 00:00:14.307
+to have deviations of the same sign. Its value depends on their units; correlation divides out
+
+00:00:14.307 --> 00:00:16.070
+their marginal standard deviations.
+
+00:00:16.600 --> 00:00:23.090
+Variance measures squared spread around each variable’s mean. Here both variables have unit standard deviation.
+
+00:00:23.600 --> 00:00:30.740
+The off-diagonal entry is covariance. With unit marginal variances it also equals the correlation coefficient.
+
+00:00:31.267 --> 00:00:36.707
+Can the variance of a sum be smaller than the variance of either individual measurement? Pause
+
+00:00:36.707 --> 00:00:39.087
+here and make a prediction before continuing.
+
+00:00:40.200 --> 00:00:48.285
+The covariance term matters because the variables can move together or offset each other. Adding variances
+
+00:00:48.285 --> 00:00:56.369
+alone assumes zero covariance. For our starting inputs, Correlation: 0.5. Variance of sum: 3. SD of
+
+00:00:56.369 --> 00:00:57.380
+sum: 1.7321.
+
+00:00:57.900 --> 00:01:03.265
+Standard deviation is the square root of variance. It has the same units as the summed
+
+00:01:03.265 --> 00:01:03.600
+measurement.
+
+00:01:04.100 --> 00:01:10.669
+Measurement noise can be correlated across pixels and channels. Do not automatically treat every variance as
+
+00:01:10.669 --> 00:01:11.080
+additive.
+

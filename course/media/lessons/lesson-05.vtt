@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.215
+Coordinates make geometric statements numerical. A position is meaningful relative to an origin and axes. A
+
+00:00:07.215 --> 00:00:14.230
+displacement compares two positions measured in the same convention and records the change coordinate by coordinate.
+
+00:00:14.733 --> 00:00:22.051
+Both positions use the same origin, axis directions and coordinate units. Otherwise subtraction would not describe
+
+00:00:22.051 --> 00:00:23.423
+the intended move.
+
+00:00:23.933 --> 00:00:30.717
+The first coordinate is horizontal change; the second is vertical change. A negative change means movement
+
+00:00:30.717 --> 00:00:32.413
+opposite the positive axis.
+
+00:00:32.933 --> 00:00:39.218
+Can the displacement change while its vertical component stays constant? Pause here and make a prediction
+
+00:00:39.218 --> 00:00:40.003
+before continuing.
+
+00:00:41.133 --> 00:00:49.857
+The displacement is a vector. Its Euclidean norm is a single nonnegative distance. For our starting
+
+00:00:49.857 --> 00:00:54.763
+inputs, Horizontal change: 3. Vertical change: -2. Distance: 3.6056.
+
+00:00:55.267 --> 00:01:02.131
+Adding a displacement to a position gives another position. Shifting the origin changes both positions but
+
+00:01:02.131 --> 00:01:03.847
+leaves their difference unchanged.
+
+00:01:04.367 --> 00:01:11.261
+Check what each coordinate represents before adding vectors. Feature vectors and spatial positions share notation but
+
+00:01:11.261 --> 00:01:13.847
+need not share a geometric meaning.
+

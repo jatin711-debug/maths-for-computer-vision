@@ -1,0 +1,35 @@
+{
+  "copyChecks": 4,
+  "downloadChecks": 2,
+  "issues": [],
+  "widths": {
+    "320": {
+      "inputChecks": 100,
+      "lessons": 48,
+      "overflowChecks": 48,
+      "resetChecks": 48
+    },
+    "390": {
+      "inputChecks": 100,
+      "lessons": 48,
+      "overflowChecks": 48,
+      "resetChecks": 48
+    },
+    "974": {
+      "inputChecks": 100,
+      "lessons": 48,
+      "overflowChecks": 48,
+      "resetChecks": 48
+    },
+    "1440": {
+      "inputChecks": 100,
+      "lessons": 48,
+      "overflowChecks": 48,
+      "resetChecks": 48
+    }
+  },
+  "nativeClipboardStatus": "Code copied. Paste it into Python or a notebook.",
+  "nativeDownloadStatus": "Prepared lesson-40-python.py with the current inputs.",
+  "jumpShortcutChecked": true,
+  "responsiveMethod": "Same-origin browser frames at 320, 390 and 1440 CSS pixels; shared browser at 974 CSS pixels."
+}

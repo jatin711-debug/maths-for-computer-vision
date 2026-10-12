@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.375
+Convexity says that a local minimum is globally optimal within a convex domain. It does not
+
+00:00:06.375 --> 00:00:12.550
+guarantee that a particular iterative method reaches that minimum at any chosen learning rate. The shape
+
+00:00:12.550 --> 00:00:16.410
+of the objective determines how aggressive an update can be.
+
+00:00:16.933 --> 00:00:23.173
+This quadratic is strictly convex. The curvature a controls how quickly the slope changes as the
+
+00:00:23.173 --> 00:00:23.953
+input moves.
+
+00:00:24.467 --> 00:00:30.075
+The gradient tells us a direction at one point. The second derivative tells us how aggressively
+
+00:00:30.075 --> 00:00:31.477
+the gradient changes nearby.
+
+00:00:32.000 --> 00:00:37.184
+Will a fixed learning rate remain safe as the curve gets steeper? Pause here and make
+
+00:00:37.184 --> 00:00:38.480
+a prediction before continuing.
+
+00:00:39.600 --> 00:00:47.526
+Keeping the learning rate fixed while increasing curvature makes the effective step more aggressive. For our
+
+00:00:47.526 --> 00:00:52.480
+starting inputs, Curvature: 2. Updated weight: 0.4. Error multiplier: 0.2.
+
+00:00:53.000 --> 00:00:58.984
+Strict contraction gives convergence for this example. Convexity alone does not make every learning rate safe;
+
+00:00:58.984 --> 00:01:02.350
+a must be below five for this fixed rate.
+
+00:01:02.867 --> 00:01:09.117
+State curvature or smoothness assumptions when using a convergence claim, and handle constraints explicitly.
+

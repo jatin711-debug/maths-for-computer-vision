@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:08.013
+A detection prediction needs both a label and a spatial region. Box coordinates first require a
+
+00:00:08.013 --> 00:00:15.827
+convention: corner format, coordinate origin and whether endpoints are continuous or inclusive integer pixel positions. Inconsistent
+
+00:00:15.827 --> 00:00:17.780
+conventions change computed areas.
+
+00:00:18.300 --> 00:00:24.683
+Each box has width two and height two. We use continuous coordinates, so no inclusive-pixel plus-one
+
+00:00:24.683 --> 00:00:25.880
+correction is added.
+
+00:00:26.400 --> 00:00:33.200
+Intersection width is clamped at zero when the boxes are separated. Negative intersection area has no
+
+00:00:33.200 --> 00:00:34.050
+geometric meaning.
+
+00:00:34.567 --> 00:00:40.247
+How far can the box move before intersection becomes zero? Pause here and make a prediction
+
+00:00:40.247 --> 00:00:40.957
+before continuing.
+
+00:00:42.067 --> 00:00:49.877
+Adding both areas counts the shared region twice. Subtract it once to obtain the union. For
+
+00:00:49.877 --> 00:00:55.247
+our starting inputs, Intersection area: 2. Union area: 6. IoU: 0.33333.
+
+00:00:55.767 --> 00:01:02.447
+The ratio is scale-free for valid boxes with nonzero union. Zero means no overlap; one means
+
+00:01:02.447 --> 00:01:04.117
+the two boxes coincide.
+
+00:01:04.633 --> 00:01:11.983
+Compute geometry before applying an IoU threshold, and document the matching rules used in detection evaluation.
+

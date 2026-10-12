@@ -1,0 +1,47 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.689
+A reported improvement can come from a changed split, extra training time, different preprocessing or a
+
+00:00:06.689 --> 00:00:13.179
+lucky seed. To study one design choice, keep those factors controlled and compare under a shared
+
+00:00:13.179 --> 00:00:13.990
+evaluation convention.
+
+00:00:14.500 --> 00:00:20.998
+Compare the same seeds, data split and training budget. Pairing helps separate the changed factor from
+
+00:00:20.998 --> 00:00:21.810
+run-to-run variation.
+
+00:00:22.333 --> 00:00:28.293
+These toy results are constructed to illustrate a paired comparison. They are not measured model benchmarks.
+
+00:00:28.800 --> 00:00:34.613
+Can the mean change be zero while individual runs differ? Pause here and make a prediction
+
+00:00:34.613 --> 00:00:35.340
+before continuing.
+
+00:00:36.467 --> 00:00:43.378
+A difference between percentages is measured in percentage points. It is not automatically a relative percent
+
+00:00:43.378 --> 00:00:50.289
+improvement. For our starting inputs, Run 1 difference: 0. Run 2 difference: 1. Run 3 difference:
+
+00:00:50.289 --> 00:00:52.017
+2. Mean difference: 1.
+
+00:00:52.533 --> 00:00:59.741
+The mean alone hides disagreement between runs. Three illustrative seeds are not enough to guarantee a
+
+00:00:59.741 --> 00:01:02.443
+general improvement; inspect protocol and uncertainty.
+
+00:01:02.967 --> 00:01:10.494
+Record dataset version, split, seeds, budget, objective and metric. A reproducible result includes the comparison’s conditions
+
+00:01:10.494 --> 00:01:12.847
+as well as its value.
+

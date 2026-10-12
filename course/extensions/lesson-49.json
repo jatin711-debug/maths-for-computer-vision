@@ -1,0 +1,23 @@
+{
+  "id": 49,
+  "module": 13,
+  "title": "Homogeneous coordinates and 2D transformations",
+  "file": "lessons/49-homogeneous-coordinates-and-2d-transformations.md",
+  "reading": "CV 2.1 and 2.1.1; Guo Part II, Chapter 1, Sections 1-2; MML 2.8 for affine spaces.",
+  "goal": "Write 2D transformations as 3×3 matrices in homogeneous coordinates and say which geometric properties each family preserves.",
+  "exercises": [
+    "Write the 3×3 matrix that rotates by 90° about the origin and then translates by (2,0). Apply it to (1,0).",
+    "Is (3,6,3) the same 2D point as (1,2)? Which 2D point is (4,−2,2)?",
+    "Find the homogeneous line through (0,0) and (1,1) with a cross product.",
+    "Which does an affine map preserve: lengths, parallel lines, angles, midpoints?"
+  ],
+  "solutions": [
+    "M=[[0,−1,2],[1,0,0],[0,0,1]]. M(1,0,1)ᵀ=(2,1,1)ᵀ, so the point moves to (2,1): rotation sends (1,0) to (0,1) and translation adds (2,0).",
+    "Yes: dividing (3,6,3) by 3 gives (1,2,1). Dividing (4,−2,2) by 2 gives the point (2,−1).",
+    "(0,0,1)×(1,1,1)=(−1,1,0), the line −x+y=0, that is y=x. Any nonzero multiple names the same line.",
+    "Parallel lines and midpoints (ratios along a line). Lengths and angles are preserved only by the Euclidean (lengths, angles) and similarity (angles) subfamilies."
+  ],
+  "checkpoint": "Explain why translation needs the extra coordinate, and classify a given 3×3 matrix as Euclidean, similarity, affine or projective from its entries.",
+  "lab": "transforms",
+  "minutes": 90
+}

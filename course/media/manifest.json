@@ -1,0 +1,134 @@
+[
+  {
+    "id": "pixels",
+    "title": "An image is an array",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 126479,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "fitting",
+    "title": "Least squares leaves a residual",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 103957,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "chain",
+    "title": "The chain rule follows the arrows",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 114206,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "bayes",
+    "title": "An alert needs a base rate",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 148592,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "softmax",
+    "title": "Scores become probabilities and loss",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 113531,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "descent",
+    "title": "One small step down the loss",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 152102,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "backprop",
+    "title": "A tiny network learns from its error",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 116124,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "overlap",
+    "title": "How close is a predicted box?",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 109205,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "evaluation",
+    "title": "Choose a metric that sees the error",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 157515,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "projection",
+    "title": "A vector becomes two parts",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 115040,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "pca",
+    "title": "Keep a direction; lose some detail",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 128621,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  },
+  {
+    "id": "filter",
+    "title": "A kernel visits a neighbourhood",
+    "duration": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "frames": 576,
+    "bytes": 156788,
+    "renderer": "SVG → browser canvas → FFmpeg libx264"
+  }
+]

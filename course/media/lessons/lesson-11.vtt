@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.840
+Some maps preserve one direction strongly and another only weakly. Recovering an input then requires undoing
+
+00:00:06.840 --> 00:00:13.480
+a very small scaling, which can amplify noise and rounding. The condition number measures this imbalance
+
+00:00:13.480 --> 00:00:15.140
+in a stated norm.
+
+00:00:15.667 --> 00:00:21.252
+Both values are positive in this example, so the map has full rank. A small minimum
+
+00:00:21.252 --> 00:00:23.347
+value marks a weakly preserved direction.
+
+00:00:23.867 --> 00:00:30.898
+The condition number compares strongest to weakest scaling. A larger ratio means that relative perturbations can
+
+00:00:30.898 --> 00:00:32.217
+be strongly amplified.
+
+00:00:32.733 --> 00:00:39.091
+What happens to sensitivity as the smallest singular value approaches zero? Pause here and make a
+
+00:00:39.091 --> 00:00:40.283
+prediction before continuing.
+
+00:00:41.400 --> 00:00:48.800
+For a full-column-rank matrix, singular values are squared in the Gram matrix. This can worsen numerical
+
+00:00:48.800 --> 00:00:54.350
+sensitivity. For our starting inputs, Condition number: 20. Gram condition number: 400.
+
+00:00:54.867 --> 00:01:01.871
+QR and SVD solve fitting problems without explicitly forming the Gram matrix. This improves the numerical
+
+00:01:01.871 --> 00:01:06.687
+route; it does not remove sensitivity inherent in the original data.
+
+00:01:07.200 --> 00:01:13.170
+A tiny residual does not guarantee accurate recovered parameters in a poorly conditioned problem.
+

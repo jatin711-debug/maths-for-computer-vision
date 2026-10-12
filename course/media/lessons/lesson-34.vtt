@@ -1,0 +1,38 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.667
+A filter response combines a local patch with a kernel. Multiply aligned entries and add their
+
+00:00:06.667 --> 00:00:13.135
+contributions to obtain one output. Sliding the kernel repeats this calculation at other positions, which makes
+
+00:00:13.135 --> 00:00:15.560
+the weights shared across the image.
+
+00:00:16.067 --> 00:00:21.331
+The order of entries matters. Fix which end of the patch aligns with which end of
+
+00:00:21.331 --> 00:00:22.647
+the kernel before multiplying.
+
+00:00:23.167 --> 00:00:31.267
+Cross-correlation multiplies aligned entries directly. This is the operation many deep-learning convolution layers implement.
+
+00:00:31.767 --> 00:00:37.729
+Would a symmetric kernel reveal the difference between the two conventions? Pause here and make a
+
+00:00:37.729 --> 00:00:38.847
+prediction before continuing.
+
+00:00:39.967 --> 00:00:48.447
+In this finite local illustration, convolution reverses kernel order before alignment. In two dimensions it reverses
+
+00:00:48.447 --> 00:00:54.807
+both spatial axes. For our starting inputs, Cross-correlation: -2. Flipped-kernel response: 2.
+
+00:00:55.333 --> 00:01:00.983
+The responses differ because this kernel is asymmetric. Symmetric kernels hide the distinction.
+
+00:01:01.500 --> 00:01:07.260
+Track the alignment and flip convention before interpreting a filter response as an edge or feature.
+

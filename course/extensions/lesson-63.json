@@ -1,0 +1,23 @@
+{
+  "id": 63,
+  "module": 16,
+  "title": "Rotations as a manifold, point-set alignment and bundle adjustment",
+  "file": "lessons/63-rotations-as-a-manifold-point-set-alignment-and-bundle-adjustment.md",
+  "reading": "CV 2.1.3, 8.1.5, 11.2 (11.2.1-11.2.2), 11.4.2-11.4.5, 13.2.1 and Appendix A.3-A.4; CS205A 6.2.4 and 3.2.2; Guo Part IV, Chapter 3.",
+  "goal": "Update rotations with the exponential map, align point sets in closed form (Kabsch), and solve the sparse normal equations of bundle adjustment with the Schur complement.",
+  "exercises": [
+    "The points (2, 0), (0, 1), (−2, 0), (0, −1) are matched to (3, 2), (2, 0), (3, −2), (4, 0). Find the centroids, H, R and t with Kabsch.",
+    "Apply δ = (0, 0, 0.5) to p = (1, 0, 0) exactly with the exponential map and with the first-order matrix I + [δ]×. Compare the lengths, and find det(I + [δ]×).",
+    "A reconstruction has 50 cameras and 20,000 points, and each point is seen by 4 cameras on average. How many unknowns and residuals does bundle adjustment have, how large is the reduced camera system, and how many gauge directions are there?",
+    "Solve [[5, 2, 1], [2, 4, 0], [1, 0, 2]] δ = (4, 2, 1) by eliminating the last two unknowns with the Schur complement, then back-substitute."
+  ],
+  "solutions": [
+    "p̄ = (0, 0) and q̄ = ((3 + 2 + 3 + 4)/4, (2 + 0 − 2 + 0)/4) = (3, 0). The centred targets are (0, 2), (−1, 0), (0, −2), (1, 0). H = Σ p̃q̃ᵀ = (2,0)(0,2)ᵀ + (0,1)(−1,0)ᵀ + (−2,0)(0,−2)ᵀ + (0,−1)(1,0)ᵀ = [[0, 8], [−2, 0]]. Its SVD has Σ = diag(8, 2), U = [[1, 0], [0, −1]] and V = [[0, 1], [1, 0]], so VUᵀ = [[0, −1], [1, 0]] with determinant +1 and no correction is needed: R is the 90° turn [[0, −1], [1, 0]]. Then t = q̄ − Rp̄ = (3, 0). Check: R(2, 0) + t = (0, 2) + (3, 0) = (3, 2).",
+    "θ = ‖δ‖ = 0.5 about the z axis. Exactly: exp([δ]×)p = (cos 0.5, sin 0.5, 0) ≈ (0.878, 0.479, 0), of length 1. First order: (I + [δ]×)p = p + δ × p = (1, 0, 0) + (0, 0.5, 0) = (1, 0.5, 0), of length √1.25 ≈ 1.118, an 11.8% stretch. det(I + [δ]×) = 1 + ‖δ‖² = 1.25, so the first-order matrix is not a rotation; repeated additive updates keep inflating the shape, while R exp([δ]×) stays a rotation for any δ.",
+    "Unknowns: 6 · 50 + 3 · 20,000 = 300 + 60,000 = 60,300. Observations: 20,000 · 4 = 80,000, each giving 2 residuals (x and y), so 160,000 residuals. The Schur complement eliminates the 60,000 point unknowns three at a time, leaving a reduced camera system of size 6 · 50 = 300, that is 300 × 300. A monocular reconstruction can be moved, turned and scaled without changing any reprojection: 3 + 3 + 1 = 7 gauge directions, which must be fixed (for example by holding the first camera and the scale) or damped.",
+    "Here B = 5, E = (2, 1), C = diag(4, 2), v = 4 and w = (2, 1). Reduced equation: (5 − 2²/4 − 1²/2) δ_c = 4 − 2 · 2/4 − 1 · 1/2, that is 3.5 δ_c = 2.5, so δ_c = 5/7 ≈ 0.714. Back-substitution: δ₁ = (2 − 2δ_c)/4 = (4/7)/4 = 1/7 ≈ 0.143 and δ₂ = (1 − δ_c)/2 = (2/7)/2 = 1/7 ≈ 0.143. Check the first row: 5 · 5/7 + 2/7 + 1/7 = 28/7 = 4."
+  ],
+  "checkpoint": "Explain why a rotation is updated by R exp([δ]×) rather than by adding a matrix, derive Kabsch's rotation from the SVD of the cross-covariance including the determinant correction, and show how the Schur complement turns bundle adjustment into a small camera-only system.",
+  "lab": "pointalign",
+  "minutes": 90
+}

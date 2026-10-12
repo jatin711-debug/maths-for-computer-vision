@@ -1,0 +1,22 @@
+[
+  {
+    "file": "linear-algebra-and-pca.ipynb",
+    "executed_code_cells": 4,
+    "result": "passed"
+  },
+  {
+    "file": "calculus-and-probability.ipynb",
+    "executed_code_cells": 4,
+    "result": "passed"
+  },
+  {
+    "file": "learning-and-backprop.ipynb",
+    "executed_code_cells": 4,
+    "result": "passed"
+  },
+  {
+    "file": "vision-and-metrics.ipynb",
+    "executed_code_cells": 5,
+    "result": "passed"
+  }
+]

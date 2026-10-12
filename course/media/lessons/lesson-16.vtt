@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:08.014
+A reduced representation only allows reconstructions inside its chosen subspace. Once a direction has been removed,
+
+00:00:08.014 --> 00:00:15.828
+adjusting the retained coefficients cannot reproduce that missing component. The best coefficients are given by orthogonal
+
+00:00:15.828 --> 00:00:18.270
+projection onto an orthonormal basis.
+
+00:00:18.800 --> 00:00:26.570
+Only the horizontal axis is available for reconstruction. This restriction is what creates unavoidable information loss.
+
+00:00:27.100 --> 00:00:33.750
+Changing z moves the reconstruction along the retained axis. It cannot recover a vertical coordinate.
+
+00:00:34.267 --> 00:00:41.053
+Can any horizontal coefficient recover the missing vertical component? Pause here and make a prediction before
+
+00:00:41.053 --> 00:00:41.477
+continuing.
+
+00:00:42.600 --> 00:00:49.325
+The first term can be reduced by choosing z correctly. The second is the squared length
+
+00:00:49.325 --> 00:00:56.050
+of the discarded component. For our starting inputs, Coefficient z: 3. Squared error: 16. Unavoidable error:
+
+00:00:56.050 --> 00:00:56.470
+16.
+
+00:00:57.000 --> 00:01:03.576
+Projection minimizes error inside the chosen subspace. Its minimum error is still nonzero because x is
+
+00:01:03.576 --> 00:01:05.220
+not in that subspace.
+
+00:01:05.733 --> 00:01:11.683
+A faithful reconstruction and a useful predictive representation are different evaluation goals.
+

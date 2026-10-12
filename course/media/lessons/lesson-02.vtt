@@ -1,0 +1,38 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.794
+Imagine following one pixel through preprocessing: first scale it, then shift it. Each operation consumes the
+
+00:00:06.794 --> 00:00:13.387
+previous output. Function composition gives a precise language for this sequence, including an order that you
+
+00:00:13.387 --> 00:00:15.860
+can trace with one concrete number.
+
+00:00:16.367 --> 00:00:20.989
+A function has an input and an output. Here one scales its input and the other
+
+00:00:20.989 --> 00:00:21.567
+shifts it.
+
+00:00:22.067 --> 00:00:28.067
+The function nearest the input acts first. The composition symbol does not mean multiply the functions.
+
+00:00:28.567 --> 00:00:33.587
+For which scale will the two orders agree? Pause here and make a prediction before continuing.
+
+00:00:34.700 --> 00:00:40.887
+The first order adds three after scaling. The second scales the added three as well. For
+
+00:00:40.887 --> 00:00:45.140
+our starting inputs, Scale then shift: 11. Shift then scale: 14.
+
+00:00:45.667 --> 00:00:51.157
+The orders agree at scale one. A particular agreement does not mean all transformations commute.
+
+00:00:51.667 --> 00:00:58.361
+Preprocessing order is part of the model specification. Write intermediate values when a nested expression feels
+
+00:00:58.361 --> 00:00:59.617
+hard to follow.
+

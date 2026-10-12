@@ -1,0 +1,163 @@
+WEBVTT
+
+00:00:00.705 --> 00:00:04.172
+A classifier looks at this photo and gives
+three raw scores:
+
+00:00:04.192 --> 00:00:06.222
+cat, dog and background.
+
+00:00:06.242 --> 00:00:08.335
+How do scores become confidence?
+
+00:00:08.355 --> 00:00:10.480
+And when it's wrong, how does it learn?
+
+00:00:10.635 --> 00:00:15.865
+Here the scores are zero for cat, one for dog,
+and minus one for background.
+
+00:00:15.885 --> 00:00:20.460
+Scores can be any number, even negative, so
+they are not probabilities yet.
+
+00:00:20.755 --> 00:00:22.672
+Step one: exponentiate.
+
+00:00:22.692 --> 00:00:24.660
+Every bar turns positive.
+
+00:00:24.680 --> 00:00:28.235
+Zero becomes one, one becomes about two point
+seven two,
+
+00:00:28.255 --> 00:00:31.235
+and minus one becomes zero point three seven.
+
+00:00:31.255 --> 00:00:33.330
+Bigger scores grow faster.
+
+00:00:33.635 --> 00:00:38.240
+Step two: stack them and divide by the total,
+about four point oh nine.
+
+00:00:38.260 --> 00:00:40.652
+Now they fill exactly one hundred percent:
+
+00:00:40.672 --> 00:00:45.527
+dog sixty-six point five, cat twenty-four
+point five, background nine.
+
+00:00:45.548 --> 00:00:47.285
+Softmax says dog.
+
+00:00:47.730 --> 00:00:48.372
+Quick check.
+
+00:00:48.392 --> 00:00:50.310
+Add one hundred to every score.
+
+00:00:50.330 --> 00:00:52.147
+What happens to the probabilities?
+
+00:00:52.168 --> 00:00:53.830
+Pause and decide.
+
+00:00:56.645 --> 00:00:57.988
+Nothing changes.
+
+00:00:58.008 --> 00:01:00.625
+Every exponential gains the same factor,
+
+00:01:00.645 --> 00:01:03.812
+e to the hundred, and it cancels when we
+divide.
+
+00:01:03.832 --> 00:01:08.995
+That's why code subtracts the largest score
+first: same answer, no overflow.
+
+00:01:09.340 --> 00:01:11.045
+But the photo is a cat.
+
+00:01:11.065 --> 00:01:16.008
+The loss is minus the log of the cat
+probability: about one point four one.
+
+00:01:16.027 --> 00:01:19.708
+Push that probability toward one, and the loss
+melts away.
+
+00:01:19.727 --> 00:01:22.440
+Confident and wrong, and it explodes.
+
+00:01:22.870 --> 00:01:26.700
+To learn, the network needs the gradient of
+the loss for each score.
+
+00:01:26.720 --> 00:01:31.187
+It is p minus y: the probabilities minus the
+one-hot answer.
+
+00:01:31.207 --> 00:01:36.295
+Cat's entry is negative, the others positive,
+and together they sum to zero.
+
+00:01:36.645 --> 00:01:37.125
+Why?
+
+00:01:37.145 --> 00:01:41.450
+The loss is minus the cat score plus the log
+of the sum of exponentials.
+
+00:01:41.470 --> 00:01:45.250
+Nudge any score, and that log rises by its
+probability.
+
+00:01:45.270 --> 00:01:47.812
+The cat score also brings a minus one.
+
+00:01:47.832 --> 00:01:51.475
+So stepping against the gradient pushes cat up
+and the others down.
+
+00:01:51.495 --> 00:01:53.670
+One step, and cat leads.
+
+00:01:54.170 --> 00:01:57.337
+One more knob: divide the scores by a
+temperature.
+
+00:01:57.357 --> 00:01:59.788
+Below one, the distribution sharpens.
+
+00:01:59.807 --> 00:02:01.762
+Above one, it flattens.
+
+00:02:01.782 --> 00:02:05.570
+Distillation and contrastive learning tune
+exactly this.
+
+00:02:06.085 --> 00:02:08.640
+You'll find this in every classification head,
+
+00:02:08.660 --> 00:02:11.328
+in the class scores of each detected box,
+
+00:02:11.348 --> 00:02:15.260
+and in segmentation, as a softmax at every
+pixel.
+
+00:02:15.795 --> 00:02:17.175
+Remember three things.
+
+00:02:17.195 --> 00:02:20.450
+Softmax: exponentiate, then normalise.
+
+00:02:20.470 --> 00:02:23.825
+The loss is minus the log of the true class
+probability.
+
+00:02:23.845 --> 00:02:26.695
+And its gradient is simply p minus y.
+

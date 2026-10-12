@@ -1,0 +1,23 @@
+{
+  "id": 61,
+  "module": 16,
+  "title": "Epipolar geometry and the eight-point algorithm",
+  "file": "lessons/61-epipolar-geometry-and-the-eight-point-algorithm.md",
+  "reading": "CV 11.3 (11.3.1-11.3.4) and 12.1; Guo Part II, Chapter 1.",
+  "goal": "Derive the epipolar constraint for calibrated (E) and uncalibrated (F) cameras, estimate F with the normalised eight-point algorithm inside RANSAC, and recover the camera motion (R, t) from E.",
+  "exercises": [
+    "Take R = I and t = (0, 1, 0), a vertical step. Write E = [t]×, check the epipolar constraint for X₁ = (1, 2, 4), and describe the epipolar lines in image 2.",
+    "Write the eight-point row for the pixel match (100, 50) ↔ (120, 40), and explain why the raw pixel row is badly scaled.",
+    "An estimate of E has singular values (1.2, 0.8, 0.05). What are the singular values of the closest essential matrix, and how far is it in the Frobenius norm? With 40% wrong matches and p = 0.99, how many RANSAC samples do the eight-point and five-point algorithms need?",
+    "A camera moves straight forward without turning: X₂ = X₁ + t with t = (0, 0, −1). Find E, the epipole in each image and the epipolar line of x̂₁ = (0.25, 0.5, 1). Where does X₁ = (1, 2, 4) appear in image 2?"
+  ],
+  "solutions": [
+    "With t = (0, 1, 0), [t]× = [[0, −t₃, t₂], [t₃, 0, −t₁], [−t₂, t₁, 0]] = [[0, 0, 1], [0, 0, 0], [−1, 0, 0]], and E = [t]× because R = I. X₁ = (1, 2, 4) gives x̂₁ = (0.25, 0.5, 1); X₂ = X₁ + t = (1, 3, 4) gives x̂₂ = (0.25, 0.75, 1). The epipolar line is Ex̂₁ = (1, 0, −0.25), that is x − 0.25 = 0, and x̂₂ᵀEx̂₁ = 0.25 − 0.25 = 0, so the constraint holds. The epipole e₂ ≃ t = (0, 1, 0) has last coordinate 0, a point at infinity along y, so every epipolar line in image 2 is vertical: after a vertical step, matches move only up or down.",
+    "With x₁ = (100, 50) and x₂ = (120, 40) the row (x₂x₁, x₂y₁, x₂, y₂x₁, y₂y₁, y₂, x₁, y₁, 1) is (12000, 6000, 120, 4000, 2000, 40, 100, 50, 1). Its entries range from 12,000 down to 1, and for a 640 × 480 image the products reach about 300,000. The smallest singular vector of A is then dominated by the large columns: tiny relative errors there swamp the entries that multiply 1, so noise drags the estimate by several pixels. Normalising each image's points (centroid at the origin, mean distance √2) makes every entry of order 1; afterwards F = T₂ᵀF̂T₁ undoes the change.",
+    "An essential matrix has two equal singular values and a zero, because E = [t]×R and [t]×t = 0. The closest one in the Frobenius norm keeps the singular vectors and replaces the values by their mean and zero: ((1.2 + 0.8)/2, (1.2 + 0.8)/2, 0) = (1, 1, 0). The distance is √(0.2² + 0.2² + 0.05²) = √0.0825 ≈ 0.287. For RANSAC with ε = 0.4: an eight-point sample is clean with probability 0.6⁸ = 0.0168, so N = ⌈ln 0.01 / ln(1 − 0.0168)⌉ = ⌈−4.605 / −0.01694⌉ = ⌈271.9⌉ = 272. A five-point sample is clean with probability 0.6⁵ = 0.0778, so N = ⌈−4.605 / −0.0809⌉ = ⌈56.9⌉ = 57, almost five times fewer.",
+    "E = [t]× = [[0, 1, 0], [−1, 0, 0], [0, 0, 0]]. The epipole in image 2 is e₂ ≃ t = (0, 0, −1) ≃ (0, 0, 1), the image centre; camera 2's centre is at −Rᵀt = (0, 0, 1) in camera 1, so e₁ is the centre of image 1 too. The line Ex̂₁ = (0.5, −0.25, 0) is 0.5x − 0.25y = 0, that is y = 2x, a line through the centre: with forward motion all epipolar lines radiate from the epipole. X₂ = X₁ + t = (1, 2, 3) gives x̂₂ = (1/3, 2/3) ≈ (0.333, 0.667), which lies on y = 2x and farther from the centre than x̂₁ = (0.25, 0.5). As the camera moves forward, points stream outwards from this focus of expansion."
+  ],
+  "checkpoint": "Derive x̂₂ᵀEx̂₁ = 0 from the coplanarity of the two rays and the baseline, write one eight-point row from a match, explain why the estimate is normalised first and truncated to rank 2 afterwards, and say which camera motions or scenes leave F undetermined.",
+  "lab": "epipolar",
+  "minutes": 90
+}

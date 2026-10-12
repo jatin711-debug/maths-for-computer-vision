@@ -1,0 +1,144 @@
+WEBVTT
+
+00:00:00.680 --> 00:00:03.672
+Blur and sharpen look like local operations:
+
+00:00:03.692 --> 00:00:07.135
+average the neighbours, or exaggerate their
+differences.
+
+00:00:07.155 --> 00:00:08.560
+But there's another view,
+
+00:00:08.580 --> 00:00:12.430
+where both are just volume knobs on waves of
+different speeds.
+
+00:00:12.845 --> 00:00:17.550
+Start with one row of pixels crossing an edge:
+dark, then suddenly bright.
+
+00:00:17.570 --> 00:00:20.220
+Can we build that step out of smooth waves?
+
+00:00:20.400 --> 00:00:22.392
+Begin with the average brightness.
+
+00:00:22.412 --> 00:00:26.092
+Add one slow wave: dark left, bright right,
+but soft.
+
+00:00:26.112 --> 00:00:31.118
+Add a wave three times as fast and a third as
+tall, then five times, then seven.
+
+00:00:31.138 --> 00:00:33.050
+Each one sharpens the jump.
+
+00:00:33.400 --> 00:00:38.930
+With fifty waves, the sum hugs the step, apart
+from small ripples beside the jump.
+
+00:00:38.950 --> 00:00:43.800
+So blurring means turning the fast waves down,
+and sharpening means turning them up.
+
+00:00:44.365 --> 00:00:46.982
+Images have waves in every direction.
+
+00:00:47.002 --> 00:00:51.307
+A slow stripe pattern shows up as two dots
+near the centre of the spectrum.
+
+00:00:51.327 --> 00:00:53.632
+Make it faster: the dots move out.
+
+00:00:53.652 --> 00:00:55.740
+Turn it: they turn too.
+
+00:00:56.125 --> 00:01:01.280
+A photo is a sum of these waves, and its
+spectrum shows how strong each one is:
+
+00:01:01.300 --> 00:01:04.780
+bright in the middle, because most of a photo
+changes slowly,
+
+00:01:04.800 --> 00:01:07.250
+with streaks from its strongest edges.
+
+00:01:07.630 --> 00:01:11.285
+Now keep only a small disc in the centre, and
+switch off the rest.
+
+00:01:11.305 --> 00:01:12.872
+What will the photo look like?
+
+00:01:12.892 --> 00:01:14.555
+Pause and decide.
+
+00:01:17.315 --> 00:01:18.032
+Blurry.
+
+00:01:18.052 --> 00:01:22.082
+Only slow waves survive, and a smaller disc
+blurs more.
+
+00:01:22.102 --> 00:01:25.620
+Keep the outside instead, and only the edges
+remain.
+
+00:01:25.640 --> 00:01:28.132
+Blurring with a kernel does exactly this:
+
+00:01:28.152 --> 00:01:31.865
+convolution in space is multiplication in
+frequency.
+
+00:01:32.275 --> 00:01:33.518
+One surprise.
+
+00:01:33.538 --> 00:01:36.718
+Each wave also has a phase: where its peaks
+sit.
+
+00:01:36.738 --> 00:01:39.618
+Keep only the phases, and the outlines
+survive.
+
+00:01:39.638 --> 00:01:42.500
+Keep only the strengths, and the photo is
+gone.
+
+00:01:42.970 --> 00:01:45.188
+This view runs through vision.
+
+00:01:45.208 --> 00:01:49.200
+Anti-aliasing removes fast waves before you
+shrink an image,
+
+00:01:49.220 --> 00:01:51.375
+as in lesson thirty three.
+
+00:01:51.395 --> 00:01:53.975
+JPEG spends its bits on the slow waves.
+
+00:01:53.995 --> 00:01:58.145
+And a CNN's first filters often look like
+oriented waves.
+
+00:01:58.755 --> 00:02:00.498
+So remember three things.
+
+00:02:00.518 --> 00:02:04.372
+An image is a sum of waves of different speeds
+and directions.
+
+00:02:04.392 --> 00:02:07.685
+The centre of the spectrum holds the slow
+variation.
+
+00:02:07.705 --> 00:02:11.080
+And filtering means turning frequencies up or
+down.
+

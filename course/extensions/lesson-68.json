@@ -1,0 +1,23 @@
+{
+  "id": 68,
+  "module": 17,
+  "title": "3D Gaussian splatting",
+  "file": "lessons/68-3d-gaussian-splatting.md",
+  "reading": "MML 6.5.3 and 5.8; CV 2.1.4, 3.1.3 and 13.4; Guo Part IV, Chapter 3.",
+  "goal": "Represent a scene by anisotropic 3D Gaussians, project each to a 2D Gaussian with the camera Jacobian, and alpha-composite depth-sorted splats.",
+  "exercises": [
+    "With f = 200 px, W = I and Σ = diag(0.04, 0.01, 0.09), compute J and Σ′ for a Gaussian centred at (0.5, −0.2, 2.5).",
+    "In 2D, compute Σ = R(30°) diag(4, 1) R(30°)ᵀ and its determinant, and explain why it is a valid covariance for any angle.",
+    "A splat has opacity 0.9 and Σ′ = diag(16, 4). Compute α at offsets (4, 0), (0, 4) and (4, 2) px from its centre.",
+    "Composite three splats front to back: green with α = 0.4, then red with α = 0.5, then blue with α = 0.9. Give the colour and the remaining transmittance, then repeat in the reverse order."
+  ],
+  "solutions": [
+    "f/z = 200/2.5 = 80, −f x/z² = −200 × 0.5/6.25 = −16 and −f y/z² = −200 × (−0.2)/6.25 = 6.4, so J = [[80, 0, −16], [0, 80, 6.4]]. With a diagonal Σ, Σ′ᵢⱼ = Σₖ Jᵢₖ Jⱼₖ Σₖₖ: Σ′ₓₓ = 80² × 0.04 + 16² × 0.09 = 256 + 23.04 = 279.04; Σ′ᵧᵧ = 80² × 0.01 + 6.4² × 0.09 = 64 + 3.69 = 67.69; Σ′ₓᵧ = (−16)(6.4)(0.09) = −9.216. The splat has standard deviations of about 16.7 px and 8.2 px and is slightly tilted, because the depth extent is seen at an angle in both directions.",
+    "With c = cos 30° = 0.866 and s = sin 30° = 0.5: Σₓₓ = 4c² + 1·s² = 3 + 0.25 = 3.25, Σᵧᵧ = 4s² + c² = 1 + 0.75 = 1.75 and Σₓᵧ = (4 − 1)cs = 1.299. The determinant is 3.25 × 1.75 − 1.299² = 5.6875 − 1.6875 = 4 = 4 × 1, the product of the variances along the Gaussian's own axes, whatever the angle. For any vector v, vᵀRSSᵀRᵀv = ‖SᵀRᵀv‖² ≥ 0, so RSSᵀRᵀ is symmetric and never negative in any direction: always a valid covariance, which is why 3DGS optimises R and S instead of Σ.",
+    "d² = dx²/16 + dy²/4. At (4, 0): d² = 1 and α = 0.9e^(−0.5) = 0.546. At (0, 4): d² = 4 and α = 0.9e^(−2) = 0.122. At (4, 2): d² = 1 + 1 = 2 and α = 0.9e^(−1) = 0.331. The splat is twice as wide horizontally (standard deviation 4 px against 2 px), so the same 4 px offset matters much less sideways than vertically.",
+    "Front to back: green has transmittance 1 and weight 0.4; red has T = 0.6 and weight 0.6 × 0.5 = 0.3; blue has T = 0.6 × 0.5 = 0.3 and weight 0.3 × 0.9 = 0.27. Colour = 0.4·green + 0.3·red + 0.27·blue = (0.3, 0.4, 0.27), with 0.3 × 0.1 = 0.03 left for the background. In the reverse order: blue gets 0.9, red 0.1 × 0.5 = 0.05 and green 0.05 × 0.4 = 0.02, giving (0.05, 0.02, 0.9), almost pure blue. The remaining transmittance is 0.03 in both orders, because a product does not depend on its order, but the colour changes completely: the splats must be sorted by depth."
+  ],
+  "checkpoint": "Explain why 3DGS builds Σ from a rotation and a scale, derive Σ′ = JWΣWᵀJᵀ from the linearised projection, compute a splat's opacity at a pixel, and show with two splats why the splats must be sorted by depth before compositing.",
+  "lab": "splat",
+  "minutes": 90
+}

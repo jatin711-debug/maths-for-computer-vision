@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.872
+A random variable turns an uncertain outcome into a numerical value. Its distribution lists probability mass
+
+00:00:06.872 --> 00:00:13.543
+for discrete outcomes or assigns a density across a continuous domain. A density height can exceed
+
+00:00:13.543 --> 00:00:18.130
+one because interval area, rather than height alone, is a probability.
+
+00:00:18.633 --> 00:00:25.286
+A random variable assigns a number to an uncertain outcome. Its distribution says how much probability
+
+00:00:25.286 --> 00:00:26.533
+each value receives.
+
+00:00:27.033 --> 00:00:34.053
+The two probabilities are nonnegative and sum to one. These are probability masses, not continuous densities.
+
+00:00:34.567 --> 00:00:40.369
+Must the expected value be one of the variable’s possible outcomes? Pause here and make a
+
+00:00:40.369 --> 00:00:41.457
+prediction before continuing.
+
+00:00:42.567 --> 00:00:50.190
+The expectation need not be a possible single outcome. For example, an expectation of one-half does
+
+00:00:50.190 --> 00:00:57.814
+not mean a Bernoulli trial returns one-half. For our starting inputs, Mass at zero: 0.4. Mass
+
+00:00:57.814 --> 00:01:00.197
+at one: 0.6. Expectation: 0.6.
+
+00:01:00.700 --> 00:01:07.304
+The sample mean is the observed fraction of ones. For independent identically distributed trials it concentrates
+
+00:01:07.304 --> 00:01:12.670
+around p as the sample size grows, while any finite sample can differ.
+
+00:01:13.200 --> 00:01:19.920
+Distinguish a random variable, one realized value, a distribution and an estimator of its expectation.
+

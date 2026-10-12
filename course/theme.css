@@ -1,0 +1,153 @@
+:root { color-scheme:light; }
+.theme-toggle {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  width:44px;
+  height:44px;
+  padding:0;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:var(--surface);
+  color:var(--ink);
+}
+.theme-toggle:hover { background:var(--paper); }
+.theme-toggle svg { display:block; }
+.theme-toggle .theme-icon-sun { display:none; }
+:root[data-theme="dark"] .theme-icon-moon { display:none; }
+:root[data-theme="dark"] .theme-icon-sun { display:block; }
+@media(max-width:720px) { .topbar-right { gap:8px; } }
+@media print { .theme-toggle { display:none; } }
+
+@media screen {
+  :root[data-theme="dark"] {
+    color-scheme:dark;
+    --paper:#000;
+    --surface:#0c0c0c;
+    --ink:#ededed;
+    --muted:#a1a1a1;
+    --line:#2a2a2a;
+    --orange:#ededed;
+    --orange-soft:#202020;
+    --green:#d4d4d4;
+    --green-soft:#1c1c1c;
+    --blue:#9ca3af;
+    --sidebar:#080808;
+  }
+  [data-theme="dark"] body { background:var(--paper); }
+  [data-theme="dark"] .topbar { background:#080808; }
+  [data-theme="dark"] .sidebar { color:var(--ink); border-right:1px solid var(--line); }
+  [data-theme="dark"] :is(.brand-sub,.sidebar-label,.sidebar-progress-label,.sidebar-bottom) { color:var(--muted); }
+  [data-theme="dark"] .brand-mark i { background:#ededed; }
+  [data-theme="dark"] #primary-nav a { color:#b5b5b5; }
+  [data-theme="dark"] #primary-nav a span { color:#929292; }
+  [data-theme="dark"] #primary-nav a:hover { background:#171717; color:#fff; }
+  [data-theme="dark"] #primary-nav a[aria-current="page"] { background:#202020; color:#fff; }
+  [data-theme="dark"] #primary-nav a[aria-current="page"] span { color:#fff; }
+  [data-theme="dark"] .sidebar-course { border-color:var(--line); }
+  [data-theme="dark"] .chapter-link { color:#d4d4d4; }
+  [data-theme="dark"] .chapter-number { background:#202020; color:#ededed; }
+  [data-theme="dark"] .sidebar progress,
+  [data-theme="dark"] progress::-webkit-progress-bar { background:#292929; }
+  [data-theme="dark"] progress::-webkit-progress-value { background:#ededed; }
+  [data-theme="dark"] progress::-moz-progress-bar { background:#ededed; }
+  [data-theme="dark"] .small-dot { background:#d4d4d4; }
+  [data-theme="dark"] .breadcrumb span { color:#a1a1a1; }
+  [data-theme="dark"] .nav-scrim { background:#000b; }
+  [data-theme="dark"] .btn:hover { background:#1c1c1c; }
+  [data-theme="dark"] .btn-primary { background:#ededed; border-color:#ededed; color:#080808; }
+  [data-theme="dark"] .btn-primary:hover { background:#d4d4d4; border-color:#d4d4d4; }
+  [data-theme="dark"] :is(.pill,.pill-plan,.pill-orange) { background:#202020; color:#d4d4d4; }
+  [data-theme="dark"] .complete-btn.selected { border-color:#737373; }
+  [data-theme="dark"] :is(.module-card,.story-card,.concept-video-card):hover { border-color:#737373; box-shadow:none; }
+  [data-theme="dark"] .panel-dark { background:#111; border-color:var(--line); color:var(--ink); }
+  [data-theme="dark"] .panel-dark :is(.muted,.eyebrow) { color:var(--muted); }
+  [data-theme="dark"] :is(.mini-arrow,.mini-control output) { color:#d4d4d4; }
+  [data-theme="dark"] .panel-dark input[type="range"] { accent-color:#ededed; }
+  [data-theme="dark"] .panel-dark .text-link { color:#ededed !important; }
+  [data-theme="dark"] .book-chip { background:#171717; border-color:var(--line); color:#d4d4d4; }
+  [data-theme="dark"] :is(.tab.active,.tab[aria-selected="true"]) { color:#080808; }
+  [data-theme="dark"] .activity-num { color:var(--muted); }
+  [data-theme="dark"] .tab.active .activity-num { color:#404040; }
+  [data-theme="dark"] .prose code { background:#202020; }
+  [data-theme="dark"] :is(.concept-focus,.focus-connection) { background:var(--surface); border-color:var(--line); }
+  [data-theme="dark"] .focus-connection { background:#141414; }
+  [data-theme="dark"] .common-trap { border-color:var(--line); }
+  [data-theme="dark"] .common-trap strong { color:#ededed; }
+  [data-theme="dark"] .reader-aside .notes-panel { background:var(--surface); }
+  [data-theme="dark"] .lesson-footer.lesson-actions { background:#0c0c0c; box-shadow:0 8px 18px #0006; }
+  [data-theme="dark"] :is(.tutor-intro>p,.python-guide ul,.tutor-interpretation) { color:#c4c4c4; }
+  [data-theme="dark"] :is(.term-buttons button,.term-detail,.tutor-explanation,.python-results,.python-output) {
+    background:#141414;
+    border-color:var(--line);
+  }
+  [data-theme="dark"] .term-buttons button[aria-expanded="true"] { background:#242424; border-color:#737373; }
+  [data-theme="dark"] :is(.tutor-predict,.python-try,.body-equation) { background:#161616; border-left-color:#a1a1a1; }
+  [data-theme="dark"] :is(.tutor-input-status,.lab-controls #adv-input-status,.incorrect) { color:#f5aaaa; }
+  [data-theme="dark"] .tutor-figure { background:#101010; border-color:var(--line); }
+  [data-theme="dark"] .tutor-figure figcaption { background:#141414; border-color:var(--line); }
+  [data-theme="dark"] .tutor-step-tabs button { background:#0c0c0c; border-color:#404040; }
+  [data-theme="dark"] .tutor-step-tabs button[aria-pressed="true"] { background:#ededed; border-color:#ededed; color:#080808; }
+  [data-theme="dark"] :is(.tutor-interpretation,.tutor-all-steps section) { border-color:var(--line); }
+  [data-theme="dark"] .python-code-head>span { background:#202020; }
+  [data-theme="dark"] :is(.python-source pre,.python-editor) { background:#080808; border-color:#333; color:#ededed; }
+  [data-theme="dark"] .python-source .python-console { background:#080808; border-color:var(--line); color:#d4d4d4; }
+  [data-theme="dark"] .python-setup code { background:#202020; }
+  [data-theme="dark"] .py-comment { color:#a1a1a1; }
+  [data-theme="dark"] .py-keyword { color:#fff; }
+  [data-theme="dark"] .py-string { color:#c4c4c4; }
+  [data-theme="dark"] .py-number { color:#d4d4d4; }
+  [data-theme="dark"] .py-function { color:#ededed; }
+  [data-theme="dark"] .quiz-question input { color:var(--ink); }
+  [data-theme="dark"] .assessment-card details p { background:#1c1c1c; color:#d4d4d4; }
+  [data-theme="dark"] .number-grid .highlighted { background:#2a2a2a; border-color:#737373; color:#fff; }
+  [data-theme="dark"] .bar-track { background:#333; }
+  [data-theme="dark"] .bar-track i[style*="#bd431c"] { background:#f6a575 !important; }
+  [data-theme="dark"] .bar-track i[style*="#cbd0c4"] { background:#626262 !important; }
+  [data-theme="dark"] .mask-cell.selected { color:#080808; }
+  [data-theme="dark"] .book-card .book-cover { background:#202020; border-left-color:#737373; box-shadow:4px 4px 0 #333; color:#ededed; }
+  [data-theme="dark"] .book-card:nth-child(2) .book-cover { background:#282828; }
+  [data-theme="dark"] .book-card:nth-child(3) .book-cover { background:#171717; }
+  [data-theme="dark"] .book-card:nth-child(4) .book-cover { background:#333; }
+  [data-theme="dark"] .story-stages button[aria-pressed="true"] { border-color:#737373; }
+  [data-theme="dark"] .concept-video-chapters .btn[aria-pressed="true"] { background:#242424; border-color:#737373; }
+  [data-theme="dark"] :is(.concept-video-card img,.concept-video-player video) { background:#111; }
+  [data-theme="dark"] :is(.hero-art,.story-thumbnail,.module-art,.story-canvas,.story-video video) { background:#101010; }
+  [data-theme="dark"] .hero-art { box-shadow:0 0 0 1px var(--line); }
+
+  /* Remap illustration surfaces while keeping the colours used by the explanations. */
+  [data-theme="dark"] :is(.hero-art,.story-thumbnail,.module-art,.story-canvas) [fill="#193428"] { fill:#101010; }
+  [data-theme="dark"] :is(.hero-art,.story-thumbnail,.module-art,.story-canvas) [fill="#243f31"] { fill:#181818; }
+  [data-theme="dark"] :is(.hero-art,.story-thumbnail,.module-art,.story-canvas) :is([fill="#30473b"],[fill="#304a3b"],[fill="#2d4035"]) { fill:#252525; }
+  [data-theme="dark"] :is(.hero-art,.story-thumbnail,.module-art,.story-canvas) :is([fill="#536952"],[fill="#415448"],[fill="#506354"]) { fill:#404040; }
+  [data-theme="dark"] :is(.hero-art,.story-thumbnail,.module-art,.story-canvas) [fill="#f4f5e9"] { fill:#ededed; }
+  [data-theme="dark"] :is(.hero-art,.story-thumbnail,.module-art,.story-canvas) [fill="#b0c3b8"] { fill:#b5b5b5; }
+  [data-theme="dark"] :is(.hero-art,.story-thumbnail,.module-art,.story-canvas) [stroke="#334e3e"] { stroke:#333; }
+  [data-theme="dark"] :is(.hero-art,.story-thumbnail,.module-art,.story-canvas) :is([stroke="#56715e"],[stroke="#577563"]) { stroke:#606060; }
+  [data-theme="dark"] .hero-art svg text { fill:#ededed; }
+  [data-theme="dark"] .plot .grid-line { stroke:#292929; }
+  [data-theme="dark"] .plot :is(.axis-line,.selected-guide) { stroke:#737373; }
+  [data-theme="dark"] .plot .series-a { stroke:#f6a575; }
+  [data-theme="dark"] .plot .series-b { stroke:#7fb8df; }
+  [data-theme="dark"] .legend-line { background:#f6a575; }
+  [data-theme="dark"] .legend-line.blue { background:#7fb8df; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [fill="#172623"] { fill:#ededed; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [stroke="#172623"] { stroke:#ededed; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [fill="#64736b"] { fill:#a1a1a1; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) :is([fill="#e7eee5"],[fill="#fae5d9"],[fill="#f6f5ef"]) { fill:#242424; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) :is([fill="#dce3d7"],[fill="#d8dfd3"]) { fill:#505050; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) :is([stroke="#e5e6dd"],[stroke="#dce3d7"],[stroke="#e5e8df"],[stroke="#dedfd5"]) { stroke:#333; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) :is([stroke="#899586"],[stroke="#8d9488"],[stroke="#c7cfc5"],[stroke="#a8b6a5"],[stroke="#d8dfd3"]) { stroke:#737373; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [fill="#bd431c"] { fill:#f6a575; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [stroke="#bd431c"] { stroke:#f6a575; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [fill="#315c86"] { fill:#7fb8df; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [stroke="#315c86"] { stroke:#7fb8df; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [fill="#34734e"] { fill:#97d7b0; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [stroke="#34734e"] { stroke:#97d7b0; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [fill="#bd431c22"] { fill:#f6a57522; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [fill="#315c8618"] { fill:#7fb8df22; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [fill="#34734e22"] { fill:#97d7b022; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [fill="#34734e66"] { fill:#97d7b066; }
+  [data-theme="dark"] :is(.tutor-figure,.plot) [stroke="#fffefa"] { stroke:#0c0c0c; }
+}

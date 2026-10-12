@@ -1,0 +1,38 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.828
+A cloud of observations may vary strongly along one line and weakly across it. PCA centres
+
+00:00:06.828 --> 00:00:13.456
+each feature, then chooses orthogonal directions that capture the most sample variation. The mean must be
+
+00:00:13.456 --> 00:00:16.770
+kept if you later reconstruct the original observations.
+
+00:00:17.300 --> 00:00:23.780
+Rows are observations and columns are features. This symmetric example already has a zero feature mean.
+
+00:00:24.300 --> 00:00:31.970
+The denominator is n minus one for this sample-covariance convention. Off-diagonal entries measure joint variation.
+
+00:00:32.500 --> 00:00:38.856
+Can the principal direction change while the data remains one-dimensional? Pause here and make a prediction
+
+00:00:38.856 --> 00:00:39.650
+before continuing.
+
+00:00:40.767 --> 00:00:47.750
+All three centred points lie on one line. Its normalized direction is the first principal axis;
+
+00:00:47.750 --> 00:00:54.297
+the perpendicular variance is zero. For our starting inputs, Leading variance: 5. Second variance: 0.
+
+00:00:54.800 --> 00:01:01.270
+The projection gives one scalar per observation. The sign of the principal axis may be flipped
+
+00:01:01.270 --> 00:01:04.100
+without changing the represented line or reconstruction.
+
+00:01:04.600 --> 00:01:11.260
+Fit centering and PCA on training data, then apply those fitted transformations to held-out observations.
+

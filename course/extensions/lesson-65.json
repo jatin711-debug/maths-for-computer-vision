@@ -1,0 +1,23 @@
+{
+  "id": 65,
+  "module": 17,
+  "title": "Cross-attention, positional encodings and set prediction",
+  "file": "lessons/65-cross-attention-positional-encodings-and-set-prediction.md",
+  "reading": "CV 5.5.3, 6.3.3 and 6.4.2-6.4.3.",
+  "goal": "Compute cross-attention from learned queries to image tokens, encode positions with sinusoidal or Fourier features, and train a set predictor with a Hungarian-matched loss and GIoU.",
+  "exercises": [
+    "Compute IoU, the enclosing area and GIoU for A = [0, 0, 2, 2] and B = [4, 1, 6, 3]. Then move B to [3, 1, 5, 3]. Which position has the higher GIoU, and why does that help training?",
+    "A DETR-style decoder has 100 object queries and attends to the stride-32 features of an 800 × 1216 image. How many image tokens are there, how many entries does one head's cross-attention matrix have, and how many output rows? Compare with self-attention among the image tokens.",
+    "With D = 4 and ω = (1, 0.01), compute PE(2) and the dot product PE(2)·PE(5). Explain why PE(12)·PE(15) gives the same value.",
+    "Targets T1, T2 and predictions P1, P2, P3 have the matching costs T1: (0.1, 0.3, 0.9) and T2: (0.2, 1.0, 0.8). Find the assignment with the smallest total, compare it with greedy matching, and say which prediction is trained towards ∅."
+  ],
+  "solutions": [
+    "A spans x 0 to 2 and B spans x 4 to 6, so they do not overlap: IoU = 0 and the union is 4 + 4 = 8. The enclosing box is [0, 0, 6, 3], area 6 × 3 = 18, so GIoU = 0 − (18 − 8)/18 = −0.556. For B = [3, 1, 5, 3] the enclosing box is [0, 0, 5, 3], area 15, so GIoU = 0 − 7/15 = −0.467. The closer box has the higher GIoU, so the loss 1 − GIoU falls from 1.556 to 1.467 as B moves towards A. Plain IoU is 0 at both positions, so 1 − IoU gives no gradient there; GIoU does.",
+    "The feature map is 800/32 = 25 by 1216/32 = 38, so there are 25 × 38 = 950 image tokens. The cross-attention matrix has one row per query and one column per image token: 100 × 950 = 95,000 entries per head. The output has 100 rows, one per query, whatever the image size. Self-attention among the image tokens would need 950² = 902,500 scores per head, about 9.5 times more.",
+    "PE(2) = (sin 2, cos 2, sin 0.02, cos 0.02) = (0.909, −0.416, 0.020, 1.000). Each frequency contributes sin(ωp)sin(ωp′) + cos(ωp)cos(ωp′) = cos(ω(p − p′)), so PE(2)·PE(5) = cos(−3) + cos(−0.03) = −0.98999 + 0.99955 = 0.0096. The dot product depends only on the offset p − p′ = −3, so PE(12)·PE(15) gives the same 0.0096: moving both positions by 10 rotates every sine-cosine pair of both encodings by the same angle, which leaves their dot product unchanged.",
+    "With two targets and three predictions there are 3 × 2 = 6 assignments: (P1, P2) 0.1 + 1.0 = 1.1; (P1, P3) 0.1 + 0.8 = 0.9; (P2, P1) 0.3 + 0.2 = 0.5; (P2, P3) 0.3 + 0.8 = 1.1; (P3, P1) 0.9 + 0.2 = 1.1; (P3, P2) 0.9 + 1.0 = 1.9. The best is T1 → P2 and T2 → P1, total 0.5, which is what the Hungarian algorithm returns. Greedy matching takes the cheapest entry first, T1 → P1 (0.1), and must then give T2 its best remaining prediction, P3 (0.8), for a total of 0.9. In the optimal matching P3 is unmatched, so its target is ∅ and its loss −ln p̂₃(∅) pushes its no-object probability up."
+  ],
+  "checkpoint": "Compute one row of cross-attention and explain why the output has one row per query, show that the dot product of two sinusoidal encodings depends only on their offset, and explain why set prediction needs a one-to-one matching step and why GIoU gives a useful signal for boxes that do not overlap.",
+  "lab": "setmatch",
+  "minutes": 90
+}

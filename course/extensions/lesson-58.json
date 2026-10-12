@@ -1,0 +1,23 @@
+{
+  "id": 58,
+  "module": 15,
+  "title": "Scale space, descriptors and matching",
+  "file": "lessons/58-scale-space-descriptors-and-matching.md",
+  "reading": "CV 3.5.3, 7.1.1, 7.1.2 and 7.1.3.",
+  "goal": "Detect blobs at their characteristic scale with a scale-normalised Laplacian (DoG), describe them with gradient-orientation histograms, and accept matches with the ratio and mutual-nearest-neighbour tests.",
+  "exercises": [
+    "An image is blurred with σ = 3 and then σ = 4. What single blur is that? A scale space holds σ = 1.6; what extra blur reaches σ = 3.2?",
+    "For a Gaussian blob of width s = 2, compute the normalised response 2σ²s²/(s² + σ²)² at σ = 1, 2 and 4. Which σ is detected, and what radius √2σ is drawn? What changes if the image is shrunk to half size?",
+    "A descriptor cell has gradients (3, 0), (0, 2), (−1, 1) and (2, 2). Build its 8-bin orientation histogram (45° bins centred on 0°, 45°, …). What happens to it if the contrast doubles, if 50 is added to every pixel, and if the patch is rotated by 90° and angles are measured from the dominant orientation?",
+    "Three descriptors in A have distances (0.20, 0.50, 0.70), (0.30, 0.35, 0.90) and (0.60, 0.80, 0.25) to three in B. Apply the ratio test with threshold 0.8 and the mutual test. Which matches survive? Then find the Hamming distance between the binary descriptors 10110010 and 10011011."
+  ],
+  "solutions": [
+    "Variances add: 3² + 4² = 9 + 16 = 25, so the two blurs equal one blur with σ = √25 = 5. To go from 1.6 to 3.2 the extra blur must supply the missing variance: √(3.2² − 1.6²) = √(10.24 − 2.56) = √7.68 ≈ 2.77, not 3.2 − 1.6 = 1.6. This is how a scale space is built incrementally, one small blur at a time.",
+    "With s² = 4: σ = 1 gives 2·1·4/(4 + 1)² = 8/25 = 0.32; σ = 2 gives 2·4·4/8² = 32/64 = 0.5; σ = 4 gives 2·16·4/20² = 128/400 = 0.32. The response peaks at σ = 2 = s, so the blob is detected at σ = 2 with a circle of radius √2·2 ≈ 2.83 pixels. Shrinking the image to half size halves the blob to s = 1, so it is detected at σ = 1 with radius ≈ 1.41: the detected scale follows the image scale, which is what makes the detector scale-covariant.",
+    "Angles and magnitudes: (3, 0) is 0° with magnitude 3; (0, 2) is 90° with 2; (−1, 1) is 135° with √2 ≈ 1.41; (2, 2) is 45° with √8 ≈ 2.83. The histogram over bins 0°, 45°, …, 315° is (3, 2.83, 2, 1.41, 0, 0, 0, 0); its length is √23 ≈ 4.80, so the unit vector is (0.626, 0.590, 0.417, 0.295, 0, 0, 0, 0). Doubling the contrast doubles every gradient and every vote, but the unit vector is unchanged. Adding 50 to every pixel leaves all differences, and so all gradients, unchanged. Rotating by 90° adds 90° to every angle, shifting each vote two bins; the dominant orientation (here 0°) moves by 90° too, so angles measured from it, and the descriptor, are unchanged.",
+    "A1: nearest B1 at 0.20, second 0.50, ratio 0.40 < 0.8, accept. A2: nearest B1 at 0.30, second 0.35, ratio 0.857 > 0.8, reject. A3: nearest B3 at 0.25, second 0.60, ratio 0.417, accept. Mutual test: B1's nearest in A is A1 (0.20 < 0.30 < 0.60) and B3's is A3 (0.25), so both accepted matches are mutual. The survivors are A1–B1 and A3–B3; A2 would also fail the mutual test, since B1 prefers A1. Hamming: 10110010 XOR 10011011 = 00101001, which has 3 ones, so the distance is 3."
+  ],
+  "checkpoint": "Explain why the Laplacian must be multiplied by σ² before scales are compared and why its peak sits at the blob's own scale, describe how a SIFT descriptor gains rotation and contrast invariance, and apply the ratio and mutual tests to a small distance table.",
+  "lab": "matching",
+  "minutes": 90
+}

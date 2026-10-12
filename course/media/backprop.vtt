@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.000 --> 00:06.000
+x=2 → affine → ReLU → output. w₁=0.5, b₁=0, w₂=1 → ŷ=1.
+z=1, so ReLU is active. Target y=3.
+
+2
+00:06.000 --> 00:12.000
+Half squared error. L=½(1−3)²=2 · dL/dŷ=−2.
+The output is two units too low. Reverse the sensitivity path.
+
+3
+00:12.000 --> 00:18.000
+Multiply the local derivatives. gw₁=−4 · gb₁=−2 · gw₂=−2.
+The ReLU derivative here is 1. All gradients use the old weights.
+
+4
+00:18.000 --> 00:24.000
+Update together with α=0.1. w₁=0.9, b₁=0.2, w₂=1.2.
+New hidden value=2; prediction=2.4. New loss=½(2.4−3)²=0.18.

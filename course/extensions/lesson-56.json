@@ -1,0 +1,23 @@
+{
+  "id": 56,
+  "module": 14,
+  "title": "Multi-scale features: pyramids, FPN and U-Net",
+  "file": "lessons/56-multi-scale-features-pyramids-fpn-and-u-net.md",
+  "reading": "CV 3.5.2-3.5.3, 5.4.1, 6.3.3, 6.4 and 6.4.2-6.4.3.",
+  "goal": "Build Gaussian and Laplacian pyramids and explain how feature pyramids and U-Net skip connections give a network both resolution and context.",
+  "exercises": [
+    "Build the Laplacian pyramid of the 1D signal (2,8,6,0) using pair averaging and repetition, then rebuild it. What does the rebuilt signal become if L₀ is set to zero?",
+    "A 640×640 image goes through an FPN with levels P₂ to P₅ (strides 4, 8, 16, 32) and 3 anchors per cell. How many anchors are on each level, and in total?",
+    "With k=⌊4+log₂(√(wh)/224)⌋ clamped to 2 to 5, assign boxes of 112×112, 300×200, 50×30 and 1200×1000 pixels to levels.",
+    "A transposed convolution with kernel 3, stride 2 and padding 1 takes a 16×16 map. What is the output side, and what does output padding 1 change? Why can this layer print a checkerboard, and which kernel size avoids uneven overlap at stride 2?"
+  ],
+  "solutions": [
+    "Pair averages give G₁=(5,3) and G₂=(4), so L₂=(4). up(G₁)=(5,5,3,3) gives L₀=(2−5, 8−5, 6−3, 0−3)=(−3,3,3,−3), and up(G₂)=(4,4) gives L₁=(1,−1). Rebuild: L₁+up(L₂)=(5,3)=G₁, then L₀+up(G₁)=(2,8,6,0)=G₀. With L₀ set to zero the result is (5,5,3,3); the error is exactly L₀.",
+    "The map sides are 640/4=160, 80, 40 and 20. Anchors: 160²·3=76,800 on P₂, 80²·3=19,200 on P₃, 40²·3=4,800 on P₄ and 20²·3=1,200 on P₅, so 102,000 in total, about 75% of them on P₂.",
+    "√(wh)=112 gives 4+log₂(0.5)=3, so P₃. √60000≈244.9 gives 4+0.129≈4.13, so P₄. √1500≈38.7 gives 4−2.53≈1.47, floor 1, clamped to P₂. √1,200,000≈1095.4 gives 4+2.29≈6.29, floor 6, clamped to P₅.",
+    "(16−1)·2−2·1+3=31, so the output is 31×31; output padding 1 adds one row and column, giving 32×32, an exact doubling. With kernel 3 and stride 2 the kernel copies overlap unevenly: interior outputs alternately receive two taps and one, so a constant input can produce a period-2 pattern, a checkerboard in 2D, unless the learned weights compensate. Kernel 4, a multiple of the stride, gives every interior output two taps (with padding 1 it maps 16 to exactly 32); resizing first and then applying a 3×3 convolution also avoids the problem."
+  ],
+  "checkpoint": "Explain why a Laplacian pyramid rebuilds the image exactly whatever blur is used, compute the feature-map sizes, anchor counts and FPN level for a given image and box, and say what U-Net skip connections supply that the decoder alone cannot.",
+  "lab": "pyramid",
+  "minutes": 90
+}

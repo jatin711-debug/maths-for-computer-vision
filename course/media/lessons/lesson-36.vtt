@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.522
+A normalized smoothing kernel combines neighbours using weights that sum to one. It preserves a constant
+
+00:00:06.522 --> 00:00:12.844
+signal away from boundary effects, but near an edge it mixes different sides and creates intermediate
+
+00:00:12.844 --> 00:00:16.400
+values. Smoothing therefore changes structure as well as noise.
+
+00:00:16.900 --> 00:00:25.130
+The symmetric nonnegative weights average nearby pixels. Normalization preserves a constant signal away from boundary effects.
+
+00:00:25.633 --> 00:00:32.383
+Mixing across the edge creates intermediate intensities. Noise suppression and edge sharpness are linked tradeoffs.
+
+00:00:32.900 --> 00:00:39.576
+Can a filter preserve average brightness while suppressing high-frequency detail? Pause here and make a prediction
+
+00:00:39.576 --> 00:00:40.410
+before continuing.
+
+00:00:41.533 --> 00:00:49.594
+A sinusoidal input is multiplied by this response. The spatial weights and frequency attenuation are two
+
+00:00:49.594 --> 00:00:57.654
+descriptions of the same linear filter. For our starting inputs, Edge left response: 0.2. Edge right
+
+00:00:57.654 --> 00:01:00.173
+response: 0.8. High-frequency response: 0.2.
+
+00:01:00.700 --> 00:01:07.558
+At a equal to one-quarter this kernel cancels the alternating high-frequency pattern. Our control range ends
+
+00:01:07.558 --> 00:01:10.130
+there to keep this attenuation nonnegative.
+
+00:01:10.633 --> 00:01:17.353
+Select smoothing for the noise and task, and state boundary conditions. Blurring can help sampling while
+
+00:01:17.353 --> 00:01:18.613
+hurting precise localization.
+

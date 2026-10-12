@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.280
+A kernel must fit at each output position under a stated padding convention. Stride chooses the
+
+00:00:06.280 --> 00:00:12.360
+distance between consecutive kernel starts. Counting those starts gives the output length or height and width,
+
+00:00:12.360 --> 00:00:16.920
+so it is better than memorizing a shape formula without its geometry.
+
+00:00:17.433 --> 00:00:23.153
+N is input length, K kernel length, P padding on each side and S stride. This
+
+00:00:23.153 --> 00:00:24.583
+example uses unit dilation.
+
+00:00:25.100 --> 00:00:31.220
+Padding enlarges the usable coordinate range. The kernel must still fit completely at each chosen start.
+
+00:00:31.733 --> 00:00:37.988
+Does a larger stride enlarge this first-layer kernel’s footprint, or only separate its starts? Pause here
+
+00:00:37.988 --> 00:00:40.333
+and make a prediction before continuing.
+
+00:00:41.433 --> 00:00:48.256
+The floor discards an incomplete final stride. The plus one counts the first valid position. For
+
+00:00:48.256 --> 00:00:53.373
+our starting inputs, Input length: 7. Output length: 7. Output jump: 1.
+
+00:00:53.900 --> 00:01:01.121
+Stride changes how far adjacent output positions are separated in input coordinates. The kernel still sees
+
+00:01:01.121 --> 00:01:04.280
+three padded positions at each first-layer output.
+
+00:01:04.800 --> 00:01:11.276
+Check both spatial alignment and tensor dimensions. Matching output sizes does not prove pixels refer to
+
+00:01:11.276 --> 00:01:12.490
+the same locations.
+

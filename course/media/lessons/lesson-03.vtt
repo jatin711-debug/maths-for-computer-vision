@@ -1,0 +1,38 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.650
+A prediction error first needs a reference: prediction minus observed target. That signed residual tells you
+
+00:00:06.650 --> 00:00:13.101
+whether a model is too high or too low. Averaging signed residuals can conceal mistakes because
+
+00:00:13.101 --> 00:00:14.310
+opposite signs cancel.
+
+00:00:14.833 --> 00:00:20.143
+A residual is prediction minus target. Its sign tells us the direction of the error.
+
+00:00:20.667 --> 00:00:25.857
+The square treats equal positive and negative mistakes equally and prevents cancellation.
+
+00:00:26.367 --> 00:00:31.901
+Will reversing the sign change the mean squared error? Pause here and make a prediction before
+
+00:00:31.901 --> 00:00:32.247
+continuing.
+
+00:00:33.367 --> 00:00:41.140
+The denominator is the number of residuals, including zero residuals. It is not the number of
+
+00:00:41.140 --> 00:00:47.457
+mistakes. For our starting inputs, Signed residual: -2. Squared-error sum: 4. MSE: 1.3333.
+
+00:00:47.967 --> 00:00:52.837
+Doubling errors quadruples squared error. Loss units are the square of the target units.
+
+00:00:53.367 --> 00:00:59.599
+A loss can become smaller through better predictions or simply through rescaling the target. Compare models
+
+00:00:59.599 --> 00:01:01.937
+under the same objective and units.
+

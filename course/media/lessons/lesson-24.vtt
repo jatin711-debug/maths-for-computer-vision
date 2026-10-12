@@ -1,0 +1,47 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.797
+Even a fixed population produces different finite samples, so a statistic computed from those samples has
+
+00:00:06.797 --> 00:00:13.393
+its own distribution. Standard error measures the spread of an estimator, such as a sample mean,
+
+00:00:13.393 --> 00:00:14.630
+across repeated sampling.
+
+00:00:15.133 --> 00:00:23.933
+This example assumes independent normal observations with known standard deviation two. Repeated correlated video frames would
+
+00:00:23.933 --> 00:00:25.033
+violate independence.
+
+00:00:25.533 --> 00:00:32.140
+Averaging n independent measurements divides the variance by n, rather than dividing the standard deviation by
+
+00:00:32.140 --> 00:00:32.553
+n.
+
+00:00:33.067 --> 00:00:38.919
+How many times more observations are needed to halve standard error? Pause here and make a
+
+00:00:38.919 --> 00:00:40.017
+prediction before continuing.
+
+00:00:41.133 --> 00:00:49.961
+Standard error measures sampling spread of the estimator. It is different from the spread of individual
+
+00:00:49.961 --> 00:00:57.133
+observations. For our starting inputs, Observations: 25. Standard error: 0.4. Interval half-width: 0.784.
+
+00:00:57.633 --> 00:01:05.833
+Under these stated assumptions, the repeated-sampling procedure has about 95% coverage. A realized interval is not
+
+00:01:05.833 --> 00:01:09.933
+a 95% probability statement about a fixed parameter.
+
+00:01:10.433 --> 00:01:17.945
+Every uncertainty calculation needs a sampling model. Bootstrap units and confidence-interval assumptions must match how the
+
+00:01:17.945 --> 00:01:19.353
+data was collected.
+

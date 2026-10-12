@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.029
+An affine layer combines inputs with weights and a bias. Stacking affine layers alone still produces
+
+00:00:07.029 --> 00:00:13.859
+one affine map, so extra depth would not create new nonlinear decision regions. An activation introduces
+
+00:00:13.859 --> 00:00:16.420
+an input-dependent response between those maps.
+
+00:00:16.933 --> 00:00:21.733
+Weights mix or scale input coordinates; the bias shifts the activation boundary.
+
+00:00:22.233 --> 00:00:29.183
+ReLU keeps positive preactivations and sets negative ones to zero. The complete map is piecewise linear.
+
+00:00:29.700 --> 00:00:36.193
+What happens to the output sensitivity when the preactivation becomes negative? Pause here and make a
+
+00:00:36.193 --> 00:00:37.410
+prediction before continuing.
+
+00:00:38.533 --> 00:00:45.564
+At the kink there is no ordinary derivative. Autograd implementations choose a convention, often zero; away
+
+00:00:45.564 --> 00:00:52.594
+from it the derivative is zero or one. For our starting inputs, Preactivation: 2. ReLU output:
+
+00:00:52.594 --> 00:00:53.033
+2.
+
+00:00:53.533 --> 00:01:01.444
+Without a nonlinearity between affine layers, their composition is still one affine map. ReLU introduces input-dependent
+
+00:01:01.444 --> 00:01:02.433
+active regions.
+
+00:01:02.933 --> 00:01:10.143
+Distinguish the affine preactivation from the post-activation feature. Each has a separate role in the computational
+
+00:01:10.143 --> 00:01:10.593
+graph.
+

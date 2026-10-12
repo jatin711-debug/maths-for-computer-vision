@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:08.217
+Regularization adds an explicit parameter preference to an objective. Normalization changes how intermediate values are scaled,
+
+00:00:08.217 --> 00:00:16.234
+while stable numerical formulas prevent avoidable overflow, underflow and cancellation. These mechanisms can interact, but one
+
+00:00:16.234 --> 00:00:19.240
+does not substitute for the others.
+
+00:00:19.767 --> 00:00:27.427
+The one-half factor is part of our definition. Check it before comparing regularization strengths across implementations.
+
+00:00:27.933 --> 00:00:33.756
+This term pulls a positive weight toward zero. It is a modelling preference, not a measured
+
+00:00:33.756 --> 00:00:34.483
+prediction residual.
+
+00:00:35.000 --> 00:00:40.816
+Which part of the update changes when only the penalty coefficient changes? Pause here and make
+
+00:00:40.816 --> 00:00:42.270
+a prediction before continuing.
+
+00:00:43.400 --> 00:00:52.547
+Both terms contribute to ordinary gradient descent on the regularized objective. For our starting inputs, Data
+
+00:00:52.547 --> 00:00:57.120
+gradient: 0.5. Penalty gradient: 0.4. Updated weight: 1.91.
+
+00:00:57.633 --> 00:01:04.207
+For this simple SGD update the penalty gives a multiplicative shrinkage. Decoupled weight decay with an
+
+00:01:04.207 --> 00:01:07.083
+adaptive optimizer is a different update rule.
+
+00:01:07.600 --> 00:01:14.470
+Keep train/evaluation modes, loss normalization and optimizer conventions visible when reproducing a method.
+

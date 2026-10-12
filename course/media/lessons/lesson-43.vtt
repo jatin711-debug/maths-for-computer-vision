@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.682
+Segmentation predicts a class at each pixel. When an object occupies only a small part of
+
+00:00:06.682 --> 00:00:13.164
+the image, predicting background everywhere can achieve high pixel accuracy while recovering none of the object.
+
+00:00:13.164 --> 00:00:16.810
+A single overall accuracy therefore answers an incomplete question.
+
+00:00:17.333 --> 00:00:24.829
+The mask has ten foreground and ninety background pixels. True positives recover foreground; false positives invent
+
+00:00:24.829 --> 00:00:26.703
+foreground on background pixels.
+
+00:00:27.233 --> 00:00:34.843
+Background true negatives can dominate accuracy. With no positive predictions this example still achieves ninety percent.
+
+00:00:35.367 --> 00:00:41.882
+Can pixel accuracy remain high when foreground overlap is zero? Pause here and make a prediction
+
+00:00:41.882 --> 00:00:42.697
+before continuing.
+
+00:00:43.800 --> 00:00:53.744
+Foreground IoU excludes true negatives, so it reveals missed objects that background-heavy accuracy can hide. For
+
+00:00:53.744 --> 00:01:00.580
+our starting inputs, Pixel accuracy: 0.94. Foreground IoU: 0.5. Dice: 0.66667.
+
+00:01:01.100 --> 00:01:07.625
+Dice weights true positives differently but uses the same errors. For these nonempty targets, Dice equals
+
+00:01:07.625 --> 00:01:10.480
+twice IoU divided by one plus IoU.
+
+00:01:11.000 --> 00:01:17.800
+Evaluate the all-background baseline and report foreground behaviour, class averaging and empty-mask conventions.
+

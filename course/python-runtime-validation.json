@@ -1,0 +1,162 @@
+{
+  "behaviorChecks": [
+    {
+      "name": "Unicode and output without newline",
+      "passed": true
+    },
+    {
+      "name": "Separate stdout and stderr",
+      "passed": true
+    },
+    {
+      "name": "Final expression output",
+      "passed": true
+    },
+    {
+      "name": "Traceback with source filename and earlier output",
+      "passed": true
+    },
+    {
+      "name": "Syntax error is visible",
+      "passed": true
+    },
+    {
+      "name": "Unsupported package reports an import error",
+      "passed": true
+    },
+    {
+      "name": "input() ends with EOF rather than hanging",
+      "passed": true
+    },
+    {
+      "name": "Fresh variables on each run",
+      "passed": true
+    },
+    {
+      "name": "Large output is bounded",
+      "passed": true
+    },
+    {
+      "name": "Empty code is handled",
+      "passed": true
+    },
+    {
+      "name": "UI timer stays responsive during Python loop",
+      "passed": true
+    },
+    {
+      "name": "Stop terminates an endless loop",
+      "passed": true
+    },
+    {
+      "name": "Runner reloads successfully after Stop",
+      "passed": true
+    },
+    {
+      "name": "Ten-second timeout ends an endless loop",
+      "passed": true
+    },
+    {
+      "name": "Runner recovers after timeout",
+      "passed": true
+    },
+    {
+      "name": "Editor opens with keyboard focus",
+      "passed": true
+    },
+    {
+      "name": "Edited code executes",
+      "passed": true
+    },
+    {
+      "name": "Slider changes preserve edits and label reference output",
+      "passed": true
+    },
+    {
+      "name": "Edits survive changing lessons in the tab",
+      "passed": true
+    },
+    {
+      "name": "Copy uses edited code",
+      "passed": true
+    },
+    {
+      "name": "Download uses edited code",
+      "passed": true
+    },
+    {
+      "name": "Restore uses current lesson values",
+      "passed": true
+    },
+    {
+      "name": "Ctrl+Enter runs edited code",
+      "passed": true
+    },
+    {
+      "name": "Editing cancels execution and clears stale output",
+      "passed": true
+    },
+    {
+      "name": "Edited code runs after cancellation",
+      "passed": true
+    },
+    {
+      "name": "Stop button ends execution",
+      "passed": true
+    },
+    {
+      "name": "Leaving the lesson terminates a running worker",
+      "passed": true
+    },
+    {
+      "name": "Reset example restores default code and clears draft",
+      "passed": true
+    }
+  ],
+  "comparisons": 578,
+  "executions": 198,
+  "issues": [],
+  "lessons": 48,
+  "widths": {
+    "320": {
+      "editorChecks": 48,
+      "lessons": 48,
+      "liveExecutions": 6,
+      "overflowChecks": 48
+    },
+    "390": {
+      "editorChecks": 48,
+      "lessons": 48,
+      "liveExecutions": 6,
+      "overflowChecks": 48
+    },
+    "974": {
+      "editorChecks": 48,
+      "lessons": 48,
+      "liveExecutions": 6,
+      "overflowChecks": 48
+    },
+    "1440": {
+      "editorChecks": 48,
+      "lessons": 48,
+      "liveExecutions": 6,
+      "overflowChecks": 48
+    }
+  },
+  "runtime": {
+    "pyodide": "314.0.7",
+    "python": "3.14.2",
+    "numpy": "2.4.6"
+  },
+  "localFileFallbackPassed": true,
+  "runtimeAssetHashesPassed": 9,
+  "observedRuntimeURLs": [
+    "http://localhost:50101/course/vendor/pyodide/pyodide-lock.json",
+    "http://localhost:50101/course/vendor/pyodide/python_stdlib.zip",
+    "http://localhost:50101/course/vendor/pyodide/pyodide.asm.wasm",
+    "http://localhost:50101/course/vendor/pyodide/pyodide.asm.mjs",
+    "http://localhost:50101/course/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl"
+  ],
+  "allObservedRuntimeRequestsLocal": true,
+  "responsiveMethod": "Browser frames at 320, 390 and 1440 CSS pixels; shared browser at 974 CSS pixels."
+}

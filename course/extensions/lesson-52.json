@@ -1,0 +1,23 @@
+{
+  "id": 52,
+  "module": 13,
+  "title": "Robust fitting: RANSAC and Gauss-Newton refinement",
+  "file": "lessons/52-robust-fitting-ransac-and-gauss-newton-refinement.md",
+  "reading": "CV 8.1.3-8.1.4, 4.1.3, Appendix A.3 and B.3; CS205A 7.2 for Newton's method in several variables.",
+  "goal": "Fit models when some measurements are wrong, and refine a nonlinear fit with Gauss–Newton or Levenberg–Marquardt.",
+  "exercises": [
+    "For an outlier fraction ε = 0.3 and a 2-point line model, how many RANSAC samples give 99% confidence of at least one outlier-free sample? Repeat for a 4-point homography.",
+    "With Huber threshold δ = 1, find the loss and the IRLS weight for residuals 0.5 and 4. Compare each loss with the squared loss ½r².",
+    "The points are (0,1), (1,3), (2,5), (3,1), (4,9). RANSAC draws the samples {(0,1), (2,5)} and {(2,5), (3,1)}. With τ = 0.5 on vertical residuals, find each line's consensus set. Which model is kept, and what does the refit on its inliers give?",
+    "For residuals r₁ = θ² − 9 and r₂ = θ − 3, take one Gauss–Newton step from θ = 1 and one Levenberg–Marquardt step with λ = 4. Evaluate E = ½‖r‖² before and after each step."
+  ],
+  "solutions": [
+    "A sample is clean with probability (0.7)² = 0.49, so N = ⌈ln 0.01 / ln 0.51⌉ = ⌈−4.605 / −0.6733⌉ = ⌈6.84⌉ = 7. For s = 4, (0.7)⁴ = 0.2401 and N = ⌈ln 0.01 / ln 0.7599⌉ = ⌈−4.605 / −0.2746⌉ = ⌈16.77⌉ = 17. Doubling the sample size more than doubles the work.",
+    "|0.5| ≤ 1, so ρ = ½(0.5)² = 0.125 and the weight is 1: small residuals are treated exactly as in least squares (squared loss 0.125). |4| > 1, so ρ = 1·(4 − ½) = 3.5 and the weight is min(1, 1/4) = 0.25, against a squared loss of ½·16 = 8. The influence w·r is 1 instead of 4.",
+    "Sample 1 gives y = 2x + 1. Its residuals are 0, 0, 0, −6, 0, so four points vote: (0,1), (1,3), (2,5) and (4,9). Sample 2 gives slope (1 − 5)/(3 − 2) = −4 and y = −4x + 13, with residuals −12, −6, 0, 0, 12: only its own two points vote. RANSAC keeps y = 2x + 1, and least squares on its four inliers returns y = 2x + 1 exactly because they lie on it.",
+    "At θ = 1, r = (−8, −2), J = (2, 1), JᵀJ = 5, Jᵀr = −18 and E = ½(64 + 4) = 34. Gauss–Newton: δ = 18/5 = 3.6, θ = 4.6, r = (12.16, 1.6), E ≈ 75.2, so the full step overshoots and raises the cost (LM would reject it and increase λ). Levenberg–Marquardt: δ = 18/(5 + 4) = 2, θ = 3, r = (0, 0) and E = 0."
+  ],
+  "checkpoint": "Justify a RANSAC inlier threshold and iteration count for a given noise level and outlier fraction, and derive the Gauss–Newton step by linearising the residuals.",
+  "lab": "ransac",
+  "minutes": 90
+}

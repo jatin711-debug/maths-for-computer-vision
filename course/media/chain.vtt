@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.000 --> 00:06.000
+Break the function into operations. x=2 → a=x²=4 → y=3a+1=13.
+Each node has a small local rule. Compute values from left to right.
+
+2
+00:06.000 --> 00:12.000
+Measure each local sensitivity. da/dx = 4 · dy/da = 3.
+Derivatives describe small changes. Keep track of the evaluated input.
+
+3
+00:12.000 --> 00:18.000
+Multiply along this path. dy/dx = 3 × 4 = 12.
+A small change in x is amplified through both operations.
+
+4
+00:18.000 --> 00:24.000
+Compare with a nearby input. x=2.01 → y=13.1203.
+Linear prediction: 13 + 12×0.01 = 13.12, close to the exact value.

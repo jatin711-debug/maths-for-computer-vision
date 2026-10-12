@@ -1,0 +1,23 @@
+{
+  "id": 57,
+  "module": 15,
+  "title": "Image gradients, the structure tensor and corners",
+  "file": "lessons/57-image-gradients-the-structure-tensor-and-corners.md",
+  "reading": "CV 3.2.1, 3.2.3, 7.2.1 and 7.1.1.",
+  "goal": "Compute image gradients with derivative-of-Gaussian filters, and classify a window as flat, edge or corner from the eigenvalues of its structure tensor.",
+  "exercises": [
+    "A 3×3 patch has rows (20, 30, 50), (20, 40, 60) and (30, 50, 70). Compute I_x and I_y with Sobel divided by 8, then |∇I| and θ = atan2(I_y, I_x) in degrees.",
+    "A window has gradients (2, 1), (2, 1), (−1, 2) and (0, 0). Build M, find det M, tr M, the eigenvalues and the Harris score with k = 0.05. Flat, edge or corner?",
+    "Three pixels have gradient (3, 4) and one has (0, 0). Find M, its eigenvalues and R with k = 0.04, and compare with three gradients (5, 0). What is E for a unit shift along the edge, (4, −3)/5, and across it, (3, 4)/5?",
+    "A flat region carries independent noise with σ = 10 grey levels. Find the standard deviation of the central-difference I_x and of Sobel divided by 8. How many multiplications per pixel does a σ = 2 derivative of Gaussian need with and without separability, using a radius of 3σ?"
+  ],
+  "solutions": [
+    "Sobel x weighs the right column minus the left column by 1, 2, 1: (50 − 20) + 2(60 − 20) + (70 − 30) = 30 + 80 + 40 = 150, so I_x = 150/8 = 18.75. Sobel y weighs the bottom row minus the top row: (30 − 20) + 2(50 − 30) + (70 − 50) = 10 + 40 + 20 = 70, so I_y = 70/8 = 8.75. |∇I| = √(18.75² + 8.75²) = √428.125 ≈ 20.69 grey levels per pixel, and θ = atan2(8.75, 18.75) ≈ 25.0°: brightness grows to the right and somewhat downwards.",
+    "Add the outer products ∇I∇Iᵀ. (2, 1) gives [[4, 2], [2, 1]], twice: [[8, 4], [4, 2]]; (−1, 2) gives [[1, −2], [−2, 4]]; (0, 0) adds nothing. M = [[9, 2], [2, 6]]. det M = 9·6 − 2² = 50 and tr M = 15, so R = 50 − 0.05·15² = 50 − 11.25 = 38.75. Eigenvalues: 7.5 ± √(1.5² + 2²) = 7.5 ± 2.5, so λ₁ = 10 and λ₂ = 5 (check: 10·5 = 50 and 10 + 5 = 15). Both are large and R > 0: a corner.",
+    "M = 3·[[9, 12], [12, 16]] = [[27, 36], [36, 48]]. det M = 27·48 − 36² = 1296 − 1296 = 0 and tr M = 75, so λ = 75 and 0 and R = 0 − 0.04·75² = −225: an edge. Three gradients (5, 0) give M = [[75, 0], [0, 0]], the same eigenvalues and the same R: the edge is only rotated, since (3, 4) and (5, 0) both have length 5. Along the edge, u = (0.8, −0.6): Mu = (21.6 − 21.6, 28.8 − 28.8) = (0, 0), so E = 0 and the patch slides along itself unchanged. Across it, u = (0.6, 0.8): Mu = (45, 60) and E = uᵀMu = 27 + 48 = 75 = λ₁.",
+    "The central difference is (I(x+1) − I(x−1))/2: the variance is (1 + 1)σ²/4 = 50, so the standard deviation is σ/√2 ≈ 7.07. Sobel/8 combines six pixels with weights ±1, ±2, ±1 divided by 8: the variance is (1 + 4 + 1 + 1 + 4 + 1)σ²/64 = 12·100/64 = 18.75, a standard deviation of √12·10/8 ≈ 4.33. The built-in smoothing cuts the noise by almost 40%. With σ = 2 the radius is 6, so each 1D kernel has 13 taps: separable filtering costs 13 + 13 = 26 multiplications per pixel against 13² = 169 for the full 2D kernel, six and a half times fewer."
+  ],
+  "checkpoint": "Compute a Sobel or derivative-of-Gaussian gradient by hand, derive E(Δu) ≈ ΔuᵀMΔu from a first-order Taylor expansion, and use the eigenvalues of M or the Harris score to say whether a window is flat, an edge or a corner.",
+  "lab": "corners",
+  "minutes": 90
+}

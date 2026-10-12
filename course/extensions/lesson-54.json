@@ -1,0 +1,23 @@
+{
+  "id": 54,
+  "module": 14,
+  "title": "Entropy, KL divergence and contrastive learning",
+  "file": "lessons/54-entropy-kl-divergence-and-contrastive-learning.md",
+  "reading": "CV 5.3.4 and 5.4.7; MML 6.4.6 for a brief note on KL divergence and 8.3 for maximum likelihood.",
+  "goal": "Measure uncertainty and mismatch between distributions, and read cross-entropy, label smoothing, distillation and contrastive losses as KL-based objectives.",
+  "exercises": [
+    "Compute the entropy of p=(1/2, 1/4, 1/8, 1/8) in bits and in nats, and compare it with the maximum for four classes.",
+    "For p=(0.5, 0.5) and q=(0.9, 0.1), compute KL(p‖q) and KL(q‖p). Which is larger, and why?",
+    "Apply label smoothing with K = 5 and ε = 0.2. Write the target, compute its entropy, and find the logit gap z_t − z_j that minimizes cross-entropy.",
+    "An image has cosine similarities (0.6, 0.2, 0.0, −0.2) with four captions, and the first caption is its true partner. Compute the InfoNCE loss for τ = 0.2 and for τ = 1, and compare both with ln 4."
+  ],
+  "solutions": [
+    "The surprises are 1, 2, 3 and 3 bits, so H = ½·1 + ¼·2 + ⅛·3 + ⅛·3 = 1.75 bits. In nats, 1.75 × ln 2 = 1.213. The maximum for four classes is log₂ 4 = 2 bits = ln 4 = 1.386 nats, reached only by the uniform distribution.",
+    "KL(p‖q) = 0.5 ln(0.5/0.9) + 0.5 ln(0.5/0.1) = −0.294 + 0.805 = 0.511. KL(q‖p) = 0.9 ln(0.9/0.5) + 0.1 ln(0.1/0.5) = 0.529 − 0.161 = 0.368. KL(p‖q) is larger: p puts half its mass on the second class, where q gives only 0.1, and each such outcome costs ln 5 = 1.61 nats. The reverse direction weights the log-ratios by q, which rarely visits that class.",
+    "p_t = 1 − 0.2 + 0.2/5 = 0.84 and p_j = 0.2/5 = 0.04 for each of the four wrong classes, so p = (0.84, 0.04, 0.04, 0.04, 0.04). H(p) = −0.84 ln 0.84 − 4 × 0.04 ln 0.04 = 0.146 + 0.515 = 0.661 nats. Cross-entropy is smallest when q = p, and q_t/q_j = e^(z_t − z_j), so z_t − z_j = ln(0.84/0.04) = ln 21 = 3.045.",
+    "τ = 0.2: logits (3, 1, 0, −1), so L = ln(e³ + e + 1 + e⁻¹) − 3 = ln(1 + e⁻² + e⁻³ + e⁻⁴) = ln 1.2034 = 0.185. τ = 1: logits (0.6, 0.2, 0, −0.2), so L = ln(1.822 + 1.221 + 1 + 0.819) − 0.6 = ln 4.862 − 0.6 = 0.982. Chance level is ln 4 = 1.386. Both are below it, but the small temperature turns the same cosines into a confident, nearly correct softmax."
+  ],
+  "checkpoint": "Show that cross-entropy equals entropy plus KL divergence, explain why minimizing it against a fixed target minimizes KL(p‖q), and write InfoNCE as a softmax cross-entropy over similarities divided by τ.",
+  "lab": "entropy",
+  "minutes": 90
+}

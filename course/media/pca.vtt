@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.000 --> 00:06.000
+Subtract the training mean. Xc = X − μtrain.
+The plotted cloud has mean zero. Test data uses the same mean.
+
+2
+00:06.000 --> 00:12.000
+Locate the main direction. v₁ = (1,1)/√2.
+This symmetric cloud varies most along the diagonal direction.
+
+3
+00:12.000 --> 00:18.000
+Keep one coordinate. score = xᵀv₁.
+Every point becomes one scalar. The perpendicular detail is lost.
+
+4
+00:18.000 --> 00:24.000
+Map back to the retained line. x̂ = (xᵀv₁) v₁.
+Reconstruction lies on the line. Good reconstruction ≠ good labels.

@@ -1,0 +1,23 @@
+{
+  "id": 67,
+  "module": 17,
+  "title": "Diffusion models: noising, denoising and sampling",
+  "file": "lessons/67-diffusion-models-noising-denoising-and-sampling.md",
+  "reading": "CV 5.5.4 for context (the books predate diffusion); MML 6.5 and 6.7; CS205A 13.3.1 and 13.3.4.",
+  "goal": "Derive closed-form forward noising, show that predicting the noise is denoising score matching, and sample with DDPM and DDIM steps and classifier-free guidance.",
+  "exercises": [
+    "A schedule has β = (0.1, 0.2, 0.25). Compute ᾱ₃, the signal scale √ᾱ₃, the noise scale √(1 − ᾱ₃) and the SNR, then noise x₀ = 1.5 with ε = 0.4.",
+    "Data are x₀ ~ N(0, 4). At ᾱ = 0.2 and x_t = 1, compute E[x₀ | x_t], E[ε | x_t] and the score, and check that (x_t − √(1 − ᾱ) E[ε | x_t])/√ᾱ gives the same E[x₀ | x_t].",
+    "Take one DDIM step from ᾱ_t = 0.36 to ᾱ_{t−1} = 0.64 with x_t = 0.2 and predicted noise 0.5.",
+    "With ε_∅ = (0.2, −0.1) and ε_c = (0.5, 0.3), compute the guided noise for w = 0, 1 and 3, and say what each setting means."
+  ],
+  "solutions": [
+    "ᾱ₃ = (1 − 0.1)(1 − 0.2)(1 − 0.25) = 0.9 × 0.8 × 0.75 = 0.54. Signal scale √0.54 = 0.735, noise scale √0.46 = 0.678, and SNR = 0.54/0.46 = 1.174, so signal and noise have similar power. x₃ = 0.735 × 1.5 + 0.678 × 0.4 = 1.102 + 0.271 = 1.374. The two scales satisfy 0.735² + 0.678² = 1, so unit-variance data keep unit variance.",
+    "Var(x_t) = ᾱs² + 1 − ᾱ = 0.2 × 4 + 0.8 = 1.6. E[x₀ | x_t] = √0.2 × 4 × 1/1.6 = 0.4472 × 2.5 = 1.118. E[ε | x_t] = √0.8 × 1/1.6 = 0.8944/1.6 = 0.559. The score is −x_t/Var(x_t) = −1/1.6 = −0.625, which also equals −E[ε | x_t]/√(1 − ᾱ) = −0.559/0.8944. Check: (1 − 0.8944 × 0.559)/0.4472 = (1 − 0.5)/0.4472 = 1.118. The estimate 1.118 lies between the prior mean 0 and x_t/√ᾱ = 2.236, which would only undo the shrinking of the signal: most of x_t is noise, so the best guess is pulled towards the average.",
+    "First estimate the clean value: x̂₀ = (x_t − √(1 − ᾱ_t) ε̂)/√ᾱ_t = (0.2 − 0.8 × 0.5)/0.6 = −0.333. Then re-noise it to the next level with the same predicted noise: x_{t−1} = √0.64 × (−0.333) + √0.36 × 0.5 = −0.267 + 0.3 = 0.033. No fresh noise is added, so the step is deterministic.",
+    "ε̃ = ε_∅ + w(ε_c − ε_∅) with ε_c − ε_∅ = (0.3, 0.4). w = 0 gives (0.2, −0.1): the unconditional model, which ignores the prompt. w = 1 gives (0.5, 0.3): the plain conditional model. w = 3 gives (0.2 + 0.9, −0.1 + 1.2) = (1.1, 1.1): an extrapolation beyond the conditional prediction, which pushes samples harder towards what distinguishes the condition, at the cost of diversity."
+  ],
+  "checkpoint": "Derive q(x_t | x₀) from the one-step transitions, explain why a network trained to predict the noise outputs E[ε | x_t] and how that gives a denoiser and a score, and contrast DDPM and DDIM sampling and the effect of the guidance weight.",
+  "lab": "diffusion",
+  "minutes": 90
+}

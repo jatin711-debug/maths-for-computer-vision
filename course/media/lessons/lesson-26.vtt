@@ -1,0 +1,50 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:08.516
+Maximum likelihood uses only the observation model. Bayesian modelling also describes plausible parameters before seeing the
+
+00:00:08.516 --> 00:00:16.832
+current observations. The posterior combines these sources; a maximum a posteriori estimate selects its highest-density parameter
+
+00:00:16.832 --> 00:00:19.950
+rather than reporting the whole distribution.
+
+00:00:20.467 --> 00:00:27.187
+The first term rewards matching the observation. The second charges for weight magnitude; its coefficient states
+
+00:00:27.187 --> 00:00:28.027
+the tradeoff.
+
+00:00:28.533 --> 00:00:34.115
+The penalty contributes to the derivative too. Minimizing only the data term would give a different
+
+00:00:34.115 --> 00:00:34.463
+answer.
+
+00:00:34.967 --> 00:00:41.214
+Will a tighter zero-centred prior move this estimate toward the observation or toward zero? Pause here
+
+00:00:41.214 --> 00:00:43.557
+and make a prediction before continuing.
+
+00:00:44.667 --> 00:00:51.610
+Collecting the terms in w gives this solution. The positive curvature makes it the unique global
+
+00:00:51.610 --> 00:00:58.553
+minimizer in this example. For our starting inputs, Unpenalized fit: 2. Regularized fit: 1. Data error:
+
+00:00:58.553 --> 00:00:58.987
+1.
+
+00:00:59.500 --> 00:01:07.013
+With observation variance one, multiplying the Gaussian negative log posterior by two produces the stated objective.
+
+00:01:07.013 --> 00:01:10.770
+A tighter zero-centred prior shrinks the MAP estimate.
+
+00:01:11.300 --> 00:01:16.967
+A MAP estimate is one point summary. It does not show posterior spread, and its numerical
+
+00:01:16.967 --> 00:01:19.800
+value depends on the stated prior and likelihood.
+

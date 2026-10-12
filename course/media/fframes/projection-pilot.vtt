@@ -1,0 +1,134 @@
+WEBVTT
+
+00:00:00.720 --> 00:00:05.595
+Vision models keep asking one question: how
+much of this patch looks like an edge?
+
+00:00:05.805 --> 00:00:09.648
+To answer it, treat each image as an arrow, a
+list of numbers.
+
+00:00:09.668 --> 00:00:13.580
+A patch has dozens of numbers, so let's shrink
+it down to two.
+
+00:00:14.155 --> 00:00:16.210
+Here's x: three right, four up.
+
+00:00:16.230 --> 00:00:19.310
+And here's a direction we care about, the
+green line.
+
+00:00:19.330 --> 00:00:22.330
+Which point on that line is closest to the tip
+of x?
+
+00:00:22.455 --> 00:00:23.198
+Let's search.
+
+00:00:23.218 --> 00:00:26.460
+Slide a point along the line, and watch the
+dashed distance.
+
+00:00:26.480 --> 00:00:29.555
+It falls, bottoms out, then rises again.
+
+00:00:29.590 --> 00:00:33.908
+At the best spot, the dashed line meets the
+green line at a right angle.
+
+00:00:33.928 --> 00:00:35.857
+Anywhere else, it leans.
+
+00:00:35.878 --> 00:00:38.965
+So the closest point is where you drop a
+perpendicular.
+
+00:00:39.210 --> 00:00:41.915
+Picture light shining straight down onto the
+line.
+
+00:00:41.935 --> 00:00:46.560
+The arrow casts a shadow, and that orange
+shadow is the projection, p.
+
+00:00:46.585 --> 00:00:50.178
+To measure it, take a unit arrow, u, along the
+line.
+
+00:00:50.198 --> 00:00:53.315
+The dot product of x with u is six over root
+five,
+
+00:00:53.335 --> 00:00:57.202
+plus four over root five, about four point
+four seven.
+
+00:00:57.223 --> 00:01:01.085
+Walk that far along u, and you land at the
+point four, two.
+
+00:01:01.520 --> 00:01:02.200
+Quick check.
+
+00:01:02.220 --> 00:01:05.762
+Suppose the line ran flat, along the
+horizontal axis.
+
+00:01:05.782 --> 00:01:07.162
+Where would the shadow end?
+
+00:01:07.182 --> 00:01:08.820
+Pause and decide.
+
+00:01:11.570 --> 00:01:12.962
+It ends at three.
+
+00:01:12.982 --> 00:01:15.950
+A flat line keeps only the first coordinate.
+
+00:01:15.970 --> 00:01:18.675
+Now turn the line, and the shadow follows.
+
+00:01:18.695 --> 00:01:23.220
+Its tip even traces a circle, because the
+corner is always a right angle.
+
+00:01:24.170 --> 00:01:26.888
+The part the shadow misses is the residual, r.
+
+00:01:26.908 --> 00:01:31.138
+It is perpendicular to the line, so r dot u is
+zero.
+
+00:01:31.158 --> 00:01:34.320
+Shadow plus residual rebuilds x exactly.
+
+00:01:34.745 --> 00:01:36.025
+Back to images.
+
+00:01:36.045 --> 00:01:41.563
+With the patch as x and an edge template as u,
+the dot product is the edge response.
+
+00:01:41.583 --> 00:01:44.900
+A convolution filter computes it at every
+position.
+
+00:01:44.920 --> 00:01:49.620
+And least squares asks the same question, with
+a plane instead of a line.
+
+00:01:50.600 --> 00:01:52.343
+So remember three things.
+
+00:01:52.363 --> 00:01:55.668
+A dot product with a unit vector measures a
+shadow.
+
+00:01:55.688 --> 00:01:58.005
+The shadow's tip is the closest point.
+
+00:01:58.025 --> 00:02:00.375
+And the leftover is perpendicular.
+

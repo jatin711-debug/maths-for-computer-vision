@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.000 --> 00:06.000
+Begin with 1,000 observations. 200 object · 800 no object.
+Each dot represents 10 cases. Object prevalence is 20%.
+
+2
+00:06.000 --> 00:12.000
+Flag 80% of object cases. 160 true alerts · 40 missed.
+Recall = P(alert | object) = 0.8. This is not alert correctness.
+
+3
+00:12.000 --> 00:18.000
+Also flag 10% of non-objects. 80 false alerts · 720 unflagged.
+True and false alerts both appear in the denominator of precision.
+
+4
+00:18.000 --> 00:24.000
+Look only among the alerts. P(object | alert) = 160/240.
+160 + 80 = 240 total alerts. Posterior probability is 2/3.

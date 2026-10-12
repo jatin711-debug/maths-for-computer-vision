@@ -1,0 +1,37 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.500
+An image is a grid of numbers. Here, zero means black, and two
+hundred and fifty five means white.
+
+2
+00:00:06.500 --> 00:00:11.533
+Keep the rows and columns in order. This image has two rows
+and two columns.
+
+3
+00:00:11.533 --> 00:00:17.200
+Multiply each pixel by one half. Every number halves, so the
+image becomes darker.
+
+4
+00:00:17.200 --> 00:00:22.300
+Now add ten to every pixel. This brightens the output without
+changing its shape.
+
+5
+00:00:22.300 --> 00:00:28.933
+Predict the new mean. Add the four output values and divide by
+four. Pause here to work it out.
+
+6
+00:00:28.933 --> 00:00:33.567
+The values sum to two hundred. Divide by four: the new mean is
+fifty.
+
+7
+00:00:33.567 --> 00:00:40.533
+The original mean was eighty. Halving it and adding ten gives
+fifty. This same rule acts on every pixel.
+

@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.154
+An exact system asks for an input that satisfies every observation simultaneously. If two equations demand
+
+00:00:07.154 --> 00:00:14.108
+different values for the same expression, no input can satisfy both. This is inconsistency, even if
+
+00:00:14.108 --> 00:00:17.150
+the coefficient matrix has a familiar shape.
+
+00:00:17.667 --> 00:00:22.697
+Both equations ask about the same sum. They cannot determine x and y individually.
+
+00:00:23.200 --> 00:00:30.930
+Consistency asks whether all equations can hold simultaneously. Counting equations alone does not answer that question.
+
+00:00:31.433 --> 00:00:37.576
+When the observations agree, do they determine both unknowns uniquely? Pause here and make a prediction
+
+00:00:37.576 --> 00:00:38.343
+before continuing.
+
+00:00:39.467 --> 00:00:46.196
+The least-squares compromise is the mean of the two requested sums. This changes the objective from
+
+00:00:46.196 --> 00:00:52.925
+exact matching to minimum squared error. For our starting inputs, First target: 1. Second target: 2.
+
+00:00:52.925 --> 00:00:54.187
+Fitted sum: 1.5.
+
+00:00:54.700 --> 00:01:00.731
+The residual entries sum to zero. Even after fitting, x and y remain underdetermined: any pair
+
+00:01:00.731 --> 00:01:03.370
+with this fitted sum is a minimizer.
+
+00:01:03.900 --> 00:01:09.760
+Check consistency, identifiable quantities and uniqueness separately before choosing a solver.
+

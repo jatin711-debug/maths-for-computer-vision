@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.000 --> 00:06.000
+Three imperfect observations. (0,1), (1,2), (2,2).
+A straight line has two parameters. It cannot pass through all points.
+
+2
+00:06.000 --> 00:12.000
+Use the fitted line. ŷ = 0.5 t + 7/6.
+Predictions: 7/6, 5/3, 13/6. The vertical gaps are residuals.
+
+3
+00:12.000 --> 00:18.000
+Square each prediction error. r = [1/6, −1/3, 1/6].
+Sum of squared errors = 1/6. MSE = (1/6)/3 = 1/18.
+
+4
+00:18.000 --> 00:24.000
+Why this line is optimal. Aᵀr = 0.
+r sums to zero. 0r₀ + 1r₁ + 2r₂ = 0.

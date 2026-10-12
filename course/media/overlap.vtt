@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.000 --> 00:06.000
+Locate the target box. A=[2,2,4,4] · area(A)=4.
+Coordinates are continuous. Width and height are both 2.
+
+2
+00:06.000 --> 00:12.000
+Place another box nearby. B=[3,3,5,5] · area(B)=4.
+Class correctness alone does not measure the location error.
+
+3
+00:12.000 --> 00:18.000
+Measure the common region. Intersection width=1, height=1.
+The shared area is 1. Count it once in the union.
+
+4
+00:18.000 --> 00:24.000
+Normalize by all covered area. IoU = 1/(4+4−1) = 1/7.
+Identical boxes have IoU 1. Disjoint boxes have IoU 0.

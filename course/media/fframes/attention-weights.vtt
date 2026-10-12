@@ -1,0 +1,148 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.205
+In a vision transformer,
+
+00:00:02.225 --> 00:00:06.318
+a patch on this cat's eye can look straight
+across the image at the other eye.
+
+00:00:06.338 --> 00:00:08.275
+How does it decide where to look?
+
+00:00:08.550 --> 00:00:13.568
+Cut the photo into a grid: fourteen by ten, a
+hundred and forty patches.
+
+00:00:13.588 --> 00:00:17.075
+Each patch becomes a token, a short list of
+numbers.
+
+00:00:17.095 --> 00:00:22.463
+Ours has just two, made by hand: how green the
+patch is, and how much edge it holds.
+
+00:00:22.482 --> 00:00:25.138
+Every patch lands as a dot on this plane.
+
+00:00:25.158 --> 00:00:27.870
+A trained model learns hundreds of its own.
+
+00:00:28.340 --> 00:00:32.057
+One patch asks a question: its query is this
+orange arrow.
+
+00:00:32.077 --> 00:00:35.595
+Every patch offers a key, here simply its own
+dot.
+
+00:00:35.615 --> 00:00:38.557
+Compare the query with each key by a dot
+product:
+
+00:00:38.577 --> 00:00:42.345
+how far the key reaches along the arrow, times
+the arrow's length.
+
+00:00:42.365 --> 00:00:45.682
+The background points away, so it scores below
+zero.
+
+00:00:45.702 --> 00:00:49.140
+The other eye reaches furthest: ten point
+five.
+
+00:00:49.695 --> 00:00:52.962
+Divide every score by root d, here root two.
+
+00:00:52.982 --> 00:00:58.025
+Then a softmax turns scores into weights: all
+positive, adding up to one.
+
+00:00:58.045 --> 00:01:00.970
+The other eye's centre takes sixty three
+percent.
+
+00:01:01.345 --> 00:01:05.238
+Each patch also carries a value, here simply
+its pixels.
+
+00:01:05.257 --> 00:01:08.075
+The output is the weighted average of the
+values:
+
+00:01:08.095 --> 00:01:11.045
+mostly eye, borrowed from across the face.
+
+00:01:11.655 --> 00:01:14.110
+A real head has sixty four numbers per key,
+
+00:01:14.130 --> 00:01:17.160
+so raw scores come out about eight times
+larger.
+
+00:01:17.180 --> 00:01:20.872
+Skip the division by root d, and what happens
+to these weights?
+
+00:01:20.892 --> 00:01:22.605
+Pause and decide.
+
+00:01:25.350 --> 00:01:26.468
+They collapse.
+
+00:01:26.488 --> 00:01:30.742
+One patch takes all but a few billionths of
+the weight, and the rest vanish.
+
+00:01:30.762 --> 00:01:34.068
+Their gradients vanish too, so the head stops
+learning.
+
+00:01:34.087 --> 00:01:37.500
+Dividing by root d keeps scores near unit
+size.
+
+00:01:37.960 --> 00:01:39.990
+And every patch asks at once.
+
+00:01:40.010 --> 00:01:41.865
+An ear finds the other ear.
+
+00:01:41.885 --> 00:01:44.565
+Blurry background finds blurry patches.
+
+00:01:44.585 --> 00:01:49.265
+The pink nose finds the pink ears: our
+features match colour, not meaning.
+
+00:01:49.285 --> 00:01:52.410
+Stack every row, and you get the attention
+matrix.
+
+00:01:52.930 --> 00:01:58.035
+Vision transformers, the D-E-T-R detector and
+CLIP repeat this in every layer.
+
+00:01:58.055 --> 00:02:02.848
+But every patch scores every patch: nineteen
+thousand six hundred pairs.
+
+00:02:02.868 --> 00:02:06.555
+Halve the patch size, and the work grows
+sixteen times.
+
+00:02:07.270 --> 00:02:09.062
+So remember three things.
+
+00:02:09.083 --> 00:02:12.625
+A score is the query dot the key, divided by
+root d.
+
+00:02:12.645 --> 00:02:15.300
+A softmax turns scores into weights.
+
+00:02:15.320 --> 00:02:18.245
+And the output is the weighted sum of the
+values.
+

@@ -1,0 +1,23 @@
+{
+  "id": 60,
+  "module": 15,
+  "title": "Multivariate Gaussians, Kalman filtering and data association",
+  "file": "lessons/60-multivariate-gaussians-kalman-filtering-and-data-association.md",
+  "reading": "MML 6.5.1, 6.5.2, 6.5.3 and 4.3; CV Appendix B.1 and B.6, 9.4.4 and 11.5.",
+  "goal": "Derive the Kalman predict and update steps from the linear-transform and conditioning rules of the Gaussian, and assign detections to tracks with the Hungarian algorithm.",
+  "exercises": [
+    "Let x ~ N((2, 1), diag(1, 4)) and y = Ax with A = [[1, 1], [0, 1]]. Find the mean and covariance of y, then the Mahalanobis distance of the point (5, 3) from y's mean.",
+    "Run one Kalman step for x = (0, 2), P = I, F = [[1, 1], [0, 1]], Q = 0, H = [1 0], R = 2 and measurement z = 3.5. Give x⁻, P⁻, S, K, the updated x and P.",
+    "With the S of question 2, which of the measurements 3.5, 6.5 and −2 pass a 95% gate, d² < 3.84?",
+    "Three tracks and three detections have costs [[0.1, 0.3, 0.9], [0.2, 0.9, 0.9], [0.9, 0.4, 0.3]]. Find the greedy assignment and its total, then the optimal assignment with the Hungarian algorithm."
+  ],
+  "solutions": [
+    "Mean Aμ = (2 + 1, 1) = (3, 1). Covariance AΣAᵀ: AΣ = [[1, 4], [0, 4]], and multiplying by Aᵀ = [[1, 0], [1, 1]] gives [[1 + 4, 4], [4, 4]] = [[5, 4], [4, 4]]. For (5, 3) the offset is (2, 2). The inverse is (1/(20 − 16))[[4, −4], [−4, 5]] = [[1, −1], [−1, 1.25]], so d² = (2, 2)·(2 − 2, −2 + 2.5) = (2, 2)·(0, 0.5) = 1 and d = 1: one standard deviation away, although the straight-line distance is 2.83, because the offset lies along the long, correlated axis of the ellipse.",
+    "Predict: x⁻ = Fx = (0 + 2, 2) = (2, 2) and P⁻ = FIFᵀ + 0 = [[2, 1], [1, 1]]. Innovation y = z − Hx⁻ = 3.5 − 2 = 1.5, with S = HP⁻Hᵀ + R = 2 + 2 = 4. Gain K = P⁻Hᵀ/S = (2, 1)/4 = (0.5, 0.25). Update: x = (2 + 0.5·1.5, 2 + 0.25·1.5) = (2.75, 2.375). P = P⁻ − KSKᵀ = [[2, 1], [1, 1]] − 4·[[0.25, 0.125], [0.125, 0.0625]] = [[1, 0.5], [0.5, 0.75]]. The position variance halves (precisions 1/2 + 1/2 = 1) and the unmeasured velocity is corrected by 0.375 through the covariance 1 between position and velocity.",
+    "The predicted measurement is Hx⁻ = 2 and S = 4. z = 3.5: y = 1.5, d² = 2.25/4 = 0.5625 < 3.84, accepted. z = 6.5: y = 4.5, d² = 20.25/4 = 5.06, rejected. z = −2: y = −4, d² = 16/4 = 4.00, just above 3.84, rejected. A gate of d² < 3.84 is the same as |y| < 1.96·√S = 3.92 for a one-dimensional measurement.",
+    "Greedy picks the smallest entry, 0.1 (track 1 to detection 1), then the smallest among the remaining rows 2–3 and columns 2–3, 0.3 (track 3 to detection 3), and is left with 0.9 (track 2 to detection 2): total 1.3. Hungarian: subtract the row minima 0.1, 0.2, 0.3 to get [[0, 0.2, 0.8], [0, 0.7, 0.7], [0.6, 0.1, 0]], then the column minima 0, 0.1, 0 to get [[0, 0.1, 0.8], [0, 0.6, 0.7], [0.6, 0, 0]]. All zeros are covered by two lines (column 1 and row 3), fewer than 3, so subtract the smallest uncovered value 0.1 from the uncovered entries and add it where the lines cross: [[0, 0, 0.7], [0, 0.5, 0.6], [0.7, 0, 0]]. Now three independent zeros exist: track 2 must take detection 1, so track 1 takes detection 2 and track 3 detection 3. Total 0.3 + 0.2 + 0.3 = 0.8, better than greedy's 1.3."
+  ],
+  "checkpoint": "Derive the Kalman predict step from the linear-transform rule and the update from Gaussian conditioning, explain how a velocity that is never measured gets corrected, gate a measurement with its innovation, and solve a small assignment problem optimally.",
+  "lab": "tracking",
+  "minutes": 90
+}

@@ -1,0 +1,138 @@
+WEBVTT
+
+00:00:00.705 --> 00:00:02.897
+A photo is a grid of numbers.
+
+00:00:02.917 --> 00:00:06.098
+This one is a hundred and twenty eight pixels
+square:
+
+00:00:06.118 --> 00:00:09.698
+sixteen thousand, three hundred and eighty
+four numbers.
+
+00:00:09.718 --> 00:00:11.755
+How few numbers could describe it?
+
+00:00:11.865 --> 00:00:14.982
+To find out, first watch what a matrix does to
+a circle.
+
+00:00:15.002 --> 00:00:17.890
+Take this messy two by two matrix, M.
+
+00:00:18.110 --> 00:00:21.190
+It looks complicated, but it's three simple
+moves.
+
+00:00:21.210 --> 00:00:23.627
+First, rotate by twenty degrees.
+
+00:00:23.647 --> 00:00:27.777
+Then stretch: three times along one axis, once
+along the other.
+
+00:00:27.797 --> 00:00:30.510
+Then rotate again, by thirty degrees.
+
+00:00:30.815 --> 00:00:32.445
+Now apply M directly.
+
+00:00:32.465 --> 00:00:33.707
+The same ellipse!
+
+00:00:33.727 --> 00:00:38.770
+So M equals U, sigma, V transpose: rotate,
+stretch, rotate.
+
+00:00:38.790 --> 00:00:43.490
+The ellipse's half axes, three and one, are
+the singular values of M.
+
+00:00:43.755 --> 00:00:47.672
+A photo works the same way, with a hundred and
+twenty eight stretches.
+
+00:00:47.692 --> 00:00:51.885
+Each one gives a layer: sigma, times a column,
+times a row.
+
+00:00:51.905 --> 00:00:53.697
+Here is layer one alone.
+
+00:00:53.717 --> 00:00:57.135
+Every row is the same pattern, just brighter
+or darker.
+
+00:00:57.155 --> 00:00:59.105
+And the stretches drop fast.
+
+00:00:59.435 --> 00:01:01.752
+Now add layers, largest first.
+
+00:01:01.772 --> 00:01:05.002
+How many until you recognise the cameraman and
+his tripod?
+
+00:01:05.022 --> 00:01:06.685
+Pause and decide.
+
+00:01:09.495 --> 00:01:11.587
+One layer is a plaid of stripes.
+
+00:01:11.607 --> 00:01:13.312
+Four, a dark figure.
+
+00:01:13.332 --> 00:01:15.612
+By eight, you can see the cameraman.
+
+00:01:15.632 --> 00:01:19.675
+By sixteen, his tripod too, from just a
+quarter of the numbers.
+
+00:01:19.695 --> 00:01:22.770
+And thirty two layers look almost like the
+original.
+
+00:01:23.200 --> 00:01:28.750
+The small singular values hold what is left:
+fine edges, grass texture, and noise.
+
+00:01:29.125 --> 00:01:31.218
+That's why low rank is everywhere.
+
+00:01:31.238 --> 00:01:33.392
+Compression keeps the top layers.
+
+00:01:33.412 --> 00:01:35.530
+Denoising drops the bottom ones:
+
+00:01:35.550 --> 00:01:40.405
+the noise falls from thirty grey levels to
+twenty, though some detail goes too.
+
+00:01:40.425 --> 00:01:44.068
+And large networks are fine tuned with low
+rank adapters:
+
+00:01:44.087 --> 00:01:46.530
+a rank eight update to a big weight matrix
+
+00:01:46.550 --> 00:01:49.525
+stores one number in two hundred and fifty
+six.
+
+00:01:50.070 --> 00:01:51.812
+So remember three things.
+
+00:01:51.832 --> 00:01:55.225
+Every matrix is rotate, stretch, rotate.
+
+00:01:55.245 --> 00:01:58.600
+The singular values rank its directions by
+importance.
+
+00:01:58.620 --> 00:02:02.920
+And keeping the top k layers gives the best
+rank k approximation.
+

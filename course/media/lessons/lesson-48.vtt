@@ -1,0 +1,50 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.274
+Reading a CV method means identifying the claim, definitions, assumptions and evidence around its equations. Start
+
+00:00:07.274 --> 00:00:14.349
+with a small numerical case where you can track every operation and dimension. A familiar symbol
+
+00:00:14.349 --> 00:00:18.770
+can hide a normalization or convention the implementation must reproduce.
+
+00:00:19.300 --> 00:00:25.693
+Suppose a method claims to compare feature direction with cosine similarity. First write down the actual
+
+00:00:25.693 --> 00:00:28.090
+vectors and verify they are nonzero.
+
+00:00:28.600 --> 00:00:36.370
+Normalization changes magnitude while preserving direction. A paper’s dot-product formula represents cosine only when the required
+
+00:00:36.370 --> 00:00:40.740
+norms are included or inputs are already unit length.
+
+00:00:41.267 --> 00:00:47.267
+Can the raw dot product exceed one while the normalized cosine score remains bounded? Pause here
+
+00:00:47.267 --> 00:00:49.517
+and make a prediction before continuing.
+
+00:00:50.633 --> 00:00:57.491
+Trace the equation into operations: squared entries, sum, square root, division and dot product. The shape
+
+00:00:57.491 --> 00:01:04.349
+of every intermediate should be clear. For our starting inputs, Raw dot product: 3. Vector norm:
+
+00:01:04.349 --> 00:01:06.063
+5. Cosine score: 0.6.
+
+00:01:06.567 --> 00:01:12.559
+The raw dot product is a different score and can exceed one. An invariant check can
+
+00:01:12.559 --> 00:01:18.177
+expose a mismatch between a mathematical claim and its implementation before evaluating the full model.
+
+00:01:18.700 --> 00:01:24.860
+Defend the connection from equation to code to experiment. State which assumptions were checked and which
+
+00:01:24.860 --> 00:01:27.170
+claims the evidence does not establish.
+

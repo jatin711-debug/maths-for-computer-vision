@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.000 --> 00:06.000
+Start with x = (3,4). ||x||₂ = 5.
+Two coordinates define a vector. The norm measures its length.
+
+2
+00:06.000 --> 00:12.000
+Keep the direction u = (1,1). uᵀx = 7 · uᵀu = 2.
+The line contains multiples of u. How much of x lies along it?
+
+3
+00:12.000 --> 00:18.000
+Choose coefficient c = 7/2. p = c u = (3.5,3.5).
+Projection lands on the line. It is the closest point to x.
+
+4
+00:18.000 --> 00:24.000
+What could not be represented?. r = x − p = (−0.5,0.5).
+uᵀr = 0: the residual is orthogonal. x = p + r.

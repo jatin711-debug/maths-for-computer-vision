@@ -1,0 +1,23 @@
+{
+  "id": 51,
+  "module": 13,
+  "title": "The pinhole camera, rotations and calibration",
+  "file": "lessons/51-the-pinhole-camera-rotations-and-calibration.md",
+  "reading": "CV 2.1.3-2.1.5 and 11.1; MML 3.9; Guo Part IV, Chapter 2, Sections 1-2 and Part IV, Chapter 3.",
+  "goal": "Project 3D points to pixels with K[R|t] and explain rotation representations, intrinsics and lens distortion.",
+  "exercises": [
+    "A camera has fx = fy = 500, cx = 320, cy = 240, R = I and t = (0, 0, 1). Project the world point (0.6, 0.3, 2).",
+    "A 640-pixel-wide image has fx = 320. Find its horizontal field of view. Which fx gives a 60° field of view?",
+    "Show that R = [[0,−1,0],[1,0,0],[0,0,1]] is a rotation, find its angle from the trace and its axis, and give a unit quaternion for it. Why does −q describe the same rotation?",
+    "A 1280 × 960 image with fx = fy = 1000, cx = 640, cy = 480 is cropped to the region starting at pixel (200, 100), and the crop is resized by a factor 0.5. What is the new K?"
+  ],
+  "solutions": [
+    "Camera coordinates: Xc = R·(0.6, 0.3, 2) + t = (0.6, 0.3, 3). Divide by the depth: (0.2, 0.1). Then u = 500·0.2 + 320 = 420 and v = 500·0.1 + 240 = 290, so the pixel is (420, 290).",
+    "FOV = 2·atan(640 / (2·320)) = 2·atan(1) = 90°. For 60° we need 640 / (2·fx) = tan 30° = 1/√3, so fx = 320·√3 ≈ 554.3 pixels. A longer focal length gives a narrower view.",
+    "The columns (0,1,0), (−1,0,0), (0,0,1) are orthonormal, so RᵀR = I, and det R = 0·(0·1−0·0) − (−1)·(1·1−0·0) + 0 = 1, so it is a rotation, not a reflection. tr R = 1 = 1 + 2cos θ gives cos θ = 0, θ = 90°. The axis solves Rn = n (eigenvalue 1): n = (0, 0, 1); since R sends (1,0,0) to (0,1,0), the turn is +90° about +z. A unit quaternion is q = (cos 45°, 0, 0, sin 45°) = (√2/2, 0, 0, √2/2). −q = (cos 225°, sin 225°·n) describes a turn by 450° = 360° + 90°, the same rotation; the rotation formula v ↦ q v q* is quadratic in q, so the sign cancels.",
+    "Cropping moves the principal point: cx = 640 − 200 = 440, cy = 480 − 100 = 380, with fx and fy unchanged. Resizing by 0.5 halves every pixel measure: fx = fy = 500, cx = 220, cy = 190. So K = [[500, 0, 220], [0, 500, 190], [0, 0, 1]]. Only the crop's corner and the scale factor matter, not the crop's size."
+  ],
+  "checkpoint": "Project a 3D point with K[R|t] step by step, say which entries of K change under a crop or a resize, convert a rotation matrix to its angle and axis, and explain why one checkerboard view gives two equations on K.",
+  "lab": "camera",
+  "minutes": 90
+}

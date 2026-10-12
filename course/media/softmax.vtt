@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.000 --> 00:06.000
+Three classes compete. z = [ln(3), 0, 0].
+Scores need not be probabilities. The target is class 2 (zero-based).
+
+2
+00:06.000 --> 00:12.000
+Exponentiate, then divide. p = [3,1,1]/5 = [0.6,0.2,0.2].
+Probabilities are nonnegative. They sum to one.
+
+3
+00:12.000 --> 00:18.000
+Read the correct-class probability. L = −ln(0.2) = ln(5).
+The model favoured class 0. The true class receives only 0.2.
+
+4
+00:18.000 --> 00:24.000
+Send a useful learning signal. dL/dz = [0.6,0.2,−0.8].
+Subtract the one-hot target. Descent pushes the target score up.

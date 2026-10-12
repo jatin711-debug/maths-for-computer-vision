@@ -1,0 +1,149 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.642
+A network can find an edge anywhere in a
+photo:
+
+00:00:03.662 --> 00:00:06.518
+along the face, the camera, the tripod.
+
+00:00:06.538 --> 00:00:08.380
+Does it learn a separate edge detector
+
+00:00:08.400 --> 00:00:11.355
+for each of the sixty five thousand positions?
+
+00:00:11.375 --> 00:00:12.030
+No.
+
+00:00:12.050 --> 00:00:15.600
+It learns one small detector, and slides it
+everywhere.
+
+00:00:15.900 --> 00:00:18.042
+Zoom in where hair meets sky.
+
+00:00:18.062 --> 00:00:22.830
+Each cell is one pixel, from zero for black to
+two fifty five for white.
+
+00:00:22.850 --> 00:00:26.480
+The detector is a three by three grid of
+weights: a kernel.
+
+00:00:26.500 --> 00:00:29.555
+Its weights are negative on the left and
+positive on the right,
+
+00:00:29.575 --> 00:00:31.625
+so it compares right with left.
+
+00:00:31.700 --> 00:00:33.255
+Place it over the edge.
+
+00:00:33.275 --> 00:00:37.630
+Multiply each pixel by the weight on top of
+it: nine products.
+
+00:00:37.650 --> 00:00:40.530
+Now add them up: six hundred seventeen.
+
+00:00:40.550 --> 00:00:42.780
+One number for this position, and a big one,
+
+00:00:42.800 --> 00:00:45.275
+because the patch gets brighter to the right.
+
+00:00:45.670 --> 00:00:48.687
+Now shift the window one pixel, and repeat.
+
+00:00:48.707 --> 00:00:52.820
+Each position fills one cell of a new image,
+called a feature map.
+
+00:00:53.000 --> 00:00:53.605
+Quick check.
+
+00:00:53.625 --> 00:00:55.842
+What will the kernel output on the flat sky?
+
+00:00:55.862 --> 00:00:57.500
+Pause and decide.
+
+00:01:00.315 --> 00:01:00.870
+Zero.
+
+00:01:00.890 --> 00:01:04.270
+The left and right columns match, so the
+products cancel.
+
+00:01:04.290 --> 00:01:07.265
+Flat regions vanish, and only edges light up.
+
+00:01:07.660 --> 00:01:12.028
+Run it over the whole photo, and the feature
+map draws every vertical edge:
+
+00:01:12.048 --> 00:01:15.835
+orange where brightness rises to the right,
+blue where it falls.
+
+00:01:16.225 --> 00:01:21.118
+And notice what never changed: the same nine
+numbers, at every position.
+
+00:01:21.138 --> 00:01:24.105
+A dense layer linking every pixel to every
+output
+
+00:01:24.125 --> 00:01:27.655
+would need over four billion weights for this
+small image.
+
+00:01:27.675 --> 00:01:29.650
+The convolution needs nine.
+
+00:01:30.105 --> 00:01:34.198
+Change the nine numbers, and the same photo
+becomes a different map.
+
+00:01:34.218 --> 00:01:35.722
+Equal weights blur it.
+
+00:01:35.742 --> 00:01:38.385
+Turn the kernel to find horizontal edges.
+
+00:01:38.405 --> 00:01:40.698
+Combine the two for every edge.
+
+00:01:40.718 --> 00:01:45.905
+A convolutional layer runs dozens of kernels
+at once, and gives dozens of maps.
+
+00:01:46.535 --> 00:01:49.803
+Stack layers, and each output sees a wider
+patch:
+
+00:01:49.822 --> 00:01:52.815
+two three by three layers see five by five.
+
+00:01:52.835 --> 00:01:56.253
+And like deep learning libraries, we never
+flipped the kernel.
+
+00:01:56.273 --> 00:02:01.910
+Textbook convolution flips it first, so
+strictly, ours is cross correlation.
+
+00:02:02.480 --> 00:02:04.148
+So remember three things.
+
+00:02:04.168 --> 00:02:06.935
+A convolution is a local weighted sum.
+
+00:02:06.955 --> 00:02:09.060
+The same weights are used everywhere.
+
+00:02:09.080 --> 00:02:11.455
+And different kernels see different structure.
+

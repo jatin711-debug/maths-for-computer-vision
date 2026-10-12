@@ -1,0 +1,17 @@
+{
+  "mml_download": {
+    "source_url": "https://mml-book.github.io/book/mml-book.pdf",
+    "sha256": "3f87b70c64a35d30ec4e565b4d5cfd18fe913002d3b3bed44691c7d0838911bc",
+    "bytes": 17565898
+  },
+  "pdf": "D:\\MathsWarmUp\\output\\pdf\\maths-for-computer-vision-course.pdf",
+  "module_count": 12,
+  "lesson_count": 48,
+  "authored_foundation_lessons": 4,
+  "notebook_demonstrations_executed": true,
+  "authored_lesson_count": 48,
+  "continuation_exercise_count": 176,
+  "interactive_page": "index.html",
+  "notebook_count": 5,
+  "expanded_on": "2026-10-11"
+}

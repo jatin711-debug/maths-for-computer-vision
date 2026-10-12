@@ -1,0 +1,78 @@
+/* Visual classroom browser (classroom.js). Kind colours stay the same in both themes so a badge means one thing everywhere. */
+.vc { --vc-animated:#e8792f; --vc-walkthrough:#3f9b62; --vc-overview:#4a86c5; margin:26px 0 44px; }
+.vc [data-kind="animated"] { --vc-kind:var(--vc-animated); }
+.vc [data-kind="walkthrough"] { --vc-kind:var(--vc-walkthrough); }
+.vc [data-kind="overview"] { --vc-kind:var(--vc-overview); }
+.vc-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+.vc-kinds { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.vc-kind { display:block; min-width:0; padding:14px 16px 15px; border:1px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink); text-align:left; line-height:1.4; transition:border-color .15s, box-shadow .15s; }
+.vc-kind:hover { border-color:var(--muted); }
+.vc-kind[aria-pressed="true"] { border-color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink); }
+.vc-kind-top { display:flex; align-items:center; gap:8px; }
+.vc-kind-top b { font-size:14px; font-weight:650; }
+.vc-kind-top i, .vc-badge i { flex:none; width:9px; height:9px; border-radius:50%; background:var(--vc-kind); }
+.vc-count { margin-left:auto; padding:1px 9px; border-radius:20px; background:var(--paper); color:var(--muted); font-family:var(--mono); font-size:12px; }
+.vc-kind[aria-pressed="true"] .vc-count { background:var(--ink); color:var(--surface); }
+.vc-kind-desc { display:block; margin-top:5px; color:var(--muted); font-size:12px; }
+
+.vc-tools { display:flex; flex-wrap:wrap; gap:12px; margin:18px 0 6px; }
+.vc-search { flex:1 1 320px; }
+.vc-module { flex:0 1 340px; min-width:0; }
+.vc-tools input, .vc-tools select { width:100%; min-height:44px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink); }
+.vc-views { display:inline-flex; flex:none; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+.vc-views button { display:inline-flex; align-items:center; gap:7px; min-height:44px; padding:0 15px; background:var(--surface); color:var(--muted); font-size:13px; font-weight:600; }
+.vc-views button + button { border-left:1px solid var(--line); }
+.vc-views button[aria-pressed="true"] { background:var(--ink); color:var(--surface); }
+
+.vc-status { display:flex; align-items:center; gap:14px; min-height:38px; }
+.vc-status p { margin:0; color:var(--muted); font-size:13px; }
+.vc-clear { padding:6px 2px; background:none; color:var(--orange); font-size:13px; font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+.vc-empty { padding:40px 20px; border:1px dashed var(--line); border-radius:12px; text-align:center; color:var(--muted); }
+.vc-empty p { margin:0 0 14px; }
+
+.vc-group { margin-top:28px; }
+.vc-group-head { display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:6px 16px; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--line); }
+.vc-group-head h2 { margin:0; font-size:19px; line-height:1.3; }
+.vc-group-head h2 span { display:block; margin-bottom:3px; color:var(--muted); font-size:11px; font-weight:600; letter-spacing:1.4px; text-transform:uppercase; }
+.vc-group-meta { color:var(--muted); font-size:12px; }
+
+.vc-items { display:grid; grid-template-columns:repeat(auto-fill,minmax(236px,1fr)); gap:16px; }
+.vc-card { display:flex; flex-direction:column; min-width:0; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--surface); color:inherit; transition:transform .15s, border-color .15s; }
+.vc-card:hover { transform:translateY(-2px); border-color:var(--muted); }
+.vc-thumb { position:relative; display:block; aspect-ratio:16/9; overflow:hidden; background:#111; }
+.vc-thumb img, .vc-thumb svg { display:block; width:100%; height:100%; object-fit:cover; }
+.vc-badge { display:inline-flex; align-items:center; gap:6px; white-space:nowrap; color:var(--ink); }
+.vc-time { position:absolute; right:9px; bottom:9px; padding:1px 7px; border-radius:5px; background:#000000c7; color:#fff; font-family:var(--mono); font-size:11px; }
+.vc-body { display:flex; flex-direction:column; gap:5px; padding:12px 15px 15px; }
+.vc-meta { display:flex; flex-wrap:wrap; align-items:center; gap:4px 10px; color:var(--muted); font-size:10.5px; font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+.vc-length { display:none; }
+.vc-title { display:-webkit-box; overflow:hidden; font-size:14.5px; font-weight:600; line-height:1.4; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+
+.vc[data-view="list"] .vc-items { grid-template-columns:minmax(0,1fr); gap:0; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--surface); }
+.vc[data-view="list"] .vc-card { flex-direction:row; align-items:center; gap:16px; padding:10px 16px 10px 10px; border:0; border-bottom:1px solid var(--line); border-radius:0; background:none; }
+.vc[data-view="list"] .vc-card:last-child { border-bottom:0; }
+.vc[data-view="list"] .vc-card:hover { transform:none; background:var(--paper); }
+.vc[data-view="list"] .vc-thumb { flex:none; width:136px; border-radius:6px; }
+.vc[data-view="list"] .vc-time { display:none; }
+.vc[data-view="list"] .vc-body { flex:1; min-width:0; padding:0; }
+.vc[data-view="list"] .vc-length { display:inline; font-family:var(--mono); font-weight:400; letter-spacing:0; }
+.vc[data-view="list"] .vc-title { -webkit-line-clamp:1; }
+
+@media(max-width:1100px) { .vc-kinds { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:720px) {
+  .vc-module { flex:1 1 200px; }
+  .vc-items { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .vc-body { padding:10px 11px 12px; }
+  .vc-title { font-size:13px; }
+  .vc[data-view="list"] .vc-card { gap:12px; padding:9px 12px 9px 9px; }
+  .vc[data-view="list"] .vc-thumb { width:96px; }
+  .vc[data-view="list"] .vc-title { -webkit-line-clamp:2; }
+}
+@media(max-width:420px) {
+  .vc-kind { padding:12px; }
+  .vc-kind-top b { font-size:13px; }
+  .vc-kind-desc { font-size:11px; }
+  .vc-views button { padding:0 12px; }
+}
+@media print { .vc-kinds, .vc-tools, .vc-status { display:none; } }

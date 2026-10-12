@@ -1,0 +1,38 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.221
+A first-order approximation uses the function value and gradient at a centre. A second-order approximation also
+
+00:00:07.221 --> 00:00:14.242
+uses curvature. In one dimension curvature is a second derivative; with several coordinates it becomes the
+
+00:00:14.242 --> 00:00:15.120
+Hessian matrix.
+
+00:00:15.633 --> 00:00:21.825
+Taylor expansion describes how the function changes around a named centre. The displacement h is not
+
+00:00:21.825 --> 00:00:23.373
+the new input itself.
+
+00:00:23.900 --> 00:00:28.480
+The derivative gives the tangent term. This approximation ignores curvature.
+
+00:00:29.000 --> 00:00:34.493
+If h is halved, how will the first-order error change for this quadratic? Pause here and
+
+00:00:34.493 --> 00:00:36.210
+make a prediction before continuing.
+
+00:00:37.333 --> 00:00:45.225
+In one dimension the Hessian is the second derivative. The quadratic term measures bending away from
+
+00:00:45.225 --> 00:00:52.623
+the tangent. For our starting inputs, Linear prediction: 6. Curvature correction: 0.25. Exact value: 6.25.
+
+00:00:53.133 --> 00:01:01.063
+For this degree-two polynomial the second-order expansion is exact. More general functions have higher-order remainder terms.
+
+00:01:01.567 --> 00:01:08.067
+Choose a small, stated neighbourhood before trusting a Taylor approximation or a finite-difference gradient check.
+

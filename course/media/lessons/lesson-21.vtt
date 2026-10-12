@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:05.976
+A detector’s probability of a positive result given a real target is different from the probability
+
+00:00:05.976 --> 00:00:11.753
+of a real target given a positive result. The two condition on different populations, so one
+
+00:00:11.753 --> 00:00:14.280
+cannot simply be renamed as the other.
+
+00:00:14.800 --> 00:00:20.872
+A is the target class; B is a positive prediction. The false-positive probability is conditional on
+
+00:00:20.872 --> 00:00:22.390
+not having the target.
+
+00:00:22.900 --> 00:00:29.635
+Multiply each conditional probability by the size of its source population. Both true and false positives
+
+00:00:29.635 --> 00:00:32.160
+contribute to the observed positive group.
+
+00:00:32.667 --> 00:00:38.420
+Will a rarer target increase or decrease the probability that a positive result is correct? Pause
+
+00:00:38.420 --> 00:00:40.937
+here and make a prediction before continuing.
+
+00:00:42.067 --> 00:00:52.034
+The denominator includes the two mutually exclusive routes. It is not just the true-positive rate. For
+
+00:00:52.034 --> 00:00:58.887
+our starting inputs, True-positive joint: 0.16. False-positive joint: 0.08. Posterior: 0.66667.
+
+00:00:59.400 --> 00:01:05.890
+Among all positive predictions, this fraction really belongs to the target class. Prevalence can change that
+
+00:01:05.890 --> 00:01:08.730
+fraction even when test behaviour stays fixed.
+
+00:01:09.233 --> 00:01:13.223
+Ask “among which group?” every time you read a conditional probability.
+

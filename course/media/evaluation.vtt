@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.000 --> 00:06.000
+Nine foreground pixels. A 5 × 5 target mask.
+Foreground: 9; background: 16. Each pixel is one binary decision.
+
+2
+00:06.000 --> 00:12.000
+Predict background everywhere. Accuracy = 16/25 = 64%.
+The baseline misses every object pixel. Foreground IoU is zero.
+
+3
+00:12.000 --> 00:18.000
+Predict the nine target pixels. TP=9 · FP=0 · FN=0.
+The toy mask is now exact. Foreground IoU and Dice are 1.
+
+4
+00:18.000 --> 00:24.000
+Connect a number to its meaning. Name the split and metric.
+Tune on validation; test once. Show real failures and assumptions.

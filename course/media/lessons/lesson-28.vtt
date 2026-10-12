@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.327
+Accuracy checks a final class decision. Calibration checks whether probability statements agree with observed frequencies in
+
+00:00:07.327 --> 00:00:14.454
+comparable groups. A model can choose the right class often while giving confidence values that are
+
+00:00:14.454 --> 00:00:15.790
+systematically too high.
+
+00:00:16.300 --> 00:00:22.220
+All twenty examples receive the same predicted probability. Twelve of their binary targets are one.
+
+00:00:22.733 --> 00:00:28.720
+A group predicted with confidence p is calibrated in the population if its positive frequency equals
+
+00:00:28.720 --> 00:00:31.713
+p. This finite group is only an estimate.
+
+00:00:32.233 --> 00:00:38.015
+Where will the constant prediction minimize Brier score for twelve positives out of twenty? Pause here
+
+00:00:38.015 --> 00:00:40.183
+and make a prediction before continuing.
+
+00:00:41.300 --> 00:00:50.626
+The Brier score measures squared error of binary probabilities, including contributions from both outcome classes. For
+
+00:00:50.626 --> 00:00:57.620
+our starting inputs, Predicted probability: 0.8. Observed frequency: 0.6. Brier score: 0.28.
+
+00:00:58.133 --> 00:01:05.159
+This group’s best constant probability is its observed frequency. Choosing adjustments on this same final test
+
+00:01:05.159 --> 00:01:08.233
+group would compromise an independent test evaluation.
+
+00:01:08.733 --> 00:01:16.333
+Metrics answer specific questions. Good discrimination, good calibration and low expected cost need not coincide.
+

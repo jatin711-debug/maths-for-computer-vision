@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.865
+An eigenvector is a nonzero direction that a square matrix maps to a scalar multiple of
+
+00:00:06.865 --> 00:00:13.530
+itself. The direction’s line survives the transformation even when its length changes or its orientation reverses.
+
+00:00:14.033 --> 00:00:19.937
+This nonzero vector lies along the first coordinate axis. The diagonal map does not mix it
+
+00:00:19.937 --> 00:00:21.413
+with the second axis.
+
+00:00:21.933 --> 00:00:26.553
+The vector remains on the same line. The scalar multiplier is its eigenvalue.
+
+00:00:27.067 --> 00:00:33.291
+How will a negative eigenvalue behave after one, two and three applications? Pause here and make
+
+00:00:33.291 --> 00:00:34.847
+a prediction before continuing.
+
+00:00:35.967 --> 00:00:43.548
+Each application multiplies the previous coefficient by the same eigenvalue. Repeated action therefore produces a power.
+
+00:00:43.548 --> 00:00:48.287
+For our starting inputs, Eigenvalue: 2. After three maps: 8.
+
+00:00:48.800 --> 00:00:57.280
+Magnitude below one contracts; magnitude above one grows. A negative eigenvalue alternates the orientation on successive
+
+00:00:57.280 --> 00:01:00.460
+applications. At zero the direction disappears.
+
+00:01:00.967 --> 00:01:09.186
+Eigenvalues describe signed action on special directions. Singular values instead describe nonnegative stretching and apply to
+
+00:01:09.186 --> 00:01:10.727
+rectangular maps too.
+

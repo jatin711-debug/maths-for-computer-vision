@@ -1,0 +1,104 @@
+[
+  {
+    "id": "pixels",
+    "title": "Images are arrays",
+    "duration": 40.53333333333333,
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 1216,
+    "bytes": 5364348,
+    "sha256": "500030f3ab8ed71accb6246303aa52f75efdcc140488f0069c8e9cbfc1f19e94",
+    "renderer": "fframes 1.2.0 / Skia Vulkan / FFmpeg libx264",
+    "narration": "Local Kokoro-82M: af_heart",
+    "narrationSettings": {
+      "engine": "kokoro",
+      "model": "hexgrad/Kokoro-82M",
+      "revision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+      "voice": "af_heart",
+      "langCode": "a",
+      "speed": 1.0
+    },
+    "timing": {
+      "fps": 30,
+      "voiceLeadSeconds": 0.2,
+      "pauseSeconds": 0.3,
+      "predictionPauseSeconds": 0.9,
+      "outroPauseSeconds": 0.45,
+      "trimSilenceDb": -50,
+      "trimLeadSeconds": 0.03,
+      "trimTailSeconds": 0.05
+    },
+    "captions": "pixels.vtt",
+    "fullDecodePassed": true,
+    "allFramesInspected": 1216
+  },
+  {
+    "id": "projection",
+    "title": "Projection keeps a direction",
+    "duration": 49.86666666666667,
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 1496,
+    "bytes": 7082961,
+    "sha256": "19e7fc96f2a86690bf159d0dfb7c63fdde9f666f8b5db7a9748b82497a593285",
+    "renderer": "fframes 1.2.0 / Skia Vulkan / FFmpeg libx264",
+    "narration": "Local Kokoro-82M: af_heart",
+    "narrationSettings": {
+      "engine": "kokoro",
+      "model": "hexgrad/Kokoro-82M",
+      "revision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+      "voice": "af_heart",
+      "langCode": "a",
+      "speed": 1.0
+    },
+    "timing": {
+      "fps": 30,
+      "voiceLeadSeconds": 0.2,
+      "pauseSeconds": 0.3,
+      "predictionPauseSeconds": 0.9,
+      "outroPauseSeconds": 0.45,
+      "trimSilenceDb": -50,
+      "trimLeadSeconds": 0.03,
+      "trimTailSeconds": 0.05
+    },
+    "captions": "projection.vtt",
+    "fullDecodePassed": true,
+    "allFramesInspected": 1496
+  },
+  {
+    "id": "descent",
+    "title": "Gradient descent follows slope",
+    "duration": 50.7,
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 1521,
+    "bytes": 7562293,
+    "sha256": "17268e8a60099862ba7e7b2051aec91733bdfe43c8b25ca50041471c29dab1e1",
+    "renderer": "fframes 1.2.0 / Skia Vulkan / FFmpeg libx264",
+    "narration": "Local Kokoro-82M: af_heart",
+    "narrationSettings": {
+      "engine": "kokoro",
+      "model": "hexgrad/Kokoro-82M",
+      "revision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+      "voice": "af_heart",
+      "langCode": "a",
+      "speed": 1.0
+    },
+    "timing": {
+      "fps": 30,
+      "voiceLeadSeconds": 0.2,
+      "pauseSeconds": 0.3,
+      "predictionPauseSeconds": 0.9,
+      "outroPauseSeconds": 0.45,
+      "trimSilenceDb": -50,
+      "trimLeadSeconds": 0.03,
+      "trimTailSeconds": 0.05
+    },
+    "captions": "descent.vtt",
+    "fullDecodePassed": true,
+    "allFramesInspected": 1521
+  }
+]

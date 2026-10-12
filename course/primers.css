@@ -1,0 +1,70 @@
+/* Plain-language primers (primers.js) and the glossary page. */
+.primer { margin:24px 0; padding:24px; border:1px solid var(--line); border-radius:16px; background:var(--surface); }
+.primer-intro h2 { margin:6px 0 6px; font-size:22px; }
+.primer-intro p { margin:0; max-width:80ch; color:var(--muted); }
+.primer-jump { padding:0; background:none; color:var(--orange); font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+.primer-context { display:grid; gap:10px; margin:18px 0 4px; }
+.primer-context > div { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+.primer-context-label { min-width:72px; color:var(--muted); font-size:11px; font-weight:600; letter-spacing:1.2px; text-transform:uppercase; }
+.primer-chip { display:inline-flex; align-items:center; gap:6px; min-height:34px; padding:4px 12px; border:1px solid var(--line); border-radius:20px; background:var(--paper); color:var(--ink); font-size:12.5px; text-align:left; }
+.primer-chip b { font-weight:650; }
+.primer-chip:hover, .primer-chip[aria-pressed="true"] { border-color:var(--ink); }
+.primer-terms { display:grid; gap:10px; margin-top:16px; }
+.primer-term { border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+.primer-term[open] { border-color:var(--muted); }
+.primer-term > summary { display:flex; align-items:center; gap:12px; min-height:52px; padding:10px 16px; cursor:pointer; list-style:none; }
+.primer-term > summary::-webkit-details-marker { display:none; }
+.primer-symbol { flex:none; min-width:44px; color:var(--ink); font-size:17px; }
+.primer-name { flex:1; font-weight:650; font-size:15.5px; }
+.primer-toggle::after { content:"+"; display:inline-grid; place-items:center; width:26px; height:26px; border:1px solid var(--line); border-radius:50%; color:var(--muted); font-size:16px; line-height:1; }
+.primer-term[open] .primer-toggle::after { content:"−"; }
+.primer-body { padding:2px 18px 18px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,340px); gap:4px 28px; align-items:start; }
+.primer-body > * { grid-column:1; }
+.primer-body > .primer-plot { grid-column:2; grid-row:1 / span 5; margin:6px 0 0; }
+.primer-plain { margin:4px 0 8px; font-size:15.5px; line-height:1.65; max-width:72ch; }
+.primer-formula { margin:2px 0 6px; overflow-x:auto; }
+.primer-steps h4 { margin:8px 0 4px; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+.primer-steps ol { margin:0; padding-left:22px; }
+.primer-steps li { margin:3px 0; line-height:1.65; }
+.primer-examples { justify-self:start; width:auto; min-width:min(100%, 360px); margin:10px 0 4px; border-collapse:collapse; font-size:14px; }
+.primer-examples th { padding:6px 14px 6px 0; border-bottom:1px solid var(--line); color:var(--muted); font-size:11px; font-weight:600; letter-spacing:1px; text-align:left; text-transform:uppercase; }
+.primer-examples td { padding:7px 14px 7px 0; border-bottom:1px solid var(--line); vertical-align:top; }
+.primer-pitfall { margin:10px 0 0; padding:10px 14px; border-left:3px solid var(--orange); background:var(--orange-soft); border-radius:0 8px 8px 0; font-size:14px; }
+.primer-links { margin:10px 0 0; color:var(--muted); font-size:13px; }
+.primer-links a { color:var(--orange); font-weight:600; }
+.primer-plot svg { display:block; width:100%; height:auto; }
+.primer-frame { fill:var(--paper); stroke:var(--line); }
+.primer-axis { stroke:var(--muted); stroke-width:1; opacity:.5; }
+.primer-curve { fill:none; stroke:var(--orange); stroke-width:2.5; }
+.primer-plot circle { fill:var(--ink); }
+.primer-tick, .primer-label, .primer-mark { fill:var(--muted); font-family:"Segoe UI",Arial,sans-serif; font-size:11px; }
+.primer-mark { fill:var(--ink); font-size:10.5px; paint-order:stroke; stroke:var(--paper); stroke-width:4px; stroke-linejoin:round; }
+.primer-label { font-size:12px; font-style:italic; }
+.primer-recall { margin-top:14px; padding:12px; border:1px dashed var(--muted); border-radius:12px; }
+.primer-recall-head { display:flex; align-items:center; justify-content:space-between; margin:0 4px 8px; color:var(--muted); font-size:11px; font-weight:600; letter-spacing:1.2px; text-transform:uppercase; }
+.primer-close { width:32px; height:32px; border-radius:50%; background:var(--paper); color:var(--ink); font-size:18px; line-height:1; }
+.symbol-key button.symbol-term { padding:0; background:none; color:inherit; text-align:left; font:inherit; text-decoration:underline dotted; text-underline-offset:4px; cursor:pointer; }
+.symbol-key button.symbol-term:hover { color:var(--orange); }
+
+.glossary-tools { display:flex; flex-wrap:wrap; gap:12px; margin:22px 0 6px; }
+.glossary-tools label:first-child { flex:1 1 320px; }
+.glossary-tools label:last-child { flex:0 1 340px; min-width:0; }
+.glossary-tools input, .glossary-tools select { width:100%; min-height:44px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink); }
+.glossary-status { margin:6px 0 0; color:var(--muted); font-size:13px; }
+.glossary-group { margin-top:26px; }
+.glossary-group h2 { margin:0; padding-bottom:6px; border-bottom:1px solid var(--line); font-size:20px; }
+.glossary-empty { padding:30px; border:1px dashed var(--line); border-radius:12px; color:var(--muted); text-align:center; }
+.vc-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+@media(max-width:900px) {
+  .primer-body { grid-template-columns:minmax(0,1fr); }
+  .primer-body > .primer-plot { grid-column:1; grid-row:auto; max-width:420px; }
+}
+@media(max-width:600px) {
+  .primer { padding:16px; }
+  .primer-intro h2 { font-size:19px; }
+  .primer-term > summary { padding:10px 12px; gap:10px; }
+  .primer-body { padding:2px 12px 14px; }
+  .primer-context-label { min-width:0; width:100%; }
+}
+@media print { .primer-term { break-inside:avoid; } .primer-term:not([open]) .primer-body { display:grid; } }

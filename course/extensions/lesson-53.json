@@ -1,0 +1,23 @@
+{
+  "id": 53,
+  "module": 14,
+  "title": "Matrix calculus for layers and losses",
+  "file": "lessons/53-matrix-calculus-for-layers-and-losses.md",
+  "reading": "MML 5.3-5.6; CV 5.3.5.",
+  "goal": "Differentiate scalar losses with respect to vectors and matrices, keeping track of shapes with the chain rule and trace identities.",
+  "exercises": [
+    "Find ∇f for f(x) = xᵀAx with A = [[1, 4], [0, 2]] at x = (1, 2). Compare it with 2Ax.",
+    "Find the gradient of ‖Ax − b‖² for A = [[1, 0], [0, 1], [1, 1]], b = (1, 2, 0) at x = (1, 1).",
+    "A linear layer Y = XW + 1bᵀ has X = [[1, 2], [3, 0], [0, 1]], W = [[2, 0], [1, 1]] and upstream gradient G = [[1, 0], [0, 1], [1, −1]]. Compute ∂L/∂W, ∂L/∂b and ∂L/∂X, and check each shape.",
+    "For f in Exercise 1, compute the central and the forward difference for ∂f/∂x₁ with h = 0.1. Why is the central difference exact here?"
+  ],
+  "solutions": [
+    "A + Aᵀ = [[2, 4], [4, 4]], so ∇f = (A + Aᵀ)x = (2 + 8, 4 + 8) = (10, 12). Check with f = x₁² + 4x₁x₂ + 2x₂²: ∂f/∂x₁ = 2x₁ + 4x₂ = 10 and ∂f/∂x₂ = 4x₁ + 4x₂ = 12. The shortcut 2Ax = 2(9, 4) = (18, 8) is wrong because A is not symmetric.",
+    "r = Ax − b = (1, 1, 2) − (1, 2, 0) = (0, −1, 2). Aᵀr = (0 + 2, −1 + 2) = (2, 1), so ∇f = 2Aᵀr = (4, 2): two entries, like x.",
+    "∂L/∂W = XᵀG = [[1·1 + 3·0 + 0·1, 1·0 + 3·1 + 0·(−1)], [2·1 + 0·0 + 1·1, 2·0 + 0·1 + 1·(−1)]] = [[1, 3], [3, −1]], 2 × 2 like W. ∂L/∂b = column sums of G = (2, 0), two entries like b. ∂L/∂X = GWᵀ with Wᵀ = [[2, 1], [0, 1]]: rows (2, 1), (0, 1), (2, 0), so 3 × 2 like X.",
+    "f(1, 2) = 1 + 8 + 8 = 17, f(1.1, 2) = 18.01 and f(0.9, 2) = 16.01. Central: (18.01 − 16.01)/0.2 = 10, exactly the true value. Forward: (18.01 − 17)/0.1 = 10.1, an error of 0.1 = h·(∂²f/∂x₁²)/2 = 0.1·2/2. The central difference is exact because f is quadratic in x₁: the even-order terms cancel in f(x + h) − f(x − h), and there is no third derivative."
+  ],
+  "checkpoint": "Derive ∂L/∂W, ∂L/∂X and ∂L/∂b for a linear layer from dL = tr(Gᵀ dY), justify every transpose by its shape, and design a finite-difference check with a sensible step size.",
+  "lab": "matcalc",
+  "minutes": 90
+}

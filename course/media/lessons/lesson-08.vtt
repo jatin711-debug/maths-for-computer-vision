@@ -1,0 +1,47 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.579
+A matrix may have many entries without preserving every input direction. Rank counts independent directions in
+
+00:00:06.579 --> 00:00:12.959
+its outputs. The null space contains input changes that the matrix sends to zero, so these
+
+00:00:12.959 --> 00:00:15.750
+changes cannot be recovered from the output.
+
+00:00:16.267 --> 00:00:22.810
+The second output coordinate is always zero. Although there are two input coordinates, only one independent
+
+00:00:22.810 --> 00:00:24.037
+output direction survives.
+
+00:00:24.567 --> 00:00:31.064
+Substitute this nonzero vector into the map: the first-row contributions cancel, and the second row is
+
+00:00:31.064 --> 00:00:31.877
+already zero.
+
+00:00:32.400 --> 00:00:38.655
+Will changing the coefficient change the number of lost directions, or only their orientation? Pause here
+
+00:00:38.655 --> 00:00:41.000
+and make a prediction before continuing.
+
+00:00:42.100 --> 00:00:49.660
+Rank counts independent output directions. Nullity counts independent input directions sent to zero. For our starting
+
+00:00:49.660 --> 00:00:53.440
+inputs, Rank: 1. Nullity: 1. Null x-coordinate: -1.
+
+00:00:53.967 --> 00:01:00.658
+Adding a null vector to any input leaves its output unchanged. This demonstrates the information loss
+
+00:01:00.658 --> 00:01:01.077
+directly.
+
+00:01:01.600 --> 00:01:07.824
+Information loss is a property of the map. A clever inverse algorithm cannot recover a direction
+
+00:01:07.824 --> 00:01:09.380
+that every output erased.
+

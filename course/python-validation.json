@@ -1,0 +1,15 @@
+{
+  "lessons": 68,
+  "pythonExecutions": 1887,
+  "torchExecutions": 108,
+  "torchExecutionsByDevice": {
+    "cpu": 54,
+    "cuda": 54
+  },
+  "numericalComparisons": 10856,
+  "issues": [],
+  "torchVersion": "2.8.0+cu126",
+  "cudaAvailable": true,
+  "cudaDevice": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "optionalTorchAvailable": true
+}

@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.687
+A multiclass model produces one score per class. Softmax exponentiates these scores and divides by their
+
+00:00:07.687 --> 00:00:15.174
+sum, making a positive distribution across mutually exclusive classes. Increasing one score therefore changes more than
+
+00:00:15.174 --> 00:00:16.110
+one probability.
+
+00:00:16.633 --> 00:00:22.233
+These scores can be any real values. This softmax model assumes exactly one of the classes
+
+00:00:22.233 --> 00:00:23.283
+is the target.
+
+00:00:23.800 --> 00:00:31.980
+Subtracting the maximum score before exponentiating gives the same probabilities and avoids unnecessarily large exponentials.
+
+00:00:32.500 --> 00:00:37.920
+If the cat score rises while the other scores stay fixed, what happens to their probabilities?
+
+00:00:37.920 --> 00:00:40.630
+Pause here and make a prediction before continuing.
+
+00:00:41.733 --> 00:00:52.447
+Cross entropy with a one-hot target is the negative logarithm of the chosen true-class probability. For
+
+00:00:52.447 --> 00:00:58.473
+our starting inputs, Cat: 0.42232. Dog: 0.42232. Background: 0.15536.
+
+00:00:59.000 --> 00:01:04.798
+Increasing the cat score lowers this loss. The coupled probabilities sum to one, so increasing one
+
+00:01:04.798 --> 00:01:06.610
+class changes the others too.
+
+00:01:07.133 --> 00:01:15.310
+Use stable log-softmax calculations for extreme scores. Independent multilabel outcomes need a different model than this
+
+00:01:15.310 --> 00:01:16.843
+mutually exclusive softmax.
+

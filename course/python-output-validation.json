@@ -1,0 +1,168 @@
+{
+  "checkedOn": "2026-10-11",
+  "browser": "T3 Code collaborative preview",
+  "viewport": {
+    "height": 609,
+    "width": 974
+  },
+  "behaviorChecks": [
+    {
+      "name": "Unicode and output without newline",
+      "passed": true
+    },
+    {
+      "name": "Separate stdout and stderr",
+      "passed": true
+    },
+    {
+      "name": "Final expression output",
+      "passed": true
+    },
+    {
+      "name": "Traceback with source filename and earlier output",
+      "passed": true
+    },
+    {
+      "name": "Syntax error is visible",
+      "passed": true
+    },
+    {
+      "name": "Unsupported package reports an import error",
+      "passed": true
+    },
+    {
+      "name": "input() ends with EOF rather than hanging",
+      "passed": true
+    },
+    {
+      "name": "Fresh variables on each run",
+      "passed": true
+    },
+    {
+      "name": "Large output is bounded",
+      "passed": true
+    },
+    {
+      "name": "Empty code is handled",
+      "passed": true
+    },
+    {
+      "name": "UI timer stays responsive during Python loop",
+      "passed": true
+    },
+    {
+      "name": "Stop terminates an endless loop",
+      "passed": true
+    },
+    {
+      "name": "Runner reloads successfully after Stop",
+      "passed": true
+    },
+    {
+      "name": "Ten-second timeout ends an endless loop",
+      "passed": true
+    },
+    {
+      "name": "Runner recovers after timeout",
+      "passed": true
+    },
+    {
+      "name": "Editor opens with keyboard focus",
+      "passed": true
+    },
+    {
+      "name": "Edited code executes",
+      "passed": true
+    },
+    {
+      "name": "Slider changes preserve edits and label reference output",
+      "passed": true
+    },
+    {
+      "name": "Edits survive changing lessons in the tab",
+      "passed": true
+    },
+    {
+      "name": "Copy uses edited code",
+      "passed": true
+    },
+    {
+      "name": "Download uses edited code",
+      "passed": true
+    },
+    {
+      "name": "Restore uses current lesson values",
+      "passed": true
+    },
+    {
+      "name": "Ctrl+Enter runs edited code",
+      "passed": true
+    },
+    {
+      "name": "Editing cancels execution and clears stale output",
+      "passed": true
+    },
+    {
+      "name": "Edited code runs after cancellation",
+      "passed": true
+    },
+    {
+      "name": "Stop button ends execution",
+      "passed": true
+    },
+    {
+      "name": "Leaving the lesson terminates a running worker",
+      "passed": true
+    },
+    {
+      "name": "Reset example restores default code and clears draft",
+      "passed": true
+    }
+  ],
+  "outputLimitChecks": [
+    {
+      "name": "Worker bounds oversized tracebacks and retains source and error context",
+      "passed": true
+    },
+    {
+      "name": "Ordinary tracebacks keep preceding output and a separating newline",
+      "passed": true
+    },
+    {
+      "name": "Console bounds a long error without printed output",
+      "passed": true
+    },
+    {
+      "name": "Console bounds combined printed output and traceback",
+      "passed": true
+    },
+    {
+      "name": "A normal traceback remains visible after excessive stderr",
+      "passed": true
+    },
+    {
+      "name": "The next run recovers after oversized errors",
+      "passed": true
+    },
+    {
+      "name": "Successful runs retain the existing printed-output limit",
+      "passed": true
+    },
+    {
+      "name": "The original lesson still runs after repeated errors",
+      "passed": true
+    }
+  ],
+  "checksPassed": 36,
+  "issues": [],
+  "limits": {
+    "printedOutputCharacters": 20000,
+    "tracebackCharacters": 10000,
+    "combinedConsoleCharactersOnError": 20000
+  },
+  "syntaxChecksPassed": [
+    "python-runtime-worker.mjs",
+    "python-runner.js",
+    "lesson-python.js"
+  ]
+}

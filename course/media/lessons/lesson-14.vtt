@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.735
+Singular-value decomposition describes a matrix as a rotation or change of orthonormal coordinates, followed by nonnegative
+
+00:00:07.735 --> 00:00:15.270
+stretching, followed by another coordinate change. It works for rectangular matrices as well as square ones.
+
+00:00:15.800 --> 00:00:22.611
+The restriction keeps the first direction at least as strong as the second. Singular values describe
+
+00:00:22.611 --> 00:00:24.740
+stretching, not signed eigenvalue reversal.
+
+00:00:25.267 --> 00:00:30.547
+A rank-one approximation preserves the first singular component and discards the other.
+
+00:00:31.067 --> 00:00:37.368
+What fraction of squared matrix energy remains when both singular values are equal? Pause here and
+
+00:00:37.368 --> 00:00:39.337
+make a prediction before continuing.
+
+00:00:40.467 --> 00:00:47.765
+The Frobenius norm is the square root of the sum of squared entries. Its squared error
+
+00:00:47.765 --> 00:00:55.064
+equals the sum of squared discarded singular values. For our starting inputs, Retained singular value: 4.
+
+00:00:55.064 --> 00:00:58.257
+Discarded singular value: 1. Retained energy: 0.94118.
+
+00:00:58.767 --> 00:01:04.934
+This is a squared-norm energy fraction. A large fraction does not guarantee that the discarded detail
+
+00:01:04.934 --> 00:01:07.247
+is irrelevant to a CV task.
+
+00:01:07.767 --> 00:01:15.145
+Choose approximation rank using the intended task and reconstruction behaviour, rather than a large energy percentage
+
+00:01:15.145 --> 00:01:15.607
+alone.
+

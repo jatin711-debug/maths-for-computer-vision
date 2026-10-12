@@ -1,0 +1,50 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:06.272
+A capstone should begin with a question that a metric and data protocol can actually answer.
+
+00:00:06.272 --> 00:00:12.345
+“Works on new videos” is different from “works on more frames from known videos”, so the
+
+00:00:12.345 --> 00:00:16.140
+intended generalization determines how samples must be grouped before splitting.
+
+00:00:16.667 --> 00:00:22.411
+Frames in a video are related. A frame-level random split can put close relatives into both
+
+00:00:22.411 --> 00:00:23.847
+training and test sets.
+
+00:00:24.367 --> 00:00:29.903
+Whole-video splitting keeps each video in one role. The number of images is larger than the
+
+00:00:29.903 --> 00:00:31.287
+number of independent groups.
+
+00:00:31.800 --> 00:00:38.040
+How many independent groups does a hundred-frame dataset really contain in this example? Pause here and
+
+00:00:38.040 --> 00:00:39.990
+make a prediction before continuing.
+
+00:00:41.100 --> 00:00:48.078
+For this comparison only, assume each frame is assigned independently to test with probability q. A
+
+00:00:48.078 --> 00:00:55.056
+video is mixed unless all five frames go to one side. For our starting inputs, Train
+
+00:00:55.056 --> 00:01:00.290
+videos: 16. Test videos: 4. Expected mixed videos under frame split: 13.44.
+
+00:01:00.800 --> 00:01:07.627
+This is an expectation under independent frame assignments, not a deterministic count from a fixed-size split.
+
+00:01:07.627 --> 00:01:11.040
+Group splitting has zero mixed videos by construction.
+
+00:01:11.567 --> 00:01:17.140
+Write the claim and protocol before selecting an architecture. The split is part of what your
+
+00:01:17.140 --> 00:01:17.837
+result means.
+

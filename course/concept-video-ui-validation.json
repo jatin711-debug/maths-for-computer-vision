@@ -1,0 +1,101 @@
+{
+  "validatedAt": "2026-10-11T14:27:25.626Z",
+  "gallery": {
+    "durationLabels": [
+      "MODULE 01 · 41 sec",
+      "MODULE 02 · 50 sec",
+      "MODULE 08 · 51 sec"
+    ],
+    "narratedCards": 3,
+    "noOverflow": true,
+    "originalStories": 12
+  },
+  "mobile": {
+    "width": 320,
+    "noOverflow": true,
+    "lessonVideoTitle": "Watch the narrated walkthrough: Gradient descent follows slope · 51 sec"
+  },
+  "videos": [
+    {
+      "captionCues": 7,
+      "captionTimingsMatch": true,
+      "chapters": 7,
+      "download": "media/fframes/pixels.mp4?v=b4181b307652",
+      "duration": 40.533333,
+      "error": null,
+      "expectedDuration": 40.53333333333333,
+      "height": 1080,
+      "id": "fframes-pixels",
+      "label": "NARRATED WALKTHROUGH · 41 sec",
+      "lastChapterTime": 33.56666666666667,
+      "noOverflow": true,
+      "selectedChapter": "6",
+      "transcriptParagraphs": 7,
+      "width": 1920
+    },
+    {
+      "captionCues": 7,
+      "captionTimingsMatch": true,
+      "chapters": 7,
+      "download": "media/fframes/projection.mp4?v=2d55e58b75f4",
+      "duration": 49.866667,
+      "error": null,
+      "expectedDuration": 49.86666666666667,
+      "height": 1080,
+      "id": "fframes-projection",
+      "label": "NARRATED WALKTHROUGH · 50 sec",
+      "lastChapterTime": 41.4,
+      "noOverflow": true,
+      "selectedChapter": "6",
+      "transcriptParagraphs": 7,
+      "width": 1920
+    },
+    {
+      "captionCues": 7,
+      "captionTimingsMatch": true,
+      "chapters": 7,
+      "download": "media/fframes/descent.mp4?v=b876176d7479",
+      "duration": 50.7,
+      "error": null,
+      "expectedDuration": 50.7,
+      "height": 1080,
+      "id": "fframes-descent",
+      "label": "NARRATED WALKTHROUGH · 51 sec",
+      "lastChapterTime": 42.2,
+      "noOverflow": true,
+      "selectedChapter": "6",
+      "transcriptParagraphs": 7,
+      "width": 1920
+    }
+  ],
+  "playback": {
+    "advancedSeconds": 0.6102509999999999,
+    "audioDecodedBytes": 18523,
+    "captionTimingsMatch": true,
+    "captions": 7,
+    "duration": 40.533333,
+    "durationLabel": "NARRATED WALKTHROUGH · 41 sec",
+    "error": null,
+    "expectedSeek": 6.5,
+    "height": 1080,
+    "seekTime": 6.5,
+    "selectedChapter": "1",
+    "src": "http://localhost:50101/course/media/fframes/pixels.mp4?v=b4181b307652",
+    "width": 1920
+  },
+  "pacing": {
+    "voice": "af_heart",
+    "speechSpeed": 1,
+    "previousDurationSeconds": 77,
+    "ordinaryGapSeconds": [
+      0.5,
+      0.53
+    ],
+    "predictionGapSeconds": [
+      1.1,
+      1.13
+    ],
+    "allFramesInspected": 4233,
+    "fullVideoAudioDecodePassed": true
+  }
+}

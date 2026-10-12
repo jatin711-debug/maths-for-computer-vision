@@ -1,0 +1,134 @@
+WEBVTT
+
+00:00:00.705 --> 00:00:01.422
+A document.
+
+00:00:01.442 --> 00:00:02.298
+A road.
+
+00:00:02.318 --> 00:00:03.048
+A pitch.
+
+00:00:03.068 --> 00:00:04.248
+A brick wall.
+
+00:00:04.268 --> 00:00:06.922
+Every photo of a flat thing is the same plane,
+
+00:00:06.942 --> 00:00:10.555
+seen through one three by three matrix: a
+homography.
+
+00:00:10.805 --> 00:00:12.810
+Here's how it works on a square grid.
+
+00:00:12.830 --> 00:00:17.398
+First, lift each point: x, y becomes x, y,
+one.
+
+00:00:17.418 --> 00:00:18.798
+Then multiply by H.
+
+00:00:18.818 --> 00:00:21.285
+Every point gets a third number, w.
+
+00:00:21.305 --> 00:00:22.585
+Now divide by w.
+
+00:00:22.605 --> 00:00:25.685
+Where w is big, points slide inward,
+
+00:00:25.705 --> 00:00:28.855
+and the square becomes a quadrilateral in
+perspective.
+
+00:00:28.985 --> 00:00:33.777
+Follow the centre: one half, one half becomes
+one, one, one and a half.
+
+00:00:33.798 --> 00:00:36.677
+Divided, it lands at two thirds, two thirds,
+
+00:00:36.698 --> 00:00:40.135
+where the diagonals cross, not at the average
+of the corners.
+
+00:00:40.435 --> 00:00:43.828
+Lines that were parallel now meet, at a
+vanishing point.
+
+00:00:43.848 --> 00:00:48.378
+Tilt the plane the other way too, and the
+other family meets at a second point.
+
+00:00:48.398 --> 00:00:50.910
+The line through both is the horizon.
+
+00:00:51.290 --> 00:00:53.370
+So how many point pairs pin down H?
+
+00:00:53.390 --> 00:00:58.058
+It has nine numbers, but scaling them all
+changes nothing, so eight unknowns.
+
+00:00:58.078 --> 00:01:00.082
+Each pair gives two equations.
+
+00:01:00.103 --> 00:01:01.107
+How many pairs?
+
+00:01:01.128 --> 00:01:02.715
+Pause and decide.
+
+00:01:05.460 --> 00:01:07.428
+Four pairs, eight equations.
+
+00:01:07.448 --> 00:01:12.435
+Drag the four corners, and H is solved again
+at once; every other point follows.
+
+00:01:12.840 --> 00:01:16.070
+Now a real photo: a brick wall, seen at an
+angle.
+
+00:01:16.090 --> 00:01:18.415
+Put the four corners on mortar lines.
+
+00:01:18.555 --> 00:01:22.672
+To make the flat view, work backwards: for
+each output pixel,
+
+00:01:22.692 --> 00:01:25.310
+H inverse says where it came from in the
+photo,
+
+00:01:25.330 --> 00:01:27.848
+and we blend the four nearest pixels.
+
+00:01:27.868 --> 00:01:29.955
+The bricks come out rectangular.
+
+00:01:30.300 --> 00:01:33.930
+The same matrix stitches panoramas, flattens
+scanned documents,
+
+00:01:33.950 --> 00:01:37.305
+tracks players on a pitch, and warps training
+images.
+
+00:01:37.325 --> 00:01:40.550
+And spatial transformer networks learn their
+own H.
+
+00:01:41.040 --> 00:01:42.658
+So remember three things.
+
+00:01:42.678 --> 00:01:44.958
+Lift points to x, y, one.
+
+00:01:44.977 --> 00:01:47.482
+Multiply by H, then divide by w.
+
+00:01:47.502 --> 00:01:49.715
+And four point pairs fix H.
+

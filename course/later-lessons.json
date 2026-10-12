@@ -1,0 +1,1014 @@
+[
+  {
+    "id": 5,
+    "module": 2,
+    "title": "Vectors as positions, displacements and features",
+    "file": "lessons/05-vectors-as-positions-displacements-and-features.md",
+    "reading": "MML 2.4 and 3.1; CS205A 0.2.",
+    "goal": "Separate a geometric position from a feature vector, and calculate vector operations with units in mind.",
+    "exercises": [
+      "Find the displacement from (1,4) to (4,2).",
+      "For u=(2,-1), v=(1,3), calculate 3u-2v.",
+      "Flatten [[1,2],[3,4]] in row order and state its vector dimension.",
+      "Why might raw distance between [brightness, width] be misleading?"
+    ],
+    "solutions": [
+      "Subtract start from end: (4-1,2-4)=(3,-2).",
+      "3u=(6,-3), 2v=(2,6), so the result is (4,-9).",
+      "The vector is [1,2,3,4], with four coordinates. A column representation has shape (4,1).",
+      "Different units and numerical scales can make one coordinate dominate. Fit scaling using training data, or choose a justified metric."
+    ],
+    "checkpoint": "Explain what every coordinate of a toy image feature means. Give a position, a displacement, and a feature vector without confusing their roles.",
+    "lab": "vectors",
+    "minutes": 90
+  },
+  {
+    "id": 6,
+    "module": 2,
+    "title": "Norms, dot products, angles and projections",
+    "file": "lessons/06-norms-dot-products-angles-and-projections.md",
+    "reading": "MML 3.1-3.5 and 3.8; CS205A 0.2.",
+    "goal": "Derive length, similarity and orthogonal projection from coordinate calculations.",
+    "exercises": [
+      "Find the L1 and L2 norms of (-3,4).",
+      "Compute the cosine similarity of (1,0) and (1,1).",
+      "Project (2,3) onto u=(1,0), and give the residual.",
+      "Can the zero vector be normalized to a unit vector? Explain."
+    ],
+    "solutions": [
+      "L1=3+4=7; L2=sqrt(9+16)=5.",
+      "The dot product is 1 and the norm product is sqrt(2), so cosine=1/sqrt(2).",
+      "c=2, projection=(2,0), residual=(0,3). Its dot product with u is zero.",
+      "No. Dividing by its norm divides by zero; it has no defined direction."
+    ],
+    "checkpoint": "Derive the projection coefficient from residual orthogonality, then explain when cosine similarity loses information a classifier might need.",
+    "lab": "vectors",
+    "minutes": 90
+  },
+  {
+    "id": 7,
+    "module": 2,
+    "title": "Matrices as maps and composition",
+    "file": "lessons/07-matrices-as-maps-and-composition.md",
+    "reading": "MML 2.2 and 2.6-2.7; CS205A 0.3.",
+    "goal": "Interpret matrix columns geometrically and track dimensions through a linear layer.",
+    "exercises": [
+      "Apply [[2,0],[0,3]] to the column vector (1,-2).",
+      "If X=(16,64) and W=(64,10), give the output and bias shapes.",
+      "For A=(3,2) and B=(4,3), which product is defined and what is its shape?",
+      "Is f(x)=2x+1 a linear map? Justify with f(0)."
+    ],
+    "solutions": [
+      "The result is (2,-6).",
+      "XW has shape (16,10); a bias of shape (10,) broadcasts across samples.",
+      "BA is defined, with shape (4,2). AB is undefined because 2 and 4 do not match.",
+      "It is affine. f(0)=1, whereas a linear map must send zero to zero."
+    ],
+    "checkpoint": "Explain a matrix product using its columns, then annotate every shape in a batch affine layer without executing code.",
+    "lab": "linear",
+    "minutes": 90
+  },
+  {
+    "id": 8,
+    "module": 2,
+    "title": "Independence, bases, rank and null spaces",
+    "file": "lessons/08-independence-bases-rank-and-null-spaces.md",
+    "reading": "MML 2.4-2.6; CS205A 0.2-0.3.",
+    "goal": "Connect independent directions and rank to information preserved or discarded.",
+    "exercises": [
+      "Are (1,2) and (3,6) independent? Give a relation.",
+      "Find the rank and a null vector of [[1,1],[2,2]].",
+      "A linear map has 5 inputs and rank 3. What is its null-space dimension?",
+      "Why can a 2x4 map never have an inverse recovering every four-coordinate input?"
+    ],
+    "solutions": [
+      "They are dependent: 3*(1,2)-(3,6)=0.",
+      "Rank=1; (1,-1) is a nonzero null vector.",
+      "Rank-nullity gives 5-3=2.",
+      "Its rank is at most 2, so its null-space dimension is at least 2. Different inputs share outputs."
+    ],
+    "checkpoint": "Construct two different inputs with the same output under a rank-deficient map. Explain precisely what prevents recovery.",
+    "lab": "linear",
+    "minutes": 90
+  },
+  {
+    "id": 9,
+    "module": 3,
+    "title": "Exact, inconsistent and underdetermined systems",
+    "file": "lessons/09-exact-inconsistent-and-underdetermined-systems.md",
+    "reading": "MML 2.1-2.3; CS205A Chapter 2.",
+    "goal": "Decide whether a measurement system has zero, one or many solutions.",
+    "exercises": [
+      "Solve x+y=5 and x-y=1.",
+      "Are x+2y=3 and 2x+4y=8 consistent?",
+      "Describe all solutions of x-y=2.",
+      "Write the design matrix for fitting y=a*t+c at t=0,1,2."
+    ],
+    "solutions": [
+      "Adding gives x=3; substituting gives y=2.",
+      "No. Doubling the first equation requires right-hand side 6, but the second requires 8.",
+      "Let y=t freely; then x=t+2, so (x,y)=(t+2,t).",
+      "A=[[0,1],[1,1],[2,1]] and the unknown column is (a,c). The observed y values form b."
+    ],
+    "checkpoint": "Classify one system of each kind and justify it using column space and null space, rather than only counting equations.",
+    "lab": "fitting",
+    "minutes": 90
+  },
+  {
+    "id": 10,
+    "module": 3,
+    "title": "Least squares as projection",
+    "file": "lessons/10-least-squares-as-projection.md",
+    "reading": "MML 3.8 and 9.1-9.2; CS205A Chapters 3-4.",
+    "goal": "Derive residual orthogonality and fit a line to inconsistent observations.",
+    "exercises": [
+      "Fit a constant c to observations [1,2,6] by least squares.",
+      "For the worked line fit, calculate the residual sum and sum of squared residuals.",
+      "Why is b-A*theta orthogonal to the column space at an optimum?",
+      "Does a residual sum of zero imply every observation is fit exactly?"
+    ],
+    "solutions": [
+      "The projection onto the constant column gives c=(1+2+6)/3=3.",
+      "Sum=0; squared sum=1/36+1/9+1/36=1/6.",
+      "Otherwise a move within that space could remove a component of the error and reduce its squared length.",
+      "No. Residuals [-1,1] sum to zero while squared error is 2."
+    ],
+    "checkpoint": "Set up an unseen line fit, identify the column space, and verify the residual is orthogonal to its columns.",
+    "lab": "fitting",
+    "minutes": 90
+  },
+  {
+    "id": 11,
+    "module": 3,
+    "title": "QR, pseudoinverses and numerical conditioning",
+    "file": "lessons/11-qr-pseudoinverses-and-numerical-conditioning.md",
+    "reading": "MML 4.5 and 9.2; CS205A 3.3, 4.3-4.5 and 6.2.1.",
+    "goal": "Understand why mathematically valid formulas can be numerically unreliable.",
+    "exercises": [
+      "Solve R*theta=(5,3) for R=[[2,1],[0,3]].",
+      "Find the condition number of diag(4,0.5).",
+      "Find the minimum-norm solution of x₁+x₂=6.",
+      "Why prefer lstsq over explicitly inverting AᵀA?"
+    ],
+    "solutions": [
+      "Back substitute: theta₂=1; 2theta₁+1=5 gives theta₁=2.",
+      "The singular values are 4 and 0.5, so the condition number is 8.",
+      "By symmetry or minimizing t²+(6-t)², the solution is (3,3).",
+      "A solver handles rank and stability using appropriate decompositions; normal equations can square conditioning, and explicit inversion is unnecessary."
+    ],
+    "checkpoint": "Distinguish problem sensitivity from solver error, and explain what a minimum-norm solution adds to least-squares fitting.",
+    "lab": "fitting",
+    "minutes": 90
+  },
+  {
+    "id": 12,
+    "module": 3,
+    "title": "Regularization and the cost of overfitting",
+    "file": "lessons/12-regularization-and-the-cost-of-overfitting.md",
+    "reading": "MML 8.2.3, 9.2.2-9.2.4 and 8.6; CV 4.1.2.",
+    "goal": "Understand how a penalty trades fitting error against coefficient magnitude.",
+    "exercises": [
+      "For the scalar example, find theta when lambda=3.",
+      "At lambda=1, compute the residual loss and penalty separately.",
+      "Why can input rescaling change a ridge fit?",
+      "Which split should choose lambda, and which split reports final performance?"
+    ],
+    "solutions": [
+      "theta=2/(1+3)=0.5.",
+      "theta=1; residual loss=(1-2)²=1 and penalty=1²=1, totaling 2.",
+      "Equivalent prediction coefficients have different magnitudes after rescaling, so the parameter penalty changes.",
+      "Use validation to choose lambda. Keep test data for final evaluation after model selection."
+    ],
+    "checkpoint": "Explain why regularization may deliberately worsen training fit while improving predictions, and design a comparison that avoids test-set tuning.",
+    "lab": "fitting",
+    "minutes": 90
+  },
+  {
+    "id": 13,
+    "module": 4,
+    "title": "Eigenvectors and repeated transformations",
+    "file": "lessons/13-eigenvectors-and-repeated-transformations.md",
+    "reading": "MML 4.2; CS205A Chapter 5.",
+    "goal": "Identify invariant directions and predict repeated application of a square map.",
+    "exercises": [
+      "Find eigenvalues and standard eigenvectors of diag(2,-1).",
+      "Apply diag(2,-1) three times to (1,2).",
+      "Verify that (1,-1) is an eigenvector of [[2,1],[1,2]].",
+      "Why is the zero vector excluded from the eigenvector definition?"
+    ],
+    "solutions": [
+      "Eigenvalue 2 with (1,0); eigenvalue -1 with (0,1).",
+      "The result is (2³*1,(-1)³*2)=(8,-2).",
+      "The product is (1,-1), so its eigenvalue is 1.",
+      "It satisfies Av=lambda*v for every lambda and carries no invariant direction."
+    ],
+    "checkpoint": "Predict repeated transformation along independent eigendirections and explain the conditions needed to use an eigenbasis.",
+    "lab": "power",
+    "minutes": 90
+  },
+  {
+    "id": 14,
+    "module": 4,
+    "title": "SVD and low-rank structure",
+    "file": "lessons/14-svd-and-low-rank-structure.md",
+    "reading": "MML 4.4-4.6; CS205A Chapter 6.",
+    "goal": "Read a rectangular map as orthogonal directions with nonnegative stretch factors.",
+    "exercises": [
+      "For singular values [6,3,2], find squared rank-1 reconstruction error.",
+      "Give reduced-SVD shapes for a 5x3 matrix.",
+      "How many numbers store a rank-4 approximation of a 20x30 matrix?",
+      "Does smallest reconstruction error guarantee best recognition accuracy?"
+    ],
+    "solutions": [
+      "Discard 3 and 2: 3²+2²=13.",
+      "q=3: U=(5,3), Sigma=(3,3), Vᵀ=(3,3).",
+      "4*(20+30+1)=204 versus 600 original entries, ignoring metadata.",
+      "No. Reconstruction error treats all entries geometrically; task-relevant details may lie in small singular directions."
+    ],
+    "checkpoint": "Draw the three stages of an SVD and calculate the reconstruction error from discarded singular values.",
+    "lab": "svdimage",
+    "minutes": 90
+  },
+  {
+    "id": 15,
+    "module": 4,
+    "title": "PCA, centering and covariance",
+    "file": "lessons/15-pca-centering-and-covariance.md",
+    "reading": "MML 10.1-10.4 and 10.6; CS205A Chapters 5-6.",
+    "goal": "Derive the direction of maximum centered variance and distinguish PCA from SVD of one image.",
+    "exercises": [
+      "Center the samples (0,2) and (2,4).",
+      "Find the sample covariance of those two samples.",
+      "For covariance eigenvalues [4,1,0], what fraction of total variance does the first component retain?",
+      "Why is PCA not a supervised classifier?"
+    ],
+    "solutions": [
+      "Mean=(1,3); centered samples are (-1,-1) and (1,1).",
+      "N-1=1, so covariance is [[2,2],[2,2]].",
+      "4/(4+1+0)=0.8, or 80%.",
+      "Its directions depend on input variation without using class labels; prediction requires an additional rule or model."
+    ],
+    "checkpoint": "Calculate one-dimensional PCA for points on a line, restore the mean during reconstruction, and explain what object each SVD factorizes.",
+    "lab": "patches",
+    "minutes": 90
+  },
+  {
+    "id": 16,
+    "module": 4,
+    "title": "Reconstruction error and data leakage",
+    "file": "lessons/16-reconstruction-error-and-data-leakage.md",
+    "reading": "MML 10.4 and 10.6; CV 5.2.3.",
+    "goal": "Evaluate compression and build preprocessing that does not learn from held-out observations.",
+    "exercises": [
+      "If discarded singular values are [3,1], find squared Frobenius error.",
+      "For N=5,D=2, turn that error into entrywise MSE.",
+      "Should validation samples get their own fitted PCA basis?",
+      "Name a reason frame-level random splitting can overestimate future performance."
+    ],
+    "solutions": [
+      "3²+1²=10.",
+      "Divide by 5*2, giving MSE=1.",
+      "No. Apply the training-fitted mean and basis; otherwise feature coordinates differ and validation informs preprocessing.",
+      "Nearby frames can be almost duplicates. A model may recognize shared scenes rather than generalize to new sequences."
+    ],
+    "checkpoint": "Write a preprocessing protocol and error denominator precisely enough that another learner can reproduce your comparison.",
+    "lab": "spectrum",
+    "minutes": 90
+  },
+  {
+    "id": 17,
+    "module": 5,
+    "title": "Derivatives and local linearity",
+    "file": "lessons/17-derivatives-and-local-linearity.md",
+    "reading": "MML 5.1; CS205A 0.4.1.",
+    "goal": "Derive a derivative from a limit and use it as a local sensitivity.",
+    "exercises": [
+      "Derive the difference quotient for f(x)=x² at a general x.",
+      "Find the derivative of 3x²+2x-5 at x=2.",
+      "Use a first-order approximation for (4.01)² around x=4.",
+      "Differentiate (3x+1)² and evaluate at x=0."
+    ],
+    "solutions": [
+      "[(x+h)²-x²]/h=2x+h, approaching 2x as h→0.",
+      "The derivative is 6x+2, giving 14.",
+      "16+8*0.01=16.08; the exact answer is 16.0801.",
+      "The chain rule gives 2(3x+1)*3=6(3x+1), which is 6 at zero."
+    ],
+    "checkpoint": "Explain a derivative using both a limit and a tangent approximation, then state when that approximation can fail.",
+    "lab": "derivatives",
+    "minutes": 90
+  },
+  {
+    "id": 18,
+    "module": 5,
+    "title": "Gradients and directional derivatives",
+    "file": "lessons/18-gradients-and-directional-derivatives.md",
+    "reading": "MML 5.2 and 5.5; CS205A 0.4.1.",
+    "goal": "Interpret a gradient as a vector of partial sensitivities and derive a least-squares gradient.",
+    "exercises": [
+      "Find ∇f for f=x²+xy+2y² at (1,2).",
+      "For gradient (3,4), find the derivative along unit direction (1,0).",
+      "Write the gradient of L=(1/N)||A*theta-b||².",
+      "Does a negative directional derivative guarantee a decrease for every step length?"
+    ],
+    "solutions": [
+      "Partial derivatives are 2x+y and x+4y; the gradient at (1,2) is (4,9).",
+      "Dotting with (1,0) gives 3.",
+      "∇L=(2/N)Aᵀ(A*theta-b), with the same parameter dimension as theta.",
+      "No. It guarantees local decrease for sufficiently small positive steps under differentiability; a large step can overshoot."
+    ],
+    "checkpoint": "Compute an unseen multivariable gradient, then verify the shape and normalization of a regression-loss gradient.",
+    "lab": "derivatives",
+    "minutes": 90
+  },
+  {
+    "id": 19,
+    "module": 5,
+    "title": "Jacobians and computational graphs",
+    "file": "lessons/19-jacobians-and-computational-graphs.md",
+    "reading": "MML 5.3-5.6; CV 5.3.5.",
+    "goal": "Apply the chain rule to vector computations and combine gradients across branching paths.",
+    "exercises": [
+      "Find the Jacobian of f(x,y)=(x+y,x*y).",
+      "For z=(2x+1)², compute dz/dx at x=1.",
+      "For L=u²+u³, calculate dL/du at u=2.",
+      "If y=Ax and ∇_y L has shape (H,1), give ∇_x L and its shape."
+    ],
+    "solutions": [
+      "J=[[1,1],[y,x]], with rows indexing outputs.",
+      "dz/dx=4(2x+1), giving 12.",
+      "dL/du=2u+3u²=4+12=16. Contributions from both branches add.",
+      "∇_x L=Aᵀ∇_y L, with shape (D,1) for A=(H,D)."
+    ],
+    "checkpoint": "Draw a branching graph, accumulate every path contribution, and use Jacobian dimensions to justify each multiplication.",
+    "lab": "derivatives",
+    "minutes": 90
+  },
+  {
+    "id": 20,
+    "module": 5,
+    "title": "Hessians, Taylor approximations and gradient checks",
+    "file": "lessons/20-hessians-taylor-approximations-and-gradient-checks.md",
+    "reading": "MML 5.7-5.8; CS205A 12.3.2-12.3.3, with CS205A 1.2 for rounding error.",
+    "goal": "Use curvature and finite differences to inspect analytic gradients.",
+    "exercises": [
+      "Find the Hessian of x²+xy+2y².",
+      "Evaluate the central-difference derivative of w² at w=3 symbolically.",
+      "At a stationary point with Hessian eigenvalues (2,-1), classify the curvature.",
+      "Give two reasons a correct derivative implementation might fail a numerical check."
+    ],
+    "solutions": [
+      "H=[[2,1],[1,4]].",
+      "[(3+h)²-(3-h)²]/(2h)=6 for nonzero h in exact arithmetic.",
+      "The Hessian is indefinite, indicating a saddle for a smooth nondegenerate stationary point.",
+      "A perturbation can cross a ReLU kink, or stochastic evaluations can use different randomness. Extreme h can also produce numerical error."
+    ],
+    "checkpoint": "Perform and interpret a gradient check, then explain why its result depends on smoothness, determinism and step size.",
+    "lab": "derivatives",
+    "minutes": 90
+  },
+  {
+    "id": 21,
+    "module": 6,
+    "title": "Conditional probability and Bayes theorem",
+    "file": "lessons/21-conditional-probability-and-bayes-theorem.md",
+    "reading": "MML 6.1 and 6.3; CV Appendix B.4.",
+    "goal": "Calculate a posterior while keeping base rates and reversed conditionals separate.",
+    "exercises": [
+      "With P(A)=0.3, P(B|A)=0.8 and P(B|not A)=0.2, compute P(B).",
+      "Using those values, compute P(A|B).",
+      "If A and B are independent with P(A)=0.4 and P(B)=0.5, find their intersection probability.",
+      "Why is detector recall different from the probability an alerted image truly contains the object?"
+    ],
+    "solutions": [
+      "P(B)=0.8*0.3+0.2*0.7=0.38.",
+      "P(A|B)=0.24/0.38=12/19≈0.6316.",
+      "P(A∩B)=0.4*0.5=0.2.",
+      "Recall conditions on true objects; the alert probability conditions on predicted positives and also depends on prevalence and false positives."
+    ],
+    "checkpoint": "Solve a new Bayes example with a frequency table, and explain each conditioning direction in plain language.",
+    "lab": "bayes",
+    "minutes": 90
+  },
+  {
+    "id": 22,
+    "module": 6,
+    "title": "Random variables, densities and expectations",
+    "file": "lessons/22-random-variables-densities-and-expectations.md",
+    "reading": "MML 6.2 and 6.4; CV Appendix B.1.",
+    "goal": "Distinguish a probability mass from a density and calculate an expectation.",
+    "exercises": [
+      "Find E[X] for values 0,2,4 with probabilities 0.2,0.5,0.3.",
+      "For uniform X on [0,4], find P(1≤X≤3).",
+      "What is P(X=2) for that continuous distribution?",
+      "If E[X]=2 and E[Y]=3, calculate E[2X-Y] without assuming independence."
+    ],
+    "solutions": [
+      "0*0.2+2*0.5+4*0.3=2.2.",
+      "Density=1/4; interval width=2, so probability=0.5.",
+      "Zero; one exact value has zero interval width.",
+      "By linearity, 2E[X]-E[Y]=4-3=1."
+    ],
+    "checkpoint": "Explain how a density of 10 can be valid, then compute both a discrete expectation and a continuous interval probability.",
+    "lab": "bayes",
+    "minutes": 90
+  },
+  {
+    "id": 23,
+    "module": 6,
+    "title": "Variance, covariance and Gaussian noise",
+    "file": "lessons/23-variance-covariance-and-gaussian-noise.md",
+    "reading": "MML 6.4-6.5; CV Appendix B.1.",
+    "goal": "Calculate fluctuation and co-variation, and state what Gaussian noise assumes.",
+    "exercises": [
+      "Find mean and population variance of [1,3,5].",
+      "If Var(X)=4, find Var(3X+2).",
+      "For 16 independent samples each with variance 4, find variance of their mean.",
+      "Does covariance zero guarantee independence? Give the lesson’s counterexample."
+    ],
+    "solutions": [
+      "Mean=3; variance=(4+0+4)/3=8/3.",
+      "Var(aX+b)=a²Var(X), giving 9*4=36.",
+      "4/16=0.25, so standard deviation is 0.5.",
+      "No. For symmetric X over -1,0,1, Y=X² depends on X even though covariance is zero."
+    ],
+    "checkpoint": "Distinguish population and sample variance, explain a covariance matrix, and list assumptions needed for averaging to reduce uncertainty.",
+    "lab": "noise",
+    "minutes": 90
+  },
+  {
+    "id": 24,
+    "module": 6,
+    "title": "Sampling and empirical uncertainty",
+    "file": "lessons/24-sampling-and-empirical-uncertainty.md",
+    "reading": "MML 6.4 and 8.6; revisit CV Appendix B.1.",
+    "goal": "Measure uncertainty in an evaluation estimate without confusing it with model confidence.",
+    "exercises": [
+      "At p_hat=0.5 and N=100, find the plug-in standard error.",
+      "How does standard error change if N is multiplied by four under the same independent model?",
+      "Why is the plug-in normal interval unreliable after 3 successes out of 3?",
+      "When evaluating many frames from each video, what could be a better bootstrap unit?"
+    ],
+    "solutions": [
+      "sqrt(0.5*0.5/100)=0.05.",
+      "It halves because standard error scales as 1/sqrt(N).",
+      "p_hat=1 gives plug-in standard error zero, hiding substantial uncertainty from a tiny sample.",
+      "Resample independent videos or groups when within-video frames are correlated and the deployment target is new videos."
+    ],
+    "checkpoint": "Report accuracy with sample size, sampling unit and an uncertainty method, and explain the limits of that evidence.",
+    "lab": "estimate",
+    "minutes": 90
+  },
+  {
+    "id": 25,
+    "module": 7,
+    "title": "Likelihood and negative log likelihood",
+    "file": "lessons/25-likelihood-and-negative-log-likelihood.md",
+    "reading": "MML 8.3-8.4 and 9.2; CV Appendix B.2.",
+    "goal": "Derive common training losses from declared observation models.",
+    "exercises": [
+      "For y=1,p=0.25, calculate binary NLL.",
+      "For labels [1,0] and predictions [0.8,0.3], write their summed NLL.",
+      "Under fixed Gaussian variance 2, what multiplies the squared residual sum in NLL?",
+      "Why cannot the log-variance term be ignored when predicting variance?"
+    ],
+    "solutions": [
+      "-ln(0.25)=ln(4)≈1.3863.",
+      "The correct-label probabilities are 0.8 and 0.7, so NLL=-ln(0.8)-ln(0.7)≈0.5798.",
+      "1/(2sigma²)=1/4.",
+      "It depends on learned parameters. Dropping it would allow increasing variance to reduce the residual term without the proper likelihood cost."
+    ],
+    "checkpoint": "Derive binary cross entropy and Gaussian squared error from likelihoods, and identify the assumptions that make each derivation valid.",
+    "lab": "softmax",
+    "minutes": 90
+  },
+  {
+    "id": 26,
+    "module": 7,
+    "title": "Priors, MAP and regularization",
+    "file": "lessons/26-priors-map-and-regularization.md",
+    "reading": "MML 8.3-8.4 and 9.3; CV Appendix B.4.",
+    "goal": "Connect a parameter preference to a probabilistic prior while tracking loss scales.",
+    "exercises": [
+      "With sigma²=2 and tau²=4, give lambda under the lesson’s summed-error convention.",
+      "For a single observation y=6 with both variances equal to 1, find the MAP.",
+      "Does MAP supply a full posterior uncertainty distribution?",
+      "If a summed data loss is divided by N, how should its penalty coefficient change to preserve the same optimum?"
+    ],
+    "solutions": [
+      "lambda=sigma²/tau²=2/4=0.5.",
+      "Minimize (theta-6)²+theta²; theta=3.",
+      "No. MAP supplies a mode; a full posterior or approximation is needed for distributional parameter uncertainty.",
+      "Divide the penalty coefficient by N too, so the entire objective is scaled equally."
+    ],
+    "checkpoint": "Derive ridge from Gaussian assumptions and show how mean-versus-sum reduction changes the numeric coefficient.",
+    "lab": "softmax",
+    "minutes": 90
+  },
+  {
+    "id": 27,
+    "module": 7,
+    "title": "Logistic regression, softmax and cross entropy",
+    "file": "lessons/27-logistic-regression-softmax-and-cross-entropy.md",
+    "reading": "MML 8.2-8.4; CV 5.1.3 and 5.3.4.",
+    "goal": "Compute stable class probabilities and derive the gradient of a softmax classifier.",
+    "exercises": [
+      "Compute softmax([0,ln 2]).",
+      "For those scores and true class 0, find cross entropy.",
+      "Write the score gradient for probabilities [0.2,0.7,0.1] with true class 1.",
+      "For X=(8,4), W=(4,3), give dW and db shapes."
+    ],
+    "solutions": [
+      "Exponentials are [1,2], so probabilities are [1/3,2/3].",
+      "-ln(1/3)=ln(3)≈1.0986.",
+      "Subtract one-hot [0,1,0], giving [0.2,-0.3,0.1]. Its entries sum to zero.",
+      "dW=(4,3); db=(3,) when summed over the eight rows."
+    ],
+    "checkpoint": "Implement stable softmax and explain every term and shape in its mean-loss gradient.",
+    "lab": "softmax",
+    "minutes": 90
+  },
+  {
+    "id": 28,
+    "module": 7,
+    "title": "Splits, bias, variance and calibration",
+    "file": "lessons/28-splits-bias-variance-and-calibration.md",
+    "reading": "MML 8.2.4 and 8.6; CV 4.1.2 and 5.3.6.",
+    "goal": "Design an honest evaluation and separate a confident prediction from a calibrated one.",
+    "exercises": [
+      "Which split selects learning rate?",
+      "A model is 90% confident on 20 predictions and correct on 12. Give empirical accuracy and confidence gap.",
+      "Give an example of leakage before model training.",
+      "Can perfect classification accuracy establish perfect probability calibration?"
+    ],
+    "solutions": [
+      "Validation selects it; training fits parameters and test evaluates the fixed choice.",
+      "Accuracy=12/20=0.6; confidence exceeds it by 0.3. The sample is small, so interpret cautiously.",
+      "Fitting normalization or PCA on all samples before splitting, or placing near-duplicates across train and test.",
+      "No. A model can classify every case correctly while assigning systematically inaccurate probabilities."
+    ],
+    "checkpoint": "Write a complete split protocol and identify a measure of correctness, a measure of probability quality and a source of sampling uncertainty.",
+    "lab": "softmax",
+    "minutes": 90
+  },
+  {
+    "id": 29,
+    "module": 8,
+    "title": "Gradient descent and optimality",
+    "file": "lessons/29-gradient-descent-and-optimality.md",
+    "reading": "MML 7.1; CS205A Chapter 8; CV 5.3.6.",
+    "goal": "Derive a learning update and its convergence range for a simple quadratic.",
+    "exercises": [
+      "Take one step for (w-3)² from w=1 with alpha=0.2.",
+      "For that loss, give the error multiplier at alpha=0.75.",
+      "For H eigenvalues [2,10], give the convergence range for the half-scaled quadratic.",
+      "Does ∇L=0 prove a global minimum for a nonconvex loss?"
+    ],
+    "solutions": [
+      "Gradient=2*(1-3)=-4; next w=1.8.",
+      "1-2*0.75=-0.5: errors alternate sign and halve in magnitude.",
+      "0<alpha<2/10=0.2.",
+      "No. It may be a local minimum, maximum, saddle or another stationary point."
+    ],
+    "checkpoint": "Derive rather than memorize a learning-rate range for a quadratic, and separate a stationary condition from a global guarantee.",
+    "lab": "optimization",
+    "minutes": 90
+  },
+  {
+    "id": 30,
+    "module": 8,
+    "title": "Mini-batch SGD, momentum and adaptive steps",
+    "file": "lessons/30-mini-batch-sgd-momentum-and-adaptive-steps.md",
+    "reading": "MML 7.1; CV 5.3.6; optional CS231n learning notes.",
+    "goal": "Explain gradient sampling and track the state of momentum and adaptive updates.",
+    "exercises": [
+      "With N=100 and batch size 20 without dropping samples, how many updates form an epoch?",
+      "Under v_next=0.5v+g, start v=0 and apply gradients 4 then -2. Give both velocities.",
+      "Why can oversampling a rare class change the optimized objective?",
+      "What is Adam’s bias-corrected second moment after its first nonzero scalar gradient g=3?"
+    ],
+    "solutions": [
+      "100/20=5 updates.",
+      "v₁=4; v₂=0.5*4-2=0.",
+      "Uniform averaging over the altered sampling distribution gives the rare class greater weight unless corrected.",
+      "v₁=(1-beta2)*9, and correction divides by 1-beta2, giving 9."
+    ],
+    "checkpoint": "Work two momentum updates by hand, explain mini-batch gradient assumptions and state what optimizer history must be preserved.",
+    "lab": "optimization",
+    "minutes": 90
+  },
+  {
+    "id": 31,
+    "module": 8,
+    "title": "Convexity, curvature and constraints",
+    "file": "lessons/31-convexity-curvature-and-constraints.md",
+    "reading": "MML 7.2-7.3; CS205A Chapters 8-9.",
+    "goal": "Recognize convex guarantees and solve a small equality-constrained problem.",
+    "exercises": [
+      "Is f(x,y)=x²+2y² convex? Use its Hessian.",
+      "Minimize x²+y² subject to x+y=4.",
+      "Minimize (w-3)² subject to 0≤w≤2.",
+      "Why need not a constrained minimum have an ordinary zero gradient?"
+    ],
+    "solutions": [
+      "H=diag(2,4) is positive definite everywhere, so the function is strictly convex.",
+      "Symmetry or Lagrange conditions give x=y=2, with value 8.",
+      "The nearest feasible point to 3 is w=2, with loss 1.",
+      "At a boundary, decreasing directions may be infeasible; constrained optimality only considers allowable movement."
+    ],
+    "checkpoint": "Solve an equality constraint with both geometry and multipliers, and distinguish local curvature from global convexity.",
+    "lab": "optimization",
+    "minutes": 90
+  },
+  {
+    "id": 32,
+    "module": 8,
+    "title": "Initialization, scaling and training diagnostics",
+    "file": "lessons/32-initialization-scaling-and-training-diagnostics.md",
+    "reading": "MML 7.1 and 8.6; CV 5.3.6.",
+    "goal": "Use controlled experiments to separate a broken computation from poor learning settings.",
+    "exercises": [
+      "What is cross entropy for equal logits over four classes?",
+      "Why can identical initialization keep two hidden units redundant?",
+      "Under the stated variance approximation, what weight variance preserves linear variance for D=100?",
+      "Name two plausible causes of flat training loss."
+    ],
+    "solutions": [
+      "ln(4)≈1.3863 for a single correct class.",
+      "Their forward activations and backward gradients can be identical, so symmetry persists under updates.",
+      "v²≈1/D=0.01 for the simple linear approximation; the ReLU heuristic would differ.",
+      "Parameters may not be updating, gradients may vanish, the learning rate may be tiny, or labels may be misaligned. Test rather than infer solely from the curve."
+    ],
+    "checkpoint": "Design a debugging order that verifies computation before changing model complexity, and justify a comparison with controlled conditions.",
+    "lab": "optimization",
+    "minutes": 90
+  },
+  {
+    "id": 33,
+    "module": 9,
+    "title": "Sampling, aliasing and image coordinates",
+    "file": "lessons/33-sampling-aliasing-and-image-coordinates.md",
+    "reading": "CV 2.3.1, 3.5.1-3.5.2 and 3.4; revisit the image-coordinate conventions in Lesson 05.",
+    "goal": "Explain how continuous variation becomes pixels and why lost detail cannot always be recovered.",
+    "exercises": [
+      "Downsample [0,1,0,1,0,1] by taking indices 0,2,4.",
+      "Average adjacent pairs in that row before reducing.",
+      "Why can cos(2*pi*n) be confused with a constant from integer samples?",
+      "Why is averaging class IDs during mask resizing usually wrong?"
+    ],
+    "solutions": [
+      "The result is [0,0,0].",
+      "The result is [0.5,0.5,0.5].",
+      "All integer samples equal 1, matching the constant signal exactly.",
+      "Class IDs are categories, not quantities to blend; averaging IDs can invent unrelated classes."
+    ],
+    "checkpoint": "Create two different underlying patterns with the same sampled values and explain what an antialiasing filter can and cannot do.",
+    "lab": "aliasing",
+    "minutes": 90
+  },
+  {
+    "id": 34,
+    "module": 9,
+    "title": "Convolution and cross-correlation",
+    "file": "lessons/34-convolution-and-cross-correlation.md",
+    "reading": "CV 3.2 and 5.4; optional CS231n convolutional-network notes.",
+    "goal": "Calculate local filter responses and distinguish kernel flipping from weight sharing.",
+    "exercises": [
+      "Find valid cross-correlation of [1,3,2] with [1,-1].",
+      "Find valid convolution of the same row and kernel.",
+      "Find full convolution of [1,2,3] with [1,1].",
+      "What is the response of a zero-sum kernel on a constant patch?"
+    ],
+    "solutions": [
+      "1-3=-2 and 3-2=1, so [-2,1].",
+      "Use flipped [-1,1], giving [2,-1].",
+      "The full output is [1,3,5,3].",
+      "It is the constant times the coefficient sum, so zero, before bias and boundary effects."
+    ],
+    "checkpoint": "Show the flip convention, compute a response by hand and explain how weight sharing differs from output invariance.",
+    "lab": "imagefilter",
+    "minutes": 90
+  },
+  {
+    "id": 35,
+    "module": 9,
+    "title": "Padding, stride, channels and receptive fields",
+    "file": "lessons/35-padding-stride-channels-and-receptive-fields.md",
+    "reading": "CV 5.4; optional CS231n convolutional-network notes.",
+    "goal": "Calculate output and parameter shapes and track receptive-field growth.",
+    "exercises": [
+      "For L=10,K=3,P=0,S=2,d=1, find output length.",
+      "Count parameters in a biased 3x3 layer from 4 to 6 channels.",
+      "Find receptive-field width after three 3x3 stride-1 layers.",
+      "For X=(5,8,8,1), valid 3x3 stride-1 filtering with four kernels, give the output shape."
+    ],
+    "solutions": [
+      "floor((10-3)/2)+1=4.",
+      "3*3*4*6+6=222.",
+      "Widths are 3,5,7, so the result is 7.",
+      "Height and width become 6: (5,6,6,4)."
+    ],
+    "checkpoint": "Annotate an unseen CNN with all activation shapes, parameter counts and a receptive-field calculation.",
+    "lab": "receptive",
+    "minutes": 90
+  },
+  {
+    "id": 36,
+    "module": 9,
+    "title": "Fourier transforms, smoothing and edges",
+    "file": "lessons/36-fourier-transforms-smoothing-and-edges.md",
+    "reading": "CV 3.2, 3.4 and 3.5; MML 3.7 for function inner products.",
+    "goal": "Interpret frequency components and connect local filtering with spectral behavior.",
+    "exercises": [
+      "Find the four-point DFT of [2,2,2,2].",
+      "What component is nonzero for [1,-1,1,-1]?",
+      "For lengths N=5 and K=3, what FFT padding length prevents circular wraparound in full linear convolution?",
+      "Why might smoothing harm recognition of tiny objects?"
+    ],
+    "solutions": [
+      "X_0=8 and X_1=X_2=X_3=0 under the stated DFT convention.",
+      "X_2=4; all other components are zero.",
+      "At least N+K-1=7.",
+      "Small-object structure may depend on high-frequency detail that the smoother suppresses."
+    ],
+    "checkpoint": "Explain DC, magnitude and phase, and state the padding required before using an FFT for linear convolution.",
+    "lab": "fourier",
+    "minutes": 90
+  },
+  {
+    "id": 37,
+    "module": 10,
+    "title": "Affine layers, activations and expressive power",
+    "file": "lessons/37-affine-layers-activations-and-expressive-power.md",
+    "reading": "MML 5.6; CV 5.3.1-5.3.2.",
+    "goal": "Write a shaped forward pass and explain why nonlinear activations change what a network can represent.",
+    "exercises": [
+      "For X=(12,8), hidden width 5 and 3 classes, give all weight and activation shapes.",
+      "Combine two affine maps y=Ax+b and z=By+c into one.",
+      "Apply ReLU to [-2,0,3].",
+      "Evaluate the XOR construction at (1,1)."
+    ],
+    "solutions": [
+      "W1=(8,5), b1=(5,), Z1=A1=(12,5), W2=(5,3), b2=(3,), logits=(12,3).",
+      "z=(BA)x+(Bb+c) under column-vector notation.",
+      "The output is [0,0,3].",
+      "h1=2,h2=1, so h1-2h2=0."
+    ],
+    "checkpoint": "Annotate a forward pass and prove why removing every nonlinearity collapses stacked affine layers into one.",
+    "lab": "network",
+    "minutes": 90
+  },
+  {
+    "id": 38,
+    "module": 10,
+    "title": "Backpropagation through a two-layer network",
+    "file": "lessons/38-backpropagation-through-a-two-layer-network.md",
+    "reading": "MML 5.4-5.6; CV 5.3.5.",
+    "goal": "Derive every weight, bias and input gradient of a small batch network.",
+    "exercises": [
+      "For hidden row [1,3] and G2=[0.2,-0.2], calculate dW2.",
+      "If dA1=[2,-3] and Z1=[-1,4], calculate dZ1.",
+      "For X=(7,4), dZ1=(7,6), give the first-layer weight-gradient shape.",
+      "Why must parameters stay unchanged until their backward sensitivities are computed?"
+    ],
+    "solutions": [
+      "The outer product is [[0.2,-0.2],[0.6,-0.6]].",
+      "The ReLU mask is [0,1], giving [0,-3].",
+      "XᵀdZ1 has shape (4,6), matching W1.",
+      "All derivatives must refer to the same forward computation; early updates change downstream Jacobians."
+    ],
+    "checkpoint": "Derive the complete backward pass without looking up formulas and justify every transpose, sum and loss-normalization factor.",
+    "lab": "network",
+    "minutes": 90
+  },
+  {
+    "id": 39,
+    "module": 10,
+    "title": "Regularization, normalization and numerical stability",
+    "file": "lessons/39-regularization-normalization-and-numerical-stability.md",
+    "reading": "CV 5.3.3 and 5.3.6; MML 5.6 and 8.6.",
+    "goal": "Explain how training aids change a computation and distinguish them from numerical safeguards.",
+    "exercises": [
+      "Differentiate (lambda/2)||W||².",
+      "At keep probability 0.25, what happens to a kept activation of 2 under inverted dropout?",
+      "For logit z=100 and label y=0, approximate stable binary NLL.",
+      "Why should training and evaluation mode be stated for dropout and batch normalization?"
+    ],
+    "solutions": [
+      "The gradient is lambda*W.",
+      "It becomes 2/0.25=8; a dropped activation becomes zero.",
+      "NLL≈100 because ln(1+exp(-100)) is tiny.",
+      "Dropout randomness and normalization statistics follow different rules in training and evaluation, changing outputs if modes are mixed."
+    ],
+    "checkpoint": "Separate objective changes, stochastic training operations and stable equivalent formulas, and specify their behavior during gradient checking.",
+    "lab": "network",
+    "minutes": 90
+  },
+  {
+    "id": 40,
+    "module": 10,
+    "title": "Autograd compared with your own gradients",
+    "file": "lessons/40-autograd-compared-with-your-own-gradients.md",
+    "reading": "MML 5.6; CV 5.3.5; optional PyTorch autograd tutorial.",
+    "goal": "Use an automatic-differentiation framework as a comparison for a derived computation.",
+    "exercises": [
+      "For L=(wx+b-y)²/2 with x=3,w=2,b=0,y=4, find dL/dw and dL/db.",
+      "Why can calling backward twice without resetting gradients change the values you inspect?",
+      "What should be compared before comparing gradients?",
+      "Why is argmax classification accuracy usually unsuitable as the differentiable training objective?"
+    ],
+    "solutions": [
+      "z=6 and residual=2, so dL/dw=2*3=6 and dL/db=2.",
+      "Many frameworks add newly computed gradients to existing stored ones rather than replacing them.",
+      "Forward values, shapes, dtype and the exact loss expression and reduction.",
+      "Argmax decisions are piecewise constant and discontinuous at boundaries, giving no useful ordinary gradient for most parameter settings."
+    ],
+    "checkpoint": "Produce a matched hand, numerical and optional framework derivative comparison, and explain why autograd does not guarantee a correct learning problem.",
+    "lab": "network",
+    "minutes": 90
+  },
+  {
+    "id": 41,
+    "module": 11,
+    "title": "CNN classification, inductive bias and augmentation",
+    "file": "lessons/41-cnn-classification-inductive-bias-and-augmentation.md",
+    "reading": "CV 5.4 and 6.2; optional CS231n convolutional-network notes.",
+    "goal": "Connect local shared weights to a trainable image classifier and choose label-preserving transformations.",
+    "exercises": [
+      "Count convolution parameters for a biased 3x3 layer from one to four channels.",
+      "For the worked 8x8 CNN, give the flattened feature dimension.",
+      "Why does shifting a feature map not imply unchanged class scores?",
+      "How should a horizontal flip affect a box [x1,y1,x2,y2] in an image of width W using boundary coordinates?"
+    ],
+    "solutions": [
+      "3*3*1*4+4=40.",
+      "6*6*4=144.",
+      "The classifier head or pooling/stride/boundary choices may depend on where features occur.",
+      "The flipped box is [W-x2,y1,W-x1,y2], with the image and labels transformed together."
+    ],
+    "checkpoint": "Explain an end-to-end CNN forward and backward computation, its parameter count and one task-specific augmentation assumption.",
+    "lab": "augment",
+    "minutes": 90
+  },
+  {
+    "id": 42,
+    "module": 11,
+    "title": "Bounding boxes, localization losses and IoU",
+    "file": "lessons/42-bounding-boxes-localization-losses-and-iou.md",
+    "reading": "CV 6.3; revisit CV 5.3.4 for training objectives.",
+    "goal": "Compute box overlap and distinguish localization training from detection evaluation.",
+    "exercises": [
+      "Find IoU of [0,0,2,2] and [1,1,3,3].",
+      "Convert center (4,3), width 2, height 4 to boundary coordinates.",
+      "Evaluate Smooth L1 with delta=1 at residuals 0.5 and 2.",
+      "Why should two duplicate boxes not both count as true positives for one object?"
+    ],
+    "solutions": [
+      "Intersection=1, union=4+4-1=7, so IoU=1/7.",
+      "The box is [3,1,5,5].",
+      "At 0.5: 0.5*0.25=0.125. At 2: 2-0.5=1.5.",
+      "One ground-truth object can be matched once under the declared protocol; otherwise duplicates would inflate recall and precision."
+    ],
+    "checkpoint": "Calculate a box metric with explicit coordinate conventions and explain the output, training objective and matching rule of a localization task.",
+    "lab": "iou",
+    "minutes": 90
+  },
+  {
+    "id": 43,
+    "module": 11,
+    "title": "Segmentation and class imbalance",
+    "file": "lessons/43-segmentation-and-class-imbalance.md",
+    "reading": "CV 6.4; revisit CV 5.3.4 for classification losses.",
+    "goal": "Define pixelwise prediction and explain why background accuracy can mislead.",
+    "exercises": [
+      "For 200 pixels with 5% foreground, find accuracy of predicting all background.",
+      "For TP=8,FP=2,FN=4, calculate foreground IoU and Dice.",
+      "Give the logit shape for a batch of 4 images, each 32x48, with three semantic classes.",
+      "Does adding rare-class weight leave the original unweighted cross-entropy objective unchanged?"
+    ],
+    "solutions": [
+      "There are 190 background pixels, so accuracy=190/200=0.95.",
+      "IoU=8/(8+2+4)=4/7; Dice=16/(16+2+4)=8/11.",
+      "Under channel-last convention, shape is (4,32,48,3).",
+      "No. It changes the contributions to the loss and therefore the optimized objective."
+    ],
+    "checkpoint": "Specify segmentation outputs, class axis, ignored pixels, loss reduction and overlap metrics, then explain an all-background failure.",
+    "lab": "masks",
+    "minutes": 90
+  },
+  {
+    "id": 44,
+    "module": 11,
+    "title": "Precision, recall, AP and mask metrics",
+    "file": "lessons/44-precision-recall-ap-and-mask-metrics.md",
+    "reading": "CV 6.2-6.4; optional official COCO evaluation implementation.",
+    "goal": "Calculate threshold-based and ranking-based metrics under a declared evaluation protocol.",
+    "exercises": [
+      "For TP=6,FP=3,FN=2, calculate precision and recall.",
+      "For ranked outcomes TP,FP,TP and two targets, compute the lesson’s noninterpolated AP.",
+      "Why can micro and macro averages disagree on imbalanced classes?",
+      "What must be specified before comparing two detection AP numbers?"
+    ],
+    "solutions": [
+      "Precision=6/9=2/3; recall=6/8=0.75.",
+      "Positive ranks have precision 1 and 2/3; AP=(1+2/3)/2=5/6.",
+      "Micro pools counts and gives frequent classes more influence; macro gives each included class equal weight.",
+      "Class set, matching and duplicate policy, IoU threshold(s), recall interpolation/sampling, size ranges and prediction limits where applicable."
+    ],
+    "checkpoint": "Explain a complete evaluation protocol and compute its small-case metrics by hand, including denominators and matching choices.",
+    "lab": "iou",
+    "minutes": 90
+  },
+  {
+    "id": 45,
+    "module": 12,
+    "title": "Choose a question, protocol and baseline",
+    "file": "lessons/45-choose-a-question-protocol-and-baseline.md",
+    "reading": "Revisit MML 8.6 and CV 6.2-6.4 for your chosen task.",
+    "goal": "Turn a broad interest into an experiment with a testable hypothesis.",
+    "exercises": [
+      "Write a one-sentence comparison question for recognition.",
+      "Give a segmentation baseline and a metric that reveals its weakness.",
+      "List four decisions that should be fixed before testing.",
+      "What does successful recognition on generated bars demonstrate?"
+    ],
+    "solutions": [
+      "One possible answer: “Does a small CNN outperform linear softmax on held-out noisy 8x8 bars under the same split and training budget?”",
+      "All-background is a baseline; foreground IoU or recall reveals its failure when objects are present.",
+      "Split/grouping rule, preprocessing, primary metric and model-selection procedure; also record seeds and evaluation conditions.",
+      "It demonstrates behavior for the declared synthetic generator and split, not general performance on real-world images."
+    ],
+    "checkpoint": "Submit a specific question, hypothesis and fixed evaluation protocol that can be reproduced without this chat.",
+    "lab": "network",
+    "minutes": 90
+  },
+  {
+    "id": 46,
+    "module": 12,
+    "title": "Controlled comparisons and reproducibility",
+    "file": "lessons/46-controlled-comparisons-and-reproducibility.md",
+    "reading": "MML 8.6; revisit the optimization diagnostics from Lesson 32.",
+    "goal": "Separate a measured improvement from an uncontrolled difference between runs.",
+    "exercises": [
+      "Find mean and sample standard deviation of [0.7,0.8,0.9].",
+      "Why is changing optimizer and architecture simultaneously hard to interpret?",
+      "Does averaging three training seeds remove uncertainty about the test population?",
+      "List information needed to reproduce a fitted preprocessing pipeline."
+    ],
+    "solutions": [
+      "Mean=0.8; sample variance=(0.01+0+0.01)/2=0.01, so standard deviation=0.1.",
+      "The result measures a bundled change, so either factor or their interaction could explain the difference.",
+      "No. Training-run variation and test-sampling uncertainty are different and both may matter.",
+      "Training split identifiers, scaling/centering statistics, selected feature basis, code and parameter settings."
+    ],
+    "checkpoint": "Produce a controlled comparison table and state exactly which differences its results can support.",
+    "lab": "optimization",
+    "minutes": 90
+  },
+  {
+    "id": 47,
+    "module": 12,
+    "title": "Errors, uncertainty and domain shift",
+    "file": "lessons/47-errors-uncertainty-and-domain-shift.md",
+    "reading": "MML 8.6; revisit CV Chapters 5-6 and Lesson 24.",
+    "goal": "Audit failure patterns and distinguish observed evidence from explanations requiring another experiment.",
+    "exercises": [
+      "Name two different kinds of domain shift for synthetic bars.",
+      "Why can unchanged recall coexist with worse precision after a prevalence change?",
+      "How would you test whether contrast causes an error pattern?",
+      "Does a narrow confidence interval on one test set prove robustness to a new distribution?"
+    ],
+    "solutions": [
+      "An input shift such as stronger noise, and a prevalence shift such as far fewer vertical bars. Position or label changes are other distinct cases.",
+      "Precision conditions on predicted positives and depends on prevalence as well as class-conditional positive and false-positive rates.",
+      "Vary contrast while keeping label, position, noise protocol and model fixed; compare errors and counts over repeated generated samples.",
+      "No. It addresses sampling uncertainty under its population assumptions, not arbitrary distribution shift."
+    ],
+    "checkpoint": "Deliver three analyzed cases, group-level evidence, one tested explanation and one clearly labeled unresolved hypothesis.",
+    "lab": "bayes",
+    "minutes": 90
+  },
+  {
+    "id": 48,
+    "module": 12,
+    "title": "Read a method and defend your maths",
+    "file": "lessons/48-read-a-method-and-defend-your-maths.md",
+    "reading": "Revisit the MML and CV sections used by your project; choose one original paper after matching its prerequisites.",
+    "goal": "Map a research method to a concrete computation and defend the choices in your own project.",
+    "exercises": [
+      "List five items you must identify in a new method.",
+      "Distinguish an empirical benchmark result from a mathematical guarantee.",
+      "Give a complete input-to-metric explanation of your capstone in five sentences.",
+      "Name one next topic and explain which gap in your project motivates it."
+    ],
+    "solutions": [
+      "Inputs, parameters, outputs, objective and evaluation protocol, with the assumptions and shapes that define them.",
+      "A benchmark result measures a stated procedure on particular data; a guarantee is a conditional logical statement under specified assumptions.",
+      "A satisfactory answer declares representation and shapes, forward computation, loss assumptions, training updates and evaluation protocol without skipping preprocessing or selection.",
+      "For example, camera geometry is motivated by estimating 3D structure from views; probability calibration is motivated by unreliable confidence. Choose based on a specific need."
+    ],
+    "checkpoint": "Defend your complete project with one worked calculation from each mathematical pillar and a clear account of the limits of its evidence.",
+    "lab": "network",
+    "minutes": 90
+  }
+]

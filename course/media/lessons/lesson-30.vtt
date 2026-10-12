@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.304
+A mini-batch gradient is a noisy estimate of a larger-data objective’s gradient. Momentum combines the latest
+
+00:00:07.304 --> 00:00:14.408
+estimate with a state carried from earlier steps. This can sustain motion along persistent directions and
+
+00:00:14.408 --> 00:00:15.740
+smooth some oscillations.
+
+00:00:16.267 --> 00:00:22.827
+Different software can rescale the velocity. Here we use the unnormalized accumulated-gradient convention.
+
+00:00:23.333 --> 00:00:28.473
+The latest batch suggests one direction, while past gradients pull in the opposite direction.
+
+00:00:29.000 --> 00:00:34.958
+When will the old and new contributions exactly cancel? Pause here and make a prediction before
+
+00:00:34.958 --> 00:00:35.330
+continuing.
+
+00:00:36.433 --> 00:00:44.163
+A high momentum coefficient retains more of the previous velocity. The current batch does not necessarily
+
+00:00:44.163 --> 00:00:51.892
+determine the update’s direction by itself. For our starting inputs, Old velocity: 2. New batch gradient:
+
+00:00:51.892 --> 00:00:55.273
+-1. Combined velocity: 0.6. New weight: 0.94.
+
+00:00:55.800 --> 00:01:02.253
+At beta one-half the contributions cancel. Below it this example increases the weight; above it the
+
+00:01:02.253 --> 00:01:03.060
+weight decreases.
+
+00:01:03.567 --> 00:01:09.487
+Record optimizer conventions, batch sampling and learning-rate schedules when comparing training runs.
+

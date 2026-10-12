@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.200 --> 00:00:07.093
+Complex models are built from small operations. A computational graph names these intermediate values and records
+
+00:00:07.093 --> 00:00:13.987
+which outputs depend on which inputs. You can then differentiate each simple edge instead of expanding
+
+00:00:13.987 --> 00:00:15.710
+the entire final expression.
+
+00:00:16.233 --> 00:00:21.905
+Use a distinct name for each intermediate. Values recorded in the forward pass will be needed
+
+00:00:21.905 --> 00:00:23.323
+in the backward calculation.
+
+00:00:23.833 --> 00:00:29.523
+The target five is fixed. The one-half factor makes the derivative of the square especially simple.
+
+00:00:30.033 --> 00:00:35.422
+If the prediction exceeds its target, what sign should the weight gradient have here? Pause here
+
+00:00:35.422 --> 00:00:37.443
+and make a prediction before continuing.
+
+00:00:38.567 --> 00:00:45.142
+Each derivative describes one edge. One is loss sensitivity to the prediction; the other is prediction
+
+00:00:45.142 --> 00:00:51.307
+sensitivity to the weight. For our starting inputs, Prediction: 7. Loss: 2. Weight gradient: 4.
+
+00:00:51.833 --> 00:00:57.990
+The chain rule combines these sensitivities. In a branching graph, contributions from every path into a
+
+00:00:57.990 --> 00:00:59.913
+shared value must be summed.
+
+00:01:00.433 --> 00:01:07.407
+Draw the forward computation before differentiating. The graph and its shapes determine the chain-rule factors and
+
+00:01:07.407 --> 00:01:07.843
+transposes.
+
