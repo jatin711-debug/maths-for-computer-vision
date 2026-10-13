@@ -445,18 +445,42 @@
     }
   }
 
+  // Keep repeated symbols and equations ready when navigating between course pages.
+  const mathCache = new Map();
+  const mathCacheLimit = 256;
   function renderMath(root) {
     if (!window.katex) return;
-    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(node){return node.parentElement.closest('pre,code,textarea,script,style,.katex,[data-equation]')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT;}});
-    const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+    if (root.closest?.('pre,code,textarea,script,style,.katex,[data-math-deferred]')) return;
+    const nodes=[], equations=[];
+    // Reject whole rendered/excluded branches instead of visiting every KaTeX text node.
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT,{acceptNode(node){
+      if(node.nodeType===Node.ELEMENT_NODE){
+        if(node.matches('pre,code,textarea,script,style,.katex,[data-math-deferred]'))return NodeFilter.FILTER_REJECT;
+        if(node.hasAttribute('data-equation')){equations.push(node);return NodeFilter.FILTER_REJECT;}
+        return NodeFilter.FILTER_SKIP;
+      }
+      return node.textContent.includes('\\(')||node.textContent.includes('\\[')?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+    }});
+    if(root.matches?.('[data-equation]'))equations.push(root);
+    else while(walker.nextNode())nodes.push(walker.currentNode);
     const regex=/\\\(([\s\S]*?)\\\)|\\\[([\s\S]*?)\\\]/g;
     nodes.forEach(node=>{
       const matches=[...node.textContent.matchAll(regex)];if(!matches.length)return;
       const frag=document.createDocumentFragment();let last=0;
-      matches.forEach(m=>{frag.append(document.createTextNode(node.textContent.slice(last,m.index)));const el=document.createElement(m[2]!==undefined?'div':'span');el.dataset.equation=m[1]??m[2];el.dataset.inline=String(m[2]===undefined);el.className=m[2]===undefined?'inline-math':'body-equation';frag.append(el);last=m.index+m[0].length;});
+      matches.forEach(m=>{frag.append(document.createTextNode(node.textContent.slice(last,m.index)));const el=document.createElement(m[2]!==undefined?'div':'span');el.dataset.equation=m[1]??m[2];el.dataset.inline=String(m[2]===undefined);el.className=m[2]===undefined?'inline-math':'body-equation';frag.append(el);equations.push(el);last=m.index+m[0].length;});
       frag.append(document.createTextNode(node.textContent.slice(last)));node.replaceWith(frag);
     });
-    root.querySelectorAll('[data-equation]').forEach(el=>{if(el.dataset.rendered===el.dataset.equation)return;window.katex.render(el.dataset.equation,el,{throwOnError:false,displayMode:el.dataset.inline!=='true',trust:false,strict:'warn'});el.dataset.rendered=el.dataset.equation;});
+    equations.forEach(el=>{
+      const displayMode=el.dataset.inline!=='true',key=JSON.stringify([displayMode,el.dataset.equation]);
+      if(el.dataset.rendered===key)return;
+      let html=mathCache.get(key);
+      if(html!==undefined)mathCache.delete(key);
+      else html=window.katex.renderToString(el.dataset.equation,{throwOnError:false,displayMode,trust:false,strict:'warn'});
+      mathCache.set(key,html);
+      if(mathCache.size>mathCacheLimit)mathCache.delete(mathCache.keys().next().value);
+      el.innerHTML=html;
+      el.dataset.rendered=key;
+    });
   }
 
   const svgText=(x,y,text,color='#64736b',size=13,className='')=>`<text x="${x}" y="${y}" fill="${color}" font-size="${size}" font-family="Segoe UI,Arial"${className ? ` class="${className}"` : ''}>${E(text)}</text>`;

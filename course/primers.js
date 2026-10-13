@@ -22,8 +22,11 @@
   const pad = n => String(n).padStart(2, '0');
   const lessons = {};
   const terms = new Map();
+  let glossaryIndex;
+  let stopGlossary = () => {};
 
   function add(lesson, spec) {
+    glossaryIndex = undefined;
     lessons[lesson] = spec;
     (spec.terms || []).forEach(term => terms.set(term.id, {...term, lesson}));
   }
@@ -61,8 +64,8 @@
       <path class="primer-curve" d="${d}"/>${marks}</svg></figure>`;
   }
 
-  function card(term, {open = false, showLesson = false} = {}) {
-    const body = [
+  function cardBody(term, showLesson) {
+    return [
       `<p class="primer-plain">${E(term.plain)}</p>`,
       term.formula ? `<div class="primer-formula">\\[${E(term.formula)}\\]</div>` : '',
       term.steps?.length ? `<div class="primer-steps"><h4>How to calculate it</h4><ol>${term.steps.map(s => `<li>${E(s)}</li>`).join('')}</ol></div>` : '',
@@ -71,7 +74,30 @@
       term.pitfall ? `<p class="primer-pitfall"><b>Watch out:</b> ${E(term.pitfall)}</p>` : '',
       showLesson || term.seeAlso?.length ? `<p class="primer-links">${showLesson ? `Introduced in <a href="#lesson/${term.lesson}">Lesson ${pad(term.lesson)}: ${E(lessonTitle(term.lesson))}</a>. ` : ''}${term.seeAlso?.length ? `Used again in ${term.seeAlso.map(n => `<a href="#lesson/${n}">Lesson ${pad(n)}</a>`).join(', ')}.` : ''}</p>` : ''
     ].join('');
-    return `<details class="primer-term" id="term-${E(term.id)}" data-term="${E(term.id)}"${open ? ' open' : ''}><summary>${term.symbol ? `<span class="primer-symbol">\\(${E(term.symbol)}\\)</span>` : ''}<span class="primer-name">${E(term.term)}</span><span class="primer-toggle" aria-hidden="true"></span></summary><div class="primer-body">${body}</div></details>`;
+  }
+
+  function card(term, {open = false, showLesson = false, lazy = false} = {}) {
+    const symbol = !term.symbol ? '' : lazy
+      ? `<span class="primer-symbol inline-math" data-equation="${E(term.symbol)}" data-inline="true" data-math-deferred></span>`
+      : `<span class="primer-symbol">\\(${E(term.symbol)}\\)</span>`;
+    return `<details class="primer-term" id="term-${E(term.id)}" data-term="${E(term.id)}"${open ? ' open' : ''}><summary>${symbol}<span class="primer-name">${E(term.term)}</span><span class="primer-toggle" aria-hidden="true"></span></summary><div class="primer-body"${lazy ? ' data-primer-pending' : ''}>${lazy ? '' : cardBody(term, showLesson)}</div></details>`;
+  }
+
+  function renderGlossarySymbol(details) {
+    const symbol = details.querySelector('[data-math-deferred]');
+    if (!symbol) return;
+    symbol.removeAttribute('data-math-deferred');
+    window.CV_TUTOR?.renderMath(symbol);
+  }
+
+  function expandGlossaryTerm(details) {
+    renderGlossarySymbol(details);
+    const body = details.querySelector('[data-primer-pending]');
+    if (!body) return;
+    const term = terms.get(details.dataset.term);
+    body.innerHTML = cardBody(term, true);
+    body.removeAttribute('data-primer-pending');
+    window.CV_TUTOR?.renderMath(body);
   }
 
   function panel(lessonId) {
@@ -120,26 +146,112 @@
   function hasTerm(lessonId, termId) { return !!lessons[lessonId]?.terms?.some(t => t.id === termId); }
 
   function glossary(root, focusId) {
+    stopGlossary();
     const modules = window.CV_COURSE.modules;
-    const moduleOf = lesson => window.CV_COURSE.lessons.find(l => l.id === lesson)?.module;
-    const all = [...terms.values()].sort((a, b) => a.term.localeCompare(b.term, 'en', {sensitivity: 'base'}));
+    if (!glossaryIndex) {
+      const moduleOf = new Map(window.CV_COURSE.lessons.map(l => [l.id, l.module]));
+      const order = new Intl.Collator('en', {sensitivity: 'base'});
+      glossaryIndex = [...terms.values()].sort((a, b) => order.compare(a.term, b.term)).map(term => ({
+        term, module: moduleOf.get(term.lesson),
+        search: [term.term, term.plain, term.symbol, term.id.replace(/-/g, ' ')].join(' ').toLowerCase()
+      }));
+    }
+    const all = glossaryIndex;
     root.innerHTML = `<div class="glossary-tools"><label><span class="vc-sr">Search the glossary</span><input type="search" placeholder="Search a term, e.g. sigmoid, eigenvalue, IoU" autocomplete="off"></label><label><span class="vc-sr">Module</span><select><option value="0">All modules</option>${modules.map(m => `<option value="${m.n}">${pad(m.n)} · ${E(m.title)}</option>`).join('')}</select></label></div><p class="glossary-status" role="status" aria-live="polite"></p><div class="glossary-results"></div>`;
     const input = root.querySelector('input'), select = root.querySelector('select'), results = root.querySelector('.glossary-results'), status = root.querySelector('.glossary-status');
-    const text = t => [t.term, t.plain, t.symbol, t.id.replace(/-/g, ' ')].join(' ').toLowerCase();
+    const template = document.createElement('template');
+    template.innerHTML = all.map(({term}) => card(term, {lazy: true})).join('');
+    const cards = new Map([...template.content.children].map(node => [node.dataset.term, node]));
+    const pendingSymbols = new Set();
+    let searchTimer, mathTimer;
+    function renderSymbols() {
+      mathTimer = undefined;
+      if (!root.isConnected) { stop(); return; }
+      const start = performance.now();
+      for (const details of pendingSymbols) {
+        pendingSymbols.delete(details);
+        if (results.contains(details)) renderGlossarySymbol(details);
+        if (performance.now() - start >= 8) break;
+      }
+      if (pendingSymbols.size) mathTimer = setTimeout(renderSymbols, 0);
+    }
+    function queueSymbol(details) {
+      if (!details.querySelector('[data-math-deferred]')) return;
+      pendingSymbols.add(details);
+      if (mathTimer === undefined) mathTimer = setTimeout(renderSymbols, 0);
+    }
+    const observer = window.IntersectionObserver ? new IntersectionObserver(entries => {
+      for (const entry of entries) if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+        queueSymbol(entry.target);
+      }
+    }, {rootMargin: '200px 0px'}) : null;
+    function stop() {
+      clearTimeout(searchTimer);
+      clearTimeout(mathTimer);
+      observer?.disconnect();
+      pendingSymbols.clear();
+      if (stopGlossary === stop) stopGlossary = () => {};
+    }
+    stopGlossary = stop;
     function update() {
       const words = input.value.toLowerCase().split(/\s+/).filter(Boolean), m = Number(select.value);
-      const list = all.filter(t => (!m || moduleOf(t.lesson) === m) && words.every(w => text(t).includes(w)));
+      const list = all.filter(item => (!m || item.module === m) && words.every(w => item.search.includes(w)));
       status.textContent = list.length === all.length ? `${all.length} terms, each with a plain explanation and a worked example` : `${list.length} of ${all.length} terms`;
       const groups = {};
-      list.forEach(t => { const k = /[a-z]/i.test(t.term[0]) ? t.term[0].toUpperCase() : '#'; (groups[k] ||= []).push(t); });
-      results.innerHTML = list.length ? Object.entries(groups).map(([k, ts]) => `<section class="glossary-group"><h2>${k}</h2><div class="primer-terms">${ts.map(t => card(t, {open: t.id === focusId, showLesson: true})).join('')}</div></section>`).join('') : '<p class="glossary-empty">No terms match. Try a shorter word.</p>';
-      window.CV_TUTOR?.renderMath(results);
+      list.forEach(({term}) => { const k = /[a-z]/i.test(term.term[0]) ? term.term[0].toUpperCase() : '#'; (groups[k] ||= []).push(term); });
+      const fragment = document.createDocumentFragment();
+      observer?.disconnect();
+      pendingSymbols.clear();
+      for (const [letter, group] of Object.entries(groups)) {
+        const section = document.createElement('section');
+        section.className = 'glossary-group';
+        const heading = document.createElement('h2');
+        heading.textContent = letter;
+        const entries = document.createElement('div');
+        entries.className = 'primer-terms';
+        for (const term of group) {
+          entries.append(cards.get(term.id));
+        }
+        section.append(heading, entries);
+        fragment.append(section);
+      }
+      if (!list.length) {
+        const empty = document.createElement('p');
+        empty.className = 'glossary-empty';
+        empty.textContent = 'No terms match. Try a shorter word.';
+        fragment.append(empty);
+      }
+      results.replaceChildren(fragment);
+      for (const {term} of list) {
+        const details = cards.get(term.id);
+        if (details.querySelector('[data-math-deferred]')) {
+          if (observer) observer.observe(details);
+          else queueSymbol(details);
+        }
+      }
     }
-    input.addEventListener('input', update);
-    select.addEventListener('change', update);
+    root.addEventListener('toggle', event => {
+      if (event.target.matches?.('.primer-term') && event.target.open) expandGlossaryTerm(event.target);
+    }, true);
+    input.addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => { if (root.isConnected) update(); }, 80);
+    });
+    select.addEventListener('change', () => { clearTimeout(searchTimer); update(); });
     update();
-    if (focusId) requestAnimationFrame(() => root.querySelector(`#term-${CSS.escape(focusId)}`)?.scrollIntoView({block: 'center'}));
+    if (focusId && cards.has(focusId)) {
+      const target = cards.get(focusId);
+      target.open = true;
+      expandGlossaryTerm(target);
+      requestAnimationFrame(() => { if (target.isConnected) target.scrollIntoView({block: 'center'}); });
+    }
   }
 
-  window.CV_PRIMER = {add, panel, mount, glossary, symbolsFor, hasTerm, terms, lessons, plot};
+  // Printing still includes every definition in the current results, including closed entries.
+  window.addEventListener?.('beforeprint', () => {
+    document.querySelectorAll('#glossary [data-primer-pending]').forEach(body => expandGlossaryTerm(body.parentElement));
+  });
+
+  window.CV_PRIMER = {add, panel, mount, glossary, symbolsFor, hasTerm, terms, lessons, plot, stop: () => stopGlossary()};
 })();

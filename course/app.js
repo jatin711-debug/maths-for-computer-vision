@@ -467,6 +467,7 @@
     document.documentElement.style.setProperty('--lesson-actions-height','0px');
     window.CV_STORIES.stop();
     window.CV_CONCEPT_VIDEOS.stop();
+    window.CV_PRIMER.stop();
     clearTimeout(saveTimer);
     if (document.querySelector('[data-note], [data-answer], [data-quiz]')) save();
     const [page = 'overview', arg, sub] = (location.hash.slice(1) || 'overview').split('/');
@@ -485,7 +486,7 @@
       if (link.dataset.nav === (page === 'module' ? 'roadmap' : page === 'lessons' ? 'lesson' : page)) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
     });
     ({ overview, practical: () => window.CV_PRACTICAL.render(main, arg, state, notes), roadmap: () => roadmap(arg === 'week' ? Number(sub) : 1, arg === 'week'), cinema: () => cinema(arg), lessons: allLessons, module: () => modulePage(Number(arg)), lesson: () => lessonPage(Number(arg) || 1, sub), explore: () => explore(arg), practice: () => practice(arg), library, glossary: () => glossaryPage(arg) }[page] || overview)();
-    window.CV_TUTOR.renderMath(main);
+    if (page !== 'glossary') window.CV_TUTOR.renderMath(main);
     updateProgress(); closeNav(); window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', route);
