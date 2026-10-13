@@ -1,0 +1,6 @@
+# Python 3.10–3.12. Install torch + torchvision together (see README for CUDA).
+numpy>=1.26,<3
+Pillow>=10,<13
+torch>=2.5,<3
+torchvision>=0.20,<1
+opencv-python>=4.10,<5

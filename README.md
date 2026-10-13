@@ -15,6 +15,7 @@ An interactive course that takes you from school algebra to the mathematics behi
 - **Python in the browser.** Every lesson has an editable NumPy example that runs locally via Pyodide; 13 also have optional PyTorch versions.
 - **75 videos:** 10 two-minute animated explanations of the hardest ideas (projection, eigenvectors, SVD, Bayes, softmax and cross-entropy, convolution, Fourier, backpropagation, homographies, attention), a narrated worked walkthrough for each of Lessons 1-48, and a short overview per module.
 - **7 Jupyter notebooks** (NumPy only) that follow the modules with predict-then-run checks.
+- **12 Practical CV labs** connect the maths to local image projects: data audits, OpenCV counting, PyTorch classification and transfer learning, detection, segmentation, geometry, optional CLIP/SAM, inference and a capstone. Readings and saved evidence checklists are in the **Practical CV** sidebar; training uses installed Python. Start with the [setup guide](course/practical/README.md).
 
 ![An experiment: Harris corners and the structure tensor on a photo](docs/experiment.jpg)
 
@@ -46,7 +47,7 @@ Modules 1-12 form a 24-week core at 8-10 hours a week; Modules 13-17 are an opti
 
 ## Run it on your own computer
 
-The course is a static site; it needs no build step and no internet once downloaded.
+The maths course is a static site; it needs no build step and no internet once downloaded. Practical lab readings also work offline, but their local Python dependencies, datasets and optional pretrained models need an initial download.
 
 ```bash
 git clone https://github.com/jatin711-debug/maths-for-computer-vision.git
@@ -67,6 +68,7 @@ Lessons cite four books, and every reading reference links to the exact PDF page
 - `python course/build_web_data.py` rebuilds `course-data.js` from the Markdown lessons (needs `pypdf` only if the book PDFs are present).
 - Checks, all currently at 0 issues: `node course/validate_lessons.cjs`, `node course/validate_practice.cjs`, `node course/validate_primers.cjs` and `python course/validate_python_examples.py` (NumPy, optionally PyTorch).
 - More detail on how each part was built and validated is in [course/README.md](course/README.md).
+- Practical checks: `python -m unittest discover -s course/practical/tests -v`, `python course/practical/build_catalog.py --check` and `node course/validate_practical.cjs`. See [practical validation](course/practical/validation.md) for the tested environment and limits.
 
 Found a mistake? Please open an issue with the lesson number and what looks wrong.
 

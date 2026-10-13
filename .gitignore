@@ -19,3 +19,9 @@
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# Practical labs download their own datasets and weights; outputs stay local.
+/course/practical/data/
+/course/practical/runs/
+/course/practical/.venv/
+/course/practical/.cache/

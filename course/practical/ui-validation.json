@@ -1,0 +1,273 @@
+{
+  "date": "2026-10-13",
+  "routes": [
+    {
+      "cards": 12,
+      "checks": 0,
+      "heading": "From equations to working vision.",
+      "height": 801,
+      "notes": 0,
+      "overflow": false,
+      "slug": "overview",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 01 · Your local vision lab",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "setup",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 02 · Count objects with OpenCV",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "opencv",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 03 · Build and audit your dataset",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "data",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 04 · Train a real-image classifier",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "classifier",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 05 · Transfer learning and fine-tuning",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "transfer",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 06 · Debug and resume training",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "diagnostics",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 07 · Detect people in photographs",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "detection",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 08 · Segment people pixel by pixel",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "segmentation",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 09 · Align views and track motion",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "geometry",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 10 · Retrieve images and prompt masks",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "foundation",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 11 · Use your model on new photos",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "inference",
+      "width": 1280
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 12 · Build an independent CV project",
+      "height": 801,
+      "notes": 1,
+      "overflow": false,
+      "slug": "capstone",
+      "width": 1280
+    },
+    {
+      "cards": 12,
+      "checks": 0,
+      "heading": "From equations to working vision.",
+      "height": 609,
+      "notes": 0,
+      "overflow": false,
+      "slug": "overview",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 01 · Your local vision lab",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "setup",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 02 · Count objects with OpenCV",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "opencv",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 03 · Build and audit your dataset",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "data",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 04 · Train a real-image classifier",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "classifier",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 05 · Transfer learning and fine-tuning",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "transfer",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 06 · Debug and resume training",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "diagnostics",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 07 · Detect people in photographs",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "detection",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 08 · Segment people pixel by pixel",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "segmentation",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 09 · Align views and track motion",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "geometry",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 10 · Retrieve images and prompt masks",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "foundation",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 11 · Use your model on new photos",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "inference",
+      "width": 974
+    },
+    {
+      "cards": 0,
+      "checks": 3,
+      "heading": "Lab 12 · Build an independent CV project",
+      "height": 609,
+      "notes": 1,
+      "overflow": false,
+      "slug": "capstone",
+      "width": 974
+    }
+  ],
+  "persistence": {
+    "reload": true,
+    "export": true,
+    "importMerge": true,
+    "testProgressRestored": true
+  },
+  "mobile": "unverified: preview resize timed out",
+  "screenshots": "incomplete: preview snapshot failures"
+}

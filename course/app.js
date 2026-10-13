@@ -479,12 +479,12 @@
     const chapterLink = document.querySelector('.chapter-link');
     chapterLink.href = '#module/' + chapter.n;
     chapterLink.innerHTML = `<span class="chapter-number">${String(chapter.n).padStart(2,'0')}</span><span>${escape(chapter.title)}</span><span aria-hidden="true">→</span>`;
-    const names = { cinema: 'Visual classroom', overview: 'Overview', roadmap: 'Course roadmap', module: 'Module details', lessons: 'Your lessons', lesson: 'Your lesson', explore: 'Explore the maths', practice: 'Practice', library: 'Resource library', glossary: 'Glossary' };
+    const names = { practical: 'Practical CV', cinema: 'Visual classroom', overview: 'Overview', roadmap: 'Course roadmap', module: 'Module details', lessons: 'Your lessons', lesson: 'Your lesson', explore: 'Explore the maths', practice: 'Practice', library: 'Resource library', glossary: 'Glossary' };
     document.getElementById('breadcrumb').innerHTML = `Your course <span>/</span> ${names[page] || 'Overview'}`;
     document.querySelectorAll('[data-nav]').forEach(link => {
       if (link.dataset.nav === (page === 'module' ? 'roadmap' : page === 'lessons' ? 'lesson' : page)) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
     });
-    ({ overview, roadmap: () => roadmap(arg === 'week' ? Number(sub) : 1, arg === 'week'), cinema: () => cinema(arg), lessons: allLessons, module: () => modulePage(Number(arg)), lesson: () => lessonPage(Number(arg) || 1, sub), explore: () => explore(arg), practice: () => practice(arg), library, glossary: () => glossaryPage(arg) }[page] || overview)();
+    ({ overview, practical: () => window.CV_PRACTICAL.render(main, arg, state, notes), roadmap: () => roadmap(arg === 'week' ? Number(sub) : 1, arg === 'week'), cinema: () => cinema(arg), lessons: allLessons, module: () => modulePage(Number(arg)), lesson: () => lessonPage(Number(arg) || 1, sub), explore: () => explore(arg), practice: () => practice(arg), library, glossary: () => glossaryPage(arg) }[page] || overview)();
     window.CV_TUTOR.renderMath(main);
     updateProgress(); closeNav(); window.scrollTo(0, 0);
   }

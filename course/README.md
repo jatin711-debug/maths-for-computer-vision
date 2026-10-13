@@ -19,6 +19,11 @@ Your completed lessons, notes and written answers are saved in that browser. Use
 
 Use the sun/moon button in the top bar to switch between the original light appearance and a black, white and silver dark mode. The course follows your device’s colour preference until you choose a mode, then remembers that choice in this browser. Appearance is saved separately from course progress.
 
+## What changed on 13 October 2026
+
+- **Practical CV:** twelve guided labs alongside the existing 68 maths lessons, from environment setup, object counting and dataset audits to PyTorch training, transfer learning, detection, segmentation, geometry, optional foundation models, inference and an independent capstone. Lab readings are embedded for offline use; Python runs locally. Evidence checks and lab notes are included in progress export/import. See [the setup guide](practical/README.md) and [the verification scope](practical/validation.md).
+- Download-free regression checks cover independent data splits, duplicate detection, image/mask/box alignment, classification and dense metrics, exact CPU resume, frozen BatchNorm, checkpoint inference and classical CV. Run `python -m unittest discover -s course/practical/tests -v`, `python course/practical/build_catalog.py --check` and `node course/validate_practical.cjs`.
+
 ## What changed on 12 October 2026
 
 - **Every new idea explained in plain words.** Each lesson now opens with **New in this lesson · in plain words**, directly under the equation card: 354 terms across the 68 lessons, each with what it is, how to calculate it by hand, worked numbers, a small graph where the shape matters and the usual mistake. Chips at the top link the earlier lessons it builds on and reopen terms from earlier lessons in place. The symbols in the equation card now have plain descriptions; select one to open its explanation. Maths the course used but never taught is covered where it is first needed: cos and sin (06), determinants (07), complex numbers and Euler's formula (13, 36), limits (17), integrals (22), the multivariate Gaussian (23), argmax and ∝ (25, 26), the cross product (49), trace and the matrix exponential (51) and more.
