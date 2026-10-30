@@ -307,9 +307,11 @@
           const state = S(), passed = right >= Math.min(CHECKPOINT_PASS, chosen.length - 1), old = state.checkpoints[moduleN];
           state.checkpoints[moduleN] = {best: Math.max(right, old?.best ?? 0), last: right, date: today(), passed: passed || !!old?.passed};
           misses.forEach(m => record(m.q, false, m.given, 'checkpoint'));
+          const revisit = [...new Set(misses.map(m => m.q.gen.lesson))].map(id => host.course.lessons.find(l => l.id === id));
+          const revisitList = revisit.length ? `<p class="pq-revisit-label">${passed ? 'Worth another look:' : 'Revisit these lessons first:'}</p><ul class="pq-revisit">${revisit.map(l => `<li><a class="text-link" href="#lesson/${l.id}">Lesson ${String(l.id).padStart(2, '0')} · ${E(l.title)}</a></li>`).join('')}</ul>` : '';
           if (passed) onPass?.();
           host.save();
-          stage.innerHTML = `<div class="pq-summary"><h3>${right} of ${chosen.length} correct</h3><p>${passed ? 'Checkpoint passed. The module is marked ready.' : `You need ${CHECKPOINT_PASS} to pass. Missed questions are in your error log and return in tomorrow’s review.`}</p><div class="button-row"><button type="button" class="btn${passed ? '' : ' btn-primary'}" data-retake>Retake with new numbers</button><a class="btn" href="#practice">Open your error log</a></div></div>`;
+          stage.innerHTML = `<div class="pq-summary"><h3>${right} of ${chosen.length} correct</h3><p>${passed ? 'Checkpoint passed. The module is marked ready, and Continue now moves past any unfinished lessons in it. They stay open.' : `You need ${CHECKPOINT_PASS} to pass. Missed questions are in your error log and return in tomorrow’s review.`}</p>${revisitList}<div class="button-row"><button type="button" class="btn${passed ? '' : ' btn-primary'}" data-retake>Retake with new numbers</button><a class="btn" href="#practice">Open your error log</a></div></div>`;
           stage.querySelector('[data-retake]').addEventListener('click', () => host.rerender());
           return;
         }

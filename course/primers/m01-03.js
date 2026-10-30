@@ -437,7 +437,7 @@
       },
       {
         id: 'affine-layer', term: 'Batched affine layer', symbol: T`Y=XW+b`,
-        plain: T`A neural-network layer applies the same weights to every example. Store the \(n\) examples as the rows of \(X\). Multiplying by \(W\) turns each row of \(d\) features into \(k\) outputs, and the bias \(b\), one number per output, is added to every row. NumPy calls this automatic repetition of \(b\) broadcasting.`,
+        plain: T`A neural-network layer applies the same weights to every example; this is also called a fully connected or dense layer, because every input feature feeds every output. Store the \(n\) examples as the rows of \(X\). Multiplying by \(W\) turns each row of \(d\) features into \(k\) outputs, and the bias \(b\), one number per output, is added to every row. NumPy calls this automatic repetition of \(b\) broadcasting.`,
         formula: T`\underbrace{Y}_{n\times k}=\underbrace{X}_{n\times d}\,\underbrace{W}_{d\times k}+\underbrace{b}_{\text{length }k}`,
         steps: [T`Write the shape under every symbol.`, T`Check that the columns of \(X\) match the rows of \(W\): both are \(d\).`, T`Read the output shape from the outer sizes, \(n\times k\); \(b\) has length \(k\).`, T`Count the trainable numbers: \(d\cdot k\) weights plus \(k\) biases.`],
         examples: [[T`\(X\) is \(4\times5\), \(W\) is \(5\times2\)`, T`\(Y\) is \(4\times2\); \(b\) has length 2; \(5\cdot2+2=12\) trainable numbers`], [T`one row \(x=[1,2]\), \(W=\begin{bmatrix}1&0\\1&1\end{bmatrix}\), \(b=[0.5,0]\)`, T`\(xW+b=[3,2]+[0.5,0]=[3.5,2]\)`]],

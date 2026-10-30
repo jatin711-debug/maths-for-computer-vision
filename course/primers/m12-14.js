@@ -278,8 +278,7 @@
         formula: T`I=(1-\alpha)(1-\beta)I_{00}+\alpha(1-\beta)I_{10}+(1-\alpha)\beta I_{01}+\alpha\beta I_{11}`,
         steps: [T`Find α and β, the offsets as fractions of a pixel from the top-left of the four centres.`, T`Blend each row: \(I_{\text{top}}=(1-\alpha)I_{00}+\alpha I_{10}\), and likewise \(I_{\text{bottom}}\) from \(I_{01}\) and \(I_{11}\).`, T`Blend the rows: \(I=(1-\beta)I_{\text{top}}+\beta I_{\text{bottom}}\).`],
         examples: [[T`\(\alpha=0.3,\ \beta=0.6\); pixels 20, 100 (top), 60, 40 (bottom)`, T`rows 44 and 54; \(I=0.4\cdot44+0.6\cdot54=50\)`], [T`the same, as weights`, T`0.28, 0.12, 0.42, 0.18 (they sum to 1); nearest neighbour gives 60`], [T`\(\alpha=\beta=0.5\)`, T`the mean of the four, 55`], [T`\(\alpha=0.25,\ \beta=0.75\); pixels 10, 30, 50, 90`, T`rows 15 and 60; \(I=48.75\); nearest gives 50`]],
-        pitfall: T`Do not blend label masks: averaging class 1 and class 3 gives 2, a class that is not there. Use nearest neighbour for labels.`,
-        seeAlso: [56]
+        pitfall: T`Do not blend label masks: averaging class 1 and class 3 gives 2, a class that is not there. Use nearest neighbour for labels.`
       }
     ]
   });
@@ -476,8 +475,7 @@
         steps: [T`For each class compute \(-p_k\ln p_k\); classes with \(p_k=0\) add nothing.`, T`Add them up. With ln the unit is the nat.`, T`Compare with the largest possible value, \(\ln K\).`],
         examples: [[T`\((1,0,0,0)\)`, T`0: nothing is uncertain`], [T`\((\tfrac14,\tfrac14,\tfrac14,\tfrac14)\)`, T`\(\ln4=1.386\) nats, the maximum for 4 classes`], [T`\((\tfrac12,\tfrac14,\tfrac14)\)`, T`1.040 nats`], [T`\((0.925,0.025,0.025,0.025)\)`, T`0.349 nats`]],
         plot: {fn: 'x => -(x * Math.log(x) + (1 - x) * Math.log(1 - x))', x: [0.01, 0.99], y: [0, 0.8], xLabel: 'probability of class 1 (two classes)', yLabel: 'entropy H (nats)', marks: [0.1, 0.5]},
-        pitfall: T`Here H is entropy, not a Hessian or a homography. Entropy belongs to the target: training cannot lower it, only the mismatch on top of it.`,
-        seeAlso: [55]
+        pitfall: T`Here H is entropy, not a Hessian or a homography. Entropy belongs to the target: training cannot lower it, only the mismatch on top of it.`
       },
       {
         id: 'kl-divergence', term: 'Kullback–Leibler divergence', symbol: T`\mathrm{KL}(p\,\|\,q)`,
@@ -493,8 +491,7 @@
         formula: T`\log_2x=\frac{\ln x}{\ln2},\qquad \text{bits}=\frac{\text{nats}}{\ln2},\qquad \log_2(2x)=\log_2x+1`,
         steps: [T`For a power of 2, count: \(\log_28=3\) because \(2^3=8\).`, T`Otherwise divide: \(\log_2x=\ln x/\ln2\).`, T`To convert an entropy from nats to bits, divide by \(\ln2\).`],
         examples: [[T`\(\log_28\)`, T`3`], [T`\(\log_20.5\)`, T`\(-1\): halving lowers it by 1`], [T`\(\log_2(96/224)\)`, T`\(\approx-1.222\)`], [T`\(\ln4=1.386\) nats; 1.040 nats`, T`2 bits; 1.5 bits`]],
-        pitfall: T`An entropy without a unit is ambiguous: 1 nat is about 1.44 bits. State which logarithm you used.`,
-        seeAlso: [56]
+        pitfall: T`An entropy without a unit is ambiguous: 1 nat is about 1.44 bits. State which logarithm you used.`
       },
       {
         id: 'label-smoothing', term: 'Label smoothing', symbol: T`p=(1-\varepsilon)y+\frac{\varepsilon}{K}`,
@@ -524,7 +521,7 @@
 
   add(55, {
     builds: [{lesson: 6, why: 'a dot product scores how well two vectors align'}, {lesson: 27, why: 'softmax turns scores into weights that sum to 1'}, {lesson: 41, why: 'the inductive bias that convolutions build in'}],
-    recall: ['dot-product', 'softmax', 'entropy', 'layer-normalization', 'translation-equivariance'],
+    recall: ['dot-product', 'softmax', 'natural-logarithm', 'layer-normalization', 'translation-equivariance'],
     symbols: [
       ['Q, K, V', 'queries, keys and values: three learned linear maps of the same tokens', 'query-key-value'],
       ['A', 'attention weights: row i says how much token i takes from each token', 'scaled-dot-product-attention'],
@@ -582,7 +579,7 @@
 
   add(56, {
     builds: [{lesson: 33, why: 'blur before halving, or detail aliases'}, {lesson: 35, why: 'stride and receptive field of a feature map'}, {lesson: 43, why: 'segmentation needs a label at every pixel'}],
-    recall: ['aliasing', 'stride', 'receptive-field', 'floor-function', 'bits-and-nats'],
+    recall: ['aliasing', 'stride', 'receptive-field', 'floor-function', 'natural-logarithm'],
     symbols: [
       ['Gₖ', 'Gaussian pyramid level k: the image blurred and halved k times', 'gaussian-pyramid'],
       ['Lₖ', 'Laplacian level k: the detail lost by one blur-and-halve step', 'laplacian-pyramid'],
@@ -618,7 +615,7 @@
         id: 'feature-pyramid-network', term: 'Feature pyramid network (FPN)', symbol: T`P_k=\operatorname{up}(P_{k+1})+\operatorname{conv}_{1\times1}(C_k)`,
         plain: T`A network add-on that gives every resolution deep, meaningful features. Starting from the coarsest backbone map, it upsamples by 2 and adds a 1 × 1 convolution of the backbone map at that scale, level by level. Each object is then handled on the level that suits its size.`,
         formula: T`k=\Bigl\lfloor4+\log_2\frac{\sqrt{wh}}{224}\Bigr\rfloor,\ \text{clamped to }2\le k\le5`,
-        steps: [T`Level k has stride \(2^k\), so its map side is \(S/2^k\).`, T`For a box of w × h pixels compute \(4+\log_2(\sqrt{wh}/224)\).`, T`Round down: the floor \(\lfloor x\rfloor\) is the largest whole number not above x. Then clamp to the levels that exist, 2 to 5.`, T`The box spans \(\sqrt{wh}/2^k\) cells of its level.`],
+        steps: [T`Level k has stride \(2^k\), so its map side is \(S/2^k\).`, T`\(\log_2x\) asks which power of 2 gives x; on a calculator, \(\log_2x=\ln x/\ln2\).`, T`For a box of w × h pixels compute \(4+\log_2(\sqrt{wh}/224)\).`, T`Round down: the floor \(\lfloor x\rfloor\) is the largest whole number not above x. Then clamp to the levels that exist, 2 to 5.`, T`The box spans \(\sqrt{wh}/2^k\) cells of its level.`],
         examples: [[T`512 × 512 image`, T`map sides 128, 64, 32, 16 on \(P_2\) to \(P_5\)`], [T`96 × 96 box`, T`\(4+\log_2(96/224)=2.78\), so \(P_2\); 24 cells`], [T`224 × 224 box; 448 × 448 box`, T`\(P_4\) and \(P_5\); 14 cells each`], [T`40 × 40 box`, T`\(1.51\), floor 1, clamped to \(P_2\)`]],
         pitfall: T`The lateral 1 × 1 convolution changes only the number of channels, so every level has the same width (256) and one detection head can be shared.`
       },

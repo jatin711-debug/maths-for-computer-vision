@@ -28,7 +28,7 @@ Use the capstone template's rubric to check whether another reader could reprodu
 
 ## Where to deepen next
 
-Choose further study from a concrete need: camera geometry for 3D vision, stronger statistics for uncertainty, more numerical methods for difficult optimization, or a specific architecture paper after its prerequisites. The extension modules take several of these paths further: camera geometry and robust fitting (Module 13), matrix calculus, attention and multi-scale networks (14), local features, optical flow and tracking (15), two-view geometry, bundle adjustment and neural rendering (16), and set prediction, VAEs, diffusion and Gaussian splatting (17). The Guo book can supply later geometry enrichment. Specialist topics beyond these still need focused study and practice.
+Choose further study from a concrete need: camera geometry for 3D vision, stronger statistics for uncertainty, more numerical methods for difficult optimization, or a specific architecture paper after its prerequisites. The extension modules take several of these paths further: camera geometry and robust fitting (Module 13), matrix calculus and information theory (14), local features, optical flow and tracking (15), two-view geometry, bundle adjustment and neural rendering (16), and set prediction, VAEs, diffusion and Gaussian splatting (17). The Guo book can supply later geometry enrichment. Specialist topics beyond these still need focused study and practice.
 
 ## Practice before opening the answers
 

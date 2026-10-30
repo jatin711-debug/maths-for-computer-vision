@@ -164,3 +164,26 @@
 .book-missing-note a { color:var(--orange); font-weight:600; }
 .book-missing-note code { font-size:12.5px; }
 .book-missing-note button { position:absolute; top:8px; right:8px; width:30px; height:30px; border-radius:50%; background:var(--paper); color:var(--ink); font-size:17px; line-height:1; }
+
+/* Study path: where a lesson leads, assessment advice and lab readiness. */
+.next-steps { display:grid; gap:10px; }
+.next-steps h3 { margin-bottom:4px; }
+.lesson-next-steps { margin-top:24px; }
+.next-step { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:2px 12px; padding:12px 14px; border:1px solid var(--line); border-radius:12px; color:inherit; text-decoration:none; }
+.next-step:hover,.next-step:focus-visible { border-color:var(--green); }
+.next-step span { grid-column:1; font-size:12px; color:var(--muted); }
+.next-step strong { grid-column:1; font-size:14px; font-weight:600; overflow-wrap:anywhere; }
+.next-step i { grid-column:2; grid-row:1 / span 2; align-self:center; font-style:normal; color:var(--muted); }
+.start-advice { margin:18px 0; }
+.start-advice h3 { margin-top:0; }
+.start-advice ul,.pq-revisit { margin:10px 0 14px; padding-left:20px; }
+.start-advice .btn { margin:6px 8px 0 0; }
+.assess-mark { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:12px; font-size:13px; color:var(--muted); }
+.assess-mark .btn { padding:7px 14px; }
+.assess-mark .btn[aria-pressed="true"] { border-color:var(--green); color:var(--green); font-weight:600; }
+.pq-revisit-label { margin-bottom:0; font-weight:600; }
+.session-link { display:inline-block; margin-top:6px; font-size:13px; }
+.practical-readiness { margin:12px 0 0; font-size:13px; color:var(--muted); }
+.practical-readiness.ready { color:var(--green); }
+/* Story frames carry fixed SVG sizes; fit them to the roadmap card so the art is not cropped away. */
+.module-art svg { display:block; width:100%; height:100%; }

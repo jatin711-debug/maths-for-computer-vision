@@ -1,6 +1,6 @@
 # Segment people pixel by pixel
 
-Use the same PennFudan photographs with a different output: foreground person versus background for every pixel. We merge all nonzero instance IDs into one semantic foreground class. This loses information about which person is which, deliberately.
+Use the same PennFudan photographs with a different output: foreground person versus background for every pixel. Lesson 56 explains the U-Net used here. We merge all nonzero instance IDs into one semantic foreground class. This loses information about which person is which, deliberately.
 
 ## Train a small U-Net
 

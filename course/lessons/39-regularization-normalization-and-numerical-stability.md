@@ -2,7 +2,7 @@
 
 **Module:** 10 | **Study time:** 60 minutes learning + 30 minutes practice.
 
-**Before you begin:** Lesson 38; revisit any symbols you cannot yet explain.
+**Before you begin:** Lessons 35 and 38; revisit any symbols you cannot yet explain.
 
 **Goal:** Explain how training aids change a computation and distinguish them from numerical safeguards.
 

@@ -1,14 +1,264 @@
 [
-  {"id":"01","slug":"setup","title":"Your local vision lab","stage":"Start here","time":"1–2 hours","lessons":[1,7,40],"summary":"Read a tensor, inspect a batch and set up a reproducible local Python environment.","file":"labs/01-setup.md","checks":["Environment check passes and versions are recorded","I can explain NCHW, RGB, float32 and the label dtype","I can run a module from the repository root"]},
-  {"id":"02","slug":"opencv","title":"Count objects with OpenCV","stage":"Images and data","time":"2–3 hours","lessons":[1,33,34,57],"summary":"Turn a photograph into a binary mask and a measured object count.","file":"labs/02-opencv.md","checks":["Saved the source photo, mask and annotated count","Compared two area/kernel settings against a manual count","Explained a merged-object or illumination failure"]},
-  {"id":"03","slug":"data","title":"Build and audit your dataset","stage":"Images and data","time":"3–4 hours","lessons":[16,28,41,47],"summary":"Write label rules, inspect duplicates and split independent groups before training.","file":"labs/03-data.md","checks":["Wrote label definitions and source/group metadata","Resolved corrupt images, duplicates and missing groups","Saved a fixed manifest and inspected class counts in every split"]},
-  {"id":"04","slug":"classifier","title":"Train a real-image classifier","stage":"Train and evaluate","time":"3–4 hours","lessons":[27,30,38,40,41],"summary":"Train a small CNN on CIFAR-10, compare a baseline and inspect confident errors.","file":"labs/04-classifier.md","checks":["Saved a protocol, learning history and validation predictions","Compared accuracy and class recall with the majority baseline","Explained three failures and kept the test set untouched"]},
-  {"id":"05","slug":"transfer","title":"Transfer learning and fine-tuning","stage":"Train and evaluate","time":"3–4 hours","lessons":[32,39,41,55],"summary":"Train a pretrained ResNet head, then unfreeze it for a controlled fine-tuning experiment.","file":"labs/05-transfer.md","checks":["Completed a frozen-head experiment on the fixed split","Completed fine-tuning initialized from the frozen model","Compared validation results and explained frozen BatchNorm"]},
-  {"id":"06","slug":"diagnostics","title":"Debug and resume training","stage":"Train and evaluate","time":"2–3 hours","lessons":[20,32,39,46],"summary":"Use learning curves, reproducible resume and one-change experiments to diagnose training.","file":"labs/06-diagnostics.md","checks":["Rendered a learning-curve report and interpreted the gap","Resumed last.pt with matching settings","Ran one controlled comparison and recorded its limitation"]},
-  {"id":"07","slug":"detection","title":"Detect people in photographs","stage":"Beyond classification","time":"4–6 hours","lessons":[42,44,56,65],"summary":"Fine-tune a detector, inspect boxes and compute explicitly defined AP50.","file":"labs/07-detection.md","checks":["Verified boxes and masks before training","Saved trained weights, AP50 and prediction overlays","Explained duplicate detections, missing objects and the AP convention"]},
-  {"id":"08","slug":"segmentation","title":"Segment people pixel by pixel","stage":"Beyond classification","time":"3–5 hours","lessons":[43,44,56],"summary":"Train a small U-Net and compare foreground overlap against an all-background baseline.","file":"labs/08-segmentation.md","checks":["Verified categorical masks and joint spatial transforms","Compared foreground IoU/Dice with the background baseline","Inspected boundary errors and explained semantic versus instance masks"]},
-  {"id":"09","slug":"geometry","title":"Align views and track motion","stage":"Beyond classification","time":"3–4 hours","lessons":[50,52,58,59,60],"summary":"Estimate a robust homography and track image features through a short video.","file":"labs/09-geometry.md","checks":["Saved inlier matches, a warp and reprojection errors","Saved a tracked video and feature survival statistics","Explained parallax, occlusion and why feature tracks are not object IDs"]},
-  {"id":"10","slug":"foundation","title":"Retrieve images and prompt masks","stage":"Optional extension","time":"2–4 hours","lessons":[54,55,65],"summary":"Use CLIP and SAM, then measure how wording and point prompts affect their outputs.","file":"labs/10-foundation.md","checks":["Saved CLIP rankings for two prompt wordings","Saved SAM masks for two points on the same image","Distinguished similarity/predicted quality from measured accuracy"]},
-  {"id":"11","slug":"inference","title":"Use your model on new photos","stage":"Ship and explain","time":"2–3 hours","lessons":[28,39,47],"summary":"Reload a saved classifier, preserve preprocessing and measure warm inference latency.","file":"labs/11-inference.md","checks":["Reloaded best.pt and predicted a new local photograph","Recorded latency scope, hardware and preprocessing","Documented an unknown-class or shifted-image failure"]},
-  {"id":"12","slug":"capstone","title":"Build an independent CV project","stage":"Ship and explain","time":"6–10 hours","lessons":[45,46,47,48],"summary":"Choose your data and task, defend the evaluation, and hand over a reproducible result.","file":"labs/12-capstone.md","checks":["Completed the project report with fixed data and comparison protocol","Evaluated the held-out test only after choosing the model","Reproduced inference from the saved artifact and documented three failures"]}
+  {
+    "id": "01",
+    "slug": "setup",
+    "title": "Your local vision lab",
+    "stage": "Start here",
+    "time": "1–2 hours",
+    "requires": [
+      1,
+      7
+    ],
+    "related": [
+      40
+    ],
+    "summary": "Read a tensor, inspect a batch and set up a reproducible local Python environment.",
+    "file": "labs/01-setup.md",
+    "checks": [
+      "Environment check passes and versions are recorded",
+      "I can explain NCHW, RGB, float32 and the label dtype",
+      "I can run a module from the repository root"
+    ]
+  },
+  {
+    "id": "02",
+    "slug": "opencv",
+    "title": "Count objects with OpenCV",
+    "stage": "Images and data",
+    "time": "2–3 hours",
+    "requires": [
+      1,
+      33,
+      34
+    ],
+    "related": [
+      57
+    ],
+    "summary": "Turn a photograph into a binary mask and a measured object count.",
+    "file": "labs/02-opencv.md",
+    "checks": [
+      "Saved the source photo, mask and annotated count",
+      "Compared two area/kernel settings against a manual count",
+      "Explained a merged-object or illumination failure"
+    ]
+  },
+  {
+    "id": "03",
+    "slug": "data",
+    "title": "Build and audit your dataset",
+    "stage": "Images and data",
+    "time": "3–4 hours",
+    "requires": [
+      12,
+      16
+    ],
+    "related": [
+      28,
+      41,
+      45,
+      47
+    ],
+    "summary": "Write label rules, inspect duplicates and split independent groups before training.",
+    "file": "labs/03-data.md",
+    "checks": [
+      "Wrote label definitions and source/group metadata",
+      "Resolved corrupt images, duplicates and missing groups",
+      "Saved a fixed manifest and inspected class counts in every split"
+    ]
+  },
+  {
+    "id": "04",
+    "slug": "classifier",
+    "title": "Train a real-image classifier",
+    "stage": "Train and evaluate",
+    "time": "3–4 hours",
+    "requires": [
+      27,
+      30,
+      38,
+      40,
+      41
+    ],
+    "related": [],
+    "summary": "Train a small CNN on CIFAR-10, compare a baseline and inspect confident errors.",
+    "file": "labs/04-classifier.md",
+    "checks": [
+      "Saved a protocol, learning history and validation predictions",
+      "Compared accuracy and class recall with the majority baseline",
+      "Explained three failures and kept the test set untouched"
+    ]
+  },
+  {
+    "id": "05",
+    "slug": "transfer",
+    "title": "Transfer learning and fine-tuning",
+    "stage": "Train and evaluate",
+    "time": "3–4 hours",
+    "requires": [
+      39,
+      41,
+      55
+    ],
+    "related": [
+      32
+    ],
+    "summary": "Train a pretrained ResNet head, then unfreeze it for a controlled fine-tuning experiment.",
+    "file": "labs/05-transfer.md",
+    "checks": [
+      "Completed a frozen-head experiment on the fixed split",
+      "Completed fine-tuning initialized from the frozen model",
+      "Compared validation results and explained frozen BatchNorm"
+    ]
+  },
+  {
+    "id": "06",
+    "slug": "diagnostics",
+    "title": "Debug and resume training",
+    "stage": "Train and evaluate",
+    "time": "2–3 hours",
+    "requires": [
+      20,
+      32,
+      39
+    ],
+    "related": [
+      46
+    ],
+    "summary": "Use learning curves, reproducible resume and one-change experiments to diagnose training.",
+    "file": "labs/06-diagnostics.md",
+    "checks": [
+      "Rendered a learning-curve report and interpreted the gap",
+      "Resumed last.pt with matching settings",
+      "Ran one controlled comparison and recorded its limitation"
+    ]
+  },
+  {
+    "id": "07",
+    "slug": "detection",
+    "title": "Detect people in photographs",
+    "stage": "Beyond classification",
+    "time": "4–6 hours",
+    "requires": [
+      42,
+      44,
+      56
+    ],
+    "related": [
+      65
+    ],
+    "summary": "Fine-tune a detector, inspect boxes and compute explicitly defined AP50.",
+    "file": "labs/07-detection.md",
+    "checks": [
+      "Verified boxes and masks before training",
+      "Saved trained weights, AP50 and prediction overlays",
+      "Explained duplicate detections, missing objects and the AP convention"
+    ]
+  },
+  {
+    "id": "08",
+    "slug": "segmentation",
+    "title": "Segment people pixel by pixel",
+    "stage": "Beyond classification",
+    "time": "3–5 hours",
+    "requires": [
+      43,
+      44,
+      56
+    ],
+    "related": [],
+    "summary": "Train a small U-Net and compare foreground overlap against an all-background baseline.",
+    "file": "labs/08-segmentation.md",
+    "checks": [
+      "Verified categorical masks and joint spatial transforms",
+      "Compared foreground IoU/Dice with the background baseline",
+      "Inspected boundary errors and explained semantic versus instance masks"
+    ]
+  },
+  {
+    "id": "09",
+    "slug": "geometry",
+    "title": "Align views and track motion",
+    "stage": "Beyond classification",
+    "time": "3–4 hours",
+    "requires": [
+      50,
+      52,
+      58,
+      59,
+      60
+    ],
+    "related": [],
+    "summary": "Estimate a robust homography and track image features through a short video.",
+    "file": "labs/09-geometry.md",
+    "checks": [
+      "Saved inlier matches, a warp and reprojection errors",
+      "Saved a tracked video and feature survival statistics",
+      "Explained parallax, occlusion and why feature tracks are not object IDs"
+    ]
+  },
+  {
+    "id": "10",
+    "slug": "foundation",
+    "title": "Retrieve images and prompt masks",
+    "stage": "Optional extension",
+    "time": "2–4 hours",
+    "requires": [
+      54,
+      55
+    ],
+    "related": [
+      65
+    ],
+    "summary": "Use CLIP and SAM, then measure how wording and point prompts affect their outputs.",
+    "file": "labs/10-foundation.md",
+    "checks": [
+      "Saved CLIP rankings for two prompt wordings",
+      "Saved SAM masks for two points on the same image",
+      "Distinguished similarity/predicted quality from measured accuracy"
+    ]
+  },
+  {
+    "id": "11",
+    "slug": "inference",
+    "title": "Use your model on new photos",
+    "stage": "Ship and explain",
+    "time": "2–3 hours",
+    "requires": [
+      28,
+      41
+    ],
+    "related": [
+      39,
+      47
+    ],
+    "summary": "Reload a saved classifier, preserve preprocessing and measure warm inference latency.",
+    "file": "labs/11-inference.md",
+    "checks": [
+      "Reloaded best.pt and predicted a new local photograph",
+      "Recorded latency scope, hardware and preprocessing",
+      "Documented an unknown-class or shifted-image failure"
+    ]
+  },
+  {
+    "id": "12",
+    "slug": "capstone",
+    "title": "Build an independent CV project",
+    "stage": "Ship and explain",
+    "time": "6–10 hours",
+    "requires": [
+      45
+    ],
+    "related": [
+      46,
+      47,
+      48
+    ],
+    "summary": "Choose your data and task, defend the evaluation, and hand over a reproducible result.",
+    "file": "labs/12-capstone.md",
+    "checks": [
+      "Completed the project report with fixed data and comparison protocol",
+      "Evaluated the held-out test only after choosing the model",
+      "Reproduced inference from the saved artifact and documented three failures"
+    ]
+  }
 ]

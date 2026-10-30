@@ -2,7 +2,7 @@
 
 **Module:** 10 | **Study time:** 60 minutes learning + 30 minutes practice.
 
-**Before you begin:** Lesson 36; revisit any symbols you cannot yet explain.
+**Before you begin:** Lessons 02, 07 and 27; revisit any symbols you cannot yet explain.
 
 **Goal:** Write a shaped forward pass and explain why nonlinear activations change what a network can represent.
 

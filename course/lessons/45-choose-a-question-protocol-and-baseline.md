@@ -10,7 +10,7 @@
 
 Choose recognition, single-object localization or binary segmentation. For recognition, a question could be: does a small CNN improve bar-orientation accuracy under held-out noise compared with a linear classifier? It names the comparison, task and evaluation condition. A vague goal such as “build the best vision model” supplies no controlled decision.
 
-The supplied notebooks use generated data so you can understand targets, coordinates and noise without needing a download. Real datasets are a later extension with additional questions about labeling, access and sampling. A synthetic result establishes behavior for its generator; do not treat it as evidence of real-scene robustness.
+The supplied notebooks use generated data so you can understand targets, coordinates and noise without needing a download. Practical Lab 12 takes the same protocol to real images, which adds questions about labeling, access and sampling. A synthetic result establishes behavior for its generator; do not treat it as evidence of real-scene robustness.
 
 ## Write a protocol before fitting
 

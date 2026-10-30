@@ -1,6 +1,6 @@
 # Lesson 55 - Attention and vision transformers
 
-**Module:** 14 | **Study time:** 60 minutes learning + 30 minutes practice.
+**Module:** 11 | **Study time:** 60 minutes learning + 30 minutes practice.
 
 **Before you begin:** Lessons 06, 27 and 41; revisit dot products, the softmax and the inductive bias of convolutions if they feel unfamiliar.
 

@@ -1,10 +1,12 @@
 # Build an independent CV project
 
+This lab is the course capstone: Lessons 45-48 teach the method, and this project applies it. There is one capstone, not two. If you have no local Python or GPU, extend the synthetic starter in the Module 12 notebook and use the same report template.
+
 Choose a modest question with data you can inspect. Examples: distinguish two types of household objects across new capture sessions; count objects under changing illumination; compare a segmentation model with a threshold baseline; or align a document under viewpoint change. You do not need to use every architecture in the course.
 
 ## Declare the protocol
 
-Use the downloadable practical report template. Write the task, population, label definitions, input/output contract and baseline. Save independent groups and fixed train/validation/test IDs before training. Decide the primary metric and how you will handle empty masks, missing objects and unknown classes. State your compute budget and one planned improvement.
+Use the downloadable capstone report template. Write the task, population, label definitions, input/output contract and baseline. Save independent groups and fixed train/validation/test IDs before training. Decide the primary metric and how you will handle empty masks, missing objects and unknown classes. State your compute budget and one planned improvement.
 
 Do not select the question after finding the most flattering result. If you use supplied CIFAR or PennFudan data, identify the source, subset limits and split limitations. Your own real-data project should include a data audit and annotation review.
 

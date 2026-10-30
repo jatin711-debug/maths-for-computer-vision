@@ -20,13 +20,13 @@ A smoothing kernel such as an all-ones 3x3 matrix divided by nine computes a loc
 
 ## Linearity and boundaries
 
-With a fixed kernel and zero bias, filtering is linear in the image: \(\operatorname{filter}(aX+bY)=a\operatorname{filter}(X)+b\operatorname{filter}(Y)\). Adding bias makes the map affine. Applying ReLU afterward makes the overall operation nonlinear. Padding rules such as zero, reflection or wraparound alter boundary responses and must be declared.
+With a fixed kernel and zero bias, filtering is linear in the image: \(\operatorname{filter}(aX+bY)=a\operatorname{filter}(X)+b\operatorname{filter}(Y)\). Adding bias makes the map affine. Clipping negative responses to zero afterward makes the overall operation nonlinear. Padding rules such as zero, reflection or wraparound alter boundary responses and must be declared.
 
 Weight sharing reduces parameters and gives a translation-related structure in the interior. It does not make every final classifier automatically translation invariant: boundaries, stride, pooling and a flattened dense head can all affect the behavior.
 
 ## Your calculation first
 
-Use the workbench to move a 3x3 kernel over a synthetic 5x5 image. Write one patch and compute its response by hand, then compare. In the vision notebook, verify your loop implementation against a second calculation before treating its output as evidence about learned features.
+Use the workbench to move a 3x3 kernel over a synthetic 5x5 image. Write one patch and compute its response by hand, then compare. In the Module 09 notebook, verify your loop implementation against a second calculation before treating its output as evidence about learned features.
 
 ## Practice before opening the answers
 

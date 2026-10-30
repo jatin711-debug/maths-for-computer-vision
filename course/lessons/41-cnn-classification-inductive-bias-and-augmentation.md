@@ -4,7 +4,7 @@
 
 **Before you begin:** Lesson 40; revisit any symbols you cannot yet explain.
 
-**Goal:** Connect local shared weights to a trainable image classifier and choose label-preserving transformations.
+**Goal:** Connect local shared weights to a trainable image classifier, choose label-preserving transformations and reuse a pretrained network.
 
 ## A CNN chooses a structured family of functions
 
@@ -14,7 +14,7 @@ For X=(N,8,8,1), a valid 3x3 layer with four kernels gives (N,6,6,4). ReLU keeps
 
 ## Shared weights also share gradient contributions
 
-An output response is \(z_{nijc}=\sum_{a,b,d}X_{n,i+a,j+b,d}K_{abdc}+b_c\). Its kernel gradient accumulates input-patch values weighted by upstream sensitivities across every sample and placement. Weight sharing is present in both the forward and backward calculations. The notebook uses NumPy patch extraction and array contractions for this small CNN, and checks selected gradients before training.
+An output response is \(z_{nijc}=\sum_{a,b,d}X_{n,i+a,j+b,d}K_{abdc}+b_c\). Its kernel gradient accumulates input-patch values weighted by upstream sensitivities across every sample and placement. Weight sharing is present in both the forward and backward calculations. The Module 11 notebook uses NumPy patch extraction and array contractions for this small CNN, and checks selected gradients before training.
 
 ## Equivariance differs from invariance
 
@@ -27,6 +27,14 @@ An augmentation must preserve the intended target, or transform it consistently.
 Compare a CNN and linear baseline on the same synthetic bars and split. Then test a declared distribution change, such as new noise or positions, without retuning on those test outcomes. High toy accuracy teaches mechanics; it is not evidence of broad real-image recognition ability.
 
 Save filter responses, one correct prediction and one failure or stressful case. Explain the shapes, objective and architectural assumptions before discussing accuracy. This connects the entire course: linear maps, local filtering, probabilities, gradients and evaluation.
+
+## Reuse a trained network: transfer learning
+
+Training every weight from random values needs a lot of data. Transfer learning starts from a network trained on a larger dataset, because its early layers have already learned general features such as edges and textures. Keep that backbone and replace the final head, which was tied to the old classes. To use the backbone as a feature extractor, freeze it so only the head's weights change: a backbone giving 512 features and a new ten-class head train just \(512\cdot10+10=5130\) parameters, however large the backbone is.
+
+Fine-tuning then unfreezes some or all of the backbone and continues with a learning rate about ten times smaller. The weights are already useful, so small steps adapt them while large steps can destroy them. Wait until the head has settled, because a random head sends large gradients back into good weights.
+
+Two things stay your responsibility. The preprocessing the weights were trained with, including input size, colour order and normalization, is part of the model. And pretrained weights do not replace evaluation: keep an independent test set and compare the frozen and fine-tuned models on the same split. Practical Lab 05 runs both strategies.
 
 ## Practice before opening the answers
 

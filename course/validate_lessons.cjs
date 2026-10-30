@@ -27,7 +27,7 @@ function value(id,params,label) {
   return pair[1];
 }
 function numerical(name,fn) {report.numericalChecks++;check(name,fn);}
-check('Every lesson listed in the course map exists',()=>assert.deepEqual(course.lessons.map(l=>l.id),course.modules.flatMap(m=>m.lessons.map(x=>parseInt(x,10)))));
+check('Every lesson listed in the course map exists',()=>assert.deepEqual(course.lessons.map(l=>l.id),course.modules.flatMap(m=>m.lessons.map(x=>parseInt(x,10))).sort((a,b)=>a-b)));
 for(const lesson of course.lessons) {
   const id=lesson.id,g=guides[id],t=teaching[id];
   report.lessons++;

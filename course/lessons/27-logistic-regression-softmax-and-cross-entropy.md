@@ -24,7 +24,7 @@ One-hot vectors here identify class membership, not a class ordering. Cross entr
 
 ## Train a transparent baseline
 
-The learning notebook trains a small linear classifier using these exact formulas, with training-only scaling and a held-out validation split. This is a useful benchmark before adding nonlinear layers. Inspect class errors and a confusion matrix; accuracy alone can conceal failures on a rare class.
+The Module 07 notebook trains a small linear classifier using these exact formulas, with training-only scaling and a held-out validation split. This is a useful benchmark before adding nonlinear layers. Inspect class errors and a confusion matrix; accuracy alone can conceal failures on a rare class.
 
 ## Practice before opening the answers
 

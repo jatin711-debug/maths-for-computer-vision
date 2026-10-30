@@ -2,7 +2,7 @@
 
 **Module:** 08 | **Study time:** 60 minutes learning + 30 minutes practice.
 
-**Before you begin:** Lesson 28; revisit any symbols you cannot yet explain.
+**Before you begin:** Lessons 13 and 18; revisit any symbols you cannot yet explain.
 
 **Goal:** Derive a learning update and its convergence range for a simple quadratic.
 

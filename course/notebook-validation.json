@@ -1,22 +1,57 @@
 [
   {
-    "file": "linear-algebra-and-pca.ipynb",
-    "executed_code_cells": 4,
-    "result": "passed"
-  },
-  {
-    "file": "calculus-and-probability.ipynb",
-    "executed_code_cells": 4,
-    "result": "passed"
-  },
-  {
-    "file": "learning-and-backprop.ipynb",
-    "executed_code_cells": 4,
-    "result": "passed"
-  },
-  {
-    "file": "vision-and-metrics.ipynb",
+    "file": "module-02-vectors-and-similarity.ipynb",
     "executed_code_cells": 5,
+    "result": "passed"
+  },
+  {
+    "file": "module-09-filters-and-frequency.ipynb",
+    "executed_code_cells": 6,
+    "result": "passed"
+  },
+  {
+    "file": "module-03-least-squares.ipynb",
+    "executed_code_cells": 4,
+    "result": "passed"
+  },
+  {
+    "file": "module-04-svd-and-pca.ipynb",
+    "executed_code_cells": 6,
+    "result": "passed"
+  },
+  {
+    "file": "module-05-gradients-and-checks.ipynb",
+    "executed_code_cells": 4,
+    "result": "passed"
+  },
+  {
+    "file": "module-06-noise-and-uncertainty.ipynb",
+    "executed_code_cells": 5,
+    "result": "passed"
+  },
+  {
+    "file": "module-08-optimization.ipynb",
+    "executed_code_cells": 5,
+    "result": "passed"
+  },
+  {
+    "file": "module-07-linear-classifier.ipynb",
+    "executed_code_cells": 5,
+    "result": "passed"
+  },
+  {
+    "file": "module-10-backprop-from-scratch.ipynb",
+    "executed_code_cells": 6,
+    "result": "passed"
+  },
+  {
+    "file": "module-11-detection-and-segmentation.ipynb",
+    "executed_code_cells": 7,
+    "result": "passed"
+  },
+  {
+    "file": "module-12-capstone-starter.ipynb",
+    "executed_code_cells": 4,
     "result": "passed"
   }
 ]

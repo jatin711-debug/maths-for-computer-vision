@@ -338,6 +338,30 @@
     }},
   ]);
 
+  P.add(41, [
+    {key: 'frozen-head-params', skill: 'Trainable parameters when the backbone is frozen', make(r) {
+      const D = r.pick([512, 1024, 1280, 2048]), C = r.pick([2, 5, 10, 20, 37]), M = r.pick([3, 5, 11, 25]);
+      const head = D * C + C, percent = 100 * head / (M * 1e6 + head);
+      return {prompt: Q`A pretrained backbone has ${M} million parameters and outputs ${D} features. You freeze it and add a new biased dense head for ${C} classes. How many parameters does training update? What percentage of all parameters is that?`,
+        answers: [{label: 'Parameters updated', value: head, tol: 0}, {label: 'Percent of all parameters', value: percent, tol: Math.max(.002, percent * .02)}],
+        hint: Q`A frozen backbone contributes nothing. The head has one weight per feature for each class, plus one bias per class.`,
+        solution: Q`Head: \(${D}\cdot${C}+${C}=${head}\). Share: \(${head}/(${M * 1e6}+${head})\) is about ${percent.toFixed(3)}%. Almost every weight is reused unchanged.`};
+    }},
+    {key: 'transfer-strategy', skill: 'Choose a transfer-learning strategy', make(r) {
+      const few = r.pick([120, 200, 300]), many = r.pick([20000, 50000, 80000]);
+      const FREEZE = 'Freeze the backbone and train only the new head', TUNE = 'Unfreeze the backbone with a smaller learning rate', KEEP = 'Raise the learning rate and unfreeze everything at once';
+      const cases = [
+        [`You have ${few} labelled photos and a task close to the data the backbone was trained on. Which is the safest first step?`, FREEZE, 'With few examples, training only the small head limits overfitting.'],
+        [`Your new head has settled, validation accuracy has levelled off and you have ${many} labelled images. What is the natural next step?`, TUNE, 'The head is no longer random and there is enough data to adapt the backbone with small steps.'],
+        [`You just attached a randomly initialized head to a pretrained backbone. Which is the safest first step?`, FREEZE, 'A random head sends large gradients back through the network, so let it settle first.'],
+      ];
+      const [prompt, right, why] = r.pick(cases);
+      return {prompt, answers: [choose(r, right, [FREEZE, TUNE, KEEP])],
+        hint: 'Ask how much data you have and whether the head is still random.',
+        solution: `${right}. ${why}`};
+    }},
+  ]);
+
   P.add(42, [
     {key: 'box-iou', skill: 'Intersection, union and IoU of two boxes', make(r) {
       const apart = r.bool(0.1); let A, B; do { A = randBox(r, 0, 6); B = randBox(r, 0, 6); } while ((interW(A, B) * interH(A, B) === 0) !== apart || A.join() === B.join());

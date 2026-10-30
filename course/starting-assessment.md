@@ -2,6 +2,8 @@
 
 Spend about 25 minutes. No searching; "not sure" is useful. Show reasoning. Questions 9-11 preview later modules, so unfamiliarity is expected.
 
+The interactive version on the Practice page shows each worked answer, lets you mark yourself and then suggests where to start. Nothing is graded.
+
 1. Solve 3x+5=20. Show one intermediate step.
 
 2. For f(x)=2x+1, compute f(3). What is the slope of its graph?

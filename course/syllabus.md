@@ -1,37 +1,44 @@
-**Course expansion:** All 68 lessons are available in the interactive webpage: the 48-lesson core plus five extension modules (Lessons 49-68): image geometry and modern architectures, local features and tracking, two-view geometry and neural rendering, and set prediction and generative models. Every lesson opens with plain-word primers for its new ideas, also collected in the Glossary. Every lesson has worked explanations, auto-checked practice with fresh numbers, four written exercises with solutions, a checkpoint and selected PDF readings that open at the cited page. Study at your own pace; the 24-week core schedule and the 4-week extension are guides.
+**Course overview:** All 68 lessons are available in the interactive webpage: a 50-lesson core plus an optional 18-lesson extension. Every lesson opens with plain-word primers for its new ideas, also collected in the Glossary. Every lesson has worked explanations, auto-checked practice with fresh numbers, four written exercises with solutions, a checkpoint and selected PDF readings that open at the cited page. Study at your own pace; the weekly schedule is a guide.
 
-# Maths for Computer Vision - 24-week course with a 4-week extension
+# Maths for Computer Vision - 28-week core with a 12-week extension
 
-Designed for a learner who needs a refresher, can study 8-10 hours weekly, and wants recognition, detection and segmentation. The core plan is 192 hours plus up to 48 hours of review. Timing is adjustable; advance by understanding, not by date.
+Designed for a learner who needs a refresher, can study 8-10 hours weekly, and wants recognition, detection and segmentation. The core plan is 246 hours and the extension adds 100, practical labs included. Timing is adjustable; advance by understanding, not by date.
 
 ## Course outcomes
 
-Read CV mathematics, derive small models and their gradients, implement numerical ideas, justify losses and metrics, and evaluate experiments. This is a strong foundation with an entry into advanced study; expertise and research depth require further practice.
+Read CV mathematics, derive small models and their gradients, implement numerical ideas, train and evaluate real vision models, justify losses and metrics, and evaluate experiments. This is a strong foundation with an entry into advanced study; expertise and research depth require further practice.
+
+## How to read this order
+
+Lesson and module numbers are permanent labels, not a reading order, so follow the table below. Module 09 comes third because filters need only vectors, which puts real image work in the first six weeks. Gradient descent (Module 08) comes before the classifier that uses it (Module 07). Lessons 32 and 35 sit in Module 10 because they need neural-network layers. Lessons 55 and 56 sit in Module 11 because detection and segmentation depend on them.
 
 ## Weekly rhythm
 
-Two 90-minute concept sessions, two 60-minute practice sessions, a 120-minute lab, and a 60-minute checkpoint: 8 hours. Optional extra time is for consolidation. Each module spans two weeks and four concept lessons.
+A usual week has two 90-minute concept sessions, a 90-minute notebook or experiment session, a 60-minute reading session, a 90-minute practice session and a 60-minute checkpoint review: 8 hours. Weeks with a practical lab take up to 10 hours, and two weeks in Module 11 go entirely to labs. A week with one lesson has a second pass in place of the other, because that material needs the time. Weeks 1-2 use the starter schedule in first-two-weeks.md.
 
 ## Reading strategy
 
 Lessons first, selected sections second, exercises third. Use MML as the mathematical bridge; CS205A for numerical depth; Szeliski for CV; Guo selectively for later geometry. Section numbers refer to verified contents, not PDF viewer page numbers. Stretch topics are optional.
 
-| Weeks | Module | Main result |
-|---|---|---|
-| 1-2 | 01. Refresh the language of maths | A one-page explanation plus the completed Week 1-2 notebook. |
-| 3-4 | 02. Vectors, geometry and linear maps | A shape-annotated forward pass and a similarity-classification notebook. |
-| 5-6 | 03. Linear systems and least squares | A fitting report with clean/noisy/outlier comparisons and limitations. |
-| 7-8 | 04. Eigenvectors, SVD and PCA | An image-compression experiment and PCA baseline. |
-| 9-10 | 05. Calculus for learning | A worked chain-rule derivation and a verified gradient-check utility. |
-| 11-12 | 06. Probability, noise and uncertainty | A noise experiment with uncertainty estimates and a written interpretation. |
-| 13-14 | 07. Statistical learning and losses | A recognition baseline with losses, confusion matrix and split protocol. |
-| 15-16 | 08. Optimization and reliable training | An optimization experiment with justified settings and failure analysis. |
-| 17-18 | 09. Images, convolution and frequency | A from-scratch filter notebook with an output-shape calculation sheet. |
-| 19-20 | 10. Neural networks and backpropagation | A small neural network with gradient checks and a training report. |
-| 21-22 | 11. Recognition, detection and segmentation | A CNN experiment with either a localization or segmentation extension. |
-| 23-24 | 12. Capstone and a route into research | A 3-5 page report, runnable experiment and a 10-minute mathematical explanation. |
-| 25-26 | 13. Geometry of images and cameras (extension) | A rectification notebook with a robust homography estimate and a residual analysis. |
-| 27-28 | 14. Matrix calculus and modern architectures (extension) | An attention-and-pyramid notebook with gradient checks and a short written explanation. |
+| Step | Weeks | Module | Main result |
+|---|---|---|---|
+| 1 | 1-2 | 01. Refresh the language of maths | A one-page explanation plus the completed Week 1-2 notebook. |
+| 2 | 3-4 | 02. Vectors, geometry and linear maps | A shape-annotated forward pass and a similarity-classification notebook. |
+| 3 | 5-6 | 09. Images, convolution and frequency | A from-scratch filter notebook with a frequency-response comparison. |
+| 4 | 7-8 | 03. Linear systems and least squares | A fitting report with clean/noisy/outlier comparisons and limitations. |
+| 5 | 9-10 | 04. Eigenvectors, SVD and PCA | An image-compression experiment and PCA baseline. |
+| 6 | 11-12 | 05. Calculus for learning | A worked chain-rule derivation and a verified gradient-check utility. |
+| 7 | 13-14 | 06. Probability, noise and uncertainty | A noise experiment with uncertainty estimates and a written interpretation. |
+| 8 | 15-16 | 08. Optimization: descent, momentum and curvature | An optimization experiment with justified settings and failure analysis. |
+| 9 | 17-18 | 07. Statistical learning and losses | A recognition baseline with losses, confusion matrix and split protocol. |
+| 10 | 19-21 | 10. Neural networks and backpropagation | A small neural network with gradient checks and a training report. |
+| 11 | 22-26 | 11. Recognition, detection and segmentation | A CNN experiment with a localization or segmentation extension, plus the evidence checklists for Practical Labs 04-08. |
+| 12 | 27-28 | 12. Capstone and a route into research | A 3-5 page report using the capstone template, a runnable experiment and a 10-minute mathematical explanation. |
+| 13 | 29-30 | 13. Geometry of images and cameras (extension) | A rectification notebook with a robust homography estimate and a residual analysis. |
+| 14 | 31 | 14. Matrix calculus and information theory (extension) | A gradient-and-information notebook with finite-difference checks and a short written explanation. |
+| 15 | 32-34 | 15. Local features, motion and tracking (extension) | A features-and-tracking notebook: corner map, ratio-test precision curve, flow field and a tracked trajectory. |
+| 16 | 35-37 | 16. Two-view geometry and neural rendering (extension) | A two-view notebook: estimated F with epipolar distances, a disparity map with depth error bars, and a rendered ray with its weights. |
+| 17 | 38-40 | 17. Set prediction, generative models and splatting (extension) | A generative-models notebook: an EM log-likelihood curve, a diffusion sampling trajectory and a splatted image. |
 
 ## Module 01 - Refresh the language of maths (Weeks 1-2)
 
@@ -71,7 +78,6 @@ Without notes: explain scalar/vector/matrix, compute a four-pixel mean and an MS
 
 A one-page explanation plus the completed Week 1-2 notebook.
 
-
 ## Module 02 - Vectors, geometry and linear maps (Weeks 3-4)
 
 Understand features, similarities and the transformations performed by a neural-network layer.
@@ -102,6 +108,10 @@ For x=[1,2] and w=[3,-1], compute w dot x. Apply A=[[2,0],[0,1]] to x and descri
 
 Build a nearest-centroid classifier for synthetic 8x8 bars. Compare Euclidean distance and normalized dot-product similarity. Fit centroids using training data only.
 
+### Practical labs in this module
+
+- Lab 01: Your local vision lab (week 4)
+
 ### Mastery gate
 
 Explain why a linear layer can change feature dimension and why matrix-product order matters. Solve three unseen shape questions.
@@ -110,8 +120,48 @@ Explain why a linear layer can change feature dimension and why matrix-product o
 
 A shape-annotated forward pass and a similarity-classification notebook.
 
+## Module 09 - Images, convolution and frequency (Weeks 5-6)
 
-## Module 03 - Linear systems and least squares (Weeks 5-6)
+Build the mathematical picture behind filters: how an image is sampled, filtered and described by frequency.
+
+### Lessons
+
+- 33 Sampling, aliasing and image coordinates
+- 34 Discrete convolution and cross-correlation
+- 36 Fourier transforms, smoothing and edge responses
+
+### By the end
+
+- Compute a filter response by hand.
+- Distinguish mathematical convolution from unflipped cross-correlation.
+- Explain aliasing and why to blur before downsampling.
+- Connect smoothing and edge detection to frequency content.
+
+### Targeted reading
+
+CV 2.3.1, 3.2, 3.4 and 3.5. MML 3.7 and complex-number reminders as needed. Read the indicated headings; do not read all of Chapter 3 at once.
+
+### Practice
+
+Convolve [1,2,3] with [1,1] in full mode. Find the response of the kernel [[1,0],[0,-1]] on the patch [[1,2],[3,4]]. Explain why two adjacent objects can become indistinguishable after excessive downsampling.
+
+### Lab
+
+Implement a small 2D cross-correlation using loops, compare it with a reference calculation, and test smoothing and edge kernels on synthetic images.
+
+### Practical labs in this module
+
+- Lab 02: Count objects with OpenCV (week 6)
+
+### Mastery gate
+
+Compute a filter response on an unseen patch, predict what a zero-sum kernel does on a flat region, and explain why blurring comes before downsampling.
+
+### Submit
+
+A from-scratch filter notebook with a frequency-response comparison.
+
+## Module 03 - Linear systems and least squares (Weeks 7-8)
 
 Learn how noisy measurements become a fitting problem and why stable solvers matter.
 
@@ -149,8 +199,7 @@ State when the solution is unique, distinguish residual from measurement noise, 
 
 A fitting report with clean/noisy/outlier comparisons and limitations.
 
-
-## Module 04 - Eigenvectors, SVD and PCA (Weeks 7-8)
+## Module 04 - Eigenvectors, SVD and PCA (Weeks 9-10)
 
 See how features can be compressed and why directions of variation matter.
 
@@ -180,6 +229,10 @@ Find the eigenvalues of diag(3,1). For singular values [5,2,1], find the squared
 
 Compress one grayscale image at several ranks; compare storage and error. Apply training-fitted PCA before the nearest-centroid classifier.
 
+### Practical labs in this module
+
+- Lab 03: Build and audit your dataset (week 10-11)
+
 ### Mastery gate
 
 Distinguish eigenvalues from singular values, show a rank-k reconstruction, and explain one case where compression harms recognition.
@@ -188,8 +241,7 @@ Distinguish eigenvalues from singular values, show a rank-k reconstruction, and 
 
 An image-compression experiment and PCA baseline.
 
-
-## Module 05 - Calculus for learning (Weeks 9-10)
+## Module 05 - Calculus for learning (Weeks 11-12)
 
 Understand derivatives as sensitivity and the chain rule as the engine of backpropagation.
 
@@ -219,6 +271,10 @@ For L(w)=(3w-2)^2, find dL/dw and evaluate at w=1. For f(x,y)=x^2+3xy, compute i
 
 Build a scalar computational graph and a gradient checker. Sweep the finite-difference step to observe truncation and roundoff error.
 
+### Practical labs in this module
+
+- Lab 03: Build and audit your dataset (week 10-11)
+
 ### Mastery gate
 
 Derive the gradient of a new two-stage expression, state its shape, and explain why the numerical check has a useful step-size range.
@@ -227,8 +283,7 @@ Derive the gradient of a new two-stage expression, state its shape, and explain 
 
 A worked chain-rule derivation and a verified gradient-check utility.
 
-
-## Module 06 - Probability, noise and uncertainty (Weeks 11-12)
+## Module 06 - Probability, noise and uncertainty (Weeks 13-14)
 
 Understand what model probabilities mean and how noise changes the reliability of predictions.
 
@@ -266,8 +321,44 @@ Solve an unseen Bayes problem, compute a variance, and explain why a continuous 
 
 A noise experiment with uncertainty estimates and a written interpretation.
 
+## Module 08 - Optimization: descent, momentum and curvature (Weeks 15-16)
 
-## Module 07 - Statistical learning and losses (Weeks 13-14)
+Understand learning-rate choices, gradients and curvature, and why a step can diverge.
+
+### Lessons
+
+- 29 Gradient descent and optimality conditions
+- 30 Mini-batch SGD, momentum and adaptive steps
+- 31 Convexity, curvature and constrained problems
+
+### By the end
+
+- Derive and apply a gradient-descent update.
+- Compare mini-batch SGD, momentum and adaptive steps on one objective.
+- Explain the difference between convex and nonconvex objectives.
+- Use a loss curve to tell a divergent step size from a slow one.
+
+### Targeted reading
+
+MML 7.1-7.3. CS205A Chapters 8-9; Chapter 10 optional. CV 5.3.6 and Appendix A.3.
+
+### Practice
+
+For L(w)=(w-3)^2, start at w=0 and compute one step with learning rate 0.1. Derive the convergence range 0<learning rate<1 for this particular quadratic. Do not generalize that range to every loss.
+
+### Lab
+
+Compare learning rates and momentum on a stretched quadratic and on a small least-squares image-fitting problem. Keep the data and initialization controlled.
+
+### Mastery gate
+
+Explain a divergent run, derive an update without notes, and distinguish a stationary point from a guaranteed global minimum.
+
+### Submit
+
+An optimization experiment with justified settings and failure analysis.
+
+## Module 07 - Statistical learning and losses (Weeks 17-18)
 
 Connect loss functions to assumptions about data, then build a transparent recognition baseline.
 
@@ -295,7 +386,7 @@ For a correct-class probability of 0.8, compute -ln(0.8). Explain why predicting
 
 ### Lab
 
-Train logistic or softmax regression on synthetic image vectors. Compare a linear model with a nearest-centroid baseline; reserve test data until the final comparison.
+Train softmax regression on synthetic image vectors with the gradient descent you learned in Module 08. Compare it with a nearest-centroid baseline; reserve test data until the final comparison.
 
 ### Mastery gate
 
@@ -305,93 +396,16 @@ Explain the statistical assumption behind MSE and cross entropy and spot two exa
 
 A recognition baseline with losses, confusion matrix and split protocol.
 
+## Module 10 - Neural networks and backpropagation (Weeks 19-21)
 
-## Module 08 - Optimization and reliable training (Weeks 15-16)
-
-Understand learning-rate choices, gradients, curvature and training failure modes.
-
-### Lessons
-
-- 29 Gradient descent and optimality conditions
-- 30 Mini-batch SGD, momentum and adaptive steps
-- 31 Convexity, curvature and constrained problems
-- 32 Initialization, scaling and optimization diagnostics
-
-### By the end
-
-- Derive and apply a gradient-descent update.
-- Separate optimization failure from generalization failure.
-- Explain the difference between convex and nonconvex objectives.
-- Use learning curves to diagnose training behavior.
-
-### Targeted reading
-
-MML 7.1-7.3. CS205A Chapters 8-9; Chapter 10 optional. CV 5.3.6 and Appendix A.3.
-
-### Practice
-
-For L(w)=(w-3)^2, start at w=0 and compute one step with learning rate 0.1. Derive the convergence range 0<learning rate<1 for this particular quadratic. Do not generalize that range to every loss.
-
-### Lab
-
-Compare learning rates and momentum on a stretched quadratic and your linear classifier. Keep the data split and initialization controlled.
-
-### Mastery gate
-
-Explain a divergent run, derive an update without notes, and distinguish a stationary point from a guaranteed global minimum.
-
-### Submit
-
-An optimization experiment with justified settings and failure analysis.
-
-
-## Module 09 - Images, convolution and frequency (Weeks 17-18)
-
-Build the mathematical picture behind filters and convolutional layers.
-
-### Lessons
-
-- 33 Sampling, aliasing and image coordinates
-- 34 Discrete convolution and cross-correlation
-- 35 Padding, stride, channels and receptive fields
-- 36 Fourier transforms, smoothing and edge responses
-
-### By the end
-
-- Compute a filter response by hand.
-- Distinguish mathematical convolution from unflipped cross-correlation.
-- Calculate output shapes and receptive fields.
-- Connect smoothing and edge detection to frequency content.
-
-### Targeted reading
-
-CV 2.3.1, 3.2, 3.4 and 3.5; 5.4. MML 3.7 and complex-number reminders as needed. Read the indicated headings; do not read all of Chapter 3 at once.
-
-### Practice
-
-For input length 7, kernel size 3, padding 1 and stride 2, compute output length. Convolve [1,2,3] with [1,1] in full mode. Explain why two adjacent objects can become indistinguishable after excessive downsampling.
-
-### Lab
-
-Implement a small 2D cross-correlation using loops, compare it with a reference calculation, and test smoothing and edge kernels on synthetic images.
-
-### Mastery gate
-
-Get shapes correct for an unseen convolution layer and explain how weight sharing differs from a fully connected layer.
-
-### Submit
-
-A from-scratch filter notebook with an output-shape calculation sheet.
-
-
-## Module 10 - Neural networks and backpropagation (Weeks 19-20)
-
-Derive a trainable network before relying on a deep-learning framework.
+Derive a trainable network before relying on a deep-learning framework, then add the convolutional layers and training diagnostics a vision model needs.
 
 ### Lessons
 
 - 37 Affine layers, activations and expressive power
 - 38 Backpropagation through a two-layer network
+- 32 Initialization, scaling and optimization diagnostics
+- 35 Padding, stride, channels and receptive fields
 - 39 Regularization, normalization and numerical stability
 - 40 Framework autograd compared with your own gradients
 
@@ -401,14 +415,16 @@ Derive a trainable network before relying on a deep-learning framework.
 - Derive weight and bias gradients.
 - Verify gradients numerically before training.
 - Explain why stacking linear layers without nonlinearities stays linear.
+- Calculate convolution output shapes, parameter counts and receptive fields.
+- Use learning curves and initialization checks to diagnose training.
 
 ### Targeted reading
 
-MML 5.6; CV 5.3.1-5.3.6. Optional CS231n neural-network case study; use current framework documentation when installing a framework.
+MML 5.6; CV 5.3.1-5.3.6 and 5.4. Optional CS231n neural-network case study; use current framework documentation when installing a framework.
 
 ### Practice
 
-For X of shape (N,D), W1=(D,H), W2=(H,C), give every activation and gradient shape. Derive dL/dW for Z=XW+b. Explain the sum over the batch in the bias gradient.
+For X of shape (N,D), W1=(D,H), W2=(H,C), give every activation and gradient shape. Derive dL/dW for Z=XW+b. Explain the sum over the batch in the bias gradient. For input length 7, kernel size 3, padding 1 and stride 2, compute the output length.
 
 ### Lab
 
@@ -416,23 +432,24 @@ Implement a small NumPy MLP with stable softmax and mini-batch SGD. Overfit a ti
 
 ### Mastery gate
 
-Gradient checks pass away from nondifferentiable activation points, and you can explain every backward-pass operation.
+Gradient checks pass away from nondifferentiable activation points, you can explain every backward-pass operation, and you can get the shapes right for an unseen convolution layer and say how weight sharing differs from a fully connected (dense) layer.
 
 ### Submit
 
 A small neural network with gradient checks and a training report.
 
+## Module 11 - Recognition, detection and segmentation (Weeks 22-26)
 
-## Module 11 - Recognition, detection and segmentation (Weeks 21-22)
-
-Understand how different vision tasks change the model outputs, objectives and evaluation.
+Understand how different vision tasks change the model outputs, objectives and evaluation, and read the modern backbones behind them: transfer learning, residual blocks, attention and multi-scale features.
 
 ### Lessons
 
 - 41 CNN classification, inductive bias and augmentation
+- 55 Attention and vision transformers
 - 42 Bounding boxes, localization losses and IoU
 - 43 Pixel classification, segmentation and class imbalance
 - 44 Precision/recall, thresholds, average precision and mask metrics
+- 56 Multi-scale features: pyramids, FPN and U-Net
 
 ### By the end
 
@@ -440,29 +457,40 @@ Understand how different vision tasks change the model outputs, objectives and e
 - Compute box IoU and mask IoU.
 - Explain multi-part detection losses and pixelwise cross entropy.
 - Recognize when background-dominated accuracy is misleading.
+- Explain transfer learning: what is frozen, what is replaced and why fine-tuning uses a smaller step.
+- Compute scaled dot-product attention by hand and explain residual connections.
+- Say what FPN levels and U-Net skip connections add to a single feature map.
 
 ### Targeted reading
 
-CV 5.4 and 6.2-6.4. CS231n public notes or lectures are optional applied support. Framework versions and dataset choices are selected when the lab begins.
+CV 5.4 and 6.2-6.4; CV 5.5.3, 5.4.3, 3.5.3, 6.3.3 and 6.4.2-6.4.3 for attention and multi-scale networks. CS231n public notes or lectures are optional applied support. Framework versions and dataset choices are selected when the lab begins.
 
 ### Practice
 
-Two 2x2 boxes overlap over a 1x2 region: find their IoU. For TP=8, FP=2 and FN=4, compute precision and recall. Explain the failure of all-background predictions on a mostly background segmentation image.
+Two 2x2 boxes overlap over a 1x2 region: find their IoU. For TP=8, FP=2 and FN=4, compute precision and recall. Explain the failure of all-background predictions on a mostly background segmentation image. Compute one row of softmax(QK^T/sqrt(d)) for a query and two keys.
 
 ### Lab
 
-Train a compact CNN on generated bars/rectangles. Add one-object box prediction or binary mask prediction, changing outputs and losses explicitly. This toy task teaches mechanics, not real-world performance.
+Train a compact CNN on generated bars and rectangles, adding one-object box prediction or binary mask prediction and changing outputs and losses explicitly. Then move to real images in Practical Labs 04-08: a classifier, transfer learning, training diagnostics, detection and segmentation.
+
+### Practical labs in this module
+
+- Lab 04: Train a real-image classifier (week 22-23)
+- Lab 05: Transfer learning and fine-tuning (week 24-25)
+- Lab 06: Debug and resume training (week 25)
+- Lab 07: Detect people in photographs (week 25-26)
+- Lab 08: Segment people pixel by pixel (week 26)
+- Lab 11: Use your model on new photos (week 26)
 
 ### Mastery gate
 
-Explain outputs, loss and metric for all three tasks, and justify one choice for class imbalance.
+Explain outputs, loss and metric for all three tasks, justify one choice for class imbalance, and say what an FPN level adds that a single feature map lacks.
 
 ### Submit
 
-A CNN experiment with either a localization or segmentation extension.
+A CNN experiment with a localization or segmentation extension, plus the evidence checklists for Practical Labs 04-08.
 
-
-## Module 12 - Capstone and a route into research (Weeks 23-24)
+## Module 12 - Capstone and a route into research (Weeks 27-28)
 
 Use the maths to justify model choices, evaluate evidence and read a research method critically.
 
@@ -490,7 +518,11 @@ Write your hypothesis before training. Predict what changes when you alter one h
 
 ### Lab
 
-Extend the synthetic recognition project, or choose a small public dataset when the module starts. Compare a linear baseline with an MLP or CNN; detection or segmentation is an optional extension, not a second mandatory capstone.
+Your capstone is Practical Lab 12: choose a modest question with data you can inspect, compare a baseline with one improvement, and evaluate once the procedure is fixed. Without local Python or a GPU, extend the runnable synthetic starter in the Module 12 notebook instead. Detection or segmentation is an optional task choice, not a second project.
+
+### Practical labs in this module
+
+- Lab 12: Build an independent CV project (week 27-28)
 
 ### Mastery gate
 
@@ -498,11 +530,11 @@ Deliver code, split protocol, seed, baseline, one controlled comparison, metrics
 
 ### Submit
 
-A 3-5 page report, runnable experiment and a 10-minute mathematical explanation.
+A 3-5 page report using the capstone template, a runnable experiment and a 10-minute mathematical explanation.
 
-## Module 13 - Geometry of images and cameras (Weeks 25-26, extension)
+## Module 13 - Geometry of images and cameras (Weeks 29-30, extension)
 
-Describe how points move between planes and cameras, then fit those maps robustly to noisy matches. Take Lesson 49 any time after Module 02, Lesson 51 after Module 04 and Lesson 52 after Module 08.
+Describe how points move between planes and cameras, then fit those maps robustly to noisy matches. Ready early? Lesson 49 after Lesson 41; Lesson 50 after Lesson 49; Lesson 51 after Lesson 50; Lesson 52 after Lesson 51.
 
 ### Lessons
 
@@ -538,47 +570,43 @@ Derive the two homography constraints from one correspondence, explain the role 
 
 A rectification notebook with a robust homography estimate and a residual analysis.
 
-## Module 14 - Matrix calculus and modern architectures (Weeks 27-28, extension)
+## Module 14 - Matrix calculus and information theory (Week 31, extension)
 
-Derive layer gradients in matrix form, compare distributions with entropy and KL divergence, and read attention and multi-scale networks as mathematics. Take Lesson 53 any time after Module 05, Lesson 54 after Module 07, and Lessons 55-56 after Module 11.
+Derive layer gradients in matrix form and compare distributions with entropy and KL divergence. Ready early? Lesson 53 after Lesson 40; Lesson 54 after Lesson 27.
 
 ### Lessons
 
 - 53 Matrix calculus for layers and losses
 - 54 Entropy, KL divergence and contrastive learning
-- 55 Attention and vision transformers
-- 56 Multi-scale features: pyramids, FPN and U-Net
 
 ### By the end
 
 - Derive gradients of linear layers and quadratic forms with their shapes, using the chain rule and trace identities.
 - Compute entropy, cross-entropy and KL divergence, and explain label smoothing and the InfoNCE loss.
-- Compute scaled dot-product attention by hand and explain the √d scaling and positional information.
-- Relate Gaussian and Laplacian pyramids to feature pyramid networks, U-Net skip connections and anchors across scales.
 
 ### Targeted reading
 
-MML 5.3-5.6. CV 5.3.4-5.3.5, 5.4.3, 5.4.7, 5.5.3, 3.5.3, 6.3.3 and 6.4.2-6.4.3.
+MML 5.3-5.6. CV 5.3.4-5.3.5.
 
 ### Practice
 
-Find the gradient of f(x)=xᵀAx for a non-symmetric A. Compute KL(p‖q) for p=(0.5,0.5) and q=(0.9,0.1), and KL(q‖p). Compute one row of softmax(QKᵀ/√d) for a query and two keys.
+Find the gradient of f(x)=xᵀAx for a non-symmetric A. Compute KL(p‖q) for p=(0.5,0.5) and q=(0.9,0.1), and KL(q‖p).
 
 ### Lab
 
-Implement one attention head in NumPy, check its gradients against finite differences, and visualize which image patches one query attends to. Then build a three-level Laplacian pyramid and reconstruct the image exactly.
+Check linear-layer gradients against finite differences, then compute entropy, cross-entropy and KL divergence for real softmax outputs and observe the effect of label smoothing.
 
 ### Mastery gate
 
-Derive dL/dW for a linear layer from the scalar chain rule, explain why attention scores are divided by √d, and say what an FPN level adds that a single feature map lacks.
+Derive dL/dW for a linear layer from the scalar chain rule, and explain why KL divergence is not symmetric.
 
 ### Submit
 
-An attention-and-pyramid notebook with gradient checks and a short written explanation.
+A gradient-and-information notebook with finite-difference checks and a short written explanation.
 
-## Module 15 - Local features, motion and tracking (Weeks 29-30, extension)
+## Module 15 - Local features, motion and tracking (Weeks 32-34, extension)
 
-Find and describe distinctive points, measure how image content moves between frames, and follow objects over time with a Kalman filter. Take Lessons 57-59 after Module 09 and Lesson 52; Lesson 60 after Module 06 and Lesson 42.
+Find and describe distinctive points, measure how image content moves between frames, and follow objects over time with a Kalman filter. Ready early? Lesson 57 after Lesson 52; Lesson 58 after Lesson 57; Lesson 59 after Lesson 57; Lesson 60 after Lesson 42.
 
 ### Lessons
 
@@ -606,6 +634,10 @@ Compute the Harris response for a window with gradients (1,0),(1,0),(0,1),(0,1).
 
 Map corners and gradient orientation on a photo, match features to a warped copy with a known homography, estimate optical flow on a synthetic warp, and track noisy boxes with a Kalman filter.
 
+### Practical labs in this module
+
+- Lab 09: Align views and track motion (week 34)
+
 ### Mastery gate
 
 Explain why the eigenvalues of the structure tensor separate corners from edges, why Lucas–Kanade fails on a straight edge, and how a Kalman filter corrects a velocity it never measures.
@@ -614,9 +646,9 @@ Explain why the eigenvalues of the structure tensor separate corners from edges,
 
 A features-and-tracking notebook: corner map, ratio-test precision curve, flow field and a tracked trajectory.
 
-## Module 16 - Two-view geometry and neural rendering (Weeks 31-32, extension)
+## Module 16 - Two-view geometry and neural rendering (Weeks 35-37, extension)
 
-Relate two views of a scene, recover depth and camera motion, refine everything with bundle adjustment, and render novel views by integrating along rays. Take Lessons 61-63 after Module 13 and Lesson 58; Lesson 64 after Lesson 51 and Module 09.
+Relate two views of a scene, recover depth and camera motion, refine everything with bundle adjustment, and render novel views by integrating along rays. Ready early? Lesson 61 after Lesson 58; Lesson 62 after Lesson 61; Lesson 63 after Lesson 62; Lesson 64 after Lesson 61.
 
 ### Lessons
 
@@ -652,9 +684,9 @@ Explain why a planar scene or pure rotation makes the fundamental matrix degener
 
 A two-view notebook: estimated F with epipolar distances, a disparity map with depth error bars, and a rendered ray with its weights.
 
-## Module 17 - Set prediction, generative models and splatting (Weeks 33-34, extension)
+## Module 17 - Set prediction, generative models and splatting (Weeks 38-40, extension)
 
-Read the mathematics behind DETR-style detectors, variational autoencoders, diffusion models and 3D Gaussian splatting. Take Lesson 65 after Module 14; Lessons 66-67 after Lessons 54 and 60; Lesson 68 after Lessons 60 and 64.
+Read the mathematics behind DETR-style detectors, variational autoencoders, diffusion models and 3D Gaussian splatting. Ready early? Lesson 65 after Lesson 64; Lesson 66 after Lesson 60; Lesson 67 after Lesson 66; Lesson 68 after Lesson 64.
 
 ### Lessons
 
@@ -682,6 +714,10 @@ Compute GIoU for two non-overlapping boxes. Compute GMM responsibilities and a G
 
 Match predicted boxes to targets with the Hungarian algorithm, fit a colour mixture with EM, sample 2D diffusion with DDPM and DDIM steps, and render a small set of Gaussian splats.
 
+### Practical labs in this module
+
+- Lab 10: Retrieve images and prompt masks (week 39)
+
 ### Mastery gate
 
 Explain why set prediction needs a matching step, why the ELBO is a lower bound, why predicting noise recovers the clean image, and why splats must be sorted by depth.
@@ -690,7 +726,28 @@ Explain why set prediction needs a matching step, why the ELBO is a lower bound,
 
 A generative-models notebook: an EM log-likelihood curve, a diffusion sampling trajectory and a splatted image.
 
+## Practical labs
+
+Twelve labs apply the maths to real images in installed Python. Each sits in the weekly plan right after the lessons it needs. Lab 10 is optional.
+
+| Lab | Weeks | Title | Do these lessons first |
+|---|---|---|---|
+| 01 | 4 | Your local vision lab | 1, 7 |
+| 02 | 6 | Count objects with OpenCV | 1, 33, 34 |
+| 03 | 10-11 | Build and audit your dataset | 12, 16 |
+| 04 | 22-23 | Train a real-image classifier | 27, 30, 38, 40, 41 |
+| 05 | 24-25 | Transfer learning and fine-tuning | 39, 41, 55 |
+| 06 | 25 | Debug and resume training | 20, 32, 39 |
+| 07 | 25-26 | Detect people in photographs | 42, 44, 56 |
+| 08 | 26 | Segment people pixel by pixel | 43, 44, 56 |
+| 09 | 34 | Align views and track motion | 50, 52, 58, 59, 60 |
+| 10 | 39 | Retrieve images and prompt masks | 54, 55 |
+| 11 | 26 | Use your model on new photos | 28, 41 |
+| 12 | 27-28 | Build an independent CV project | 45 |
+
 ## Capstone rubric
+
+There is one capstone: Practical Lab 12, reported with the capstone template. The Module 12 notebook is the alternative route if you have no local Python environment for the lab.
 
 - Mathematical explanation: 30%. Define shapes, assumptions, objective and relevant derivatives.
 - Experiment design: 25%. Fixed split, seed, baseline and one controlled comparison.
@@ -699,4 +756,4 @@ A generative-models notebook: an EM log-likelihood curve, a diffusion sampling t
 
 ## Advanced continuation after the core
 
-Modules 13-17 carry paths 1 and 4 below a long way: homogeneous coordinates, homographies, cameras and robust fitting; matrix calculus, information theory, attention and multi-scale networks; local features, optical flow and tracking; epipolar geometry, stereo, bundle adjustment on the rotation manifold and neural rendering; set prediction, VAEs, diffusion models and Gaussian splatting. You can take their lessons after the prerequisites listed in each module, before or alongside the capstone. Then choose one path: (1) attention and vision transformers, beginning with dot products, softmax and matrix gradients; (2) segmentation and detection objectives, imbalance and evaluation; (3) statistical learning, generalization and uncertainty; (4) geometric CV, adding projective geometry, camera models, rotations and manifold optimization. Guo becomes more central on path 4. Choose primary papers and current implementations when that stage arrives.
+Modules 13-17 carry paths 1 and 4 below a long way: homogeneous coordinates, homographies, cameras and robust fitting; matrix calculus and information theory; local features, optical flow and tracking; epipolar geometry, stereo, bundle adjustment on the rotation manifold and neural rendering; set prediction, VAEs, diffusion models and Gaussian splatting. Each of those lessons opens as soon as what it needs is done, and the lesson that opens it links to it, so you can take them before or alongside the capstone. Then choose one path: (1) attention and vision transformers, beginning with dot products, softmax and matrix gradients; (2) segmentation and detection objectives, imbalance and evaluation; (3) statistical learning, generalization and uncertainty; (4) geometric CV, adding projective geometry, camera models, rotations and manifold optimization. Guo becomes more central on path 4. Choose primary papers and current implementations when that stage arrives.

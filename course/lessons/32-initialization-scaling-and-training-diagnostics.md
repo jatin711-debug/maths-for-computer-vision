@@ -1,8 +1,8 @@
 # Lesson 32 - Initialization, scaling and training diagnostics
 
-**Module:** 08 | **Study time:** 60 minutes learning + 30 minutes practice.
+**Module:** 10 | **Study time:** 60 minutes learning + 30 minutes practice.
 
-**Before you begin:** Lesson 31; revisit any symbols you cannot yet explain.
+**Before you begin:** Lessons 29 and 38; revisit any symbols you cannot yet explain.
 
 **Goal:** Use controlled experiments to separate a broken computation from poor learning settings.
 

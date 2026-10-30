@@ -3,6 +3,8 @@
   'use strict';
   const escape = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const items = [...window.CV_CONCEPT_VIDEO_DATA,...(window.CV_LESSON_VIDEO_DATA||[]),...(window.CV_EXPLAINER_VIDEO_DATA||[])].sort((a,b)=>a.lesson-b.lesson||Number(!!b.animated)-Number(!!a.animated));
+  // Videos are filed under the module their lesson belongs to now.
+  items.forEach(item => { const lesson = window.CV_COURSE?.lessons.find(l => l.id === item.lesson); if (lesson) item.module = lesson.module; });
   let dispose;
   const timeLabel = seconds => `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2,'0')}`;
   const durationLabel = seconds => {

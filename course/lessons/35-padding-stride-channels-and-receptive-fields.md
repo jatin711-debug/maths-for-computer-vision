@@ -1,8 +1,8 @@
 # Lesson 35 - Padding, stride, channels and receptive fields
 
-**Module:** 09 | **Study time:** 60 minutes learning + 30 minutes practice.
+**Module:** 10 | **Study time:** 60 minutes learning + 30 minutes practice.
 
-**Before you begin:** Lesson 34; revisit any symbols you cannot yet explain.
+**Before you begin:** Lessons 32, 34 and 37; revisit any symbols you cannot yet explain.
 
 **Goal:** Calculate output and parameter shapes and track receptive-field growth.
 

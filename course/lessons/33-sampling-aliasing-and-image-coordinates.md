@@ -2,7 +2,7 @@
 
 **Module:** 09 | **Study time:** 60 minutes learning + 30 minutes practice.
 
-**Before you begin:** Lesson 32; revisit any symbols you cannot yet explain.
+**Before you begin:** Lessons 01 and 05; revisit any symbols you cannot yet explain.
 
 **Goal:** Explain how continuous variation becomes pixels and why lost detail cannot always be recovered.
 

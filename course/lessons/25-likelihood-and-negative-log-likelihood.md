@@ -2,7 +2,7 @@
 
 **Module:** 07 | **Study time:** 60 minutes learning + 30 minutes practice.
 
-**Before you begin:** Lesson 24; revisit any symbols you cannot yet explain.
+**Before you begin:** Lessons 22 and 23; revisit any symbols you cannot yet explain.
 
 **Goal:** Derive common training losses from declared observation models.
 

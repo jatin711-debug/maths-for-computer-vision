@@ -18,7 +18,7 @@ context.window.CV_PRACTICAL.render(main, undefined, state, notes);
 assert.equal((main.innerHTML.match(/class="panel practical-card"/g)||[]).length, 12);
 for (const lab of labs) {
   assert(fs.existsSync(path.join(base,'practical',lab.file)), lab.file);
-  assert(lab.lessons.every(n => Number.isInteger(n) && n >= 1 && n <= 68));
+  assert(lab.requires.length && [...lab.requires, ...lab.related].every(n => Number.isInteger(n) && n >= 1 && n <= 68));
   assert(lab.html.includes('<h2>') && lab.html.includes('<pre'), lab.slug);
   assert(!/<script\b/i.test(lab.html));
   context.window.CV_PRACTICAL.render(main, lab.slug, state, notes);

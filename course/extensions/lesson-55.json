@@ -1,6 +1,6 @@
 {
   "id": 55,
-  "module": 14,
+  "module": 11,
   "title": "Attention and vision transformers",
   "file": "lessons/55-attention-and-vision-transformers.md",
   "reading": "CV 5.5.3, 5.4.3 and 6.6; MML 5.6.",

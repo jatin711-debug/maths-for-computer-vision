@@ -7,9 +7,9 @@
   ],
   "seedsPerGenerator": 300,
   "lessons": 68,
-  "generators": 312,
-  "instances": 93600,
-  "texSegments": 125803,
+  "generators": 314,
+  "instances": 94200,
+  "texSegments": 125883,
   "issues": [],
   "warnings": [
     {
@@ -79,7 +79,7 @@
     "38": 5,
     "39": 5,
     "40": 5,
-    "41": 5,
+    "41": 7,
     "42": 5,
     "43": 5,
     "44": 5,

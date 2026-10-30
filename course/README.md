@@ -1,13 +1,14 @@
 # Start your maths course here
 
-**Your plan:** 24 weeks, 8-10 hours per week, with a refresher and a focus on deep-learning computer vision, plus an optional 10-week extension (weeks 25-34): image geometry and modern architectures, then local features and tracking, two-view geometry and neural rendering, and generative models.
+**Your plan:** a 28-week core at 8-10 hours per week, with a refresher and a focus on recognition, detection and segmentation, plus an optional 12-week extension (weeks 29-40): image geometry, matrix calculus and information theory, local features and tracking, two-view geometry and neural rendering, then set prediction, generative models and Gaussian splatting. Open the course roadmap and follow its steps in order.
 
 Double-click [Open Course.cmd](<../Open Course.cmd>) (Windows) to start and open the course at http://127.0.0.1:50101/course/. The launcher reuses a running course server and starts it again after a computer restart. It serves only on your own computer.
 
 Or start the server from a terminal:
 
 ```powershell
-cd path	o	hisepository
+cd path	o	his
+epository
 make server
 ```
 
@@ -18,6 +19,17 @@ You can also open [index.html](index.html) directly from disk. Lessons, SVG play
 Your completed lessons, notes and written answers are saved in that browser. Use **Resource library → Export my progress** for a backup, and **Import progress** to bring one back. Imported notes are merged with existing writing. The same localhost address keeps existing browser progress available. Progress in different browsers is separate.
 
 Use the sun/moon button in the top bar to switch between the original light appearance and a black, white and silver dark mode. The course follows your device’s colour preference until you choose a mode, then remembers that choice in this browser. Appearance is saved separately from course progress.
+
+## What changed on 30 October 2026
+
+- **A new study order.** Lesson and module numbers stay the same, so saved progress still works, but the path has changed. Filters now come third (weeks 5-6), gradient descent comes before the classifier that uses it, and Lessons 32 and 35 follow the neural-network lessons they rely on. `study-path.json` is the single source of truth, and Continue, Next, the roadmap and the weekly plan all follow it. Saved weekly ticks and notes moved with their lessons.
+- **The core now reaches its goal.** Attention, residual connections, FPN and U-Net (Lessons 55-56) moved into the core, inside Module 11, and Lesson 41 teaches transfer learning, with new primers and practice.
+- **Labs are part of the plan.** Each lab has a week, right after the lessons it needs, and lessons and modules link to their labs. Each lab now separates what it requires from what is merely related, and shows which required lessons you still have to finish. Weeks 25-26 go to the detection and segmentation labs.
+- **One capstone.** Practical Lab 12 is the capstone, with one report template. The Module 12 notebook is the route for anyone without local Python.
+- **A real starting point.** The assessment now suggests where to begin, passed checkpoints move Continue forward, and a missed checkpoint names the lessons to revisit.
+- **Optional lessons appear when they open.** Each extension lesson's opening point is computed from what it needs, and the lesson that opens it links to it. Modules 15-17 now take three weeks each.
+- **One notebook per core module:** Modules 2-12 each have their own, replacing four shared notebooks, so nothing asks for a later module. Module 1 keeps its starter notebook, and Modules 13-17 keep their existing two.
+- `validate_path.cjs` checks all of this: order, dependencies, lab placement, weekly hours and the documents built from them.
 
 ## What changed on 13 October 2026
 
@@ -52,7 +64,7 @@ Use the sun/moon button in the top bar to switch between the original light appe
 
 1. [Attempt the starting assessment](starting-assessment.md) (about 25 minutes).
 2. [Read Lesson 01: Images as numbers](lessons/01-images-as-numbers.md) and attempt its exercises.
-3. Send your reasoning for Lesson 01 Questions 1-3 in this chat. Mark anything uncertain.
+3. Check your reasoning for Lesson 01 Questions 1-3 against [the solutions](solutions.md). Mark anything uncertain.
 4. [Follow your first two weeks](first-two-weeks.md).
 
 ## Materials
@@ -67,19 +79,19 @@ Use the sun/moon button in the top bar to switch between the original light appe
 
 The starter notebook uses Python 3 and NumPy only. You can open it in an existing Jupyter environment, or use a notebook service of your choice. No GPU, external image download or paid service is needed for this lab. If Python itself is new, use the linked CS231n tutorial and begin with the paper exercises.
 
-## How I will teach you
+## How to work through it
 
-Bring an attempted calculation or explanation. I will check it, give a worked explanation of the specific gap, and follow with a similar problem. We will revisit errors and use the mastery gates to adjust pace. All 68 lessons are authored, with plain-word primers, worked examples, auto-checked practice and checkpoints. Seven NumPy notebooks support the course; framework autograd is an optional extension. Teaching and pacing can adapt to your answers.
+Attempt each calculation or explanation before opening its answer. The course checks your numbers, shows a worked solution and brings mistakes back in spaced review. Use the mastery gates to adjust your pace. All 68 lessons are authored, with plain-word primers, worked examples, practice and checkpoints.
 
 ## Continue beyond the foundations
 
-Open the course roadmap to reach any of the 68 lessons. Each lesson has reading, an interactive experiment and practice with worked answers. Expand “Suggested weekly rhythm” on the roadmap for all 34 weeks of pacing guidance (24 core weeks and the 10-week extension), session checklists and weekly notes. Existing saved checklists and notes are preserved.
+Open the course roadmap to reach any of the 68 lessons. Each lesson has reading, an interactive experiment and practice with worked answers. Expand “Suggested weekly rhythm” on the roadmap for all 40 weeks of pacing guidance (28 core weeks and the 12-week extension), session checklists and weekly notes. Existing saved checklists and notes are preserved.
 
 The original printable guide covers the roadmap and first four lessons; the expanded lessons and solutions are in the webpage and editable Markdown files. See [later solutions](later-solutions.md) and the [capstone template](capstone-template.md). Browser notes and completion records are preserved.
 
 ## Visual teaching studio
 
-- 68 lesson-specific equation cards, symbol explanations, CV connections, common mistakes and feedback checks, each followed by plain-word primers for the lesson's new ideas (354 terms, also collected in the Glossary).
+- 68 lesson-specific equation cards, symbol explanations, CV connections, common mistakes and feedback checks, each followed by plain-word primers for the lesson's new ideas (355 terms, also collected in the Glossary).
 - 68 live worked examples with their own controls, four explained calculation steps, exact-value inputs and reset buttons. Predict a result, change a value, then follow how the calculation changes.
 - 68 editable Python examples below the worked calculations, with Run Python, Stop, Restore example, Copy and Download .py controls. Execution uses Python WebAssembly in a background browser worker and shows real output and tracebacks. Changing a lesson input updates the example; custom edits stay intact until restored. Each card explains the implementation and array shapes. Matrix and array examples use NumPy; scalar examples use the standard library. Thirteen lessons also have optional PyTorch equivalents for an installed Python environment: 1, 4, 7, 14, 18, 29, 33, 37–41 and 48. They cover tensors, stable loss, SVD, gradients, sampling, ReLU, regularization, augmentation and cosine similarity, with code that follows the lesson inputs.
 - Select a notation term to see its own typeset symbol and explanation. The longer readings also use typeset fractions, sums, derivatives and matrices, with wide formulas scrolling inside the text on small screens.

@@ -26,8 +26,8 @@ The core workload is 8 hours per week. Use up to 2 additional hours for review o
 
 Do not compensate for a weak foundation by reading more chapters. Identify one missed idea, do a simpler example, then try the original task again.
 
-## How to work with your teacher
+## How to work on your own
 
-Send your attempted answer, your reasoning, and the exact line where you become uncertain. For example: "Lesson 01, Question 3: I got 140 before clipping and 140 after clipping. I think the mean should stay affine. Where did I go wrong?"
+When you get stuck, write down your attempted answer, your reasoning and the exact line where you become uncertain. For example: "Lesson 01, Question 3: I got 140 before clipping and 140 after clipping. I think the mean should stay affine." Then open the worked answer, find the first line that differs from yours, and try a similar problem with new numbers.
 
-I will check reasoning, explain the gap, and set a short follow-up exercise. Continue to the next module when you can explain the ideas and solve new examples. Completing a calendar week alone is not evidence of mastery.
+Continue to the next module when you can explain the ideas and solve new examples. Completing a calendar week alone is not evidence of mastery. Each module's checkpoint gives you five fresh questions, and it names the lessons to revisit if you miss any.

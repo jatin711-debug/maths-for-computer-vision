@@ -26,7 +26,7 @@ Every batch row uses the same W and b. Gradients add across rows because the obj
 
 Compute the complete backward pass using the forward-pass parameters before mutating any weight. Updating W2 before computing dA1 would differentiate a different network. Cache only the values needed for the backward formulas, verify analytic gradients on a tiny deterministic batch, and then train.
 
-The learning notebook implements this chain in NumPy. It checks selected coordinates numerically and compares a nonlinear XOR model with a linear baseline, so the need for a hidden activation is visible.
+The Module 10 notebook implements this chain in NumPy. It checks selected coordinates numerically and compares a nonlinear model with a linear baseline on a two-bar image task that no linear boundary can solve, so the need for a hidden activation is visible.
 
 ## Practice before opening the answers
 

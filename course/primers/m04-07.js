@@ -54,8 +54,7 @@
         formula: T`i^2=-1,\qquad \sqrt{-q}=i\sqrt q\ \ (q>0),\qquad \begin{bmatrix}a&-b\\b&a\end{bmatrix}\ \text{has}\ \lambda=a\pm bi`,
         steps: [T`Solve the characteristic equation as usual.`, T`If the quadratic formula needs the square root of a negative number, write \(\sqrt{-q}=i\sqrt q\).`, T`Complex results \(a\pm bi\) mean the map rotates; their size \(\sqrt{a^2+b^2}\) is the stretch per application.`],
         examples: [[T`\(i^2\) and \((2i)^2\)`, T`\(-1\) and \(-4\)`], [T`\(\sqrt{-4}\)`, T`\(2i\)`], [T`90° rotation \(\begin{bmatrix}0&-1\\1&0\end{bmatrix}\)`, T`\(\lambda^2+1=0\Rightarrow\lambda=\pm i\), size 1: a pure quarter turn`], [T`\(\begin{bmatrix}1&-1\\1&1\end{bmatrix}\)`, T`\((1-\lambda)^2+1=0\Rightarrow\lambda=1\pm i\), size \(\sqrt2\approx1.414\): turns 45° and stretches`]],
-        pitfall: T`Complex eigenvalues of a real matrix come in pairs \(a\pm bi\). Symmetric matrices never have them, which is one reason covariance matrices are easy to analyse. Lesson 36 develops complex numbers further.`,
-        seeAlso: [36]
+        pitfall: T`Complex eigenvalues of a real matrix come in pairs \(a\pm bi\). Symmetric matrices never have them, which is one reason covariance matrices are easy to analyse. Lesson 36 develops complex numbers further.`
       },
       {
         id: 'positive-definite-matrix', term: 'Positive-definite matrix', symbol: T`x^TAx>0`,
@@ -862,7 +861,7 @@
         steps: [T`Choose the split and the per-example loss \(\ell\).`, T`Compute \(\ell\) for every example in that split.`, T`Average the results.`],
         examples: [[T`per-example losses \(0.2,\ 0.5,\ 1.1\)`, T`\(1.8/3=0.6\)`], [T`cross-entropy with true-class probabilities \(0.8,\ 0.5,\ 0.25\)`, T`\((0.223+0.693+1.386)/3\approx0.767\)`], [T`0-1 loss (1 if wrong), 3 errors in 20`, T`\(0.15\), the error rate`]],
         pitfall: T`Always name the split. A low training risk says little about new data; the risk on the whole future population is what matters, and a split only estimates it.`,
-        seeAlso: [29, 30, 46]
+        seeAlso: [46]
       },
       {
         id: 'bias-variance-tradeoff', term: 'Bias and variance of a model', symbol: T`\text{error}=\text{bias}^2+\text{variance}+\text{noise}`,

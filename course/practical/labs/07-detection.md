@@ -1,6 +1,6 @@
 # Detect people in photographs
 
-Detection predicts a variable number of objects. This lab fine-tunes a Faster R-CNN with a MobileNet backbone on PennFudan. There is one foreground class, person, indexed 1; 0 is background. Instance masks provide the ground-truth boxes. This is an educational dataset and split, not a comprehensive pedestrian benchmark.
+Detection predicts a variable number of objects. This lab fine-tunes a Faster R-CNN with a MobileNet backbone on PennFudan. Lesson 56 explains the anchors and feature pyramid inside it. There is one foreground class, person, indexed 1; 0 is background. Instance masks provide the ground-truth boxes. This is an educational dataset and split, not a comprehensive pedestrian benchmark.
 
 ## Inspect the targets first
 

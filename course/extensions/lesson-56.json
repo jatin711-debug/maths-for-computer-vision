@@ -1,6 +1,6 @@
 {
   "id": 56,
-  "module": 14,
+  "module": 11,
   "title": "Multi-scale features: pyramids, FPN and U-Net",
   "file": "lessons/56-multi-scale-features-pyramids-fpn-and-u-net.md",
   "reading": "CV 3.5.2-3.5.3, 5.4.1, 6.3.3, 6.4 and 6.4.2-6.4.3.",

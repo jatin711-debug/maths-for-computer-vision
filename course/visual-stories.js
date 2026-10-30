@@ -79,7 +79,7 @@
       ['Lift','Append a 1 to every point','x̃ = (x, y, 1)',['Homogeneous coordinates.','Scaling x̃ names the same point.']],
       ['Map','Multiply by a 3 × 3 matrix H','x̃′ = H x̃ = (u, v, w)',['One matrix moves every point.','Eight numbers fix H up to scale.']],
       ['Divide','Divide by the last coordinate','x′ = (u / w, v / w)',['Lines stay straight.','Parallel lines can now meet.']]]},
-    {id:'attention',title:'Every patch looks at every patch',tag:'14 / ATTENTION',module:14,noVideo:true,steps:[
+    {id:'attention',title:'Every patch looks at every patch',tag:'11 / ATTENTION',module:11,lesson:55,noVideo:true,steps:[
       ['Tokens','Cut the image into patches','x₁ … x₆ ∈ ℝᵈ',['Each patch becomes a vector.','Order is added as position.']],
       ['Compare','Score query against each key','sⱼ = qᵀkⱼ / √d',['Large dot product = similar.','√d keeps scores in range.']],
       ['Normalize','Softmax the scores','aⱼ = e^{sⱼ} / Σₖ e^{sₖ}',['Weights are positive.','They sum to one.']],
@@ -261,5 +261,7 @@
     const onHide=()=>{if(document.hidden)pause();};document.addEventListener('visibilitychange',onHide);
     dispose=()=>{pause();document.removeEventListener('visibilitychange',onHide);target.querySelectorAll('video').forEach(v=>v.pause());};render();
   }
-  window.CV_STORIES={stories,frame,mount,stop,forModule:n=>stories.find(s=>s.module===n)||stories[(n-1)%stories.length]};
+  // Module 14 shares the chain-rule overview: matrix calculus is that idea in matrix form.
+  const shared={14:'chain'};
+  window.CV_STORIES={stories,frame,mount,stop,forLesson:id=>stories.find(s=>s.lesson===id),forModule:n=>stories.find(s=>s.module===n&&!s.lesson)||stories.find(s=>s.id===shared[n])||stories[(n-1)%stories.length]};
 })();

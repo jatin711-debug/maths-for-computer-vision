@@ -57,7 +57,7 @@
         m.scaled
           ? step('Divide by √d', Q`\ell=\frac{s}{\sqrt d}=\frac{s}{\sqrt4}=(${m.logits.map(x => T(x)).join(',\ ')})`, 'With d = 4 the scores are halved. For entries with variance 1, a dot product of d terms has variance d, so this division keeps the softmax inputs near unit scale whatever the head width.')
           : step('Skip the √d division', Q`\ell=s=(${m.logits.map(x => T(x)).join(',\ ')})\quad\text{(not divided by }\sqrt d\text{)}`, 'Without the division the softmax receives the raw dot products. In wide heads these spread out like √d, which pushes the softmax toward a one-hot row.'),
-        step('Softmax along the row', Q`a_j=\frac{e^{\ell_j}}{\sum_m e^{\ell_m}}=(${T(a1)},\ ${T(a2)},\ ${T(a3)}),\qquad\sum_ja_j=1`, `The weights are positive and sum to 1. Their entropy is ${N(m.H)} nats, so the query effectively attends to exp(H) = ${N(m.eff, 2)} of the 3 keys.`),
+        step('Softmax along the row', Q`a_j=\frac{e^{\ell_j}}{\sum_m e^{\ell_m}}=(${T(a1)},\ ${T(a2)},\ ${T(a3)}),\qquad\sum_ja_j=1`, `The weights are positive and sum to 1. Their entropy, \\(H=-\\sum_ja_j\\ln a_j\\), measures how spread out they are (Lesson 54 develops it). It is ${N(m.H)} nats, so the query effectively attends to exp(H) = ${N(m.eff, 2)} of the 3 keys.`),
         step('Average the values', Q`o=\sum_ja_jv_j=${T(a1)}${col(VALUES[0])}+${T(a2)}${col(VALUES[1])}+${T(a3)}${col(VALUES[2])}=${col(m.o)}`, 'The output is a convex combination of the value vectors, so it always lies inside their triangle. A one-hot row would simply copy one value; an even row averages all three.'),
       ],
       values: [['Weight a1', a1], ['Weight a2', a2], ['Weight a3', a3], ['Output o1', m.o[0]], ['Output o2', m.o[1]], ['Effective number exp(H)', m.eff]],

@@ -1,6 +1,6 @@
 # Lesson 56 - Multi-scale features: pyramids, FPN and U-Net
 
-**Module:** 14 | **Study time:** 60 minutes learning + 30 minutes practice.
+**Module:** 11 | **Study time:** 60 minutes learning + 30 minutes practice.
 
 **Before you begin:** Lessons 33, 35 and 43; revisit aliasing, the receptive-field recursion and the per-pixel output shape of segmentation if they feel unfamiliar.
 

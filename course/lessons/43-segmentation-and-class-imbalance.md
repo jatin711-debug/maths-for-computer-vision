@@ -28,7 +28,7 @@ For binary probabilities p_i and targets y_i, one soft Dice convention is \(\fra
 
 Strided features may need upsampling before predicting a full-resolution mask. Check that output pixels correspond to target locations; good-looking shapes can hide shifts from padding or resizing. Apply every spatial augmentation identically to image and mask while preserving class semantics.
 
-In the vision notebook, a simple trainable pixel classifier segments synthetic bright rectangles. Compare its foreground IoU with the all-background baseline and inspect noisy boundaries. This teaches output, loss and metric mechanics before a more expressive segmentation architecture is needed.
+In the Module 11 notebook, a simple trainable pixel classifier segments synthetic bright rectangles. Compare its foreground IoU with the all-background baseline and inspect noisy boundaries. This teaches output, loss and metric mechanics before a more expressive segmentation architecture is needed.
 
 ## Practice before opening the answers
 

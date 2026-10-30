@@ -3,13 +3,33 @@
   const course = window.CV_COURSE;
   const main = document.getElementById('main-content');
   const storageKey = 'cv-maths-learning-studio-v1';
-  const blankState = { completed: [], ready: [], answers: {}, notes: {}, sessions: [], quiz: {}, practice: {}, errors: [], checkpoints: {} };
+  const blankState = { completed: [], ready: [], answers: {}, notes: {}, sessions: [], quiz: {}, practice: {}, errors: [], checkpoints: {}, assessment: {} };
   const validModule = n => Number.isInteger(n) && course.modules.some(m => m.n === n);
   // Practice records come from the auto-checked questions; keep only well-formed entries.
   const cleanPractice = value => Object.fromEntries(Object.entries(value && typeof value === 'object' && !Array.isArray(value) ? value : {}).filter(([id, r]) => /^\d+:[\w-]+$/.test(id) && r && typeof r === 'object' && Number.isInteger(r.box) && r.box >= 0 && r.box <= 5 && /^\d{4}-\d{2}-\d{2}$/.test(r.due || '') && Number.isFinite(r.right) && Number.isFinite(r.wrong)));
   const cleanErrors = value => (Array.isArray(value) ? value : []).filter(e => e && typeof e === 'object' && typeof e.item === 'string' && Number.isInteger(e.lesson) && ['prompt', 'expected', 'date', 'skill'].every(k => typeof e[k] === 'string')).map(e => ({...e, given: String(e.given ?? '')})).slice(0, 150);
   const cleanCheckpoints = value => Object.fromEntries(Object.entries(value && typeof value === 'object' && !Array.isArray(value) ? value : {}).filter(([n, r]) => validModule(Number(n)) && r && typeof r === 'object' && Number.isFinite(r.best) && typeof r.date === 'string'));
-  let state = { ...blankState };
+  const cleanAssessment = value => Object.fromEntries(Object.entries(value && typeof value === 'object' && !Array.isArray(value) ? value : {}).filter(([q, mark]) => course.assessmentGuide.some(item => String(item.question) === q) && ['yes', 'no'].includes(mark)));
+  // Study order changed in path version 2. Week-based ticks and notes follow their lessons to the new weeks.
+  const PATH_VERSION = 2;
+  function migratePath(saved) {
+    if (saved.pathVersion >= PATH_VERSION) return saved;
+    const oldLessons = week => { const first = (Math.ceil(week / 2) - 1) * 4 + 1; return week % 2 ? [first, first + 1] : [first + 2, first + 3]; };
+    const placement = id => { const lesson = course.lessons.find(l => l.id === id); return lesson && { week: lesson.week, index: course.path.weeks[lesson.week - 1].lessons.indexOf(id) }; };
+    const sessions = saved.sessions.map(key => {
+      const match = /^(\d+)-(\d+)$/.exec(key), week = Number(match?.[1]), index = Number(match?.[2]);
+      if (!match || week < 5) return key;
+      const pair = oldLessons(week), moved = placement(pair[index < 2 ? index : 0]);
+      return moved ? `${moved.week}-${index < 2 ? moved.index : index}` : key;
+    });
+    const notes = {};
+    Object.entries(saved.notes).forEach(([key, text]) => {
+      const week = Number(/^week-(\d+)$/.exec(key)?.[1]), moved = week >= 5 ? placement(oldLessons(week)[0]) : null, target = moved ? `week-${moved.week}` : key;
+      notes[target] = notes[target] && notes[target] !== text ? `${notes[target]}\n\n${text}` : text;
+    });
+    return { ...saved, sessions: [...new Set(sessions)], notes, pathVersion: PATH_VERSION };
+  }
+  let state = { ...blankState, pathVersion: PATH_VERSION };
   let storageAvailable = true;
   let lessonActionsObserver;
   new ResizeObserver(entries=>document.documentElement.style.setProperty('--course-topbar-height',`${entries[0].target.getBoundingClientRect().height}px`)).observe(document.querySelector('.topbar'));
@@ -26,6 +46,8 @@
       ['answers', 'notes', 'quiz'].forEach(key => {
         if (!state[key] || typeof state[key] !== 'object' || Array.isArray(state[key])) state[key] = {};
       });
+      state.assessment = cleanAssessment(stored.assessment);
+      state = migratePath(state);
     }
   } catch { storageAvailable = false; }
   const labState = { pixels: { scale: .5, offset: 10, clip: true }, functions: { slope: 2, offset: 10, input: 30 }, loss: { weight: .5 }, confidence: { score: 0, label: 1 } };
@@ -50,11 +72,23 @@
   const bookLinks = reading => `<div class="reading-links">${window.CV_READING.chips(reading)}</div>`;
   window.CV_PRACTICE.init({ course, getState: () => state, save: () => save(), rerender: () => route() });
   const extensionModules = () => course.modules.filter(m => m.extension);
-  const coreWeeks = () => 2 * (course.modules.length - extensionModules().length);
+  const coreWeeks = () => course.path.coreWeeks;
+  const lessonById = id => course.lessons.find(l => l.id === id);
+  const moduleById = id => course.modules.find(m => m.n === id);
+  const modulesInOrder = () => [...course.modules].sort((a, b) => a.step - b.step);
+  const lessonsInModule = id => moduleById(id).lessonIds.map(lessonById);
+  const moduleCleared = id => state.ready.includes(id) || !!state.checkpoints[id]?.passed;
+  // Continue goes to the first unfinished lesson on the path, skipping modules the learner has already shown they know.
+  function nextLesson() {
+    const path = course.path.order.map(lessonById), open = path.filter(l => !state.completed.includes(l.id));
+    return open.find(l => !moduleCleared(l.module)) || open[0] || path[0];
+  }
+  const neighbourLesson = (id, step) => course.path.order[course.path.order.indexOf(id) + step];
+  const lessonLabel = id => `Lesson ${String(id).padStart(2, '0')}`;
   // A one-line reminder of the spaced-review queue on the overview.
   function reviewStrip() {
     const due = window.CV_PRACTICE.dueCount(), tried = Object.keys(state.practice).length;
-    return `<a class="review-strip${due ? ' due' : ''}" href="${due ? '#practice/review' : tried ? '#practice' : `#lesson/${(course.lessons.find(l => !state.completed.includes(l.id)) || course.lessons[0]).id}/practice`}"><span class="eyebrow">SPACED REVIEW</span><strong>${due ? `${due} question${due === 1 ? '' : 's'} due today` : tried ? 'Nothing due today' : 'Start with a lesson’s fresh practice'}</strong><span>${due ? 'New numbers, about a minute each. Start today’s review →' : tried ? 'Your next review will appear here. Practise ahead or revisit your error log →' : 'Each question you answer joins a review schedule that adapts to you →'}</span></a>`;
+    return `<a class="review-strip${due ? ' due' : ''}" href="${due ? '#practice/review' : tried ? '#practice' : `#lesson/${nextLesson().id}/practice`}"><span class="eyebrow">SPACED REVIEW</span><strong>${due ? `${due} question${due === 1 ? '' : 's'} due today` : tried ? 'Nothing due today' : 'Start with a lesson’s fresh practice'}</strong><span>${due ? 'New numbers, about a minute each. Start today’s review →' : tried ? 'Your next review will appear here. Practise ahead or revisit your error log →' : 'Each question you answer joins a review schedule that adapts to you →'}</span></a>`;
   }
 
   function save() {
@@ -76,7 +110,7 @@
     return `<div class="page-head"><div class="eyebrow">${eyebrow}</div><h1>${title}</h1>${description ? `<p>${description}</p>` : ''}</div>`;
   }
   function notes(key, label = 'Your notes & questions') {
-    return `<div class="notes-panel"><label for="notes-${key}" class="notes-label">${label}</label><textarea id="notes-${key}" class="notes" data-note="${key}" placeholder="Explain the idea in your own words. Record a question or a mistake to revisit.">${escape(state.notes[key] || '')}</textarea><p class="small muted">Saved here as you write. Bring your questions back to our chat.</p></div>`;
+    return `<div class="notes-panel"><label for="notes-${key}" class="notes-label">${label}</label><textarea id="notes-${key}" class="notes" data-note="${key}" placeholder="Explain the idea in your own words. Record a question or a mistake to revisit.">${escape(state.notes[key] || '')}</textarea><p class="small muted">Saved in this browser as you write.</p></div>`;
   }
   function heroDiagram() {
     return window.CV_STORIES.frame('filter', 3.8);
@@ -97,15 +131,15 @@
     else window.CV_CLASSROOM.render(document.getElementById('classroom'), {modules: course.modules});
   }
   function lessonRows(moduleId = 1) {
-    return course.lessons.filter(lesson => lesson.module === moduleId).map(lesson => `<a class="lesson-row${state.completed.includes(lesson.id) ? ' complete' : ''}" href="#lesson/${lesson.id}"><span class="lesson-index">${state.completed.includes(lesson.id) ? '✓' : String(lesson.id).padStart(2, '0')}</span><div><div class="lesson-title">${escape(lesson.title)}</div><div class="lesson-meta">${lesson.id === 1 ? '75–90' : '90'} min · Lesson + experiment + practice</div></div><span class="row-arrow" aria-hidden="true">↗</span></a>`).join('');
+    return lessonsInModule(moduleId).map(lesson => `<a class="lesson-row${state.completed.includes(lesson.id) ? ' complete' : ''}" href="#lesson/${lesson.id}"><span class="lesson-index">${state.completed.includes(lesson.id) ? '✓' : String(lesson.id).padStart(2, '0')}</span><div><div class="lesson-title">${escape(lesson.title)}</div><div class="lesson-meta">${lesson.id === 1 ? '75–90' : '90'} min · Lesson + experiment + practice</div></div><span class="row-arrow" aria-hidden="true">↗</span></a>`).join('');
   }
   function overview() {
-    const next = course.lessons.find(l => !state.completed.includes(l.id)) || course.lessons[0];
+    const next = nextLesson(), chapterLessons = lessonsInModule(next.module);
     main.innerHTML = `<section class="hero"><div><div class="eyebrow">YOUR PERSONAL COURSE</div><h1>Understand the maths.<br>See the vision.</h1><p>A connected path from refreshed foundations to recognition, detection and segmentation. Read a little, work the numbers, then see the idea change.</p><div class="button-row">${button(state.completed.length ? 'Continue your lessons' : 'Start Lesson 01', `#lesson/${next.id}`, true)}${button('View the roadmap', '#roadmap')}</div></div><div class="hero-art">${heroDiagram()}</div></section>
       <div class="course-facts"><span><strong>${coreWeeks()}</strong> core weeks${extensionModules().length ? ` + ${course.plan.length - coreWeeks()} extension` : ''}</span><span><strong>8–10</strong> hours / week</span><span><strong>${course.modules.length}</strong> modules</span><span><strong>${course.lessons.length}</strong> lessons ready</span></div>${reviewStrip()}
-      <div class="dashboard-grid"><section class="panel"><div class="section-heading"><h2>Your next chapter</h2><span class="pill">Ready to study</span></div><div class="lesson-list">${lessonRows(next.module)}</div><div class="today-block"><div class="eyebrow" style="margin:0">${state.completed.filter(n => course.lessons.find(l=>l.id===n)?.module===next.module).length} / 4 CHAPTER LESSONS COMPLETE</div><p>Understanding sets the pace.<br>Revisit an idea whenever you need.</p></div></section>
+      <div class="dashboard-grid"><section class="panel"><div class="section-heading"><h2>Your next chapter</h2><span class="pill">Ready to study</span></div><div class="lesson-list">${lessonRows(next.module)}</div><div class="today-block"><div class="eyebrow" style="margin:0">${chapterLessons.filter(l => state.completed.includes(l.id)).length} / ${chapterLessons.length} CHAPTER LESSONS COMPLETE</div><p>Understanding sets the pace.<br>Revisit an idea whenever you need.</p></div></section>
       <section class="panel panel-dark"><div class="eyebrow">TRY AN IDEA</div><h2>Pixels are numbers.</h2><p class="muted small">Move the scale. Watch every entry change.</p><div class="mini-image-row"><div id="mini-original" class="mini-matrix"></div><span class="mini-arrow" aria-hidden="true">→</span><div id="mini-output" class="mini-matrix"></div></div><label class="mini-control" for="mini-scale"><span>Scale</span><output id="mini-scale-value">0.50</output></label><input id="mini-scale" type="range" min="0" max="1.5" step=".05" value=".5"><div class="mini-control"><span>Output mean</span><output id="mini-mean">40</output></div><a class="text-link" style="color:#ffc29a;display:inline-block;margin-top:20px" href="#lesson/1/explore">Open the full experiment ↗</a></section></div>
-      <section class="visual-home-section"><div class="section-heading"><div><div class="eyebrow">A VISUAL PATH THROUGH THE COURSE</div><h2>See what each chapter unlocks.</h2></div><a class="text-link" href="#cinema">All ${window.CV_CONCEPT_VIDEOS.items.length + window.CV_STORIES.stories.length} videos ↗</a></div>${storyTiles()}</section><div class="lower-grid"><a class="shortcut" href="#practice"><span class="shortcut-num">01 / FIND YOUR START</span><h3>A short assessment</h3><p>No grades. Find the ideas to refresh.</p></a><a class="shortcut" href="#roadmap/week/1"><span class="shortcut-num">02 / MAKE A RHYTHM</span><h3>Your weekly rhythm</h3><p>Six flexible study sessions each week.</p></a><a class="shortcut" href="#library"><span class="shortcut-num">03 / GO DEEPER</span><h3>All four books, together</h3><p>Your PDFs and the MML bridge, one click away.</p></a></div>`;
+      <section class="visual-home-section"><div class="section-heading"><div><div class="eyebrow">A VISUAL PATH THROUGH THE COURSE</div><h2>See what each chapter unlocks.</h2></div><a class="text-link" href="#cinema">All ${window.CV_CONCEPT_VIDEOS.items.length + window.CV_STORIES.stories.length} videos ↗</a></div>${storyTiles()}</section><div class="lower-grid"><a class="shortcut" href="#practice/start"><span class="shortcut-num">01 / FIND YOUR START</span><h3>A short assessment</h3><p>No grades. Get a suggested place to start.</p></a><a class="shortcut" href="#roadmap/week/1"><span class="shortcut-num">02 / MAKE A RHYTHM</span><h3>Your weekly rhythm</h3><p>Six flexible study sessions each week.</p></a><a class="shortcut" href="#library"><span class="shortcut-num">03 / GO DEEPER</span><h3>All four books, together</h3><p>Your PDFs and the MML bridge, one click away.</p></a></div>`;
     const base = [20, 60, 100, 140];
     renderPixels(document.getElementById('mini-original'), base, true);
     const updateMini = () => {
@@ -118,18 +152,35 @@
     document.getElementById('mini-scale').addEventListener('input', updateMini);
     updateMini();
   }
+  const weekRange = m => `${m.weeks.includes('-') ? 'WEEKS' : 'WEEK'} ${m.weeks}`;
   function roadmap(week = 1, showRhythm = false) {
     week = validStudyWeek(week);
-    main.innerHTML = header('THE CONNECTED PATH', 'Your course roadmap', `${course.modules.length - extensionModules().length} core modules${extensionModules().length ? ` and ${extensionModules().length} extension modules` : ''}, each with four authored lessons, auto-checked practice, interactive experiments and a checkpoint. Follow the sequence and let the checkpoints set your pace.`) +
-      `<details class="roadmap-rhythm" id="weekly-rhythm"${showRhythm ? ' open' : ''}><summary>Suggested weekly rhythm<span>${course.plan.length} flexible weeks · 8–10 hours per week</span></summary><div class="roadmap-rhythm-content"><p class="muted">Eight core hours each week, plus up to two for review. Use the mastery checks to set your pace.</p>${weeklyRhythmMarkup(week)}</div></details>` +
-      `<div class="roadmap">${course.modules.map(m => `<a class="module-card" href="#module/${m.n}"><div class="module-art">${window.CV_STORIES.frame(window.CV_STORIES.forModule(m.n).id,3.8)}</div><div class="eyebrow">MODULE ${String(m.n).padStart(2, '0')} · WEEKS ${m.weeks}${m.extension ? ' · EXTENSION' : ''}</div><h3>${escape(m.title)}</h3><p>${escape(m.purpose)}</p>${m.extension && m.after ? `<p class="small muted">${escape(m.after)}</p>` : ''}<div class="card-bottom"><span class="pill${state.ready.includes(m.n) ? '' : ' pill-orange'}">${state.checkpoints[m.n]?.passed ? '✓ Checkpoint passed' : state.ready.includes(m.n) ? 'Marked ready' : `${course.lessons.filter(l => l.module === m.n).length} lessons ready`}</span><span class="text-link">Explore module ↗</span></div></a>`).join('')}</div>`;
+    main.innerHTML = header('THE CONNECTED PATH', 'Your course roadmap', `${course.modules.length - extensionModules().length} core modules${extensionModules().length ? ` and ${extensionModules().length} extension modules` : ''}, with authored lessons, auto-checked practice, interactive experiments and a checkpoint. Follow the steps in order and let the checkpoints set your pace. Module numbers are permanent labels, so Module 09 comes third on purpose: filters are taught early, once vectors are in place.`) +
+      `<details class="roadmap-rhythm" id="weekly-rhythm"${showRhythm ? ' open' : ''}><summary>Suggested weekly rhythm<span>${course.plan.length} flexible weeks · 8–10 hours per week</span></summary><div class="roadmap-rhythm-content"><p class="muted">Eight core hours each week. Practical labs add up to two more in the weeks they appear. Use the mastery checks to set your pace.</p>${weeklyRhythmMarkup(week)}</div></details>` +
+      `<div class="roadmap">${modulesInOrder().map(m => `<a class="module-card" href="#module/${m.n}"><div class="module-art">${window.CV_STORIES.frame(window.CV_STORIES.forModule(m.n).id,3.8)}</div><div class="eyebrow">STEP ${String(m.step).padStart(2, '0')} · MODULE ${String(m.n).padStart(2, '0')} · ${weekRange(m)}${m.extension ? ' · EXTENSION' : ''}</div><h3>${escape(m.title)}</h3><p>${escape(m.purpose)}</p>${m.extension && m.after ? `<p class="small muted">${escape(m.after)}</p>` : ''}<div class="card-bottom"><span class="pill${state.ready.includes(m.n) ? '' : ' pill-orange'}">${state.checkpoints[m.n]?.passed ? '✓ Checkpoint passed' : state.ready.includes(m.n) ? 'Marked ready' : `${m.lessonIds.length} lessons ready`}</span><span class="text-link">Explore module ↗</span></div></a>`).join('')}</div>`;
     document.getElementById('study-week').addEventListener('change', event => { location.hash = '#roadmap/week/' + event.target.value; });
+  }
+  // Labs and optional lessons belong where a learner reaches them, not only on their own pages.
+  const nextStep = (href, label, title) => `<a class="next-step" href="${href}"><span>${escape(label)}</span><strong>${escape(title)}</strong><i aria-hidden="true">↗</i></a>`;
+  function moduleBranches(id) {
+    const slugs = [...new Set(course.plan.flatMap((week, i) => course.path.weeks[i].module === id ? week.filter(s => s.lab).map(s => s.lab) : []))];
+    const labs = slugs.map(slug => window.CV_PRACTICAL_DATA.find(lab => lab.slug === slug));
+    const branches = course.lessons.filter(l => moduleById(id).lessonIds.includes(l.opensAfter) && l.module !== id);
+    if (!labs.length && !branches.length) return '';
+    return `<section class="panel next-steps"><h3>Alongside this module</h3>${labs.map(lab => nextStep(`#practical/${lab.slug}`, `Practical Lab ${lab.id}`, lab.title)).join('')}${branches.map(l => nextStep(`#lesson/${l.id}`, `Optional · ${lessonLabel(l.id)}`, l.title)).join('')}</section>`;
+  }
+  function lessonNextSteps(id) {
+    const position = lesson => course.path.order.indexOf(lesson);
+    const labs = window.CV_PRACTICAL_DATA, ready = labs.filter(lab => lab.requires.reduce((a, b) => position(a) > position(b) ? a : b) === id);
+    const uses = labs.filter(lab => !ready.includes(lab) && [...lab.requires, ...lab.related].includes(id)), branches = course.lessons.filter(l => l.opensAfter === id && l.module !== lessonById(id).module);
+    if (!ready.length && !uses.length && !branches.length) return '';
+    return `<section class="panel next-steps lesson-next-steps"><div class="eyebrow">WHERE THIS LEADS</div>${ready.map(lab => nextStep(`#practical/${lab.slug}`, `Ready after this lesson · Lab ${lab.id}`, lab.title)).join('')}${branches.map(l => nextStep(`#lesson/${l.id}`, `Optional, opens after this lesson · ${lessonLabel(l.id)}`, l.title)).join('')}${uses.map(lab => nextStep(`#practical/${lab.slug}`, `Used in Lab ${lab.id}`, lab.title)).join('')}</section>`;
   }
   function modulePage(id) {
     const m = course.modules.find(m => m.n === id);
     if (!m) return overview();
-    main.innerHTML = header(`MODULE ${String(id).padStart(2, '0')} · WEEKS ${m.weeks}${m.extension ? ' · EXTENSION' : ''}`, escape(m.title), escape(m.purpose) + (m.extension && m.after ? `<br><span class="small">${escape(m.after)}</span>` : '')) +
-      `<div class="detail-grid"><div class="detail-stack"><section class="panel"><h3>Four concept lessons</h3>${lessonRows(id)}</section><section class="panel"><h3>By the end, you can…</h3><ul>${m.outcomes.map(t => `<li>${escape(t)}</li>`).join('')}</ul></section><section class="panel"><h3>Practice before the lab</h3><p>${escape(m.practice)}</p></section><section class="panel"><h3>Your experiment</h3><p>${escape(m.lab)}</p><h3>What to submit</h3><p>${escape(m.artifact)}</p><div class="resource-downloads">${course.notebooks.filter(nb => nb.modules.includes(id)).map(nb => `<a class="btn nb-link" href="${nb.href}" download>Module notebook ↓</a>`).join('')}</div>${id === 12 ? `<a class="text-link" href="capstone-template.md" download>Capstone report template ↓</a>` : ''}</section></div>
+    main.innerHTML = header(`STEP ${String(m.step).padStart(2, '0')} · MODULE ${String(id).padStart(2, '0')} · ${weekRange(m)}${m.extension ? ' · EXTENSION' : ''}`, escape(m.title), escape(m.purpose) + (m.extension && m.after ? `<br><span class="small">${escape(m.after)}</span>` : '')) +
+      `<div class="detail-grid"><div class="detail-stack"><section class="panel"><h3>${m.lessonIds.length} concept lessons</h3>${lessonRows(id)}</section>${moduleBranches(id)}<section class="panel"><h3>By the end, you can…</h3><ul>${m.outcomes.map(t => `<li>${escape(t)}</li>`).join('')}</ul></section><section class="panel"><h3>Practice before the lab</h3><p>${escape(m.practice)}</p></section><section class="panel"><h3>Your experiment</h3><p>${escape(m.lab)}</p><h3>What to submit</h3><p>${escape(m.artifact)}</p><div class="resource-downloads">${course.notebooks.filter(nb => nb.modules.includes(id)).map(nb => `<a class="btn nb-link" href="${nb.href}" download>Module notebook ↓</a>`).join('')}</div>${id === 12 ? `<a class="text-link" href="capstone-template.md" download>Capstone report template ↓</a>` : ''}</section></div>
       <div class="detail-stack"><section class="panel"><div class="eyebrow">READ WITH A PURPOSE</div><h3>Your book sections</h3><p>${window.CV_READING.linkify(m.reading)}</p>${bookLinks(m.reading)}</section><section class="panel"><div class="eyebrow">CHECK YOUR UNDERSTANDING</div><h3>Mastery check</h3><p>${escape(m.gate)}</p>${window.CV_PRACTICE.checkpointMarkup(id)}<div class="pq-manual"><button class="btn complete-btn${state.ready.includes(id) ? ' selected' : ''}" id="mark-ready" type="button" aria-pressed="${state.ready.includes(id)}">${state.ready.includes(id) ? '✓ Module marked ready' : 'Mark ready without the checkpoint'}</button><p class="small muted" style="margin-top:10px">Use this when you have shown the same understanding another way, such as explaining the gate above and solving a new example.</p></div></section>${notes('module-' + id)}</div></div>`;
     document.getElementById('mark-ready').addEventListener('click', () => {
       state.ready = state.ready.includes(id) ? state.ready.filter(n => n !== id) : [...state.ready, id];
@@ -137,8 +188,20 @@
     });
     window.CV_PRACTICE.mountCheckpoint(main, id, () => { if (!state.ready.includes(id)) state.ready = [...state.ready, id]; save(); const b = document.getElementById('mark-ready'); b.classList.add('selected'); b.setAttribute('aria-pressed', 'true'); b.textContent = '✓ Module marked ready'; });
   }
-  function manualQuestions(prefix, questions, solutions) {
-    return `<div class="assessment">${questions.map((q, i) => `<section class="assessment-card"><div class="question-meta"><span>QUESTION ${String(i + 1).padStart(2, '0')}</span></div><h3 id="q-label-${prefix}-${i}">${escape(q)}</h3><textarea class="notes" data-answer="${prefix}-${i}" aria-labelledby="q-label-${prefix}-${i}" placeholder="Show your reasoning. ‘Not sure’ is a useful starting point.">${escape(state.answers[`${prefix}-${i}`] || '')}</textarea>${solutions && solutions[i] ? `<details><summary>Show the worked answer</summary><p>${escape(solutions[i])}</p></details>` : ''}</section>`).join('')}</div>`;
+  const assessmentMarks = question => `<div class="assess-mark" role="group" aria-label="Mark question ${question}"><span>After checking the answer:</span>${[['yes', 'I got it'], ['no', 'Not yet']].map(([mark, label]) => `<button type="button" class="btn" data-assess="${question}" data-mark="${mark}" aria-pressed="${state.assessment[question] === mark}">${label}</button>`).join('')}</div>`;
+  function startAdvice() {
+    const guide = course.assessmentGuide, mark = item => state.assessment[item.question], inGroup = name => guide.filter(item => item.group === name);
+    const required = [...inGroup('foundation'), ...inGroup('linear')], missed = list => list.filter(item => mark(item) === 'no');
+    const refresh = list => list.length ? `<ul>${list.map(item => `<li><a class="text-link" href="#lesson/${item.lesson}">${lessonLabel(item.lesson)}</a> · ${escape(item.skill)}</li>`).join('')}</ul>` : '';
+    if (required.some(item => !mark(item))) return `<h3>Your suggested start</h3><p class="muted">Mark Questions 1–${required.length} to see it. So far ${guide.filter(mark).length} of ${guide.length} are marked.</p>`;
+    const python = missed(inGroup('python')).length ? `<p class="small muted">Practise NumPy before your first notebook: run the Python example in Lesson 01, then the <a class="text-link" href="https://cs231n.github.io/python-numpy-tutorial/" target="_blank" rel="noopener">CS231n Python and NumPy tutorial ↗</a>.</p>` : '';
+    const previewsKnown = inGroup('preview').every(item => mark(item) === 'yes');
+    if (missed(inGroup('foundation')).length) return `<h3>Start at Lesson 01</h3><p>This is the usual route, and these lessons refresh what you marked:</p>${refresh(missed(inGroup('foundation')))}${python}${button('Start Lesson 01', '#lesson/1', true)}`;
+    if (missed(inGroup('linear')).length) return `<h3>Skip ahead to Module 02</h3><p>Your foundations look secure. Pass the Module 01 checkpoint to confirm, and Continue will move on to Lesson 05. These lessons will matter most:</p>${refresh(missed(inGroup('linear')))}${python}${button('Take the Module 01 checkpoint', '#module/1', true)}`;
+    return `<h3>Test out as far as you can</h3><p>Questions 1–${required.length} look secure. Take the checkpoints in roadmap order, starting with Module 01. Each one you pass moves Continue forward, and the first one that stops you is your real starting point. Skipped lessons stay open.${previewsKnown ? ' You also knew the calculus and probability previews, so expect to get further than most.' : ''}</p>${python}${button('Take the Module 01 checkpoint', '#module/1', true)}${button('View the roadmap', '#roadmap')}`;
+  }
+  function manualQuestions(prefix, questions, solutions, marking = false) {
+    return `<div class="assessment">${questions.map((q, i) => `<section class="assessment-card"><div class="question-meta"><span>QUESTION ${String(i + 1).padStart(2, '0')}</span></div><h3 id="q-label-${prefix}-${i}">${escape(q)}</h3><textarea class="notes" data-answer="${prefix}-${i}" aria-labelledby="q-label-${prefix}-${i}" placeholder="Show your reasoning. ‘Not sure’ is a useful starting point.">${escape(state.answers[`${prefix}-${i}`] || '')}</textarea>${solutions && solutions[i] ? `<details><summary>Show the worked answer</summary><p>${escape(solutions[i])}</p></details>` : ''}${marking ? assessmentMarks(i + 1) : ''}</section>`).join('')}</div>`;
   }
   function mathFocus(id) {
     const t=window.CV_TEACHING[id];
@@ -152,9 +215,9 @@
     const lesson=course.lessons.find(l=>l.id===id);
     if(!lesson)return overview();
     if(!['read','explore','practice'].includes(tab))tab='read';
-    const t=window.CV_TEACHING[id],story=window.CV_STORIES.forModule(lesson.module);
-    main.innerHTML=header(`LESSON ${String(id).padStart(2,'0')} · MODULE ${String(lesson.module).padStart(2,'0')} · 90 MIN`,escape(lesson.title),escape(lesson.goal||'Connect mathematical notation to images, calculate a worked example and explain what the numbers mean.'))+
-      `<nav class="lesson-tabs" aria-label="Lesson activities">${['read','explore','practice'].map((v,i)=>`<a class="tab${v===tab?' active':''}" href="#lesson/${id}/${v}"${v===tab?' aria-current="page"':''}><span class="activity-num">0${i+1}</span>${{read:'Learn & visualize',explore:'Experiment',practice:'Practice'}[v]}</a>`).join('')}</nav><div id="lesson-content"></div><div class="lesson-footer"><button class="btn complete-btn${state.completed.includes(id)?' selected':''}" id="complete-lesson" type="button" aria-pressed="${state.completed.includes(id)}">${state.completed.includes(id)?'✓ Lesson complete':'Mark lesson complete'}</button>${id>1?button('Previous lesson','#lesson/'+(id-1)):''}${course.lessons.some(l=>l.id===id+1)?button('Next lesson','#lesson/'+(id+1)):button('Back to the roadmap','#roadmap')}</div>`;
+    const t=window.CV_TEACHING[id],story=window.CV_STORIES.forLesson(id)||window.CV_STORIES.forModule(lesson.module),previous=neighbourLesson(id,-1),following=neighbourLesson(id,1);
+    main.innerHTML=header(`LESSON ${String(id).padStart(2,'0')} · MODULE ${String(lesson.module).padStart(2,'0')} · WEEK ${lesson.week} · 90 MIN`,escape(lesson.title),escape(lesson.goal||'Connect mathematical notation to images, calculate a worked example and explain what the numbers mean.'))+
+      `<nav class="lesson-tabs" aria-label="Lesson activities">${['read','explore','practice'].map((v,i)=>`<a class="tab${v===tab?' active':''}" href="#lesson/${id}/${v}"${v===tab?' aria-current="page"':''}><span class="activity-num">0${i+1}</span>${{read:'Learn & visualize',explore:'Experiment',practice:'Practice'}[v]}</a>`).join('')}</nav><div id="lesson-content"></div>${lessonNextSteps(id)}<div class="lesson-footer"><button class="btn complete-btn${state.completed.includes(id)?' selected':''}" id="complete-lesson" type="button" aria-pressed="${state.completed.includes(id)}">${state.completed.includes(id)?'✓ Lesson complete':'Mark lesson complete'}</button>${previous?button(`Previous: ${lessonLabel(previous)}`,'#lesson/'+previous):''}${following?button(`Next: ${lessonLabel(following)}`,'#lesson/'+following):button('Back to the roadmap','#roadmap')}</div>`;
     const content=document.getElementById('lesson-content');
     const actions=main.querySelector('.lesson-footer');
     actions.classList.add('lesson-actions');
@@ -347,7 +410,7 @@
     main.innerHTML = header('PRACTICE & REFLECTION', 'Work it out. Explain your steps.', 'Review questions that are due, revisit your mistakes, or use the starting assessment to find what needs a refresher. Your answers are saved in this browser.') +
       window.CV_PRACTICE.practiceMarkup() +
       `<div class="section-heading" style="margin-top:45px"><h2>Lesson 01 quick check</h2><a href="#lesson/1" class="text-link">Revisit the lesson ↗</a></div><div class="quiz">${quizQuestions.map((q, i) => `<div class="quiz-question"><div class="question-meta">CHECK ${i + 1}</div><label for="quiz-${i}">${q.text}</label><input id="quiz-${i}" type="number" step="any" placeholder="Your answer" value="${escape(state.quiz[i] ?? '')}" data-quiz="${i}"><div id="quiz-feedback-${i}" class="quiz-feedback"></div></div>`).join('')}</div><div class="button-row"><button id="check-quiz" class="btn btn-primary" type="button">Check my answers</button><span id="quiz-result" role="status" class="small"></span></div>
-      <div class="section-heading" style="margin-top:45px"><h2>Your starting assessment</h2><span class="pill pill-plan">About 25 minutes</span></div><p class="muted small">The later questions preview calculus and probability. “Not sure” helps us choose where to slow down.</p>${manualQuestions('assessment', course.assessment, course.assessmentAnswers)}<div class="answer-copy"><button class="btn" id="copy-answers" type="button">Copy answers for our chat ↗</button><span id="copy-status" class="small muted" role="status" style="margin-left:12px"></span><div id="copy-fallback"></div></div>`;
+      <div class="section-heading" id="starting-assessment" style="margin-top:45px"><h2>Your starting assessment</h2><span class="pill pill-plan">About 25 minutes</span></div><p class="muted small">Answer first, open the worked answer, then mark yourself. Questions 9–11 preview calculus and probability, so “Not yet” is expected there. Nothing is graded and nothing leaves this browser.</p><section class="panel start-advice" id="start-advice" aria-live="polite">${startAdvice()}</section>${manualQuestions('assessment', course.assessment, course.assessmentAnswers, true)}`;
     window.CV_PRACTICE.mountPractice(main);
     document.getElementById('check-quiz').addEventListener('click', () => {
       let correct = 0;
@@ -359,31 +422,33 @@
       });
       document.getElementById('quiz-result').textContent = `${correct} of 4 correct. ${correct === 4 ? 'Now explain why clipping changes the mean.' : 'Use the explanation, then try a new example.'}`;
     });
-    document.getElementById('copy-answers').addEventListener('click', async () => {
-      const content = course.assessment.map((q, i) => `${i + 1}. ${q}\nMy answer: ${state.answers['assessment-' + i] || 'Not attempted yet'}`).join('\n\n');
-      try { await navigator.clipboard.writeText(content); document.getElementById('copy-status').textContent = 'Copied. Paste into our chat.'; }
-      catch {
-        document.getElementById('copy-fallback').innerHTML = `<label class="notes-label" for="copy-text">Select and copy your answers</label><textarea id="copy-text" class="notes clipboard-fallback" readonly>${escape(content)}</textarea>`;
-        document.getElementById('copy-text').select(); document.getElementById('copy-status').textContent = 'Press Ctrl+C to copy the selected answers.';
-      }
-    });
+    document.querySelectorAll('[data-assess]').forEach(control => control.addEventListener('click', () => {
+      const question = control.dataset.assess;
+      state.assessment[question] = state.assessment[question] === control.dataset.mark ? undefined : control.dataset.mark;
+      state.assessment = cleanAssessment(state.assessment);
+      save();
+      document.querySelectorAll(`[data-assess="${question}"]`).forEach(item => item.setAttribute('aria-pressed', String(state.assessment[question] === item.dataset.mark)));
+      document.getElementById('start-advice').innerHTML = startAdvice();
+    }));
+    if (sub === 'start') requestAnimationFrame(() => document.getElementById('starting-assessment').scrollIntoView());
   }
   function allLessons() {
     main.innerHTML = header('YOUR LESSON LIBRARY', 'A connected course, ready to study.', `All ${course.lessons.length} lessons have explanations, auto-checked practice and checkpoints. Use the roadmap sequence; you can revisit any lesson at any time.`) +
-      `<div class="lesson-filters"><label>Find a topic<input type="search" id="lesson-search" placeholder="Try vectors, gradient, IoU…"></label><label>Module<select id="lesson-module"><option value="0">All modules</option>${course.modules.map(m => `<option value="${m.n}">${String(m.n).padStart(2,'0')} · ${escape(m.title)}</option>`).join('')}</select></label></div><div id="lesson-index-results"></div>`;
+      `<div class="lesson-filters"><label>Find a topic<input type="search" id="lesson-search" placeholder="Try vectors, gradient, IoU…"></label><label>Module<select id="lesson-module"><option value="0">All modules</option>${modulesInOrder().map(m => `<option value="${m.n}">${String(m.n).padStart(2,'0')} · ${escape(m.title)}</option>`).join('')}</select></label></div><div id="lesson-index-results"></div>`;
     const render = () => {
       const query = document.getElementById('lesson-search').value.trim().toLowerCase();
       const module = Number(document.getElementById('lesson-module').value);
       const matches = course.lessons.filter(l => (!module || l.module === module) && (l.title + ' ' + (l.goal || '')).toLowerCase().includes(query));
-      document.getElementById('lesson-index-results').innerHTML = matches.length ? course.modules.filter(m => matches.some(l => l.module === m.n)).map(m => `<section class="panel lesson-index-group"><div class="section-heading"><h2>${String(m.n).padStart(2,'0')} · ${escape(m.title)}</h2><a class="text-link" href="#module/${m.n}">Module guide ↗</a></div>${matches.filter(l => l.module === m.n).map(l => `<a class="lesson-row" href="#lesson/${l.id}"><span class="lesson-index">${state.completed.includes(l.id) ? '✓' : String(l.id).padStart(2,'0')}</span><div><div class="lesson-title">${escape(l.title)}</div><div class="lesson-meta">90 min · Read + explore + practice</div></div><span class="row-arrow">↗</span></a>`).join('')}</section>`).join('') : '<p role="status">No lessons match that topic. Try a shorter search.</p>';
+      document.getElementById('lesson-index-results').innerHTML = matches.length ? modulesInOrder().filter(m => matches.some(l => l.module === m.n)).map(m => `<section class="panel lesson-index-group"><div class="section-heading"><h2>${String(m.n).padStart(2,'0')} · ${escape(m.title)}</h2><a class="text-link" href="#module/${m.n}">Module guide ↗</a></div>${lessonsInModule(m.n).filter(l => matches.includes(l)).map(l => `<a class="lesson-row" href="#lesson/${l.id}"><span class="lesson-index">${state.completed.includes(l.id) ? '✓' : String(l.id).padStart(2,'0')}</span><div><div class="lesson-title">${escape(l.title)}</div><div class="lesson-meta">90 min · Read + explore + practice</div></div><span class="row-arrow">↗</span></a>`).join('')}</section>`).join('') : '<p role="status">No lessons match that topic. Try a shorter search.</p>';
     };
     document.getElementById('lesson-search').addEventListener('input',render);document.getElementById('lesson-module').addEventListener('change',render);render();
   }
   function validStudyWeek(week) {
     return Number.isInteger(week) && week >= 1 && week <= course.plan.length ? week : 1;
   }
+  const weekHours = week => { const hours = course.plan[week - 1].reduce((sum, s) => sum + s.minutes, 0) / 60; return `${fmt(hours, 1)} hours`; };
   function weeklyRhythmMarkup(week) {
-    return `<div class="study-week-picker"><label for="study-week">Choose your week</label><select id="study-week">${course.plan.map((_,i) => `<option value="${i+1}"${week === i+1 ? ' selected' : ''}>Week ${i+1} · Module ${Math.floor(i/2)+1}</option>`).join('')}</select></div><section class="panel"><div class="section-heading"><h2>Week ${week}</h2><span class="pill pill-orange">8 hours · 6 sessions</span></div>${course.plan[week - 1].map((session, i) => { const id = `${week}-${i}`; return `<label class="plan-session${state.sessions.includes(id) ? ' done' : ''}"><input type="checkbox" data-session="${id}"${state.sessions.includes(id) ? ' checked' : ''}><span class="session-time">${session.minutes} min</span><span><span class="session-task">${escape(session.task)}</span><span class="session-evidence" style="display:block">Evidence: ${escape(session.evidence)}</span></span></label>`; }).join('')}</section><p class="explore-note">Revisit an idea when it needs more time. A completed session records practice; explaining the idea and solving a new example checks mastery.</p>${notes('week-' + week, 'This week’s questions & things to revisit')}`;
+    return `<div class="study-week-picker"><label for="study-week">Choose your week</label><select id="study-week">${course.plan.map((_,i) => `<option value="${i+1}"${week === i+1 ? ' selected' : ''}>Week ${i+1} · Module ${String(course.path.weeks[i].module).padStart(2,'0')}</option>`).join('')}</select></div><section class="panel"><div class="section-heading"><h2>Week ${week}</h2><span class="pill pill-orange">${weekHours(week)} · ${course.plan[week - 1].length} sessions</span></div>${course.plan[week - 1].map((session, i) => { const id = `${week}-${i}`; return `<label class="plan-session${state.sessions.includes(id) ? ' done' : ''}"><input type="checkbox" data-session="${id}"${state.sessions.includes(id) ? ' checked' : ''}><span class="session-time">${session.minutes} min</span><span><span class="session-task">${escape(session.task)}</span><span class="session-evidence" style="display:block">Evidence: ${escape(session.evidence)}</span>${session.lab ? `<a class="text-link session-link" href="#practical/${session.lab}">Open the lab ↗</a>` : session.lesson ? `<a class="text-link session-link" href="#lesson/${session.lesson}">Open the lesson ↗</a>` : ''}</span></label>`; }).join('')}</section><p class="explore-note">Revisit an idea when it needs more time. A completed session records practice; explaining the idea and solving a new example checks mastery.</p>${notes('week-' + week, 'This week’s questions & things to revisit')}`;
   }
   function glossaryPage(focus) {
     main.innerHTML=header('GLOSSARY','Every new idea, in plain words.','Each term has a plain explanation, how to calculate it by hand and a worked example, with a link to the lesson that introduces it.')+'<div id="glossary"></div>';
@@ -401,6 +466,7 @@
         if(data.course!=='Maths for Computer Vision'||data.version!==1||!Array.isArray(data.completed)||!Array.isArray(data.ready)||!Array.isArray(data.sessions))throw Error('Choose a course progress JSON exported from this course.');
         for(const key of ['notes','answers','quiz'])if(!data[key]||typeof data[key]!=='object'||Array.isArray(data[key])||Object.values(data[key]).some(v=>typeof v!=='string'&&typeof v!=='number'))throw Error('The backup has invalid '+key+'.');
         // Merge notes and checks. Existing notes absent from the backup stay in place.
+        Object.assign(data,migratePath(data));
         const mergeWriting=(current,incoming)=>{const merged={...current};for(const [key,value] of Object.entries(incoming)){const text=String(value);merged[key]=merged[key]&&merged[key]!==text?merged[key]+'\n\n[Imported backup]\n'+text:text;}return merged;};
         // Keep whichever practice record was reviewed more recently; keep the best checkpoint result.
         const incomingPractice=cleanPractice(data.practice),practiceMerged={...state.practice};
@@ -409,7 +475,7 @@
         for(const [n,r] of Object.entries(cleanCheckpoints(data.checkpoints)))if(!checkpointMerged[n]||r.best>checkpointMerged[n].best)checkpointMerged[n]={...r,passed:r.passed||!!checkpointMerged[n]?.passed};
         const errorKey=e=>e.item+'|'+e.date+'|'+e.prompt;
         const errorsMerged=[...state.errors,...cleanErrors(data.errors).filter(e=>!state.errors.some(x=>errorKey(x)===errorKey(e)))].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,150);
-        state={...state,completed:[...new Set([...state.completed,...data.completed.filter(n=>course.lessons.some(l=>l.id===n))])],ready:[...new Set([...state.ready,...data.ready.filter(validModule)])],sessions:[...new Set([...state.sessions,...data.sessions.filter(v=>typeof v==='string')])],notes:mergeWriting(state.notes,data.notes),answers:mergeWriting(state.answers,data.answers),quiz:{...data.quiz,...state.quiz},practice:practiceMerged,errors:errorsMerged,checkpoints:checkpointMerged};
+        state={...state,completed:[...new Set([...state.completed,...data.completed.filter(n=>course.lessons.some(l=>l.id===n))])],ready:[...new Set([...state.ready,...data.ready.filter(validModule)])],sessions:[...new Set([...state.sessions,...data.sessions.filter(v=>typeof v==='string')])],notes:mergeWriting(state.notes,data.notes),answers:mergeWriting(state.answers,data.answers),quiz:{...data.quiz,...state.quiz},practice:practiceMerged,errors:errorsMerged,checkpoints:checkpointMerged,assessment:cleanAssessment({...data.assessment,...state.assessment}),pathVersion:PATH_VERSION};
         save();status.textContent='Backup imported and merged with your current progress. ';event.target.value='';
       }catch(error){status.textContent=error.message+' ';event.target.value='';}
     });
@@ -475,7 +541,7 @@
       location.replace('#roadmap/week/' + validStudyWeek(Number(arg)));
       return;
     }
-    const contextModule = page === 'module' ? Number(arg) : page === 'lesson' ? course.lessons.find(l => l.id === Number(arg))?.module : page === 'cinema' && arg ? (window.CV_CONCEPT_VIDEOS.items.find(item=>item.id===arg)?.module || window.CV_STORIES.stories.find(s=>s.id===arg)?.module) : (course.lessons.find(l => !state.completed.includes(l.id)) || course.lessons[0]).module;
+    const contextModule = page === 'module' ? Number(arg) : page === 'lesson' ? course.lessons.find(l => l.id === Number(arg))?.module : page === 'cinema' && arg ? (window.CV_CONCEPT_VIDEOS.items.find(item=>item.id===arg)?.module || window.CV_STORIES.stories.find(s=>s.id===arg)?.module) : nextLesson().module;
     const chapter = course.modules.find(m => m.n === contextModule) || course.modules[0];
     const chapterLink = document.querySelector('.chapter-link');
     chapterLink.href = '#module/' + chapter.n;

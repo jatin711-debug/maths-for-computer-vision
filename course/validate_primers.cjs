@@ -16,6 +16,7 @@ files.forEach(f => run(path.join(dir, 'primers', f)));
 
 const course = window.CV_COURSE, P = window.CV_PRIMER;
 const lessonIds = new Set(course.lessons.map(l => l.id));
+const studyPosition = id => course.path.order.indexOf(id);
 const issues = [];
 const fail = (where, msg) => issues.push(`${where}: ${msg}`);
 const firstLesson = new Map();
@@ -55,7 +56,7 @@ for (const id of lessonsWithPrimers) {
     (t.steps || []).forEach((s, i) => tex(`${w} step ${i + 1}`, s));
     (t.examples || []).forEach((e, i) => { if (!Array.isArray(e) || e.length !== 2) fail(w, `example ${i + 1} must be [input, result]`); else e.forEach(x => tex(`${w} example ${i + 1}`, x)); });
     if (t.pitfall) tex(`${w} pitfall`, t.pitfall);
-    (t.seeAlso || []).forEach(n => { if (!lessonIds.has(n)) fail(w, `seeAlso lesson ${n} does not exist`); else if (n <= id) fail(w, `seeAlso lesson ${n} is not later than ${id}`); });
+    (t.seeAlso || []).forEach(n => { if (!lessonIds.has(n)) fail(w, `seeAlso lesson ${n} does not exist`); else if (studyPosition(n) <= studyPosition(id)) fail(w, `seeAlso lesson ${n} is not later than ${id} in study order`); });
     if (t.plot) {
       try {
         const f = new Function(`return (${t.plot.fn})`)();
@@ -70,14 +71,14 @@ for (const id of lessonsWithPrimers) {
       } catch (e) { fail(w, `plot error: ${e.message}`); }
     }
   }
-  (spec.builds || []).forEach(b => { if (!lessonIds.has(b.lesson) || b.lesson >= id) fail(at, `builds lesson ${b.lesson} must be an earlier lesson`); if (!b.why) fail(at, `builds lesson ${b.lesson} needs why`); });
+  (spec.builds || []).forEach(b => { if (!lessonIds.has(b.lesson) || studyPosition(b.lesson) >= studyPosition(id)) fail(at, `builds lesson ${b.lesson} must come earlier in study order`); if (!b.why) fail(at, `builds lesson ${b.lesson} needs why`); });
   (spec.symbols || []).forEach(([s, m, term]) => { if (!s || !m) fail(at, 'symbol rows need [symbol, meaning]'); if (term && !spec.terms.some(t => t.id === term)) fail(at, `symbol ${s} points to term ${term}, which is not in this lesson`); if ((m || '').length > 90) fail(at, `symbol ${s} meaning is ${m.length} characters; keep it under 90`); });
   P.panel(id);
 }
 for (const id of lessonsWithPrimers) {
   (P.lessons[id].recall || []).forEach(r => {
     if (!firstLesson.has(r)) fail(`Lesson ${id}`, `recall "${r}" is not a term id`);
-    else if (firstLesson.get(r) >= id) fail(`Lesson ${id}`, `recall "${r}" is introduced in Lesson ${firstLesson.get(r)}, not earlier`);
+    else if (studyPosition(firstLesson.get(r)) >= studyPosition(id)) fail(`Lesson ${id}`, `recall "${r}" is introduced in Lesson ${firstLesson.get(r)}, not earlier in study order`);
   });
 }
 const missing = course.lessons.map(l => l.id).filter(id => !P.lessons[id]);

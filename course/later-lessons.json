@@ -622,7 +622,7 @@
   },
   {
     "id": 32,
-    "module": 8,
+    "module": 10,
     "title": "Initialization, scaling and training diagnostics",
     "file": "lessons/32-initialization-scaling-and-training-diagnostics.md",
     "reading": "MML 7.1 and 8.6; CV 5.3.6.",
@@ -691,7 +691,7 @@
   },
   {
     "id": 35,
-    "module": 9,
+    "module": 10,
     "title": "Padding, stride, channels and receptive fields",
     "file": "lessons/35-padding-stride-channels-and-receptive-fields.md",
     "reading": "CV 5.4; optional CS231n convolutional-network notes.",
@@ -833,7 +833,7 @@
     "title": "CNN classification, inductive bias and augmentation",
     "file": "lessons/41-cnn-classification-inductive-bias-and-augmentation.md",
     "reading": "CV 5.4 and 6.2; optional CS231n convolutional-network notes.",
-    "goal": "Connect local shared weights to a trainable image classifier and choose label-preserving transformations.",
+    "goal": "Connect local shared weights to a trainable image classifier, choose label-preserving transformations and reuse a pretrained network.",
     "exercises": [
       "Count convolution parameters for a biased 3x3 layer from one to four channels.",
       "For the worked 8x8 CNN, give the flattened feature dimension.",

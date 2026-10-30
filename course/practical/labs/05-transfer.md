@@ -1,6 +1,6 @@
 # Transfer learning and fine-tuning
 
-A pretrained model brings features learned on another dataset. We replace ResNet18's final classifier with ten outputs, then compare two adaptation strategies on the same CIFAR split. The first run downloads about 45 MB of ImageNet weights. Images are resized to 224 × 224 and normalized with the saved ImageNet constants. Upsampling CIFAR cannot create missing detail.
+A pretrained model brings features learned on another dataset. Lesson 41 explains freezing and fine-tuning, and Lesson 55 explains the residual connections inside ResNet18. We replace ResNet18's final classifier with ten outputs, then compare two adaptation strategies on the same CIFAR split. The first run downloads about 45 MB of ImageNet weights. Images are resized to 224 × 224 and normalized with the saved ImageNet constants. Upsampling CIFAR cannot create missing detail.
 
 ## Train only the head
 

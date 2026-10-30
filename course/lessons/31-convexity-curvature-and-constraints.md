@@ -24,7 +24,7 @@ Minimize \((w-3)^2\) subject to \(w\le1\). The feasible optimum is w=1, where th
 
 ## Interpret constraints in vision
 
-Probability vectors must be nonnegative and sum to one; softmax builds this into the representation. Image-coordinate predictions might need bounds, but naively clipping inside a learned computation changes derivatives and may saturate them. Decide whether the constraint belongs to parameterization, optimization or evaluation. These are different operations with different mathematical consequences.
+Probability vectors must be nonnegative and sum to one; the softmax of Lesson 27 builds this into the representation. Image-coordinate predictions might need bounds, but naively clipping inside a learned computation changes derivatives and may saturate them. Decide whether the constraint belongs to parameterization, optimization or evaluation. These are different operations with different mathematical consequences.
 
 ## Practice before opening the answers
 

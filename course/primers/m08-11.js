@@ -183,7 +183,7 @@
         steps: [T`Find the fan-in \(D\) of the layer.`, T`Choose the weight variance: \(1/D\) to preserve a plain weighted sum, \(2/D\) (He) before a ReLU.`, T`Take the square root to get the standard deviation, and draw zero-mean weights with that spread.`, T`Give every weight its own random value so that units do not start identical.`],
         examples: [[T`\(D=100,\ v^2=1,\ s^2=1\)`, T`sum variance \(100\) (standard deviation 10): far too large`], [T`\(D=100,\ v^2=1/100\)`, T`sum variance \(1\): size preserved`], [T`He, \(D=100\)`, T`\(v^2=0.02\), standard deviation \(\approx0.141\)`], [T`He, \(D=32\)`, T`\(v^2=0.0625\), standard deviation \(0.25\)`]],
         pitfall: T`Never start every weight at the same value, such as all zeros: identical units receive identical gradients and stay copies of each other. Random starts break that symmetry.`,
-        seeAlso: [37, 41]
+        seeAlso: [41]
       },
       {
         id: 'vanishing-and-exploding-gradients', term: 'Vanishing and exploding gradients', symbol: T`c^{\,n}`,
@@ -192,7 +192,7 @@
         steps: [T`Estimate how much one layer scales the size of what passes through it: the factor \(c\).`, T`Raise it to the number of layers \(n\).`, T`Far below 1 means tiny gradients and early layers that barely learn; far above 1 means overflow and NaN values.`],
         examples: [[T`\(c=0.5,\ n=10\)`, T`\(0.5^{10}\approx0.001\)`], [T`\(c=1.5,\ n=10\)`, T`\(1.5^{10}\approx57.7\)`], [T`\(c=0.9,\ n=20\)`, T`\(0.9^{20}\approx0.12\)`], [T`\(c=1,\ n=10\)`, T`\(1\): size preserved`]],
         pitfall: T`A flat training loss can come from vanishing gradients, but also from a learning rate that is too small, frozen parameters or misaligned labels. Measure the gradient sizes before deciding.`,
-        seeAlso: [38, 39]
+        seeAlso: [39]
       },
       {
         id: 'chance-level-loss', term: 'Starting-loss check: ln C', symbol: T`L_0\approx\ln C`,
@@ -273,7 +273,7 @@
 
   add(34, {
     builds: [{lesson: 6, why: 'each output is a dot product of a patch with the kernel'}, {lesson: 33, why: 'an image is a grid of samples'}],
-    recall: ['dot-product', 'weighted-sum', 'summation-notation', 'gaussian-distribution', 'outer-product'],
+    recall: ['dot-product', 'weighted-sum', 'summation-notation', 'matrix-multiplication'],
     symbols: [
       ['K', 'kernel: the small grid of weights slid across the image', 'filter-kernel'],
       ['I', 'input image: the grid of pixel values being filtered'],
@@ -308,7 +308,7 @@
       },
       {
         id: 'weight-sharing', term: 'Weight sharing',
-        plain: T`A convolutional layer uses the same kernel weights at every image position. It needs far fewer parameters than connecting every pixel to every output, and a pattern learned in one place can be found anywhere. During training, each shared weight’s gradient adds up the contributions from every position.`,
+        plain: T`A convolutional layer uses the same kernel weights at every image position. It needs far fewer parameters than connecting every pixel to every output, and a pattern found in one place can be found anywhere. When a network learns these weights (Lesson 41), every position contributes to the same shared numbers.`,
         steps: [T`Count the kernel’s weights: they are reused at every placement.`, T`Compare with a dense layer, which needs one weight for every input–output pair.`],
         examples: [[T`3×3 kernel on a 5×5 image (9 outputs)`, T`9 shared weights`], [T`dense map from those 25 pixels to 9 outputs`, T`\(25\times9=225\) weights`], [T`the same kernel on a 100×100 image`, T`still 9 weights`]],
         pitfall: T`Sharing weights does not by itself make a classifier ignore position: borders, stride, pooling and the final layers can all respond to where things are (Lesson 41).`,
@@ -316,7 +316,7 @@
       },
       {
         id: 'gaussian-kernel', term: 'Gaussian blur kernel (separable)', symbol: T`G(x,y)=g(x)\,g(y)`,
-        plain: T`A Gaussian kernel blurs by weighting each neighbour with the bell-shaped Gaussian curve \(e^{-x^2/(2\sigma^2)}\): near pixels count most and \(\sigma\) sets the width. The 2D kernel is the product \(g(x)g(y)\), so you can blur every row and then every column with one short 1D kernel. Cut it off at a radius of about \(3\sigma\) and divide by the sum so that the weights add to 1.`,
+        plain: T`A Gaussian kernel blurs by weighting each neighbour with the bell curve \(e^{-x^2/(2\sigma^2)}\): near pixels count most, and the number \(\sigma\) (sigma) sets the width. Lesson 23 meets this curve again as a model of noise. Each entry of the 2D kernel is one 1D weight times another, \(g(x)g(y)\), so you can blur every row and then every column with one short 1D kernel. Cut it off at a radius of about \(3\sigma\) and divide by the sum so that the weights add to 1.`,
         formula: T`g(x)=\frac{e^{-x^2/(2\sigma^2)}}{\sum_{x'=-r}^{r}e^{-x'^2/(2\sigma^2)}},\quad x=-r,\dots,r,\ \ r\approx3\sigma;\qquad G(x,y)=g(x)\,g(y)`,
         steps: [T`Choose \(\sigma\) and a radius \(r\approx3\sigma\), rounded up to a whole number.`, T`For \(x=-r,\dots,r\), compute \(e^{-x^2/(2\sigma^2)}\).`, T`Divide every value by their sum, so the weights add to 1 and brightness is kept.`, T`Blur each row with \(g\), then each column with \(g\): the same result as the 2D kernel \(G\).`],
         examples: [[T`\(\sigma=1,\ r=3\): raw values at \(x=0,1,2,3\)`, T`\(1,\ 0.607,\ 0.135,\ 0.011\); their sum over \(-3..3\) is \(\approx2.506\)`], [T`normalized`, T`\(\approx[0.004,\ 0.054,\ 0.242,\ 0.399,\ 0.242,\ 0.054,\ 0.004]\)`], [T`small kernel \(g=[0.25,0.5,0.25]\) (\(\sigma\approx0.71\))`, T`\(G=g\,g^T=\tfrac1{16}\begin{bmatrix}1&2&1\\2&4&2\\1&2&1\end{bmatrix}\)`], [T`7×7 kernel, cost per pixel`, T`49 multiplications directly, \(7+7=14\) separably`]],
@@ -359,7 +359,7 @@
         steps: [T`Pad: the length becomes \(n+2p\). Zeros are usual; mirrored or wrapped-round values are alternatives.`, T`Subtract the kernel size \(k\).`, T`Divide by the stride \(s\) and take the floor.`, T`Add 1. At stride 1 an odd kernel keeps the size with \(p=(k-1)/2\) (“same” padding).`],
         examples: [[T`row \([1,2,3]\) padded with \(p=1\) zero`, T`\([0,1,2,3,0]\)`], [T`\(n=5,\ k=3,\ p=0,\ s=1\)`, T`\(\lfloor2/1\rfloor+1=3\)`], [T`\(n=7,\ k=3,\ p=1,\ s=2\)`, T`\(\lfloor6/2\rfloor+1=4\)`], [T`\(n=7,\ k=3,\ p=1,\ s=1\)`, T`\(\lfloor6/1\rfloor+1=7\): “same” padding keeps the size`]],
         pitfall: T`Border outputs see padded zeros rather than real image. “Same” padding can need unequal sides for even kernels or larger strides, so state the actual numbers. The formula is spatial only: the output channel count is the number of kernels.`,
-        seeAlso: [36, 41, 56]
+        seeAlso: [41, 56]
       },
       {
         id: 'channels', term: 'Channels and parameter count', symbol: T`(k_h,k_w,C_{\text{in}},C_{\text{out}})`,
@@ -678,6 +678,14 @@
         examples: [[T`brightness ×1.5 on \([20,60,100,140]\)`, T`\([30,90,150,210]\)`], [T`brightness ×2`, T`\([40,120,200,255]\): the 280 is clipped to 255`], [T`horizontal flip of box \([x_1,y_1,x_2,y_2]=[2,3,5,7]\), image width \(W=10\)`, T`\([W-x_2,\ y_1,\ W-x_1,\ y_2]=[5,3,8,7]\)`], [T`flip an image of the arrow “→” labelled “right”`, T`it shows “←”: the label is no longer valid`]],
         pitfall: T`Augment only the training data, and never let an augmented copy of one image land in another split. More augmentation is not automatically better.`,
         seeAlso: [43, 46]
+      },
+      {
+        id: 'transfer-learning', term: 'Transfer learning, frozen layers and fine-tuning',
+        plain: T`Transfer learning starts from a network trained on another dataset instead of random weights. Keep its backbone, whose early layers learned general features, and replace the final head. Freezing means a layer’s weights are not updated, so at first only the head trains. Fine-tuning then unfreezes some or all of the backbone with a much smaller learning rate: the weights are already useful, so small steps adapt them while large steps can wreck them.`,
+        steps: [T`Keep the backbone and replace the head with a layer sized for your classes.`, T`Freeze the backbone and train the head until it settles.`, T`Unfreeze the last layers, or all of them with enough data, and lower the learning rate about tenfold.`, T`Keep the preprocessing the backbone was trained with, and compare both models on the same split.`],
+        examples: [[T`512 backbone features, new head for 10 classes`, T`\(512\cdot10+10=5130\) trainable parameters`], [T`share of all parameters, with an 11-million-parameter backbone`, T`\(5130/11{,}005{,}130\approx0.05\%\)`], [T`head trained at learning rate \(10^{-3}\)`, T`fine-tune at about \(10^{-4}\)`], [T`only 200 labelled images`, T`often keep the backbone frozen: few examples, many parameters`]],
+        pitfall: T`Unfreezing while the head is still random sends large gradients into good weights. Pretrained weights also do not excuse a weak evaluation: keep your own independent test set.`,
+        seeAlso: [55]
       }
     ]
   });

@@ -1,6 +1,6 @@
 # Practical computer vision
 
-Twelve guided labs connect the maths course to working image systems. Open **Practical CV** in the course sidebar for the readings, commands, experiments, evidence checklists and saved notes. This track is additional to the 68 maths lessons. Start Labs 01–03 early, classification after Lesson 41, and geometry after Lessons 50–59. Allow roughly 35–55 hours of active work plus downloads/training; use the mastery checks to set your pace.
+Twelve guided labs connect the maths course to working image systems. Open **Practical CV** in the course sidebar for the readings, commands, experiments, evidence checklists and saved notes. Each lab sits in the weekly plan right after the lessons it needs; see the sequence below. Allow roughly 35–55 hours of active work plus downloads/training; use the mastery checks to set your pace.
 
 ## Get the code
 
@@ -51,20 +51,22 @@ First downloads require internet. Subsequent runs use local data. `--pretrained`
 
 ## Lab sequence
 
-1. **Environment, tensors and files:** understand RGB, dtype, layout and a batch.
-2. **OpenCV object counter:** threshold, morphology, components and failure cases.
-3. **Your dataset:** annotation rules, duplicate audit and group-aware splits.
-4. **Real-image classifier:** Dataset/DataLoader, training, baseline and confusion matrix.
-5. **Transfer learning:** frozen ResNet18 features, then fine-tuning.
-6. **Training diagnostics:** loss curves, exact CPU resume and controlled comparisons.
-7. **Object detection:** variable-size targets, pretrained Faster R-CNN and AP50.
-8. **Segmentation:** a small U-Net, joint augmentation and foreground metrics.
-9. **Geometry and video:** ORB/RANSAC alignment and Lucas–Kanade tracks.
-10. **Foundation models (optional):** CLIP retrieval and SAM point prompts.
-11. **Inference and latency:** saved preprocessing, new photographs and timing.
-12. **Independent capstone:** your question, protocol, evidence and reproducible handoff.
+| Lab | Weeks | What you build | Do these lessons first |
+|---|---|---|---|
+| 01 | 4 | **Environment, tensors and files:** understand RGB, dtype, layout and a batch | 1, 7 |
+| 02 | 6 | **OpenCV object counter:** threshold, morphology, components and failure cases | 1, 33, 34 |
+| 03 | 10-11 | **Your dataset:** annotation rules, duplicate audit and group-aware splits | 12, 16 |
+| 04 | 22-23 | **Real-image classifier:** Dataset/DataLoader, training, baseline and confusion matrix | 27, 30, 38, 40, 41 |
+| 05 | 24-25 | **Transfer learning:** frozen ResNet18 features, then fine-tuning | 39, 41, 55 |
+| 06 | 25 | **Training diagnostics:** loss curves, exact CPU resume and controlled comparisons | 20, 32, 39 |
+| 07 | 25-26 | **Object detection:** variable-size targets, pretrained Faster R-CNN and AP50 | 42, 44, 56 |
+| 08 | 26 | **Segmentation:** a small U-Net, joint augmentation and foreground metrics | 43, 44, 56 |
+| 09 | 34 | **Geometry and video:** ORB/RANSAC alignment and Lucas–Kanade tracks | 50, 52, 58, 59, 60 |
+| 10 | 39 | **Foundation models (optional):** CLIP retrieval and SAM point prompts | 54, 55 |
+| 11 | 26 | **Inference and latency:** saved preprocessing, new photographs and timing | 28, 41 |
+| 12 | 27-28 | **The capstone:** your question, protocol, evidence and reproducible handoff | 45 |
 
-The editable guides are in `labs/`; `manifest.json` defines their order and prerequisites. `python course/practical/build_catalog.py` embeds them in the webpage so readings work offline and from `file://`. Python execution remains local. Lab notes and evidence checks use the existing course progress backup/import system.
+The editable guides are in `labs/`; `manifest.json` defines each lab’s required and related lessons, and `study-path.json` places it in the weekly plan. `python course/practical/build_catalog.py` embeds them in the webpage so readings work offline and from `file://`. Python execution remains local. Lab notes and evidence checks use the existing course progress backup/import system.
 
 ## Files and contracts
 

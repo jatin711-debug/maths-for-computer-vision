@@ -26,7 +26,7 @@ Macro averaging gives classes equal weight. Micro averaging pools counts, giving
 
 For recognition: class counts, accuracy, confusion matrix and probability quality. For detection: matching, score thresholds or AP convention, coordinate format and IoU thresholds. For segmentation: foreground or class-wise IoU/Dice, valid pixels and empty-mask policy. Include failure images and sampling uncertainty when the evaluation supports it.
 
-Choose the metric because it answers the deployment question, not because it is largest. The vision notebook calculates transparent toy metrics and labels its AP convention explicitly.
+Choose the metric because it answers the deployment question, not because it is largest. The Module 11 notebook calculates transparent toy metrics and labels its AP convention explicitly.
 
 ## Practice before opening the answers
 

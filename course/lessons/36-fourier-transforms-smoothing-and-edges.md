@@ -2,7 +2,7 @@
 
 **Module:** 09 | **Study time:** 60 minutes learning + 30 minutes practice.
 
-**Before you begin:** Lesson 35; revisit any symbols you cannot yet explain.
+**Before you begin:** Lessons 04, 33 and 34; revisit any symbols you cannot yet explain.
 
 **Goal:** Interpret frequency components and connect local filtering with spectral behavior.
 
@@ -26,7 +26,7 @@ Smoothing suppresses rapidly changing components. A difference filter suppresses
 
 ## A practical experiment
 
-Use NumPy FFT on constant, alternating and stripe patterns in the vision notebook. Check inverse reconstruction. Compare an average filter and a difference filter on the same row, then explain the lost or enhanced components. A frequency description complements local patch calculations; it does not replace the chosen task metric.
+Use NumPy FFT on constant, alternating and stripe patterns in the Module 09 notebook. Check inverse reconstruction. Compare an average filter and a difference filter on the same row, then explain the lost or enhanced components. A frequency description complements local patch calculations; it does not replace the chosen task metric.
 
 ## Practice before opening the answers
 

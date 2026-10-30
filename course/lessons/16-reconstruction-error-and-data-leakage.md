@@ -26,7 +26,7 @@ Near-duplicate images and frames from the same video can leak across a random sp
 
 ## Your module artifact
 
-In the linear-algebra notebook, compare raw and PCA features using the same split and metric. Record retained dimensions, error normalization, training-only preprocessing and a failure example. Then compress one image at several ranks. Distinguish this single-image experiment from the classifier's learned dataset transform.
+In the Module 04 notebook, compare raw and PCA features using the same split and metric. Record retained dimensions, error normalization, training-only preprocessing and a failure example. Then compress one image at several ranks. Distinguish this single-image experiment from the classifier's learned dataset transform.
 
 ## Practice before opening the answers
 
