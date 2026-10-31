@@ -1,0 +1,110 @@
+WEBVTT
+
+00:00:00.206 --> 00:00:04.056
+Training every weight from random values
+needs a lot of data.
+
+00:00:04.056 --> 00:00:08.406
+But a network trained on a large dataset
+has already done most of the work.
+
+00:00:08.406 --> 00:00:13.294
+Its early layers have learned general
+features, like edges and textures.
+
+00:00:13.294 --> 00:00:16.381
+Only the final head is tied to the old
+classes.
+
+00:00:16.386 --> 00:00:21.386
+So keep the backbone, take off the old
+head, and attach a new one for your
+classes.
+
+00:00:21.386 --> 00:00:22.761
+Here, ten.
+
+00:00:22.761 --> 00:00:25.142
+The backbone hands over 512 features,
+
+00:00:25.143 --> 00:00:28.361
+and the new head turns them into ten class
+scores.
+
+00:00:28.374 --> 00:00:31.833
+To use the backbone as a feature
+extractor, freeze it,
+
+00:00:31.834 --> 00:00:34.012
+so only the head's weights change.
+
+00:00:34.011 --> 00:00:37.911
+Each of the ten outputs has 512 weights
+and one bias:
+
+00:00:37.911 --> 00:00:40.524
+5130 parameters to train.
+
+00:00:40.514 --> 00:00:45.527
+Now swap in a backbone ten times larger
+that still gives 512 features.
+
+00:00:45.527 --> 00:00:48.502
+How many parameters do you train while it
+is frozen?
+
+00:00:48.502 --> 00:00:50.189
+Pause and decide.
+
+00:00:51.673 --> 00:00:55.123
+Still 5130, however large the backbone is.
+
+00:00:55.123 --> 00:00:56.811
+Fine-tuning goes further:
+
+00:00:56.811 --> 00:00:59.423
+it unfreezes the backbone and keeps
+training.
+
+00:00:59.423 --> 00:01:02.436
+But use a learning rate about ten times
+smaller.
+
+00:01:02.436 --> 00:01:04.136
+The weights are already good.
+
+00:01:04.136 --> 00:01:06.586
+A large step throws them out of the
+valley.
+
+00:01:06.586 --> 00:01:08.398
+A small step adapts them.
+
+00:01:08.398 --> 00:01:10.347
+And wait until the head has settled,
+
+00:01:10.348 --> 00:01:13.974
+because a random head sends large
+gradients back into good weights.
+
+00:01:13.959 --> 00:01:16.409
+Two things stay your responsibility.
+
+00:01:16.409 --> 00:01:19.759
+The preprocessing the weights were trained
+with is part of the model:
+
+00:01:19.759 --> 00:01:23.384
+input size, colour order and
+normalization.
+
+00:01:23.384 --> 00:01:26.672
+And pretrained weights do not replace
+evaluation.
+
+00:01:26.672 --> 00:01:28.570
+Keep an independent test set,
+
+00:01:28.571 --> 00:01:32.235
+and compare frozen against fine-tuned on
+the same split.

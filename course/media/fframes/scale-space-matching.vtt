@@ -1,0 +1,142 @@
+WEBVTT
+
+00:00:00.196 --> 00:00:05.158
+Photograph a doorway from twice as far and
+every structure is half as wide in pixels.
+
+00:00:05.158 --> 00:00:09.271
+A detector with one fixed scale sees
+different things in each photo.
+
+00:00:09.271 --> 00:00:14.283
+So look at every scale, and let the image
+say which scale belongs to each structure.
+
+00:00:14.283 --> 00:00:17.696
+That stack of ever more blurred copies is
+the scale space.
+
+00:00:17.696 --> 00:00:20.758
+And blurs compose, because variances add:
+
+00:00:20.758 --> 00:00:24.646
+blur by three and then by four, and you've
+blurred by five.
+
+00:00:24.628 --> 00:00:28.499
+To find a blob's size, measure the
+Laplacian at every scale,
+
+00:00:28.500 --> 00:00:32.241
+multiplied by sigma squared so that scales
+compare fairly.
+
+00:00:32.240 --> 00:00:36.986
+For a blob of width three, the response
+rises to one half at sigma three,
+
+00:00:36.986 --> 00:00:38.416
+then falls away again.
+
+00:00:38.416 --> 00:00:41.316
+The peak is the blob's characteristic
+scale.
+
+00:00:41.316 --> 00:00:45.103
+A keypoint is a point that wins in
+position and in scale.
+
+00:00:45.062 --> 00:00:48.562
+Now enlarge the image by two, so the blob
+has width six.
+
+00:00:48.562 --> 00:00:49.900
+Where does the peak move?
+
+00:00:49.900 --> 00:00:51.412
+Pause and predict.
+
+00:00:52.901 --> 00:00:54.664
+The peak moves to six.
+
+00:00:54.664 --> 00:00:58.676
+Detection follows the scale of the image,
+which is the whole point.
+
+00:00:58.676 --> 00:01:01.831
+Second derivatives at every scale are
+expensive,
+
+00:01:01.832 --> 00:01:04.790
+so SIFT subtracts neighbouring blurs
+instead.
+
+00:01:04.789 --> 00:01:08.039
+This difference of Gaussians is already
+scale-normalised:
+
+00:01:08.039 --> 00:01:11.464
+at this blob it gives minus zero point
+zero eight four,
+
+00:01:11.465 --> 00:01:15.077
+against a prediction of minus zero point
+zero eight three.
+
+00:01:15.007 --> 00:01:17.420
+A keypoint has a position and a scale.
+
+00:01:17.420 --> 00:01:20.570
+To compare it across images, it needs a
+description.
+
+00:01:20.570 --> 00:01:22.745
+SIFT builds one from gradients.
+
+00:01:22.745 --> 00:01:25.295
+Take one cell with these four gradients.
+
+00:01:25.295 --> 00:01:28.607
+Each votes for its direction, weighted by
+its length.
+
+00:01:28.607 --> 00:01:32.695
+Four by four cells of eight bins give one
+hundred and twenty-eight numbers.
+
+00:01:32.695 --> 00:01:36.382
+Divide by the length, and doubling the
+contrast changes nothing.
+
+00:01:36.297 --> 00:01:40.384
+Every descriptor has a nearest neighbour,
+even one with no true partner.
+
+00:01:40.384 --> 00:01:41.534
+So test it.
+
+00:01:41.534 --> 00:01:45.159
+Lowe's ratio test compares the best
+distance with the runner-up.
+
+00:01:45.159 --> 00:01:48.559
+Point two against point five is a ratio of
+point four:
+
+00:01:48.559 --> 00:01:49.484
+accept.
+
+00:01:49.484 --> 00:01:52.647
+Point three against point three five is
+point eight six:
+
+00:01:52.647 --> 00:01:55.580
+reject, because two candidates look
+equally good,
+
+00:01:55.581 --> 00:01:57.735
+like repeated windows on a building.
+
+00:01:57.734 --> 00:02:01.372
+The mutual test adds that the best match
+must choose you back.

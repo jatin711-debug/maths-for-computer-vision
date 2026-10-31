@@ -1,0 +1,171 @@
+WEBVTT
+
+00:00:00.202 --> 00:00:03.552
+A two by two matrix can move a picture in
+many ways.
+
+00:00:03.552 --> 00:00:04.802
+It can rotate it.
+
+00:00:04.802 --> 00:00:06.077
+It can scale it.
+
+00:00:06.077 --> 00:00:07.277
+It can shear it.
+
+00:00:07.277 --> 00:00:08.777
+But watch the origin.
+
+00:00:08.777 --> 00:00:12.452
+It never moves, because A times zero is
+always zero.
+
+00:00:12.452 --> 00:00:16.952
+So sliding an image, the simplest move of
+all, is not a matrix product.
+
+00:00:16.919 --> 00:00:20.244
+Give every point a third coordinate equal
+to one.
+
+00:00:20.244 --> 00:00:23.357
+Now translation is a three by three
+matrix.
+
+00:00:23.357 --> 00:00:24.557
+Multiply it out:
+
+00:00:24.557 --> 00:00:28.782
+x plus t x, y plus t y, and the one stays
+one.
+
+00:00:28.782 --> 00:00:30.832
+The origin finally moves.
+
+00:00:30.832 --> 00:00:33.834
+Every transformation here is now a single
+matrix,
+
+00:00:33.835 --> 00:00:36.470
+and a sequence of them is a single
+product.
+
+00:00:36.433 --> 00:00:38.095
+Take the point one, one.
+
+00:00:38.095 --> 00:00:41.570
+Rotate it ninety degrees and it lands on
+minus one, one.
+
+00:00:41.570 --> 00:00:44.983
+Translate by two, zero, and you end at
+one, one.
+
+00:00:44.980 --> 00:00:46.092
+Now swap them.
+
+00:00:46.092 --> 00:00:48.080
+Translate first, then rotate.
+
+00:00:48.080 --> 00:00:49.317
+Where does the point land?
+
+00:00:49.317 --> 00:00:50.955
+Pause here and work it out.
+
+00:00:52.454 --> 00:00:55.154
+Translating first gives three, one.
+
+00:00:55.154 --> 00:00:57.641
+Rotating that gives minus one, three:
+
+00:00:57.641 --> 00:00:58.829
+a different point.
+
+00:00:58.829 --> 00:01:00.754
+Read the product from the right.
+
+00:01:00.754 --> 00:01:03.254
+The matrix nearest the point acts first.
+
+00:01:03.257 --> 00:01:06.794
+Restrict the entries of the matrix and you
+get a family of moves.
+
+00:01:06.794 --> 00:01:10.469
+Translation has two numbers, and only
+position changes.
+
+00:01:10.469 --> 00:01:11.594
+Rigid has three:
+
+00:01:11.594 --> 00:01:13.582
+lengths and angles survive.
+
+00:01:13.582 --> 00:01:15.094
+Similarity has four:
+
+00:01:15.094 --> 00:01:17.282
+angles and ratios of lengths.
+
+00:01:17.282 --> 00:01:18.669
+Affine has six:
+
+00:01:18.669 --> 00:01:20.844
+parallel lines stay parallel.
+
+00:01:20.844 --> 00:01:24.282
+Projective has eight, and only straight
+lines stay straight.
+
+00:01:24.252 --> 00:01:28.127
+After a projective map the last coordinate
+is usually not one,
+
+00:01:28.128 --> 00:01:30.003
+so read the point by dividing.
+
+00:01:30.002 --> 00:01:33.690
+Two, four, two and one, two, one are the
+same point:
+
+00:01:33.690 --> 00:01:35.915
+every vector on this ray names it.
+
+00:01:35.915 --> 00:01:38.554
+As the ray tips over, its point runs away,
+
+00:01:38.555 --> 00:01:42.578
+and when the last coordinate is zero there
+is no ordinary point.
+
+00:01:42.577 --> 00:01:45.452
+It names a direction, a point at infinity.
+
+00:01:45.386 --> 00:01:47.324
+A line is a vector too.
+
+00:01:47.324 --> 00:01:52.176
+The lines y equals one and y equals two
+have the vectors zero, one,
+
+00:01:52.177 --> 00:01:54.712
+minus one and zero, one, minus two.
+
+00:01:54.711 --> 00:01:57.936
+Their cross product is minus one, zero,
+zero.
+
+00:01:57.936 --> 00:01:59.899
+Its last coordinate is zero:
+
+00:01:59.899 --> 00:02:01.499
+a point at infinity.
+
+00:02:01.499 --> 00:02:03.965
+A homography can bring that point into
+view,
+
+00:02:03.966 --> 00:02:06.712
+which is why railway tracks meet in a
+photograph.

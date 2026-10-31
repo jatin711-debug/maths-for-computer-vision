@@ -13,7 +13,7 @@ An interactive course that takes you from school algebra to the mathematics behi
 - **46 interactive experiments**, most on real photographs: filtering and Fourier analysis, SVD compression, corners and feature matching, optical flow, Kalman tracking, epipolar lines, block-matching stereo, ICP, a ray-marched volume, Hungarian box matching, EM and a small VAE trained in the browser, diffusion sampling and a Gaussian-splat renderer.
 - **Auto-checked practice** with fresh numbers each time (314 question types), hints, worked solutions, spaced review, an automatic error log and a five-question checkpoint per module.
 - **Python in the browser.** Every lesson has an editable NumPy example that runs locally via Pyodide; 13 also have optional PyTorch versions.
-- **75 videos:** 10 two-minute animated explanations of the hardest ideas (projection, eigenvectors, SVD, Bayes, softmax and cross-entropy, convolution, Fourier, backpropagation, homographies, attention), a narrated worked walkthrough for each of Lessons 1-48, and a short overview per module.
+- **94 videos, with at least one for every lesson:** 29 animated explanations of about two minutes (including all of Lessons 49-68, and transfer learning), a narrated worked walkthrough for each of Lessons 1-48, and a short overview per module.
 - **14 Jupyter notebooks** (NumPy only): one for each core module, plus two for the extension, with predict-then-run checks.
 - **12 Practical CV labs** connect the maths to local image projects: data audits, OpenCV counting, PyTorch classification and transfer learning, detection, segmentation, geometry, optional CLIP/SAM, inference and a capstone. Each lab has a place in the weekly plan, right after the lessons it needs. Readings and saved evidence checklists are in the **Practical CV** sidebar; training uses installed Python. Start with the [setup guide](course/practical/README.md).
 
@@ -67,6 +67,7 @@ Lessons cite four books, and every reading reference links to the exact PDF page
 - Primers are in `course/primers/*.js` (schema at the top of `course/primers.js`).
 - `python course/build_web_data.py` rebuilds `course-data.js` from the Markdown lessons (needs `pypdf` only if the book PDFs are present).
 - `course/study-path.json` is the single source of truth for study order. After changing it or a module, run `python course/build_web_data.py`, then `python course/build_syllabus.py`. `python course/build_core_notebooks.py` rebuilds and runs the notebooks for Modules 2-12.
+- `video-studio/` holds the storyboards and tools for the 19 newest animated explanations; see its README. It is not part of the published site.
 - Checks, all currently at 0 issues: `node course/validate_path.cjs`, `node course/validate_lessons.cjs`, `node course/validate_practice.cjs`, `node course/validate_primers.cjs` and `python course/validate_python_examples.py` (NumPy, optionally PyTorch).
 - More detail on how each part was built and validated is in [course/README.md](course/README.md).
 - Practical checks: `python -m unittest discover -s course/practical/tests -v`, `python course/practical/build_catalog.py --check` and `node course/validate_practical.cjs`. See [practical validation](course/practical/validation.md) for the tested environment and limits.
@@ -81,4 +82,4 @@ The lessons, experiments, practice generators and videos were written with AI as
 
 - Code (JavaScript, Python, CSS, HTML and scripts): [MIT](LICENSE).
 - Course content (lesson text, primers, exercises, notebooks' prose, images and videos): [CC BY 4.0](LICENSE-CONTENT.md). You may share and adapt it, including commercially, with credit.
-- Third-party components keep their own licences: [KaTeX](https://katex.org/) (MIT, `course/vendor/katex`), the [Pyodide](https://pyodide.org/) runtime with CPython, Emscripten and NumPy (MPL-2.0, PSF, MIT and BSD; licence files in `course/vendor/pyodide`), sample photographs from [scikit-image](https://scikit-image.org/) (CC0), and Kokoro-82M voice output (Apache-2.0).
+- Third-party components keep their own licences: [KaTeX](https://katex.org/) (MIT, `course/vendor/katex`), the [Pyodide](https://pyodide.org/) runtime with CPython, Emscripten and NumPy (MPL-2.0, PSF, MIT and BSD; licence files in `course/vendor/pyodide`), sample photographs from [scikit-image](https://scikit-image.org/) (CC0), and Kokoro-82M voice output (Apache-2.0), and DM Sans (OFL-1.1, licence file in `video-studio/media`). The videos are drawn with [FFrames](https://github.com/dmtrKovalenko/fframes) (MIT) and MathJax (Apache-2.0), which are not redistributed.

@@ -1,0 +1,110 @@
+WEBVTT
+
+00:00:00.176 --> 00:00:02.789
+Rotations do not live in a flat space.
+
+00:00:02.789 --> 00:00:06.997
+Inside all three by three matrices they
+form a curved surface, a manifold,
+
+00:00:06.998 --> 00:00:08.590
+like the surface of a globe.
+
+00:00:08.589 --> 00:00:12.214
+So an optimizer that adds a small step
+walks off the surface.
+
+00:00:12.214 --> 00:00:17.313
+A tenth of a radian added this way sends a
+unit vector to length one point zero zero
+five,
+
+00:00:17.314 --> 00:00:19.977
+and the determinant becomes one point zero
+one.
+
+00:00:19.976 --> 00:00:23.376
+It stretches space, so it's no longer a
+rotation.
+
+00:00:23.376 --> 00:00:25.451
+The exponential map fixes this:
+
+00:00:25.451 --> 00:00:28.826
+keep a three-number step, and bend it back
+onto the surface.
+
+00:00:28.783 --> 00:00:33.396
+Given matched points, the best rotation
+has a closed form, with no iterations.
+
+00:00:33.396 --> 00:00:34.696
+This is Kabsch.
+
+00:00:34.696 --> 00:00:36.546
+Subtract both centroids.
+
+00:00:36.546 --> 00:00:39.471
+Form the cross-covariance H and take its
+SVD.
+
+00:00:39.471 --> 00:00:42.433
+The rotation is V times U transpose.
+
+00:00:42.433 --> 00:00:47.521
+If that comes out as a reflection, flip
+the sign of the smallest singular
+direction.
+
+00:00:47.521 --> 00:00:52.133
+This square, turned by ninety degrees,
+gives back exactly that turn.
+
+00:00:52.101 --> 00:00:53.751
+Now bundle adjustment.
+
+00:00:53.751 --> 00:00:57.263
+It refines ten cameras and ten thousand
+points together.
+
+00:00:57.263 --> 00:01:00.488
+Each camera has six numbers and each point
+three.
+
+00:01:00.488 --> 00:01:02.376
+How big is the linear system?
+
+00:01:02.376 --> 00:01:04.513
+And could you really solve that directly?
+
+00:01:04.513 --> 00:01:06.176
+Pause and estimate.
+
+00:01:07.630 --> 00:01:10.030
+Thirty thousand and sixty unknowns.
+
+00:01:10.030 --> 00:01:14.928
+But each residual touches just one camera
+and one point, so the system is sparse,
+
+00:01:14.929 --> 00:01:17.831
+and its point block is diagonal in small
+pieces.
+
+00:01:17.830 --> 00:01:21.117
+Solve the points in terms of the cameras,
+and substitute.
+
+00:01:21.117 --> 00:01:23.217
+What's left is the Schur complement:
+
+00:01:23.217 --> 00:01:26.630
+a sixty by sixty system, for the cameras
+alone.
+
+00:01:26.630 --> 00:01:29.442
+Then recover each point, one at a time.
+
+00:01:29.442 --> 00:01:32.705
+This is why large reconstruction is
+possible at all.

@@ -1,0 +1,122 @@
+WEBVTT
+
+00:00:00.192 --> 00:00:04.480
+In self-attention, queries, keys and
+values all come from one set.
+
+00:00:04.480 --> 00:00:09.017
+Cross-attention takes the queries from one
+set and the keys and values from another.
+
+00:00:09.017 --> 00:00:11.548
+DETR uses one hundred learned object
+queries,
+
+00:00:11.549 --> 00:00:13.855
+and eight hundred and fifty image tokens.
+
+00:00:13.854 --> 00:00:17.512
+Each query reads from the whole image and
+comes back with one row,
+
+00:00:17.513 --> 00:00:19.230
+however many tokens there were.
+
+00:00:19.229 --> 00:00:21.267
+Here a query scores three tokens:
+
+00:00:21.267 --> 00:00:23.180
+four, zero and two.
+
+00:00:23.180 --> 00:00:26.167
+After softmax, it takes mostly from the
+first.
+
+00:00:26.165 --> 00:00:30.977
+Attention alone treats its tokens as a
+set, so positions must be added.
+
+00:00:30.977 --> 00:00:35.527
+Sinusoidal encodings give each position a
+point on several unit circles.
+
+00:00:35.527 --> 00:00:38.078
+A fast circle separates neighbours.
+
+00:00:38.078 --> 00:00:40.890
+A slow one tells distant positions apart.
+
+00:00:40.890 --> 00:00:44.362
+And moving by a fixed offset just rotates
+every pair,
+
+00:00:44.363 --> 00:00:48.491
+so the dot product of two encodings
+depends only on the offset.
+
+00:00:48.413 --> 00:00:53.063
+DETR outputs one hundred predictions, but
+this image has two objects.
+
+00:00:53.063 --> 00:00:55.813
+And the objects come in no particular
+order.
+
+00:00:55.813 --> 00:00:58.726
+So which prediction should be blamed for
+which object?
+
+00:00:58.726 --> 00:01:01.313
+Pause and think about how you would
+decide.
+
+00:01:02.781 --> 00:01:06.194
+Choose the best one-to-one assignment, and
+then compute the loss.
+
+00:01:06.194 --> 00:01:09.581
+Build a cost matrix from class scores and
+box overlap.
+
+00:01:09.581 --> 00:01:12.069
+The Hungarian algorithm picks the minimum:
+
+00:01:12.069 --> 00:01:16.819
+cup to prediction one, spoon to prediction
+three, a total of minus one.
+
+00:01:16.819 --> 00:01:21.184
+Prediction two is a near-duplicate of one,
+so it's matched to no object,
+
+00:01:21.185 --> 00:01:22.882
+and its loss pushes it down.
+
+00:01:22.881 --> 00:01:27.631
+Duplicates are trained away, which is why
+DETR needs no non-maximum suppression.
+
+00:01:27.569 --> 00:01:28.982
+One last problem.
+
+00:01:28.982 --> 00:01:32.851
+Two separated boxes have an IoU of zero
+wherever they are,
+
+00:01:32.852 --> 00:01:34.920
+so the loss gives no direction.
+
+00:01:34.919 --> 00:01:39.857
+Generalised IoU subtracts the share of the
+enclosing box that neither covers.
+
+00:01:39.857 --> 00:01:42.982
+Slide the box closer and the loss falls
+steadily:
+
+00:01:42.982 --> 00:01:47.432
+one point five, one point two, one, and
+point six seven.
+
+00:01:47.432 --> 00:01:49.719
+The boxes now know which way to move.

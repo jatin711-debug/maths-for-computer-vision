@@ -87,6 +87,15 @@ const questions = course.assessmentGuide.map(item => item.question);
 if (JSON.stringify(questions) !== JSON.stringify(course.assessment.map((_, i) => i + 1))) fail('Assessment', 'guide does not cover every question');
 for (const item of course.assessmentGuide) if (!lessonById(item.lesson)) fail('Assessment', `question ${item.question} points at a missing lesson`);
 
+// Every lesson has a video, and every video's files exist.
+['concept-video-data.js', 'lesson-video-data.js', 'explainer-video-data.js'].forEach(run);
+const videos = [...window.CV_CONCEPT_VIDEO_DATA, ...window.CV_LESSON_VIDEO_DATA, ...window.CV_EXPLAINER_VIDEO_DATA];
+for (const lesson of course.lessons) if (!videos.some(v => v.lesson === lesson.id)) fail(`Lesson ${lesson.id}`, 'has no video');
+for (const video of videos) {
+  for (const key of ['src', 'poster', 'captions']) if (!fs.existsSync(path.join(dir, video[key].split('?')[0]))) fail(video.id, `${key} file is missing`);
+  if (!video.chapters.length) fail(video.id, 'has no chapters');
+}
+
 // Documents agree with the path, and nothing still points at what was retired.
 const syllabus = read('syllabus.md'), root = fs.readFileSync(path.join(dir, '..', 'README.md'), 'utf8');
 const extensionWeeks = weeks.length - coreWeeks;
@@ -101,6 +110,6 @@ for (const file of ['README.md', 'syllabus.md', 'first-two-weeks.md', 'starting-
   if (retired.test(read(file))) fail(file, `still mentions something retired: ${retired.exec(read(file))[0]}`);
 }
 
-console.log(`Study path: ${order.length} lessons, ${weeks.length} weeks (${coreWeeks} core), ${labs.length} labs, ${course.notebooks.length} notebooks, ${issues.length} issues`);
+console.log(`Study path: ${order.length} lessons, ${weeks.length} weeks (${coreWeeks} core), ${labs.length} labs, ${course.notebooks.length} notebooks, ${videos.length} lesson videos, ${issues.length} issues`);
 issues.forEach(issue => console.log('  - ' + issue));
 process.exitCode = issues.length ? 1 : 0;

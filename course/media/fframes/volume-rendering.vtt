@@ -1,0 +1,135 @@
+WEBVTT
+
+00:00:00.190 --> 00:00:03.002
+Every pixel looks along a ray through the
+scene.
+
+00:00:03.002 --> 00:00:07.477
+A neural radiance field describes that
+scene with two functions of position.
+
+00:00:07.477 --> 00:00:08.402
+A density:
+
+00:00:08.402 --> 00:00:11.202
+how much light is absorbed per unit
+length.
+
+00:00:11.202 --> 00:00:14.064
+Fog is thin, and a wall is dense.
+
+00:00:14.064 --> 00:00:17.114
+And a colour, the light sent out in that
+direction.
+
+00:00:17.114 --> 00:00:19.602
+Nothing about surfaces is assumed.
+
+00:00:19.602 --> 00:00:22.465
+A pixel is computed by looking through the
+field.
+
+00:00:22.465 --> 00:00:27.090
+Light from far away reaches the camera
+only if nothing in front absorbs it.
+
+00:00:27.090 --> 00:00:30.040
+The fraction that survives is the
+transmittance.
+
+00:00:30.040 --> 00:00:33.553
+It falls exponentially with the density it
+has passed through.
+
+00:00:33.553 --> 00:00:39.065
+A slab of density zero point five and
+thickness two lets through thirty-seven
+percent.
+
+00:00:39.065 --> 00:00:43.359
+The pixel adds up, along the ray, what
+survives times what is emitted,
+
+00:00:43.360 --> 00:00:45.691
+plus whatever background gets through.
+
+00:00:45.629 --> 00:00:47.979
+Discretise the ray into intervals.
+
+00:00:47.979 --> 00:00:52.851
+Here is a clear sample, then a half-opaque
+red, then a three-quarter opaque blue,
+
+00:00:52.852 --> 00:00:54.717
+in front of a white background.
+
+00:00:54.716 --> 00:00:56.766
+How much of the pixel comes from red?
+
+00:00:56.766 --> 00:00:58.066
+How much from blue?
+
+00:00:58.066 --> 00:01:00.029
+Pause and work out the shares.
+
+00:01:01.497 --> 00:01:04.022
+Blue only receives what red lets through.
+
+00:01:04.022 --> 00:01:05.685
+Red takes one half.
+
+00:01:05.685 --> 00:01:10.172
+Blue takes a half of three quarters, which
+is zero point three seven five.
+
+00:01:10.172 --> 00:01:12.160
+White gets the remaining eighth.
+
+00:01:12.160 --> 00:01:14.285
+The pixel is a weighted average:
+
+00:01:14.285 --> 00:01:15.222
+a purple.
+
+00:01:15.222 --> 00:01:17.535
+The same sums give the gradients.
+
+00:01:17.535 --> 00:01:21.235
+A sample hidden behind something opaque
+has weight near zero,
+
+00:01:21.236 --> 00:01:23.298
+so it receives almost no gradient.
+
+00:01:23.255 --> 00:01:27.011
+Fed raw coordinates, a network learns
+smooth functions first,
+
+00:01:27.012 --> 00:01:29.044
+and fine detail extremely slowly.
+
+00:01:29.043 --> 00:01:31.805
+Here's a small network fitting one row of
+a photo.
+
+00:01:31.805 --> 00:01:32.856
+It's blurry.
+
+00:01:32.856 --> 00:01:37.930
+The fix is to feed each coordinate through
+sines and cosines at doubling frequencies.
+
+00:01:37.930 --> 00:01:41.110
+Nearby positions then differ a lot in the
+fast features,
+
+00:01:41.111 --> 00:01:44.007
+and the same network can suddenly follow
+the edges.
+
+00:01:44.005 --> 00:01:48.831
+But push the frequencies too far, and on
+pixels it never saw, it does worse.
+
+00:01:48.831 --> 00:01:50.531
+That's aliasing again.

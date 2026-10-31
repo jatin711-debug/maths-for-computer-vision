@@ -1,0 +1,158 @@
+WEBVTT
+
+00:00:00.180 --> 00:00:05.555
+Put the camera at the origin, looking
+along Z, with the image plane at distance
+f.
+
+00:00:05.555 --> 00:00:09.062
+A ray from a 3D point to the centre
+crosses that plane,
+
+00:00:09.063 --> 00:00:11.231
+and the two triangles are similar.
+
+00:00:11.230 --> 00:00:13.868
+So x equals f times X over Z.
+
+00:00:13.868 --> 00:00:15.293
+With f of 800 pixels,
+
+00:00:15.294 --> 00:00:21.131
+a point half a metre off-axis at four
+metres lands one hundred pixels from the
+centre.
+
+00:00:21.089 --> 00:00:23.414
+Now slide the point along its ray.
+
+00:00:23.414 --> 00:00:27.707
+The point one, zero, eight is twice as
+wide and twice as far,
+
+00:00:27.708 --> 00:00:29.890
+and it lands on the same pixel.
+
+00:00:29.889 --> 00:00:32.843
+One image cannot separate size from
+distance,
+
+00:00:32.844 --> 00:00:37.965
+which is why depth from one camera needs
+learned priors or known object sizes.
+
+00:00:37.922 --> 00:00:40.623
+Pixel coordinates start at the image
+corner,
+
+00:00:40.624 --> 00:00:45.598
+so the intrinsic matrix K adds the
+principal point, here three twenty, two
+forty.
+
+00:00:45.597 --> 00:00:50.334
+The camera point zero point five, minus
+zero point two five, four,
+
+00:00:50.335 --> 00:00:53.135
+lands on pixel four twenty, one ninety.
+
+00:00:53.134 --> 00:00:59.597
+A six hundred and forty pixel wide image
+then spans a horizontal view of about
+forty-three point six degrees.
+
+00:00:59.576 --> 00:01:01.674
+A training pipeline crops the image,
+
+00:01:01.675 --> 00:01:05.464
+starting one hundred pixels from the left
+and forty from the top.
+
+00:01:05.463 --> 00:01:07.638
+Where is the principal point in the crop?
+
+00:01:07.638 --> 00:01:09.376
+Pause and work it out.
+
+00:01:10.896 --> 00:01:12.208
+Subtract the offset:
+
+00:01:12.208 --> 00:01:13.983
+two twenty, two hundred.
+
+00:01:13.983 --> 00:01:15.827
+A crop or a resize changes K,
+
+00:01:15.828 --> 00:01:20.534
+so a network trained on crops with the old
+K learns inconsistent geometry.
+
+00:01:20.533 --> 00:01:25.271
+Add a rotation and translation and you
+have the full three by four camera matrix.
+
+00:01:25.271 --> 00:01:28.822
+With the camera five metres back, the
+world point one, zero,
+
+00:01:28.823 --> 00:01:31.959
+zero gives twenty-four hundred, twelve
+hundred, five.
+
+00:01:31.958 --> 00:01:33.296
+Divide by five:
+
+00:01:33.296 --> 00:01:35.446
+pixel four eighty, two forty.
+
+00:01:35.340 --> 00:01:39.553
+A rotation matrix has nine entries but
+only three degrees of freedom.
+
+00:01:39.553 --> 00:01:41.753
+Here's a ninety degree turn about Z:
+
+00:01:41.753 --> 00:01:45.053
+its trace is one, so the cosine of theta
+is zero.
+
+00:01:45.053 --> 00:01:48.828
+Axis-angle stores it in three numbers,
+which suits optimizers.
+
+00:01:48.828 --> 00:01:50.468
+Euler angles are easy to read,
+
+00:01:50.469 --> 00:01:53.804
+but at ninety degrees of pitch they lose a
+degree of freedom:
+
+00:01:53.803 --> 00:01:55.003
+gimbal lock.
+
+00:01:55.003 --> 00:01:58.475
+Unit quaternions use four numbers with no
+gimbal lock,
+
+00:01:58.476 --> 00:02:01.241
+though q and minus q are the same
+rotation.
+
+00:02:01.196 --> 00:02:03.659
+Real lenses bend straight lines.
+
+00:02:03.659 --> 00:02:07.896
+The radial model scales each point by its
+distance from the centre.
+
+00:02:07.896 --> 00:02:12.859
+A negative coefficient pulls the edges in,
+and the grid bows into a barrel.
+
+00:02:12.859 --> 00:02:16.717
+Calibration estimates these numbers from
+photos of a checkerboard,
+
+00:02:16.718 --> 00:02:18.472
+and then we can undo the bend.

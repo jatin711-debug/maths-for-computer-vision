@@ -1,0 +1,5 @@
+/target/
+/build/
+/.tools/
+/node_modules/
+__pycache__/

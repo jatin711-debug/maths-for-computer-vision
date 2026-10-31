@@ -1,0 +1,135 @@
+WEBVTT
+
+00:00:00.193 --> 00:00:05.118
+Optical flow asks how far the content at
+each pixel moved between two frames.
+
+00:00:05.118 --> 00:00:06.505
+The basic assumption:
+
+00:00:06.505 --> 00:00:09.130
+a point keeps its brightness as it moves.
+
+00:00:09.130 --> 00:00:13.793
+Take a pixel on a ramp, where brightness
+rises by one per pixel to the right.
+
+00:00:13.793 --> 00:00:16.217
+If the content slides two pixels right,
+
+00:00:16.218 --> 00:00:20.381
+this pixel now shows what was two to its
+left, which is two darker.
+
+00:00:20.380 --> 00:00:24.518
+Expand to first order, and you get one
+linear equation per pixel.
+
+00:00:24.455 --> 00:00:26.668
+One equation, two unknowns.
+
+00:00:26.668 --> 00:00:31.130
+In the plane of u and v, one pixel only
+says the answer lies on this line.
+
+00:00:31.130 --> 00:00:32.655
+We can pin down one piece:
+
+00:00:32.655 --> 00:00:35.118
+the normal flow, along the gradient.
+
+00:00:35.118 --> 00:00:38.968
+But two, one and minus two, four fit
+equally well.
+
+00:00:38.968 --> 00:00:43.618
+Through a small hole, a bar looks the same
+whether or not it slides along itself.
+
+00:00:43.618 --> 00:00:45.530
+This is the aperture problem.
+
+00:00:45.512 --> 00:00:49.949
+Lucas and Kanade assume that the flow is
+the same across a small window.
+
+00:00:49.949 --> 00:00:52.374
+Now every pixel adds its own line.
+
+00:00:52.374 --> 00:00:54.712
+Two pixels see a gradient to the right.
+
+00:00:54.712 --> 00:00:56.424
+Two see one downwards.
+
+00:00:56.424 --> 00:00:58.412
+The lines cross at one point:
+
+00:00:58.412 --> 00:00:59.824
+two, one.
+
+00:00:59.824 --> 00:01:02.726
+The least squares solve is a two by two
+system,
+
+00:01:02.727 --> 00:01:05.938
+and its matrix is the structure tensor
+from corners.
+
+00:01:05.922 --> 00:01:09.747
+Now suppose all four pixels have the same
+gradient, pointing right.
+
+00:01:09.747 --> 00:01:11.234
+What happens to the solve?
+
+00:01:11.234 --> 00:01:12.897
+Pause and think about M.
+
+00:01:14.498 --> 00:01:18.760
+M becomes four, zero, zero, zero, which is
+singular.
+
+00:01:18.760 --> 00:01:22.148
+All four lines are the same line, so
+nothing fixes v.
+
+00:01:22.148 --> 00:01:25.810
+The aperture problem is a rank-deficient
+structure tensor.
+
+00:01:25.810 --> 00:01:28.576
+That's why a KLT tracker follows corners,
+
+00:01:28.577 --> 00:01:33.299
+where the smaller eigenvalue is large and
+the flow is well determined.
+
+00:01:33.223 --> 00:01:36.486
+The linear step only holds for motions of
+about a pixel.
+
+00:01:36.486 --> 00:01:40.032
+Each pass is really a Gauss-Newton step,
+so we can iterate,
+
+00:01:40.033 --> 00:01:42.137
+but an eight pixel jump is too far.
+
+00:01:42.136 --> 00:01:43.861
+A pyramid fixes that.
+
+00:01:43.861 --> 00:01:48.497
+Halving the image halves every
+displacement, so eight pixels are one
+pixel,
+
+00:01:48.498 --> 00:01:49.487
+three levels up.
+
+00:01:49.486 --> 00:01:54.336
+Estimate there, double it, warp the next
+level, and solve for the small correction.
+
+00:01:54.336 --> 00:01:56.548
+Repeat down to full resolution.

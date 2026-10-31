@@ -1,0 +1,140 @@
+WEBVTT
+
+00:00:00.179 --> 00:00:02.779
+An image gradient is two numbers per
+pixel:
+
+00:00:02.779 --> 00:00:07.192
+how fast brightness changes to the right,
+and how fast it changes downwards.
+
+00:00:07.192 --> 00:00:12.402
+The Sobel filter takes a difference across
+three rows and averages them with weights
+one,
+
+00:00:12.403 --> 00:00:12.930
+two, one.
+
+00:00:12.929 --> 00:00:16.655
+On a ramp that climbs twelve per pixel
+across and five down,
+
+00:00:16.656 --> 00:00:18.768
+its sums are ninety-six and forty.
+
+00:00:18.767 --> 00:00:22.067
+Divide by eight, and you get exactly
+twelve and five.
+
+00:00:22.067 --> 00:00:25.854
+So the edge strength is thirteen, at about
+twenty-three degrees.
+
+00:00:25.817 --> 00:00:30.667
+A difference amplifies noise, because
+noise is the highest frequency there is.
+
+00:00:30.667 --> 00:00:33.617
+Here is a plain difference on a noisy
+image.
+
+00:00:33.617 --> 00:00:37.893
+The principled fix is to blur with a
+Gaussian, then differentiate,
+
+00:00:37.894 --> 00:00:39.643
+and one kernel can do both.
+
+00:00:39.642 --> 00:00:44.204
+It separates into a derivative along the
+rows and a blur along the columns,
+
+00:00:44.205 --> 00:00:47.732
+so a thirteen-tap kernel needs twenty-six
+multiplications,
+
+00:00:47.733 --> 00:00:49.619
+not one hundred and sixty-nine.
+
+00:00:49.516 --> 00:00:54.029
+A good feature point is one whose patch
+would look different if it moved in any
+direction.
+
+00:00:54.029 --> 00:00:57.166
+So shift a window, and add up the squared
+differences.
+
+00:00:57.166 --> 00:01:00.791
+On a flat patch nothing changes, and the
+map stays dark.
+
+00:01:00.791 --> 00:01:04.466
+On an edge, moving along it changes
+nothing, so you get a valley.
+
+00:01:04.466 --> 00:01:07.754
+At a corner, every direction costs, and
+you get a bowl.
+
+00:01:07.754 --> 00:01:10.900
+A Taylor expansion turns this into a
+quadratic form,
+
+00:01:10.901 --> 00:01:13.442
+with the structure tensor M in the middle.
+
+00:01:13.374 --> 00:01:16.162
+Two pixels both have the gradient one,
+one.
+
+00:01:16.162 --> 00:01:19.374
+Every entry of M is two, which looks big
+everywhere.
+
+00:01:19.374 --> 00:01:21.262
+Is this a corner, or an edge?
+
+00:01:21.262 --> 00:01:23.649
+Pause and work out the eigenvalues.
+
+00:01:25.098 --> 00:01:25.998
+It's an edge.
+
+00:01:25.998 --> 00:01:28.198
+The eigenvalues are four and zero:
+
+00:01:28.198 --> 00:01:31.036
+the same edge, turned by forty-five
+degrees.
+
+00:01:31.036 --> 00:01:31.936
+Both small:
+
+00:01:31.936 --> 00:01:32.586
+flat.
+
+00:01:32.586 --> 00:01:33.223
+One large:
+
+00:01:33.223 --> 00:01:33.961
+an edge.
+
+00:01:33.961 --> 00:01:34.798
+Both large:
+
+00:01:34.798 --> 00:01:35.761
+a corner.
+
+00:01:35.761 --> 00:01:39.273
+Harris avoids the square roots with the
+determinant and the trace.
+
+00:01:39.273 --> 00:01:43.261
+The corner scores three point three six,
+and edges score negative.
+
+00:01:43.261 --> 00:01:47.773
+Keep the strongest local maxima, and these
+are the corners of a real image.

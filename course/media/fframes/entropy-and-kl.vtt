@@ -1,0 +1,131 @@
+WEBVTT
+
+00:00:00.181 --> 00:00:03.618
+The surprise of an outcome with
+probability p is minus log p.
+
+00:00:03.618 --> 00:00:08.711
+With probabilities one half, one quarter
+and one quarter, the surprises are one,
+
+00:00:08.712 --> 00:00:09.794
+two and two bits.
+
+00:00:09.793 --> 00:00:11.418
+Entropy is their average:
+
+00:00:11.418 --> 00:00:13.231
+one point five bits.
+
+00:00:13.231 --> 00:00:15.268
+Now change the distribution.
+
+00:00:15.268 --> 00:00:19.606
+A certain outcome has entropy zero, and
+the uniform one has the most:
+
+00:00:19.606 --> 00:00:23.131
+log K, which is exactly two bits for four
+classes.
+
+00:00:23.085 --> 00:00:26.472
+Cross-entropy is the average surprise when
+outcomes follow p,
+
+00:00:26.473 --> 00:00:28.361
+but you score them with a model q.
+
+00:00:28.360 --> 00:00:30.085
+It splits into two parts:
+
+00:00:30.085 --> 00:00:33.310
+the entropy of p, plus the KL divergence.
+
+00:00:33.310 --> 00:00:38.060
+As q moves towards p, KL shrinks to zero,
+but entropy stays.
+
+00:00:38.060 --> 00:00:40.185
+It is a floor no model can beat.
+
+00:00:40.185 --> 00:00:45.060
+So with a fixed target, minimizing
+cross-entropy is the same as minimizing
+KL.
+
+00:00:45.208 --> 00:00:46.758
+Is KL a distance?
+
+00:00:46.758 --> 00:00:51.408
+Take p as one half, one half, and q as
+zero point eight, zero point two.
+
+00:00:51.408 --> 00:00:54.846
+Would KL of p from q equal KL of q from p?
+
+00:00:54.846 --> 00:00:56.358
+Pause and decide.
+
+00:00:57.877 --> 00:00:58.277
+No:
+
+00:00:58.277 --> 00:01:02.004
+they are zero point two two three and zero
+point one nine three,
+
+00:01:02.005 --> 00:01:03.228
+so direction matters.
+
+00:01:03.227 --> 00:01:06.065
+Softer targets are KL at work too.
+
+00:01:06.065 --> 00:01:09.392
+Label smoothing moves a little mass to the
+wrong classes,
+
+00:01:09.393 --> 00:01:14.178
+which caps the best gap between logits at
+log thirty-seven, about three point six.
+
+00:01:14.177 --> 00:01:17.227
+Distillation softens a teacher with a
+temperature.
+
+00:01:17.227 --> 00:01:21.502
+At T equals four, its logits show how it
+ranks the wrong classes.
+
+00:01:21.442 --> 00:01:24.655
+Contrastive learning is classification
+over a batch.
+
+00:01:24.655 --> 00:01:29.730
+CLIP compares every image with every
+caption, and the diagonal holds the true
+pairs.
+
+00:01:29.730 --> 00:01:32.306
+Each row asks an image to pick its
+caption,
+
+00:01:32.307 --> 00:01:35.243
+and each column asks a caption to pick its
+image.
+
+00:01:35.242 --> 00:01:39.067
+The temperature matters because cosines
+live between minus one and one:
+
+00:01:39.067 --> 00:01:42.560
+this example costs zero point eight seven
+at tau of one,
+
+00:01:42.561 --> 00:01:44.868
+and almost nothing at zero point one.
+
+00:01:44.867 --> 00:01:48.167
+And if the scores carry no information,
+the loss is log N.
+
+00:01:48.167 --> 00:01:49.267
+That's chance.

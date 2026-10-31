@@ -1,0 +1,106 @@
+WEBVTT
+
+00:00:00.185 --> 00:00:04.622
+A diffusion model learns to undo a process
+that turns images into noise.
+
+00:00:04.622 --> 00:00:08.372
+Each step shrinks the image a little and
+adds a little Gaussian noise.
+
+00:00:08.372 --> 00:00:12.110
+After a thousand steps, almost nothing of
+the image is left.
+
+00:00:12.110 --> 00:00:15.647
+Because Gaussian variances add, you do not
+need to walk there.
+
+00:00:15.647 --> 00:00:18.335
+Any noise level can be reached in one
+jump.
+
+00:00:18.335 --> 00:00:23.210
+With zero point six four, the value two
+with noise minus one becomes one.
+
+00:00:23.167 --> 00:00:28.292
+A network sees the noisy image and the
+step, and is trained to recover the noise.
+
+00:00:28.292 --> 00:00:30.504
+Know the noise, and you have the image:
+
+00:00:30.504 --> 00:00:32.617
+rearrange the same formula.
+
+00:00:32.617 --> 00:00:35.692
+But many clean images could give the same
+noisy one.
+
+00:00:35.692 --> 00:00:38.767
+So the best possible network outputs an
+average:
+
+00:00:38.767 --> 00:00:41.792
+the mean clean image consistent with what
+it sees.
+
+00:00:41.763 --> 00:00:44.920
+Take data that is only ever plus one or
+minus one,
+
+00:00:44.921 --> 00:00:47.889
+and suppose the noisy value is zero point
+five.
+
+00:00:47.888 --> 00:00:49.950
+What should the best denoiser output?
+
+00:00:49.950 --> 00:00:50.675
+One?
+
+00:00:50.675 --> 00:00:51.675
+Something else?
+
+00:00:51.675 --> 00:00:53.238
+Pause and decide.
+
+00:00:54.671 --> 00:00:56.034
+About zero point eight:
+
+00:00:56.034 --> 00:00:59.384
+a soft choice between the two examples,
+never quite committing.
+
+00:00:59.384 --> 00:01:03.009
+To generate, start from pure noise and
+step towards less noise.
+
+00:01:03.009 --> 00:01:07.096
+Here is a real run with the exact best
+denoiser for six training images.
+
+00:01:07.096 --> 00:01:08.571
+It lands on one of them.
+
+00:01:08.571 --> 00:01:12.596
+The exact denoiser can only copy, which is
+why it must be learned.
+
+00:01:12.596 --> 00:01:16.596
+DDPM adds a little fresh noise at each of
+a thousand steps.
+
+00:01:16.596 --> 00:01:22.484
+DDIM adds none, so one start always gives
+one image, and it can skip to fifty steps.
+
+00:01:22.846 --> 00:01:27.734
+Guidance pushes past the conditional
+prediction to follow a prompt more
+closely.
+
+00:01:27.734 --> 00:01:31.396
+Weight three turns zero point five into
+one point one.

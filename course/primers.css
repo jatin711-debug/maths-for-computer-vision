@@ -9,13 +9,13 @@
 .primer-chip { display:inline-flex; align-items:center; gap:6px; min-height:34px; padding:4px 12px; border:1px solid var(--line); border-radius:20px; background:var(--paper); color:var(--ink); font-size:12.5px; text-align:left; }
 .primer-chip b { font-weight:650; }
 .primer-chip:hover, .primer-chip[aria-pressed="true"] { border-color:var(--ink); }
-.primer-terms { display:grid; gap:10px; margin-top:16px; }
+.primer-terms { display:grid; grid-template-columns:minmax(0,1fr); gap:10px; margin-top:16px; }
 .primer-term { border:1px solid var(--line); border-radius:12px; background:var(--surface); }
 .primer-term[open] { border-color:var(--muted); }
 .primer-term > summary { display:flex; align-items:center; gap:12px; min-height:52px; padding:10px 16px; cursor:pointer; list-style:none; }
 .primer-term > summary::-webkit-details-marker { display:none; }
-.primer-symbol { flex:none; min-width:44px; color:var(--ink); font-size:17px; }
-.primer-name { flex:1; font-weight:650; font-size:15.5px; }
+.primer-symbol { flex:0 1 auto; min-width:44px; max-width:50%; overflow-x:auto; overflow-y:hidden; color:var(--ink); font-size:17px; }
+.primer-name { flex:1; min-width:0; font-weight:650; font-size:15.5px; }
 .primer-toggle::after { content:"+"; display:inline-grid; place-items:center; width:26px; height:26px; border:1px solid var(--line); border-radius:50%; color:var(--muted); font-size:16px; line-height:1; }
 .primer-term[open] .primer-toggle::after { content:"−"; }
 .primer-body { padding:2px 18px 18px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,340px); gap:4px 28px; align-items:start; }

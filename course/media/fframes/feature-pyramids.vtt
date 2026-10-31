@@ -1,0 +1,220 @@
+WEBVTT
+
+00:00:00.201 --> 00:00:06.001
+One street photo can hold a pedestrian
+twenty-four pixels tall and a bus four
+hundred pixels wide.
+
+00:00:06.001 --> 00:00:10.473
+At stride thirty-two, every feature cell
+covers a thirty-two pixel block,
+
+00:00:10.474 --> 00:00:13.414
+so the pedestrian is three quarters of one
+cell.
+
+00:00:13.413 --> 00:00:15.842
+A stride-four map places it precisely,
+
+00:00:15.843 --> 00:00:20.827
+but there a three by three layer adds
+eight pixels of context, not sixty-four.
+
+00:00:20.826 --> 00:00:23.301
+One map knows where, the other knows what.
+
+00:00:23.301 --> 00:00:24.401
+We need both.
+
+00:00:24.400 --> 00:00:26.587
+The classical answer is a pyramid.
+
+00:00:26.587 --> 00:00:30.900
+Blur the image, keep every second pixel in
+each direction, and repeat.
+
+00:00:30.900 --> 00:00:32.212
+The blur matters.
+
+00:00:32.212 --> 00:00:36.464
+Drop every second pixel of these fine
+stripes, and they turn into false,
+
+00:00:36.465 --> 00:00:37.351
+coarse stripes.
+
+00:00:37.350 --> 00:00:40.212
+Blur first, and the false pattern is gone.
+
+00:00:40.212 --> 00:00:42.844
+Each level has a quarter of the pixels
+below it,
+
+00:00:42.845 --> 00:00:46.026
+so the whole pyramid costs under four
+thirds of the image.
+
+00:00:46.005 --> 00:00:49.292
+A Laplacian pyramid stores what each
+halving lost.
+
+00:00:49.292 --> 00:00:51.392
+Take four, six, ten, two.
+
+00:00:51.392 --> 00:00:52.442
+Average each pair:
+
+00:00:52.442 --> 00:00:53.692
+five and six.
+
+00:00:53.692 --> 00:00:54.442
+Average again:
+
+00:00:54.442 --> 00:00:55.842
+five point five.
+
+00:00:55.842 --> 00:00:58.192
+Now repeat five and six to upsample:
+
+00:00:58.192 --> 00:01:00.342
+five, five, six, six.
+
+00:01:00.342 --> 00:01:02.130
+Subtract from the original.
+
+00:01:02.130 --> 00:01:04.542
+Minus one, one, four, minus four.
+
+00:01:04.542 --> 00:01:08.130
+That is L zero, the part the coarser level
+cannot predict.
+
+00:01:08.097 --> 00:01:09.147
+A quick test.
+
+00:01:09.147 --> 00:01:12.372
+Set L zero to all zeros, then rebuild from
+the top.
+
+00:01:12.372 --> 00:01:13.960
+Which four numbers come back?
+
+00:01:13.960 --> 00:01:15.672
+Pause here and work it out.
+
+00:01:17.148 --> 00:01:21.973
+You get five, five, six, six, and the
+error is exactly L zero.
+
+00:01:21.973 --> 00:01:25.210
+On a real image, the finest level looks
+like the edges.
+
+00:01:25.210 --> 00:01:27.660
+Without it, the picture goes soft.
+
+00:01:27.660 --> 00:01:31.061
+Keep every level and rebuilding is exact,
+for any blur,
+
+00:01:31.062 --> 00:01:34.524
+because each step adds back exactly what
+was subtracted.
+
+00:01:34.498 --> 00:01:37.623
+A ResNet already computes a pyramid in one
+pass.
+
+00:01:37.623 --> 00:01:40.661
+But its fine maps are sharp with weak
+features.
+
+00:01:40.661 --> 00:01:43.611
+A feature pyramid network adds a top-down
+path.
+
+00:01:43.611 --> 00:01:45.261
+Start from P five.
+
+00:01:45.261 --> 00:01:51.061
+Each level upsamples the coarser map and
+adds a one by one convolution of the
+matching C map.
+
+00:01:51.061 --> 00:01:56.319
+Every level now has its own resolution and
+the deep meaning, with 256 channels,
+
+00:01:56.320 --> 00:01:58.849
+so one detection head serves them all.
+
+00:01:58.738 --> 00:02:01.650
+Each box goes to the level that fits its
+size.
+
+00:02:01.650 --> 00:02:06.955
+Take the square root of its area over 224,
+take log base two, add four,
+
+00:02:06.956 --> 00:02:08.076
+and round down.
+
+00:02:08.075 --> 00:02:10.950
+A 224 box goes to P four.
+
+00:02:10.950 --> 00:02:14.325
+Half that goes to P three, and double it
+to P five.
+
+00:02:14.325 --> 00:02:18.615
+A forty-pixel box gives about one point
+five, rounds down to one,
+
+00:02:18.616 --> 00:02:21.389
+and is clamped to P two, the lowest level.
+
+00:02:21.318 --> 00:02:24.105
+Segmentation needs a label for every
+pixel.
+
+00:02:24.105 --> 00:02:26.105
+U-Net's encoder goes down,
+
+00:02:26.106 --> 00:02:32.569
+from 256 pixels and 64 channels to a
+bottleneck of sixteen pixels and 1024
+channels.
+
+00:02:32.568 --> 00:02:34.174
+The decoder climbs back up,
+
+00:02:34.175 --> 00:02:37.744
+and at each scale it joins the encoder map
+of the same size.
+
+00:02:37.743 --> 00:02:44.755
+At thirty-two pixels, 512 upsampled
+channels plus 512 skipped channels make
+1024.
+
+00:02:44.755 --> 00:02:46.918
+The skips bring back the location.
+
+00:02:46.918 --> 00:02:49.018
+The decoder brings the context.
+
+00:02:48.971 --> 00:02:52.658
+Both designs merge fine location with deep
+context.
+
+00:02:52.658 --> 00:02:57.283
+FPN adds the two streams, so the channel
+count stays the same.
+
+00:02:57.283 --> 00:03:01.833
+U-Net concatenates them and lets the next
+convolution learn how to mix them.
+
+00:03:01.833 --> 00:03:05.671
+Either way, the network reads every scale
+in a single pass.

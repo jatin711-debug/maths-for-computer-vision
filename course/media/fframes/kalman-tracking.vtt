@@ -1,0 +1,139 @@
+WEBVTT
+
+00:00:00.185 --> 00:00:03.210
+A tracker never knows exactly where an
+object is.
+
+00:00:03.210 --> 00:00:07.535
+It keeps a mean and a covariance, and the
+covariance is an ellipse of doubt.
+
+00:00:07.535 --> 00:00:12.222
+Gaussians are the natural language here,
+because a linear map keeps them Gaussian.
+
+00:00:12.222 --> 00:00:15.572
+The mean follows the map, and the
+covariance is sandwiched.
+
+00:00:15.572 --> 00:00:18.722
+Take position and velocity, and one time
+step.
+
+00:00:18.722 --> 00:00:21.522
+A round doubt shears into a tilted
+ellipse:
+
+00:00:21.522 --> 00:00:25.210
+position is less certain, and it is now
+tied to velocity.
+
+00:00:25.131 --> 00:00:27.268
+The second rule is conditioning.
+
+00:00:27.268 --> 00:00:30.131
+Two quantities a and b share a joint
+Gaussian.
+
+00:00:30.131 --> 00:00:32.143
+Now observe b equals one.
+
+00:00:32.143 --> 00:00:36.443
+That slices the ellipse, and what's left
+of a is a narrower Gaussian.
+
+00:00:36.443 --> 00:00:40.393
+The mean moves to one, and the variance
+falls from four to two.
+
+00:00:40.393 --> 00:00:44.214
+The drop depends only on how strongly a
+and b vary together,
+
+00:00:44.215 --> 00:00:45.807
+not on the value you saw.
+
+00:00:45.735 --> 00:00:48.660
+A Kalman filter is exactly these two
+rules.
+
+00:00:48.660 --> 00:00:50.010
+Predict with the first:
+
+00:00:50.010 --> 00:00:52.422
+at position one, with variance two.
+
+00:00:52.422 --> 00:00:55.272
+A measurement arrives at two, with
+variance one.
+
+00:00:55.272 --> 00:00:56.597
+Condition on it.
+
+00:00:56.597 --> 00:01:00.360
+The new position is five thirds, with
+variance two thirds.
+
+00:01:00.360 --> 00:01:01.535
+Now the surprise:
+
+00:01:01.535 --> 00:01:05.597
+velocity rose from one to four thirds,
+though it was never measured.
+
+00:01:05.597 --> 00:01:08.460
+The tilt in the covariance linked it to
+position.
+
+00:01:08.395 --> 00:01:12.270
+If the model is right, the squared
+innovation over S is small.
+
+00:01:12.270 --> 00:01:15.820
+The usual gate for one measurement is
+three point eight four.
+
+00:01:15.820 --> 00:01:17.970
+Now a measurement arrives at six.
+
+00:01:17.970 --> 00:01:19.108
+Is it accepted?
+
+00:01:19.108 --> 00:01:20.720
+Pause and work it out.
+
+00:01:22.180 --> 00:01:23.017
+Rejected:
+
+00:01:23.017 --> 00:01:27.305
+d squared is about eight point three, so
+that detection belongs to something else.
+
+00:01:27.305 --> 00:01:31.042
+With several tracks, we must decide which
+detection updates which track.
+
+00:01:31.042 --> 00:01:32.617
+Build a cost matrix.
+
+00:01:32.617 --> 00:01:35.434
+Greedy matching grabs the smallest cost,
+point one,
+
+00:01:35.435 --> 00:01:37.368
+and is then forced into point nine:
+
+00:01:37.367 --> 00:01:39.205
+one point zero in total.
+
+00:01:39.205 --> 00:01:41.830
+The best pairing costs only point five.
+
+00:01:41.830 --> 00:01:44.605
+The Hungarian algorithm finds it in cubic
+time,
+
+00:01:44.606 --> 00:01:49.981
+by subtracting each row's minimum and each
+column's minimum until independent zeros
+appear.

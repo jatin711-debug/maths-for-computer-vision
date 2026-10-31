@@ -1,4 +1,4 @@
-# Publish the course only; everything else in this workspace (video tooling, build caches, scratch files) stays local.
+# Publish the course only; build caches and scratch files in this workspace stay local.
 /*
 !/.gitignore
 !/.github/
@@ -10,6 +10,7 @@
 !/Open-Course.ps1
 !/course/
 !/docs/
+!/video-studio/
 
 # The cited books are not redistributed (see course/resources/README.md).
 /course/resources/*.pdf
